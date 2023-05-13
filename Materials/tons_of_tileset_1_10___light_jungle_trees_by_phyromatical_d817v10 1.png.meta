@@ -1,0 +1,1598 @@
+fileFormatVersion: 2
+guid: 08af6e6763108684fa0cf08ec7387ff7
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 64
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_0
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 689
+        width: 32
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 60b2c8a3e1f4dab48914bd89643d5b2b
+      internalID: 1734947758
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_1
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 705
+        width: 16
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7fac02d55e4d05e4287fa04116c71290
+      internalID: -2030851355
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_2
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 688
+        width: 48
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 02185e74e3043b44090a3f1bee1d057d
+      internalID: -751307152
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_3
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 688
+        width: 32
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4b8cb2c8e07213948b99c8452f70ba33
+      internalID: -329037536
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_4
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 688
+        width: 48
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f2875e39cb15e6847a64f719548519fb
+      internalID: 2121662497
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_5
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 640
+        width: 96
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5e2a2179ca9d7ef44a47aeaf56fe6bd2
+      internalID: 166062412
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_6
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 688
+        width: 31
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d7973af66a0c3664195450aa5870a7e7
+      internalID: 1041114495
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_7
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 661
+        width: 16
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 674d2235c25c21145a50243fad1d5f97
+      internalID: 2101354905
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_8
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 672
+        width: 15
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f6b7ad1b340f43b49a3c432cc2012516
+      internalID: 721023257
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_9
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 674
+        width: 14
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6c88d0878327fe24fb26d50f8e0c079a
+      internalID: 879887205
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_10
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 675
+        width: 13
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 117f3604e0e344647a6efea5ab2550e1
+      internalID: -167202966
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_11
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 673
+        width: 14
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a1dd78b264d73814da9224b162c1e5c1
+      internalID: -318383053
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_12
+      rect:
+        serializedVersion: 2
+        x: 97
+        y: 673
+        width: 14
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fdf5501c797af814e8124529f6696242
+      internalID: -1993335075
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_13
+      rect:
+        serializedVersion: 2
+        x: 113
+        y: 672
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c7faaed06071dbb4498bd7bc73ed896b
+      internalID: 1673233769
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_14
+      rect:
+        serializedVersion: 2
+        x: 122
+        y: 672
+        width: 15
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ebfc19b6f9c84944f94a861e33be5b68
+      internalID: 1234835329
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_15
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 654
+        width: 48
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 05a8669a73b94134f927eb04c50094f0
+      internalID: 1958364360
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_16
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 640
+        width: 16
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 31df0513de57c814cabd69f06966a7b8
+      internalID: 1601626096
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_17
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 659
+        width: 13
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1b750cecd2e6c164b9acab1f4501aeba
+      internalID: -1561416485
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_18
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 663
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 367fdbec907ebd743af3dec8547d824d
+      internalID: 1609131092
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_19
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 658
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e18dc5571f26e544ea8e05be03abf90e
+      internalID: 1586534225
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_20
+      rect:
+        serializedVersion: 2
+        x: 99
+        y: 663
+        width: 11
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ad162aa78975e8a418ef6eee52af5a8d
+      internalID: -445951742
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_21
+      rect:
+        serializedVersion: 2
+        x: 116
+        y: 662
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 88818fdf84813e042bdee35f09a41b14
+      internalID: 129396730
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_22
+      rect:
+        serializedVersion: 2
+        x: 131
+        y: 663
+        width: 11
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bd3fe4fffa0f5f14b8c0496a0a356b00
+      internalID: -722549089
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_23
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 581
+        width: 100
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5b9383309452cc94cb3d0ed9faca55ae
+      internalID: -1828107653
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_24
+      rect:
+        serializedVersion: 2
+        x: 118
+        y: 602
+        width: 36
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f9c8bbc3fa4441445a217031389a0a2b
+      internalID: -2005093738
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_25
+      rect:
+        serializedVersion: 2
+        x: 166
+        y: 592
+        width: 53
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6726d032904bea749a0ecd36d381e56a
+      internalID: -1700681209
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_26
+      rect:
+        serializedVersion: 2
+        x: 273
+        y: 624
+        width: 30
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 317e5b861909fed43a0d0241a045d95a
+      internalID: -2035510237
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_27
+      rect:
+        serializedVersion: 2
+        x: 117
+        y: 544
+        width: 38
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 00ad5b73e3040bf40bd8b0505a8b5d7d
+      internalID: 298941243
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_28
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 528
+        width: 80
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6fa0df8c9a23d2c499420194b2b68275
+      internalID: -1194587551
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_29
+      rect:
+        serializedVersion: 2
+        x: 228
+        y: 577
+        width: 40
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 25c17bb38f3c8fc478efcf0a67dc91b0
+      internalID: -854388289
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_30
+      rect:
+        serializedVersion: 2
+        x: 274
+        y: 577
+        width: 42
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4a1bcf2f152270649964d8c8c76e9016
+      internalID: -188765180
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_31
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 528
+        width: 36
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9df1866becea10d4983a3b806917b70b
+      internalID: -1646827368
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_32
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 528
+        width: 48
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 695b4f25847593b4596436d6c8bdbbc0
+      internalID: -611904317
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_33
+      rect:
+        serializedVersion: 2
+        x: 241
+        y: 528
+        width: 46
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eea116fa839997e4cb850b79832ddaea
+      internalID: -1537038886
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_34
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 512
+        width: 48
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fbd62b27fa241cc4aa01052c5863b029
+      internalID: -1134046709
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_35
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 464
+        width: 48
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2e6de322caca64f47a5299ea7a813087
+      internalID: 1091336450
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_36
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 464
+        width: 42
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ed6bacee4ce1a834a8df5fb9adab3010
+      internalID: 4673034
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_37
+      rect:
+        serializedVersion: 2
+        x: 99
+        y: 457
+        width: 57
+        height: 71
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 36510f3fb216af741915e03d0077acf3
+      internalID: 979688137
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_38
+      rect:
+        serializedVersion: 2
+        x: 163
+        y: 457
+        width: 57
+        height: 71
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8458be1ad44b79f40b9840e300c939b7
+      internalID: -1041499427
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_39
+      rect:
+        serializedVersion: 2
+        x: 225
+        y: 450
+        width: 47
+        height: 56
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ef9f863a64c129f4d9b0019d864e5a95
+      internalID: 1983184497
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_40
+      rect:
+        serializedVersion: 2
+        x: 273
+        y: 450
+        width: 47
+        height: 56
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 361c60dcc20065c43aeb375b29d0ab27
+      internalID: -248003698
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_41
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 378
+        width: 54
+        height: 70
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3a83a5bd425830d44b2fc93abc657fcf
+      internalID: 991104604
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_42
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 378
+        width: 55
+        height: 70
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 240756e1b1ee59a44a30b99dabb444a2
+      internalID: -423272849
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_43
+      rect:
+        serializedVersion: 2
+        x: 133
+        y: 369
+        width: 53
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c96bdb83fcd4e354fbc70e1e8d83b030
+      internalID: -1725799360
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_44
+      rect:
+        serializedVersion: 2
+        x: 197
+        y: 369
+        width: 53
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fe06f94391b912d498eb245636f05f3d
+      internalID: 1188330332
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_45
+      rect:
+        serializedVersion: 2
+        x: 260
+        y: 352
+        width: 40
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2190055863ed6d24d95261ea8b89f11a
+      internalID: 1506259141
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_46
+      rect:
+        serializedVersion: 2
+        x: 308
+        y: 400
+        width: 25
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d970817d737615245812193bc621352f
+      internalID: -97813445
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_47
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 321
+        width: 36
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c47de0a001251134b8b7deda07626f9f
+      internalID: -1161838565
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_48
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 321
+        width: 36
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0e40371bfb2696f489b9ad1af2beb511
+      internalID: -747441568
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_49
+      rect:
+        serializedVersion: 2
+        x: 99
+        y: 304
+        width: 56
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6753aa4cad61ae54da479e0266454f90
+      internalID: 71659459
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_50
+      rect:
+        serializedVersion: 2
+        x: 163
+        y: 304
+        width: 56
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 365cbe45dce6c2a42b7175e784fbc3f7
+      internalID: 1557906936
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_51
+      rect:
+        serializedVersion: 2
+        x: 307
+        y: 352
+        width: 25
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 55972918a6d5a594491b160831e2c431
+      internalID: -1796095236
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_52
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 272
+        width: 32
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4efaa9ae3644b4943a26076fa6fbded0
+      internalID: -1101151518
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_53
+      rect:
+        serializedVersion: 2
+        x: 228
+        y: 256
+        width: 40
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f3eb7b0f169a78948af0271e8e966f29
+      internalID: -2019594510
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_54
+      rect:
+        serializedVersion: 2
+        x: 276
+        y: 256
+        width: 40
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ba07db92687552d41a4e4e087545ea8a
+      internalID: 1195899763
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_55
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 304
+        width: 16
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dd69461d8ebbddf47b044c85c582cc50
+      internalID: -17127042
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_56
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 224
+        width: 32
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5cc33af0b4b1dce4d9661c65a27674a8
+      internalID: 1403011577
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_57
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 240
+        width: 41
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a99f1a85a84b8ff4e96c63457e4a7f10
+      internalID: -644693687
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_58
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 240
+        width: 41
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7576639e59a2d08469bdefad01fc3af8
+      internalID: -1362590176
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_59
+      rect:
+        serializedVersion: 2
+        x: 132
+        y: 240
+        width: 40
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0378b74a8276f6344ba402e50a341de5
+      internalID: -26343428
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_60
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 240
+        width: 40
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ca141b810b049164d94e1108d3566fb0
+      internalID: -1713445968
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_61
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 256
+        width: 16
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5e0987ed239925f4098da1f6028e2c3f
+      internalID: 1464748315
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_62
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 66
+        width: 80
+        height: 173
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8fc1e4f34e71c7941a228dcf65d59dc8
+      internalID: -2120845857
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_63
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 192
+        width: 40
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aa8486f8b479b07428c2c50cd2b61ba4
+      internalID: 1223703878
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_64
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 50
+        width: 160
+        height: 204
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9d9d5bc45a401fb4588d0bb45a0923e0
+      internalID: 203769796
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_65
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 66
+        width: 80
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9209768cce65ad946828c28a7dc06fbe
+      internalID: 1085283472
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_43: -1725799360
+      tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_1: -2030851355
+      tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_31: -1646827368
+      tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_2: -751307152
+      tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_22: -722549089
+      tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_59: -26343428
+      tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_29: -854388289
+      tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_35: 1091336450
+      tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_27: 298941243
+      tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_32: -611904317
+      tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_3: -329037536
+      tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_38: -1041499427
+      tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_8: 721023257
+      tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_7: 2101354905
+      tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_11: -318383053
+      tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_12: -1993335075
+      tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_36: 4673034
+      tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_30: -188765180
+      tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_58: -1362590176
+      tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_28: -1194587551
+      tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_37: 979688137
+      tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_47: -1161838565
+      tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_14: 1234835329
+      tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_26: -2035510237
+      tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_46: -97813445
+      tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_60: -1713445968
+      tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_63: 1223703878
+      tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_62: -2120845857
+      tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_41: 991104604
+      tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_57: -644693687
+      tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_61: 1464748315
+      tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_5: 166062412
+      tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_6: 1041114495
+      tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_9: 879887205
+      tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_21: 129396730
+      tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_53: -2019594510
+      tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_56: 1403011577
+      tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_51: -1796095236
+      tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_18: 1609131092
+      tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_64: 203769796
+      tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_50: 1557906936
+      tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_15: 1958364360
+      tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_23: -1828107653
+      tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_19: 1586534225
+      tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_10: -167202966
+      tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_17: -1561416485
+      tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_52: -1101151518
+      tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_34: -1134046709
+      tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_65: 1085283472
+      tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_45: 1506259141
+      tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_13: 1673233769
+      tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_0: 1734947758
+      tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_42: -423272849
+      tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_39: 1983184497
+      tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_40: -248003698
+      tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_55: -17127042
+      tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_4: 2121662497
+      tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_16: 1601626096
+      tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_25: -1700681209
+      tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_24: -2005093738
+      tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_20: -445951742
+      tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_54: 1195899763
+      tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_48: -747441568
+      tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_44: 1188330332
+      tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_49: 71659459
+      tons_of_tileset_1_10___light_jungle_trees_by_phyromatical_d817v10 1_33: -1537038886
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
