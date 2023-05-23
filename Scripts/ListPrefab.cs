@@ -18,4 +18,9 @@ public class ListPrefab : AutoMonobehaviour
         foreach (Transform prefab in transform)
             this.listPrefabs.Add(prefab);
     }
+
+    public virtual Transform GetRandomPrefab()
+    {
+        return this.listPrefabs[Random.Range(0, this.listPrefabs.Count)];
+    }
 }

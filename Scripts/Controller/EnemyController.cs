@@ -8,6 +8,7 @@ public class EnemyController : AutoMonobehaviour
     [SerializeField] protected EnemyMovement movement;
     [SerializeField] protected SignalImpact impact;
     [SerializeField] protected EnemyDamagedSender damagedSender;
+    [SerializeField] protected EnemyDamagedReceiver damagedReceiver;
     [SerializeField] protected EnemyHealthBar healthBar;
     [SerializeField] protected CloseCombatAttack closeCombat;
 
@@ -15,6 +16,7 @@ public class EnemyController : AutoMonobehaviour
     public SignalImpact Impact => this.impact;
     public Transform Model => this.model;
     public EnemyDamagedSender DamagedSender => this.damagedSender;
+    public EnemyDamagedReceiver DamagedReceiver => this.damagedReceiver;
     public EnemyHealthBar HealthBar => this.healthBar;
     public CloseCombatAttack CloseCombat => this.closeCombat;
 
@@ -25,8 +27,16 @@ public class EnemyController : AutoMonobehaviour
         this.LoadMovement();
         this.LoadImpact();
         this.LoadDamagedSender();
+        this.LoadDamagedReceiver();
         this.LoadHealthBar();
         this.LoadCloseCombat();
+    }
+
+    protected virtual void LoadDamagedReceiver()
+    {
+        if (this.damagedReceiver != null) return;
+        this.damagedReceiver = transform.Find("DamagedReceiver").GetComponent<EnemyDamagedReceiver>();
+        Debug.Log(transform.name + ": Load DamagedReceiver", gameObject);
     }
 
     protected virtual void LoadHealthBar()

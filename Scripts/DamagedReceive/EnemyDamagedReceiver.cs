@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyDamagedReceiver : DamagedReceiver
 {
     [SerializeField] protected EnemyController controller;
+    [SerializeField] protected bool stop = false;
 
     protected override void LoadComponent()
     {
@@ -26,8 +27,12 @@ public class EnemyDamagedReceiver : DamagedReceiver
         this.controller.HealthBar.transform.parent.gameObject.SetActive(true);
         base.Deduct(deduct);
         SpriteRenderer render = this.controller.Model.GetComponent<SpriteRenderer>();
-        render.color = new Color32(221, 83, 11, 255);
-        Invoke("ResetColor", 0.05f);
+        
+        if (this.stop == false)
+        {
+            render.color = new Color32(221, 83, 11, 255);
+            Invoke("ResetColor", 0.05f);
+        }
         Invoke("DisappearHealthbar", 1f);
     }
 
@@ -46,5 +51,23 @@ public class EnemyDamagedReceiver : DamagedReceiver
     {
         base.OnDead();
         EnemySpawner.Instance.Despawn(transform.parent);
+    }
+
+    public virtual void StopMoving(float time)
+    {
+        this.stop = true;
+        this.controller.Movement.gameObject.SetActive(false);
+        this.controller.Model.GetComponent<Animator>().enabled = false;
+        this.controller.Model.GetComponent<SpriteRenderer>().color = new Color32(34, 84, 176, 255);
+        StartCoroutine(this.ContinueMoving(time));
+    } 
+
+    protected IEnumerator ContinueMoving(float time)
+    {
+        yield return new WaitForSeconds(time);
+        this.stop = false;
+        this.controller.Movement.gameObject.SetActive(true);
+        this.controller.Model.GetComponent<Animator>().enabled = true;
+        this.controller.Model.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 255);
     }
 }

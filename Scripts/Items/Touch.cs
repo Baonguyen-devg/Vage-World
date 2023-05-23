@@ -8,6 +8,8 @@ public class Touch : AutoMonobehaviour
     [SerializeField] protected ItemController controller;
     public ItemController Controller => this.controller;
 
+    [SerializeField] protected MaterialController materialCtrl;
+
     protected override void LoadComponent()
     {
         base.LoadComponent();
@@ -23,9 +25,11 @@ public class Touch : AutoMonobehaviour
     
     public virtual void OnMouseDown()
     {
-        PlayerController player = transform.Find("Player").GetComponent<PlayerController>();
-     
+        if (this.materialCtrl == null)
+            this.materialCtrl = GameObject.Find("MaterialController").GetComponent<MaterialController>();
 
+        this.materialCtrl.IncreaseNumber(transform.parent.name, 1);
+        ItemSpawner.Instance.Despawn(transform.parent);
     }
 
     public virtual void OnMouseEnter()

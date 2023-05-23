@@ -19,10 +19,17 @@ public class ShootingAttack : Attack
         Debug.Log(transform.name + ": Load PosShoote", gameObject);
     }
 
-    protected virtual void Shoote(string nameBullet)
+    protected virtual void Shoote(string nameBullet, Transform posShoote)
     {
-        Vector3 position = this.posShoote.parent.position;
-        Quaternion rotation = this.posShoote.parent.rotation;
-        BulletSpawner.Instance.SpawnInRegion(nameBullet, "Forest", position, rotation);
+        Vector3 position = posShoote.position;
+        Quaternion rotation = posShoote.rotation;
+        Transform bullet = BulletSpawner.Instance.SpawnInRegion(nameBullet, "Forest", position, rotation);
+        if (bullet.name == "Tornado_Bullet") bullet.Find("Model").transform.rotation = Quaternion.Euler(0, 0, 0);
+        this.HaveSkill2(bullet);
+    }
+
+    protected virtual void HaveSkill2(Transform bullet)
+    {
+
     }
 }

@@ -6,14 +6,12 @@ public class MapController : AutoMonobehaviour
 {
     [SerializeField] protected CreateMap createMap;
     [SerializeField] protected CreateTree createTree;
-    [SerializeField] protected CreateStone createStone;
-    [SerializeField] protected CreateGrass createGrass;
+    [SerializeField] protected CreateItem createItem;
     [SerializeField] protected CreateGroupEnemy createGroupEnemy;
     [SerializeField] protected Transform link;
 
     public CreateMap CreateMap => this.createMap;
-    public CreateGrass CreateGrass => this.createGrass;
-    public CreateStone CreateStone => this.createStone;
+    public CreateItem CreateItem => this.createItem;
     public CreateTree CreateTree => this.createTree;
     public CreateGroupEnemy CreateGroupEnemy => this.createGroupEnemy;
     public Transform Link => this.link;
@@ -23,8 +21,7 @@ public class MapController : AutoMonobehaviour
         base.LoadComponent();
         this.LoadCreateMap();
         this.LoadCreateTree();
-        this.LoadCreateStone();
-        this.LoadCreateGrass();
+        this.LoadCreateItem();
         this.LoadCreateGroupEnemy();
         this.LoadLink();
     }
@@ -46,22 +43,19 @@ public class MapController : AutoMonobehaviour
     protected virtual void LoadCreateTree()
     {
         if (this.createTree != null) return;
-        this.createTree = transform.Find("CreateTree").GetComponent<CreateTree>();
+        if (transform.Find("CreateTree") == null) return;
+
+        if (transform.Find("CreateTree").TryGetComponent<CreateTree>(out CreateTree tree)) {
+            this.createTree = tree;
+        }
         Debug.Log(transform.name + ": Load CreateTree", gameObject);
     }
 
-    protected virtual void LoadCreateStone()
+    protected virtual void LoadCreateItem()
     {
-        if (this.createStone != null) return;
-        this.createStone = transform.Find("CreateStone").GetComponent<CreateStone>();
-        Debug.Log(transform.name + ": Load CreateStone", gameObject);
-    }
-
-    protected virtual void LoadCreateGrass()
-    {
-        if (this.createGrass != null) return;
-        this.createGrass = transform.Find("CreateGrass").GetComponent<CreateGrass>();
-        Debug.Log(transform.name + ": Load CreateGrass", gameObject);
+        if (this.createItem != null) return;
+        this.createItem = transform.Find("CreateItem").GetComponent<CreateItem>();
+        Debug.Log(transform.name + ": Load CreateItem", gameObject);
     }
 
     protected virtual void LoadCreateGroupEnemy()

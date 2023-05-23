@@ -34,12 +34,11 @@ public class Create : AutoMonobehaviour
     {
         this.heightMap = this.mapController.CreateMap.HeightMap;
         this.widthMap = this.mapController.CreateMap.WidthMap;
-        this.distanceMax = Random.Range(0, 4);
-        this.numberGroup = Random.Range(20, 25);
     }
 
     public virtual void CreateGroup()
     {
+        Debug.Log(transform.name + " " + this.numberGroup);
         this.canPush = new bool[this.widthMap + 1, this.heightMap + 1];
         for (int i = 1; i <= this.numberGroup; i++)
             this.Group();
