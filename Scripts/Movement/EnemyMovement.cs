@@ -33,22 +33,7 @@ public class EnemyMovement : Movement
     protected override void Move()
     {
         base.Move();
-        if (!this.CheckAndAttack(transform.parent.position)) return;
-
         Vector3 newPos = Vector3.Lerp(transform.parent.position, this.target.position, this.speed);
         transform.parent.position = newPos;
-        this.controller.Model.GetComponent<Animator>().SetBool("Run", true);
-    }
-
-    protected virtual bool CheckAndAttack(Vector3 position)
-    {
-        if (Vector3.Distance(position, this.target.position) > 1)
-        {
-            this.controller.CloseCombat.gameObject.SetActive(false);
-            this.controller.Model.GetComponent<Animator>().SetBool("Attack", false);
-            return true;
-        }
-        this.controller.CloseCombat.gameObject.SetActive(true);
-        return false;
     }
 }

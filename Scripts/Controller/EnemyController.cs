@@ -11,6 +11,7 @@ public class EnemyController : AutoMonobehaviour
     [SerializeField] protected EnemyDamagedReceiver damagedReceiver;
     [SerializeField] protected EnemyHealthBar healthBar;
     [SerializeField] protected CloseCombatAttack closeCombat;
+    private CloseCombatAttack closeCombatComponent;
 
     public EnemyMovement Movement => this.movement;
     public SignalImpact Impact => this.impact;
@@ -69,15 +70,18 @@ public class EnemyController : AutoMonobehaviour
 
     protected virtual void LoadImpact()
     {
-        if (this.impact != null) return;
+        if (this.impact != null || transform.Find("SignalImpact") == null) return;
         this.impact = transform.Find("SignalImpact").GetComponent<SignalImpact>();
         Debug.Log(transform.name + ": Load SignalImpact", gameObject);
     }
 
     protected virtual void LoadCloseCombat()
     {
-        if (this.closeCombat != null) return;
-        this.closeCombat = transform.Find("CloseCombat").GetComponent<CloseCombatAttack>();
-        Debug.Log(transform.name + ": Loaf CloseCombat", gameObject);
+        if (this.closeCombat != null || transform.Find("CloseCombat") == null) return;
+        if (transform.Find("CloseCombat").TryGetComponent<CloseCombatAttack>(out closeCombatComponent)) {
+            this.closeCombat = closeCombatComponent;
+        } 
+        
+        Debug.Log(transform.name + ": Load CloseCombat", gameObject);
     }
 }

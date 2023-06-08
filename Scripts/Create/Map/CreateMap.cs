@@ -45,10 +45,15 @@ public class CreateMap : AutoMonobehaviour
 
 
         this.CreateMapRandom();
-      /*  this.mapController.CreateGroupEnemy.CreateGroup();*/
-        if (this.mapController.CreateTree != null) this.mapController.CreateTree.CreateGroup();
-        this.mapController.CreateItem.CreateGroup();
+        /*  this.mapController.CreateGroupEnemy.CreateGroup();*/
+        Invoke("CreateObjectInMap", 2f);
         this.CreateLink();
+    }
+
+    public virtual void CreateObjectInMap()
+    {
+        this.mapController.DecorObject.CreateGroup();
+        this.mapController.CreateItem.CreateGroup();
     }
 
     protected virtual void CreateLink()

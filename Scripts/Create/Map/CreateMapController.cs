@@ -35,14 +35,14 @@ public class CreateMapController : AutoMonobehaviour
 
     protected virtual void CreateLink()
     {
-        for (int i = 0; i <= 3; i++)
-            if (i == 3) this.CreateLink(this.mapRandoms[3].Find("Link"), this.mapRandoms[1].Find("Link"));
+        for (int i = 0; i <= 1; i++)
+            if (i == 1) this.CreateLink(this.mapRandoms[1].Find("Link"), this.mapRandoms[1].Find("Link"));
             else this.CreateLink(this.mapRandoms[i].Find("Link"), this.mapRandoms[i + 1].Find("Link"));
     }
 
     protected virtual void CreateArrayRandom()
     {
-        int[] array = {0, 1, 2, 3};
+        int[] array = {0, 1};
         System.Random random = new System.Random();
         arrayRandom = array.OrderBy(element => random.Next()).ToArray();
     }
@@ -50,7 +50,7 @@ public class CreateMapController : AutoMonobehaviour
     protected virtual void CreateListRandomMap()
     {
         this.CreateArrayRandom();
-        for (int i = 0; i <= 3; i++)
+        for (int i = 0; i <= 1; i++)
         {
             this.mapRandoms.Add(this.mapPrefabs[arrayRandom[i]]);
             this.mapPrefabs[arrayRandom[i]].transform.position += new Vector3(150 * i, 0, 0);

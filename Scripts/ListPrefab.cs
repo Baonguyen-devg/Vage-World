@@ -15,6 +15,7 @@ public class ListPrefab : AutoMonobehaviour
 
     protected virtual void LoadPrefabs()
     {
+        if (this.listPrefabs.Count != 0) return;
         foreach (Transform prefab in transform)
             this.listPrefabs.Add(prefab);
     }

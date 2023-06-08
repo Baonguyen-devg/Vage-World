@@ -7,16 +7,16 @@ public abstract class Attack : AutoMonobehaviour
     [SerializeField] protected float speedAttack;
     [SerializeField] protected float rateTimeAttack;
     [SerializeField] protected bool skill1, skill2, skill3;
-    protected float nextTimeAttack;
+    [SerializeField] protected float nextTimeAttack;
 
     protected virtual void FixedUpdate()
     {
         if (this.CanAttack()) this.ToAttack();
     }
 
-    protected virtual void ToAttack()
+    public virtual void ToAttack()
     {
-        //For Override
+        
     }
 
     protected virtual bool CanAttack()

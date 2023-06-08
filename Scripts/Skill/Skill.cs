@@ -16,7 +16,6 @@ public class Skill : AutoMonobehaviour
 
     protected virtual void Start()
     {
-        this.listRandomMaterial = new Dictionary<Transform, int>(3);
         this.listRandomMap = new List<Transform>(ItemSpawner.Instance.ListPrefab.Count);
         this.RandomPositionMap();
         this.RandomMaterial();
@@ -30,12 +29,20 @@ public class Skill : AutoMonobehaviour
 
     protected virtual void RandomMaterial()
     {
+        this.listRandomMaterial = new Dictionary<Transform, int>();
         int minRandom = this.baseLevel * (this.levelSkill - 1);
         int maxRandom = this.baseLevel * (this.levelSkill + 1);
         for (int i = 0; i <= 2; i++)
         {
             int value = Random.Range(minRandom, maxRandom);
-            this.listRandomMaterial.Add(this.listRandomMap[i].GetComponent<ListPrefab>().GetRandomPrefab(), value);
+            int mapRan = Random.Range(0, this.listRandomMap.Count);
+            Transform material = this.listRandomMap[mapRan].GetComponent<ListPrefab>().GetRandomPrefab();
+            while(this.listRandomMaterial.ContainsKey(material))
+            {
+                mapRan = Random.Range(0, this.listRandomMap.Count);
+                material = this.listRandomMap[mapRan].GetComponent<ListPrefab>().GetRandomPrefab();
+            }
+            this.listRandomMaterial.Add(material, value);
         }
     }
 

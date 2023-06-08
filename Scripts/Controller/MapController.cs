@@ -5,14 +5,14 @@ using UnityEngine;
 public class MapController : AutoMonobehaviour
 {
     [SerializeField] protected CreateMap createMap;
-    [SerializeField] protected CreateTree createTree;
+    [SerializeField] protected CreateDecorObject decorObject;
     [SerializeField] protected CreateItem createItem;
     [SerializeField] protected CreateGroupEnemy createGroupEnemy;
     [SerializeField] protected Transform link;
 
     public CreateMap CreateMap => this.createMap;
     public CreateItem CreateItem => this.createItem;
-    public CreateTree CreateTree => this.createTree;
+    public CreateDecorObject DecorObject => this.decorObject;
     public CreateGroupEnemy CreateGroupEnemy => this.createGroupEnemy;
     public Transform Link => this.link;
 
@@ -20,7 +20,7 @@ public class MapController : AutoMonobehaviour
     {
         base.LoadComponent();
         this.LoadCreateMap();
-        this.LoadCreateTree();
+        this.LoadCreateDecorObject();
         this.LoadCreateItem();
         this.LoadCreateGroupEnemy();
         this.LoadLink();
@@ -40,15 +40,15 @@ public class MapController : AutoMonobehaviour
         Debug.Log(transform.name + ": Load CreateMap", gameObject);
     }
 
-    protected virtual void LoadCreateTree()
+    protected virtual void LoadCreateDecorObject()
     {
-        if (this.createTree != null) return;
-        if (transform.Find("CreateTree") == null) return;
+        if (this.decorObject != null) return;
+        if (transform.Find("CreateDecorObject") == null) return;
 
-        if (transform.Find("CreateTree").TryGetComponent<CreateTree>(out CreateTree tree)) {
-            this.createTree = tree;
+        if (transform.Find("CreateDecorObject").TryGetComponent<CreateDecorObject>(out CreateDecorObject tree)) {
+            this.decorObject = tree;
         }
-        Debug.Log(transform.name + ": Load CreateTree", gameObject);
+        Debug.Log(transform.name + ": Load DecorObject", gameObject);
     }
 
     protected virtual void LoadCreateItem()

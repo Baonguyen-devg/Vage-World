@@ -38,7 +38,6 @@ public class Create : AutoMonobehaviour
 
     public virtual void CreateGroup()
     {
-        Debug.Log(transform.name + " " + this.numberGroup);
         this.canPush = new bool[this.widthMap + 1, this.heightMap + 1];
         for (int i = 1; i <= this.numberGroup; i++)
             this.Group();

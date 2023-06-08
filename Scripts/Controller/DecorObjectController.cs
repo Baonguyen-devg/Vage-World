@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TreeController : AutoMonobehaviour
+public class DecorObjectController : AutoMonobehaviour
 {
     [SerializeField] protected Transform model;
 

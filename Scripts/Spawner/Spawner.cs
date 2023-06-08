@@ -17,7 +17,7 @@ public class Spawner : AutoMonobehaviour
 
     protected virtual void LoadPrefab()
     {
-        if (this.listPrefab.Count > 0) return;
+        if (this.listPrefab.Count != 0) return;
         Transform prefabObj = transform.Find("Prefab");
         foreach (Transform prefab in prefabObj)
             this.listPrefab.Add(prefab);

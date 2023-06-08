@@ -48,7 +48,7 @@ public class PlayerShootingAttack : ShootingAttack
         this.skill3 = Status;
     }
 
-    protected override void ToAttack()
+    public override void ToAttack()
     {
         base.ToAttack();
 
