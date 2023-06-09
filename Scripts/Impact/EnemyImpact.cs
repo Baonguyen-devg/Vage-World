@@ -15,7 +15,7 @@ public class EnemyImpact : Impact
     protected virtual void LoadController()
     {
         if (this.controller != null) return;
-        this.controller = transform.parent.parent.GetComponent<EnemyController>();
+        this.controller = transform.parent.parent.parent.GetComponent<EnemyController>();
         Debug.Log(transform.name + ": Load Controller", gameObject);
     }
 

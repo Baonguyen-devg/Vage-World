@@ -14,8 +14,8 @@ public class Group : AutoMonobehaviour
     [SerializeField] protected string nameRegion;
 
     [Header("Spawning Number")]
-    [SerializeField] protected int minNumber = 3;
-    [SerializeField] protected int maxNumber = 4;
+    [SerializeField] protected int minNumber = 5;
+    [SerializeField] protected int maxNumber = 7;
 
     public virtual void ChangeMapController(MapController map)
     {

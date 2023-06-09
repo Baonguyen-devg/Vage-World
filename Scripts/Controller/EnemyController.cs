@@ -10,7 +10,7 @@ public class EnemyController : AutoMonobehaviour
     [SerializeField] protected EnemyDamagedSender damagedSender;
     [SerializeField] protected EnemyDamagedReceiver damagedReceiver;
     [SerializeField] protected EnemyHealthBar healthBar;
-    [SerializeField] protected CloseCombatAttack closeCombat;
+    [SerializeField] protected EnemyCloseCombatAttack closeCombat;
     private CloseCombatAttack closeCombatComponent;
 
     public EnemyMovement Movement => this.movement;
@@ -19,7 +19,7 @@ public class EnemyController : AutoMonobehaviour
     public EnemyDamagedSender DamagedSender => this.damagedSender;
     public EnemyDamagedReceiver DamagedReceiver => this.damagedReceiver;
     public EnemyHealthBar HealthBar => this.healthBar;
-    public CloseCombatAttack CloseCombat => this.closeCombat;
+    public EnemyCloseCombatAttack CloseCombat => this.closeCombat;
 
     protected override void LoadComponent()
     {
@@ -78,10 +78,7 @@ public class EnemyController : AutoMonobehaviour
     protected virtual void LoadCloseCombat()
     {
         if (this.closeCombat != null || transform.Find("CloseCombat") == null) return;
-        if (transform.Find("CloseCombat").TryGetComponent<CloseCombatAttack>(out closeCombatComponent)) {
-            this.closeCombat = closeCombatComponent;
-        } 
-        
+        this.closeCombat = transform.Find("CloseCombat").GetComponent<EnemyCloseCombatAttack>();
         Debug.Log(transform.name + ": Load CloseCombat", gameObject);
     }
 }

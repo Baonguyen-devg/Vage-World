@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SignalImpact : Impact
+public class EnemyCloseCombatAttack : CloseCombatAttack
 {
     [SerializeField] protected EnemyController controller;
+    [SerializeField] protected string nameBehavioirCloseCombat;
 
     protected override void LoadComponent()
     {
@@ -19,11 +20,15 @@ public class SignalImpact : Impact
         Debug.Log(transform.name + ": Load Controller", gameObject);
     }
 
-    protected virtual void OnTriggerEnter2D(Collider2D collision)
+    protected override void LoadTarget()
     {
-        if (collision.transform.name != "Main Camera") return;
+        base.LoadTarget();
+        this.target = GameObject.Find("Player").transform;
+    }
 
-        this.controller.Movement.gameObject.SetActive(true);
-        this.controller.Model.GetComponent<Animator>().SetTrigger("Run");
+    public override void ToAttack()
+    {
+        base.ToAttack();
+        this.controller.Model.GetComponent<BehaviorManager>().GetBehaviorByName(this.nameBehavioirCloseCombat).gameObject.SetActive(true);
     }
 }

@@ -45,8 +45,8 @@ public class CreateMap : AutoMonobehaviour
 
 
         this.CreateMapRandom();
-        /*  this.mapController.CreateGroupEnemy.CreateGroup();*/
-        Invoke("CreateObjectInMap", 2f);
+        this.mapController.CreateGroupEnemy.CreateGroup();
+        this.CreateObjectInMap();
         this.CreateLink();
     }
 
@@ -128,7 +128,12 @@ public class CreateMap : AutoMonobehaviour
                     continue;
                 }
                 if (this.titles[i, j] == 0) this.landList.Add(land);
-                if (this.colorTitles[i, j] == 1) this.ChangeColor(land);
+                if (this.colorTitles[i, j] == 1)
+                {
+                    this.ChangeColor(land);
+                  /*  ItemSpawner.Instance.SpawnInRegion("Grass", this.nameRegion, pos, rot);*/
+                }
+
             }
     }
 

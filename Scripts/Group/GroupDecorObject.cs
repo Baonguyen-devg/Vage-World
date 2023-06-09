@@ -33,6 +33,6 @@ public class GroupDecorObject : Group
         int key = Random.Range(3, 5);
         Transform decorObject = DecorObjectSpawner.Instance.SpawnInRegion(this.objectSpawner, this.nameRegion, position, rotation);
         if (decorObject == null) return;
-        decorObject.GetComponent<DecorObjectController>().Model.localScale = new Vector3(key, key, 1);
+        /*decorObject.GetComponent<DecorObjectController>().Model.localScale = new Vector3(key, key, 1);*/
     }
 }
