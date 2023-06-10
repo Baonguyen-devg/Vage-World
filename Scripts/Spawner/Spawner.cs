@@ -77,7 +77,7 @@ public class Spawner : AutoMonobehaviour
     protected virtual Transform GetPoolObject(Transform obj)
     {
         foreach(Transform prefab in this.poolObjects)
-            if (obj.name == prefab.name)
+            if (obj.name == prefab.name && !prefab.gameObject.activeSelf)
             {
                 this.poolObjects.Remove(prefab);
                 return prefab;
