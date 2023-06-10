@@ -1027,6 +1027,54 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.3
+--- !u!1 &80057085
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 80057087}
+  - component: {fileID: 80057086}
+  m_Layer: 0
+  m_Name: TimeLineController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &80057086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 80057085}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0555a629fa8dc1b4383574b5260fb45b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeAppearBoss: 30
+  levelManagerSO: {fileID: 11400000, guid: 660278c79c958234fbd0302fbd649509, type: 2}
+  spawnBoss: 0
+  boss: {fileID: 1804020214}
+--- !u!4 &80057087
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 80057085}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 16
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &83641982
 GameObject:
   m_ObjectHideFlags: 0
@@ -3947,13 +3995,14 @@ GameObject:
   - component: {fileID: 306147544}
   - component: {fileID: 306147546}
   - component: {fileID: 306147545}
+  - component: {fileID: 306147547}
   m_Layer: 5
   m_Name: Frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &306147544
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3963,16 +4012,16 @@ RectTransform:
   m_GameObject: {fileID: 306147543}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.2828, y: 1.2828, z: 1.2828}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1914532559}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 759, y: 336}
-  m_SizeDelta: {x: 380, y: 380}
+  m_AnchoredPosition: {x: 759, y: 309}
+  m_SizeDelta: {x: 261.8, y: 261.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &306147545
 MonoBehaviour:
@@ -3994,16 +4043,16 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 5840cf9e1033fa846ae3a8ebbdaa41d7, type: 3}
-  m_Type: 0
+  m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
+  m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
-  m_FillAmount: 1
+  m_FillAmount: 0.382
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 0.01
 --- !u!222 &306147546
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4012,6 +4061,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 306147543}
   m_CullTransparentMesh: 1
+--- !u!114 &306147547
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 306147543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d18176c976641d9488422f66018fcd12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &307070363
 GameObject:
   m_ObjectHideFlags: 0
@@ -7626,7 +7687,7 @@ Transform:
   m_Children:
   - {fileID: 923175707}
   m_Father: {fileID: 0}
-  m_RootOrder: 21
+  m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &463256865
 MonoBehaviour:
@@ -7943,7 +8004,7 @@ Transform:
   - {fileID: 1365831238}
   - {fileID: 1231526569}
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &486292920
 GameObject:
@@ -8655,7 +8716,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 25b84aea41e82bc4ea0a5c9d9abb59dd, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0
+  m_Volume: 0.16
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -10595,15 +10656,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   heightMap: 100
   widthMap: 100
-  seed: baonguyen3303
-  mapController: {fileID: 1844089067}
-  posPaX: 0
-  posPaY: 0
-  nameRegion: 
   randomFillPercent: 47
   smoothPercent: 10
-  number: 0
+  rateChangeColor: 0
+  seed: baonguyen3303
+  mapController: {fileID: 1844089067}
   landList: []
+  levelManagerSO: {fileID: 0}
 --- !u!1 &644914325
 GameObject:
   m_ObjectHideFlags: 0
@@ -19114,15 +19173,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   heightMap: 100
   widthMap: 100
-  seed: VictorDave3303
-  mapController: {fileID: 1230040810}
-  posPaX: 0
-  posPaY: 0
-  nameRegion: 
   randomFillPercent: 47
   smoothPercent: 10
-  number: 0
+  rateChangeColor: 0
+  seed: VictorDave3303
+  mapController: {fileID: 1230040810}
   landList: []
+  levelManagerSO: {fileID: 0}
 --- !u!1 &1116031904
 GameObject:
   m_ObjectHideFlags: 0
@@ -20813,7 +20870,7 @@ Transform:
   - {fileID: 2145325086}
   - {fileID: 1230040811}
   m_Father: {fileID: 0}
-  m_RootOrder: 22
+  m_RootOrder: 23
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1184716421
 GameObject:
@@ -21041,7 +21098,7 @@ Transform:
   m_Children:
   - {fileID: 1510334167}
   m_Father: {fileID: 0}
-  m_RootOrder: 20
+  m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1192032658
 MonoBehaviour:
@@ -22087,15 +22144,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   heightMap: 100
   widthMap: 100
-  seed: Darkmaster3303
-  mapController: {fileID: 1704497151}
-  posPaX: 0
-  posPaY: 0
-  nameRegion: 
   randomFillPercent: 47
   smoothPercent: 10
-  number: 0
+  rateChangeColor: 0
+  seed: Darkmaster3303
+  mapController: {fileID: 1704497151}
   landList: []
+  levelManagerSO: {fileID: 0}
 --- !u!4 &1255469227
 Transform:
   m_ObjectHideFlags: 0
@@ -23624,7 +23679,7 @@ RectTransform:
   m_Children:
   - {fileID: 1200238744}
   m_Father: {fileID: 0}
-  m_RootOrder: 18
+  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -27821,7 +27876,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1540263140
 GameObject:
@@ -29104,19 +29159,19 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1593738536}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.2, y: 1.2, z: 1}
+  m_LocalScale: {x: 3.2362, y: 3.2362, z: 3.2362}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 85300676}
   m_Father: {fileID: 1914532559}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 759, y: 336}
-  m_SizeDelta: {x: 165.63, y: 155.87996}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 758, y: 309}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1593738538
 MonoBehaviour:
@@ -32548,7 +32603,7 @@ Transform:
   - {fileID: 1060874172}
   - {fileID: 1913945707}
   m_Father: {fileID: 0}
-  m_RootOrder: 23
+  m_RootOrder: 24
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1804020215
 MonoBehaviour:
@@ -34318,8 +34373,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1593738537}
   - {fileID: 306147544}
+  - {fileID: 1593738537}
   m_Father: {fileID: 1200238744}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -35196,7 +35251,7 @@ RectTransform:
   m_Children:
   - {fileID: 800811387}
   m_Father: {fileID: 0}
-  m_RootOrder: 19
+  m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -36555,15 +36610,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   heightMap: 100
   widthMap: 100
-  seed: thaibao3303
-  mapController: {fileID: 520979283}
-  posPaX: 0
-  posPaY: 0
-  nameRegion: 
   randomFillPercent: 47
   smoothPercent: 10
-  number: 100
+  rateChangeColor: 10
+  seed: Baonguyen.devG
+  mapController: {fileID: 520979283}
   landList: []
+  levelManagerSO: {fileID: 11400000, guid: 660278c79c958234fbd0302fbd649509, type: 2}
 --- !u!1 &2037177008
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: LevelManager
+  m_EditorClassIdentifier: Assembly-CSharp::LevelManagerSO
+  height: 100
+  width: 100
+  smooth: 10
+  randomFillPercent: 47
+  rateDecorObject: 8
+  rateChangeColor: 10
+  levelSkill: 3
+  baseLevel: 11
+  rateSkill1: 5
+  rateSkill2: 7
+  rateSkill3: 9
+  distanceBetween: 0
+  number: 39
+  timeAppearBoss: 30
+  dame: 100
+  health: 10000
+  speed: 0.03

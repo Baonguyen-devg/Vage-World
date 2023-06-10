@@ -8,21 +8,17 @@ public class CreateMap : AutoMonobehaviour
     protected int[] row = { -1, 0, 0, 1, 0, -1, 1, 1, -1 };
     [SerializeField] protected int heightMap = 50;
     [SerializeField] protected int widthMap = 50;
+    [SerializeField] protected int randomFillPercent;
+    [SerializeField] protected int smoothPercent;
+    [SerializeField] protected int rateChangeColor;
+
     [SerializeField] protected int[, ] titles;
     [SerializeField] protected int[, ] colorTitles;
-    [SerializeField] protected string seed;
+    [SerializeField] protected string seed = "Baonguyen.devG";
     [SerializeField] protected MapController mapController;
-    [SerializeField] protected float posPaX, posPaY;
-    [SerializeField] protected string nameRegion;
-    protected Queue<Vector2> queue;
-
-    [Range(0, 100)]
-    [SerializeField] protected int randomFillPercent;
-    [Range(0, 10)]
-    [SerializeField] protected int smoothPercent;
-    [SerializeField] protected int number;
 
     public List<Transform> landList;
+    [SerializeField] private LevelManagerSO levelManagerSO;
 
     public int HeightMap => this.heightMap;
     public int WidthMap => this.widthMap;
@@ -31,15 +27,30 @@ public class CreateMap : AutoMonobehaviour
     {
         base.LoadComponent();
         this.LoadMapController();
+        this.LoadLevelManagerSO();
+    }
+
+    protected virtual void LoadLevelManagerSO()
+    {
+        if (this.levelManagerSO != null) return;
+        string resPath = "Level/LevelManager";
+        this.levelManagerSO = Resources.Load<LevelManagerSO>(resPath);
+        Debug.LogWarning(transform.name + ": Load GroupDecorObjectSO" + resPath, gameObject);
+        this.LoadInformationMap();
+    }
+
+    protected virtual void LoadInformationMap()
+    {
+        this.widthMap = this.levelManagerSO.Width;
+        this.heightMap = this.levelManagerSO.Height;
+        this.smoothPercent = this.levelManagerSO.Smooth;
+        this.randomFillPercent = this.levelManagerSO.RandomFillPercent;
+        this.rateChangeColor = this.levelManagerSO.RateChangeColor;
     }
 
     protected virtual void Start()
     {
-        this.number = (this.widthMap * this.heightMap) * randomFillPercent / 100;
         string region = transform.parent.name;
-        this.nameRegion = region.Substring(9, region.Length - 9);
-        this.posPaX = transform.parent.position.x;
-        this.posPaY = transform.parent.position.y;
         this.CreateBitRandom();
         this.SmoothMap();
 
@@ -69,7 +80,7 @@ public class CreateMap : AutoMonobehaviour
     {
         int key = Random.Range(0, this.landList.Count);
         portal.position = this.landList[key].position;
-        this.RemoveLand((int)(this.landList[key].position.x - this.posPaX + this.widthMap / 2), (int)(this.landList[key].position.y - this.posPaY + this.heightMap / 2));
+        this.RemoveLand((int)(this.landList[key].position.x + this.widthMap / 2), (int)(this.landList[key].position.y + this.heightMap / 2));
     }
 
     protected virtual void LoadMapController()
@@ -107,7 +118,7 @@ public class CreateMap : AutoMonobehaviour
                 if (i <= 2 || j <= 2 || i >= this.widthMap - 1 || j >= this.heightMap - 1) this.titles[i, j] = 1;
                 else this.titles[i, j] = (psuedo.Next(0, 100) < this.randomFillPercent) ? 1 : 0;
 
-                if (this.titles[i, j] == 0 && Random.Range(0, 10) <= 8) this.colorTitles[i, j] = 1;
+                if (this.titles[i, j] == 0 && Random.Range(0, 10) <= this.rateChangeColor) this.colorTitles[i, j] = 1;
             }
     }
 
@@ -116,24 +127,19 @@ public class CreateMap : AutoMonobehaviour
         for (int i = 1; i <= this.widthMap; i++)
             for (int j = 1; j <= this.heightMap; j++)
             {
-                Vector3 pos = new Vector3(i + this.posPaX - this.widthMap / 2, j + this.posPaY - this.heightMap / 2, 0);
+                Vector3 pos = new Vector3(i - this.widthMap / 2, j - this.heightMap / 2, 0);
                 Quaternion rot = transform.rotation;
 
                 Transform land = null, sea = null; 
-                if (this.titles[i, j] == 0) land = MapSpawner.Instance.SpawnInRegion(MapSpawner.land_1, this.nameRegion, pos, rot);
-                else sea = MapSpawner.Instance.SpawnInRegion(MapSpawner.sea_1, this.nameRegion, pos, rot);
+                if (this.titles[i, j] == 0) land = MapSpawner.Instance.SpawnInRegion(MapSpawner.land_1, "Forest", pos, rot);
+                else sea = MapSpawner.Instance.SpawnInRegion(MapSpawner.sea_1, "Forest", pos, rot);
                 if (land == null)
                 {
                     this.ChangeSide(i, j, sea);
                     continue;
                 }
                 if (this.titles[i, j] == 0) this.landList.Add(land);
-                if (this.colorTitles[i, j] == 1)
-                {
-                    this.ChangeColor(land);
-                  /*  ItemSpawner.Instance.SpawnInRegion("Grass", this.nameRegion, pos, rot);*/
-                }
-
+                if (this.colorTitles[i, j] == 1) this.ChangeColor(land);
             }
     }
 
