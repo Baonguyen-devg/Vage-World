@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Group : AutoMonobehaviour
 {
-    protected int[] col = { 0, 0, -1, 1, 0 };
-    protected int[] row = { -1, 1, 0, 0, 0 };
+    protected int[] col = { 0, 0, -1, 1};
+    protected int[] row = { -1, 1, 0, 0};
 
     [SerializeField] protected int numberObject;
     [SerializeField] protected bool[,] haveObject;
@@ -37,7 +37,7 @@ public class Group : AutoMonobehaviour
         while (count != this.numberObject && landList.Count != 0)
         {
             Vector3 pos = landList.Dequeue();
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 4; i++)
             {
                 int x = (int)pos.x + col[i];
                 int y = (int)pos.y + row[i];
