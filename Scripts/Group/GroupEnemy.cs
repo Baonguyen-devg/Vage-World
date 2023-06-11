@@ -30,7 +30,8 @@ public class GroupEnemy : Group
 
     protected override void SpawnObject(Vector3 position, Quaternion rotation)
     {
-        EnemySpawner.Instance.SpawnInRegion(this.objectSpawner, this.nameRegion, position, rotation);
+        Transform enemy = EnemySpawner.Instance.SpawnInRegion(this.objectSpawner, this.nameRegion, position, rotation);
+        transform.parent.GetComponent<PointSpawnEnemy>().Add(enemy);
     }
 
 }

@@ -12,16 +12,10 @@ public class EnemyMovement : Movement
     protected override void LoadComponent()
     {
         base.LoadComponent();
-        this.LoadTarget();
         this.LoadController();
     }
 
-    protected virtual void LoadTarget()
-    {
-        if (this.target != null) return;
-        this.target = GameObject.Find("Player").transform;
-        Debug.Log(transform.name + ": LoadTarget", gameObject);
-    }
+    public virtual void SetTarget(Transform target) { this.target = target; }
 
     protected virtual void LoadController()
     {
@@ -33,6 +27,7 @@ public class EnemyMovement : Movement
     protected override void Move()
     {
         base.Move();
+        if (this.target == null) return;
         Vector3 newPos = Vector3.Lerp(transform.parent.position, this.target.position, this.speed);
         transform.parent.position = newPos;
     }

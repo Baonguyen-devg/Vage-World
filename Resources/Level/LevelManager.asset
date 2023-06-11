@@ -25,7 +25,7 @@ MonoBehaviour:
   rateSkill3: 9
   distanceBetween: 0
   number: 39
-  timeAppearBoss: 30
+  timeAppearBoss: 300
   dame: 100
   health: 10000
   speed: 0.03

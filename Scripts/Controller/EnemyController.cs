@@ -12,6 +12,7 @@ public class EnemyController : AutoMonobehaviour
     [SerializeField] protected EnemyHealthBar healthBar;
     [SerializeField] protected EnemyCloseCombatAttack closeCombat;
     private CloseCombatAttack closeCombatComponent;
+    private Transform posRoot;
 
     public EnemyMovement Movement => this.movement;
     public SignalImpact Impact => this.impact;
@@ -31,6 +32,13 @@ public class EnemyController : AutoMonobehaviour
         this.LoadDamagedReceiver();
         this.LoadHealthBar();
         this.LoadCloseCombat();
+    }
+
+    protected virtual void Start()
+    {
+        GameObject pos = new GameObject();
+        pos.transform.position = transform.position;
+        this.posRoot = pos.transform;
     }
 
     protected virtual void LoadDamagedReceiver()
@@ -80,5 +88,15 @@ public class EnemyController : AutoMonobehaviour
         if (this.closeCombat != null || transform.Find("CloseCombat") == null) return;
         this.closeCombat = transform.Find("CloseCombat").GetComponent<EnemyCloseCombatAttack>();
         Debug.Log(transform.name + ": Load CloseCombat", gameObject);
+    }
+
+    public virtual void DoAttack()
+    {
+        this.Movement.SetTarget(GameObject.Find("Player").transform);
+    }
+
+    public virtual void StopAttack()
+    {
+        this.Movement.SetTarget(this.posRoot);
     }
 }
