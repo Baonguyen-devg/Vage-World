@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class BossEnemyImpact : EnemyImpact
 {
+    protected virtual void OnEnable()
+    {
+        GameObject.Find("Camera").GetComponent<Animator>().SetTrigger("Shaking");
+    }
+
     protected override void LoadController()
     {
         if (this.controller != null) return;
