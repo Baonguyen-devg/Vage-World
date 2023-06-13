@@ -43,15 +43,4 @@ public class UISkillController : AutoMonobehaviour
             if (_name == prefab.name) return prefab;
         return null;
     }
-
-    public virtual void MoveSkillUI(int index)
-    {
-        for (int i = index + 1; i < this.skillPrefab.Count - 1; i++)
-            this.MoveToPos(this.skillPrefab[i].GetComponent<RectTransform>(), -90);
-    }
-
-    protected virtual void MoveToPos(RectTransform Object, float distance)
-    {
-        Object.localPosition = new Vector3(Object.localPosition.x + distance, Object.localPosition.y, Object.localPosition.z);
-    }
 }

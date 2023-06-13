@@ -72,11 +72,8 @@ public class SkillController : AutoMonobehaviour
 
     public virtual void SetTimeSkillOne(bool status)
     {
-        if (this.OnSkill1 == false)
-        {
-            this.OnSkill1 = true;
-            UISkillController.Instance.MoveSkillUI(0);
-        }
+        if (this.OnSkill1 == false) this.OnSkill1 = true;
+           
         if (status == false)
         {
             this.timeSkill1 = Time.time + this.GetPrefabByName("Skill1").GetComponent<Skill>().TimeDelay;
@@ -86,11 +83,7 @@ public class SkillController : AutoMonobehaviour
 
     public virtual void SetTimeSkillTwo(bool status)
     {
-        if (this.OnSkill2 == false)
-        {
-            this.OnSkill2 = true;
-            UISkillController.Instance.MoveSkillUI(1);
-        }
+        if (this.OnSkill2 == false) this.OnSkill2 = true;
         if (status == false) this.timeSkill2 = Time.time + this.GetPrefabByName("Skill2").GetComponent<Skill>().TimeDelay;
         this.useSkill2 = false;
     }

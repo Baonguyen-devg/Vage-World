@@ -66,16 +66,6 @@ public class UISkill: AutoMonobehaviour
         Debug.Log(transform.name + ": Load Buttom Update", gameObject);
     }
 
-    protected virtual void LoadUIMaterial()
-    {
-        int index = 0;
-        foreach (KeyValuePair<Transform, int> skillPrefab in this.skill.GetComponent<Skill>().ListRandomMaterial)
-        {
-            this.listRender[index++].sprite = transform.parent.GetComponent<UISkillController>().GetPrefabByName("Image" + skillPrefab.Key.name).sprite;
-            this.listRender[index - 1].transform.parent.Find("Number").GetComponent<Text>().text = skillPrefab.Value.ToString();
-        }
-    }
-
     protected virtual void LoadBoxMaterial()
     {
         if (this.BoxMaterials != null) return;
