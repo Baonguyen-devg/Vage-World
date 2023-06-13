@@ -325,12 +325,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7d7dcc0db8d390459fe58a9cc99f590, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedAttack: 0
-  rateTimeAttack: 1
+  attackDelay: 0
   skill1: 0
   skill2: 0
   skill3: 0
-  nextTimeAttack: 0
+  attackTimer: 0
   target: {fileID: 774405703}
   controller: {fileID: 1804020215}
   nameBehavioirCloseCombat: Seismic
@@ -2142,12 +2141,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fc5ac3c477847d40b6363a2c75e7710, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedAttack: 0
-  rateTimeAttack: 3
+  attackDelay: 0
   skill1: 0
   skill2: 0
   skill3: 0
-  nextTimeAttack: 0
+  attackTimer: 0
   posShoote: {fileID: 1774633621}
   controller: {fileID: 0}
   pointSpawns:
@@ -3172,6 +3170,7 @@ GameObject:
   m_Component:
   - component: {fileID: 200397780}
   - component: {fileID: 200397781}
+  - component: {fileID: 200397782}
   m_Layer: 0
   m_Name: Model
   m_TagString: Untagged
@@ -3188,9 +3187,10 @@ Transform:
   m_GameObject: {fileID: 200397779}
   m_LocalRotation: {x: 0, y: 0, z: -0.38268343, w: 0.92387956}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1584047012}
   m_Father: {fileID: 800899187}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -45}
@@ -3235,7 +3235,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 8
-  m_Sprite: {fileID: -1613550611, guid: f1d5ea9aaa43a7247a873830b3f2d4f7, type: 3}
+  m_Sprite: {fileID: -1086237301, guid: 97f5f92de37876645b3dad321555f5c5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -3246,6 +3246,26 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &200397782
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 200397779}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b2df504cd74b8e74387d92d3ae908cb0, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &200826502
 GameObject:
   m_ObjectHideFlags: 0
@@ -8994,9 +9014,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 254835d862e29ab439a60510f96cd61a, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 294c43df33a24574191f084166461622, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.16
+  m_Volume: 0.62
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -10740,6 +10760,7 @@ GameObject:
   m_Component:
   - component: {fileID: 623031008}
   - component: {fileID: 623031009}
+  - component: {fileID: 623031010}
   m_Layer: 0
   m_Name: Model
   m_TagString: Untagged
@@ -10754,14 +10775,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 623031007}
-  m_LocalRotation: {x: 0, y: 0, z: -0.38268343, w: 0.92387956}
+  m_LocalRotation: {x: 0, y: -0, z: 0.9238796, w: -0.38268325}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.8, y: 0.8, z: 0.4}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1551425929}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -45}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 225}
 --- !u!212 &623031009
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -10802,8 +10823,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
-  m_Sprite: {fileID: -1876321583, guid: f1d5ea9aaa43a7247a873830b3f2d4f7, type: 3}
+  m_SortingOrder: 9
+  m_Sprite: {fileID: 1719078550, guid: 8c48a95f62db98444b574032e522246f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -10814,6 +10835,26 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &623031010
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 623031007}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 80c1d2a703906424c8b7a83ce8932688, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &625203917
 GameObject:
   m_ObjectHideFlags: 0
@@ -11482,12 +11523,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7d7dcc0db8d390459fe58a9cc99f590, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedAttack: 0
-  rateTimeAttack: 1
+  attackDelay: 0
   skill1: 0
   skill2: 0
   skill3: 0
-  nextTimeAttack: 0
+  attackTimer: 0
   target: {fileID: 774405703}
   controller: {fileID: 358635837}
   nameBehavioirCloseCombat: Attack
@@ -11829,12 +11869,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7d7dcc0db8d390459fe58a9cc99f590, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedAttack: 0
-  rateTimeAttack: 1
+  attackDelay: 0
   skill1: 0
   skill2: 0
   skill3: 0
-  nextTimeAttack: 0
+  attackTimer: 0
   target: {fileID: 774405703}
   controller: {fileID: 88146382}
   nameBehavioirCloseCombat: Attack
@@ -18735,12 +18774,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fc5ac3c477847d40b6363a2c75e7710, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedAttack: 0
-  rateTimeAttack: 1
+  attackDelay: 0
   skill1: 0
   skill2: 0
   skill3: 0
-  nextTimeAttack: 0
+  attackTimer: 0
   posShoote: {fileID: 0}
   controller: {fileID: 0}
   pointSpawns:
@@ -20125,7 +20163,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e281a615c4380da44957fcd87bc2d6d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  speed: 9
   maxSpeed: 10
   minSpeed: 0.05
   isMovingFast: 0
@@ -27156,12 +27194,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ccac44dede6a3141b4e65eabdffcb63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedAttack: 0
-  rateTimeAttack: 0.1
+  attackDelay: 0.3
   skill1: 0
   skill2: 0
   skill3: 0
-  nextTimeAttack: 0
+  attackTimer: 0
   posShoote: {fileID: 800899187}
   pointSpawnsSkillOne:
   - {fileID: 270913385}
@@ -27320,7 +27357,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1473070461
 Transform:
   m_ObjectHideFlags: 0
@@ -30037,6 +30074,111 @@ Transform:
   m_Father: {fileID: 848735921}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1584047011
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1584047012}
+  - component: {fileID: 1584047014}
+  - component: {fileID: 1584047013}
+  m_Layer: 0
+  m_Name: ArcheryModel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1584047012
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1584047011}
+  m_LocalRotation: {x: -0, y: -0, z: -0.7201411, w: 0.69382775}
+  m_LocalPosition: {x: 0.003, y: 0.038, z: 0}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 0.32}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 200397780}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -92.132}
+--- !u!95 &1584047013
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1584047011}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 80c1d2a703906424c8b7a83ce8932688, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!212 &1584047014
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1584047011}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 9
+  m_Sprite: {fileID: 1719078550, guid: 8c48a95f62db98444b574032e522246f, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
 --- !u!1 &1591783330
 GameObject:
   m_ObjectHideFlags: 0
@@ -30955,12 +31097,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fc5ac3c477847d40b6363a2c75e7710, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedAttack: 0
-  rateTimeAttack: 0
+  attackDelay: 0
   skill1: 0
   skill2: 0
   skill3: 0
-  nextTimeAttack: 0
+  attackTimer: 0
   posShoote: {fileID: 1791467770}
   controller: {fileID: 0}
   pointSpawns: []
@@ -33651,7 +33792,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1804020214
 Transform:
   m_ObjectHideFlags: 0
@@ -39721,12 +39862,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88308297a0887e84e802c065cc8d6e10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedAttack: 0
-  rateTimeAttack: 0
+  attackDelay: 0
   skill1: 0
   skill2: 0
   skill3: 0
-  nextTimeAttack: 0
+  attackTimer: 0
   target: {fileID: 0}
 --- !u!4 &2128801594
 Transform:

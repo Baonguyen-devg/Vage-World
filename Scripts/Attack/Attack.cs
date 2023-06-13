@@ -4,12 +4,11 @@ using UnityEngine;
 
 public abstract class Attack : AutoMonobehaviour
 {
-    [SerializeField] protected float speedAttack;
-    [SerializeField] protected float rateTimeAttack;
+    [SerializeField] protected float attackDelay;
     [SerializeField] protected bool skill1, skill2, skill3;
-    [SerializeField] protected float nextTimeAttack;
+    [SerializeField] protected float attackTimer;
 
-    protected virtual void FixedUpdate()
+    protected virtual void Update()
     {
         if (this.CanAttack()) this.ToAttack();
     }
@@ -21,9 +20,8 @@ public abstract class Attack : AutoMonobehaviour
 
     protected virtual bool CanAttack()
     {
-        if (Time.time < this.nextTimeAttack) return false;
-
-        this.nextTimeAttack = Time.time + this.rateTimeAttack;
+        this.attackTimer = this.attackTimer + Time.deltaTime;
+        if (this.attackTimer < this.attackDelay) return false;
         return true;
     }
 }

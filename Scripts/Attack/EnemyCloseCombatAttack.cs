@@ -29,6 +29,7 @@ public class EnemyCloseCombatAttack : CloseCombatAttack
     public override void ToAttack()
     {
         base.ToAttack();
+        this.attackTimer = 0;
         this.controller.Model.GetComponent<BehaviorManager>().GetBehaviorByName(this.nameBehavioirCloseCombat).gameObject.SetActive(true);
     }
 }

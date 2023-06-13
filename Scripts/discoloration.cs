@@ -34,7 +34,6 @@ public class discoloration : AutoMonobehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.LogWarning("BAO");
         if (collision.GetComponent<PlayerController>() == null
             && collision.GetComponent<EnemyController>() == null) return;
         transform.parent.Find("Model").GetComponent<SpriteRenderer>().color = new(1f, 1f, 1f, 0.5f);

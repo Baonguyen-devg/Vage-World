@@ -68,6 +68,8 @@ public class PlayerShootingAttack : ShootingAttack
             }
             else this.Shoote(bullet, this.posShoote);
 
+            transform.Find("PointSpawn").Find("Model").GetComponent<Animator>().SetTrigger("Bow");
+
             if (this.skill2 == true) SkillController.Instance.SetTimeSkillTwo(false);
             if (this.skill3 == true) SkillController.Instance.SetTimeSkillThree(false);
             this.ChangeStatusSkill2(false);

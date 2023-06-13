@@ -36,7 +36,7 @@ public class DamagedReceiver : AutoMonobehaviour
 
     public virtual bool IsDead()
     {
-        return this.health == 0;
+        return this.health <= 0;
     }
 
     public virtual void Reborn()

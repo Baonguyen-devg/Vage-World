@@ -21,6 +21,7 @@ public class ShootingAttack : Attack
 
     protected virtual void Shoote(string nameBullet, Transform posShoote)
     {
+        this.attackTimer = 0;
         Vector3 position = posShoote.position;
         Quaternion rotation = posShoote.rotation;
         Transform bullet = BulletSpawner.Instance.SpawnInRegion(nameBullet, "Forest", position, rotation);
