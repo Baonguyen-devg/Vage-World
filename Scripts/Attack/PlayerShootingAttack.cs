@@ -48,11 +48,18 @@ public class PlayerShootingAttack : ShootingAttack
         this.skill3 = Status;
     }
 
+    protected virtual void ZoomBullet(Transform bullet)
+    {
+        bullet.Find("Model").localScale += new Vector3(0.5f, 0.5f, 0);
+        bullet.GetComponent<BulletController>().DamagedSender.IncreaseDame(20);
+    }
+
     public override void ToAttack()
     {
         base.ToAttack();
 
         string bullet = (this.skill3) ? BulletSpawner.torandoBullet : BulletSpawner.playerBullet;
+        Transform bulletSpawn;
 
         if (Input.GetMouseButton(0))
         {
@@ -61,12 +68,17 @@ public class PlayerShootingAttack : ShootingAttack
                 foreach (Transform point in this.pointSpawnsSkillOne)
                 {
                     point.gameObject.SetActive(true);
-                    this.Shoote(bullet, point);
+                    bulletSpawn = this.ShooteReturnBullet(bullet, point);
+                    if (this.skill2) this.ZoomBullet(bulletSpawn);
                 }
                 SkillController.Instance.SetTimeSkillOne(false);
                 this.ChangeStatusSkill1(false);
             }
-            else this.Shoote(bullet, this.posShoote);
+            else
+            {
+                bulletSpawn = this.ShooteReturnBullet(bullet, this.posShoote);
+                if (this.skill2) this.ZoomBullet(bulletSpawn);
+            }
 
             transform.Find("PointSpawn").Find("Model").GetComponent<Animator>().SetTrigger("Bow");
 

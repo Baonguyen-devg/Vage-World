@@ -6,8 +6,6 @@ using UnityEngine.UI;
 public class UISkill: AutoMonobehaviour
 {
     [SerializeField] protected Transform skill;
-    [SerializeField] protected Transform BoxMaterials;
-    [SerializeField] protected int distance;
     [SerializeField] protected Button buttomUpdate;
     [SerializeField] protected List<Image> listRender;
     [SerializeField] protected Image imageShader;
@@ -16,7 +14,6 @@ public class UISkill: AutoMonobehaviour
     {
         base.LoadComponent();
         this.LoadSkillPrefab();
-        this.LoadBoxMaterial();
         this.LoadButtomUpdate();
         this.LoadListRender();
         this.LoadImageShader();
@@ -32,10 +29,10 @@ public class UISkill: AutoMonobehaviour
     protected virtual void LoadListRender()
     {
         if (this.listRender.Count != 0) return;
-        Transform render = transform.Find("NumberInfor");
+        Transform render = transform.Find("MaterialFrame").Find("NumberInfor");
 
         foreach (Transform objectRender in render)
-            this.listRender.Add(objectRender.Find("Image").GetComponent<Image>());
+            this.listRender.Add(objectRender.GetComponentInChildren<Image>());
     }
 
     protected virtual void Start()
@@ -43,11 +40,26 @@ public class UISkill: AutoMonobehaviour
         Invoke("LoadUIMaterial", 1f);
     }
 
+    protected virtual void LoadUIMaterial()
+    {
+        int index = 0;
+        foreach (KeyValuePair<Transform, int> skillPrefab in this.skill.GetComponent<Skill>().ListRandomMaterial)
+        {
+            this.listRender[index++].sprite = transform.parent.GetComponent<UISkillController>().GetPrefabByName("Image" + skillPrefab.Key.name).sprite;
+            this.listRender[index - 1].transform.parent.Find("Number").GetComponent<Text>().text = skillPrefab.Value.ToString();
+        }
+    }
+
     protected virtual void Update()
     {
-        if (transform.name == "Skill1") this.imageShader.fillAmount = (SkillController.Instance.TimeSkill1 - Time.time) / this.skill.GetComponent<Skill>().TimeDelay;
-        if (transform.name == "Skill2") this.imageShader.fillAmount = (SkillController.Instance.TimeSkill2 - Time.time) / this.skill.GetComponent<Skill>().TimeDelay;
-        if (transform.name == "Skill3") this.imageShader.fillAmount = (SkillController.Instance.TimeSkill3 - Time.time) / this.skill.GetComponent<Skill>().TimeDelay;
+        if (transform.name == "Skill1") 
+            this.imageShader.fillAmount = (SkillController.Instance.TimeSkill1 - Time.time) / this.skill.GetComponent<Skill>().TimeDelay;
+        
+        if (transform.name == "Skill2")
+            this.imageShader.fillAmount = (SkillController.Instance.TimeSkill2 - Time.time) / this.skill.GetComponent<Skill>().TimeDelay;
+       
+        if (transform.name == "Skill3") 
+            this.imageShader.fillAmount = (SkillController.Instance.TimeSkill3 - Time.time) / this.skill.GetComponent<Skill>().TimeDelay;
 
         if (this.CheckEnoughMaterial()) this.buttomUpdate.gameObject.SetActive(true);
         else this.buttomUpdate.gameObject.SetActive(false);
@@ -64,13 +76,6 @@ public class UISkill: AutoMonobehaviour
         if (this.buttomUpdate != null) return;
         this.buttomUpdate = transform.Find("Update").Find("Button").GetComponent<Button>();
         Debug.Log(transform.name + ": Load Buttom Update", gameObject);
-    }
-
-    protected virtual void LoadBoxMaterial()
-    {
-        if (this.BoxMaterials != null) return;
-        this.BoxMaterials = transform.Find("BoxMaterials");
-        Debug.Log(transform.name + ": Load BoxMaterial", gameObject);
     }
 
     protected virtual void LoadSkillPrefab()

@@ -24,9 +24,25 @@ public class ShootingAttack : Attack
         this.attackTimer = 0;
         Vector3 position = posShoote.position;
         Quaternion rotation = posShoote.rotation;
-        Transform bullet = BulletSpawner.Instance.SpawnInRegion(nameBullet, "Forest", position, rotation);
+        Transform bullet = this.GetBulletByName(nameBullet, posShoote);
         if (bullet.name == "Tornado_Bullet") bullet.Find("Model").transform.rotation = Quaternion.Euler(0, 0, 0);
         this.HaveSkill2(bullet);
+    }
+
+    protected virtual Transform ShooteReturnBullet(string nameBullet, Transform posShoote)
+    {
+        this.attackTimer = 0;
+        Vector3 position = posShoote.position;
+        Quaternion rotation = posShoote.rotation;
+        Transform bullet = this.GetBulletByName(nameBullet, posShoote);
+        if (bullet.name == "Tornado_Bullet") bullet.Find("Model").transform.rotation = Quaternion.Euler(0, 0, 0);
+        this.HaveSkill2(bullet);
+        return bullet;
+    }
+
+    protected virtual Transform GetBulletByName(string nameBullet, Transform pos)
+    {
+        return BulletSpawner.Instance.SpawnInRegion(nameBullet, "Forest", pos.position, pos.rotation);
     }
 
     protected virtual void HaveSkill2(Transform bullet)
