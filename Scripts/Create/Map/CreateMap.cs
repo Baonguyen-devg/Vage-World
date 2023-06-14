@@ -33,7 +33,7 @@ public class CreateMap : AutoMonobehaviour
     protected virtual void LoadLevelManagerSO()
     {
         if (this.levelManagerSO != null) return;
-        string resPath = "Level/LevelManager";
+        string resPath = "Level/EasyLevel";
         this.levelManagerSO = Resources.Load<LevelManagerSO>(resPath);
         Debug.LogWarning(transform.name + ": Load GroupDecorObjectSO" + resPath, gameObject);
         this.LoadInformationMap();

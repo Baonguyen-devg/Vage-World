@@ -9,23 +9,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: LevelManager
-  m_EditorClassIdentifier: Assembly-CSharp::LevelManagerSO
+  m_Script: {fileID: 11500000, guid: b85759f00fd019243a4f311a375d0cf2, type: 3}
+  m_Name: EasyLevel
+  m_EditorClassIdentifier: 
   height: 100
   width: 100
-  smooth: 10
+  smooth: 7
   randomFillPercent: 47
-  rateDecorObject: 8
+  rateDecorObject: 10
   rateChangeColor: 10
-  levelSkill: 3
-  baseLevel: 11
-  rateSkill1: 5
-  rateSkill2: 7
-  rateSkill3: 9
+  levelSkill: 0
+  baseLevel: 0
+  rateSkill1: 0
+  rateSkill2: 0
+  rateSkill3: 0
   distanceBetween: 0
-  number: 39
-  timeAppearBoss: 300
-  dame: 100
-  health: 10000
-  speed: 0.03
+  number: 0
+  timeAppearBoss: 100
+  dame: 0
+  health: 0
+  speed: 0

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "LeveManager", menuName = "ScriptableObjects/LeveManager")]
+[CreateAssetMenu(fileName = "LevelManager", menuName = "ScriptableObjects/LevelManager")]
 public class LevelManagerSO : ScriptableObject
 {
     [Header("[ SET UP MAP] ")]

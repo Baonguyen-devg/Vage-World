@@ -1168,7 +1168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeAppearBoss: 300
-  levelManagerSO: {fileID: 11400000, guid: 660278c79c958234fbd0302fbd649509, type: 2}
+  levelManagerSO: {fileID: 0}
   spawnBoss: 0
   boss: {fileID: 1804020214}
 --- !u!4 &80057087
@@ -37880,7 +37880,7 @@ MonoBehaviour:
   heightMap: 100
   widthMap: 100
   randomFillPercent: 47
-  smoothPercent: 10
+  smoothPercent: 7
   rateChangeColor: 10
   seed: Baonguyen.devG
   mapController: {fileID: 520979283}
