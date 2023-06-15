@@ -23,5 +23,6 @@ public class PlayerDamagedReceiver : DamagedReceiver
     {
         base.OnDead();
         this.controller.Model.GetComponent<Animator>().SetTrigger("Die");
+        UIController.Instance.LoseGame();
     }
 }

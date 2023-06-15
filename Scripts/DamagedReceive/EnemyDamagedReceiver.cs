@@ -51,6 +51,7 @@ public class EnemyDamagedReceiver : DamagedReceiver
     {
         base.OnDead();
         EnemySpawner.Instance.Despawn(transform.parent);
+        if (transform.parent.name == "Boss") UIController.Instance.WinGame();
     }
 
     public virtual void StopMoving(float time)
