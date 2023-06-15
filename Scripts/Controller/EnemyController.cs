@@ -57,7 +57,7 @@ public class EnemyController : AutoMonobehaviour
 
     protected virtual void LoadDamagedSender()
     {
-        if (this.damagedSender != null) return;
+        if (this.damagedSender != null || transform.Find("DamagedSender") == null) return;
         this.damagedSender = transform.Find("DamagedSender").GetComponent<EnemyDamagedSender>();
         Debug.Log(transform.name + ": Load DamagedSender", gameObject);
     }

@@ -6,10 +6,20 @@ public class ShootingAttack : Attack
 {
     [SerializeField] protected Transform posShoote;
 
+    [SerializeField] protected Transform target;
+
+    public void SetTarget(Transform target) { this.target = target; }
+
     protected override void LoadComponent()
     {
         base.LoadComponent();
         this.LoadPosShoote();
+        this.LoadTarget();
+    }
+
+    protected virtual void LoadTarget()
+    {
+        //For override
     }
 
     protected virtual void LoadPosShoote()
