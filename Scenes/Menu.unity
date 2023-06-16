@@ -793,8 +793,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 718, y: 295.04}
-  m_SizeDelta: {x: 356.39, y: 59.93}
+  m_AnchoredPosition: {x: 718, y: 281}
+  m_SizeDelta: {x: 350, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &85884690
 MonoBehaviour:
@@ -872,7 +872,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: f535ea79bea11d44ea097f0402000631, type: 3}
+  m_Sprite: {fileID: 21300000, guid: cafcbaa73f94e6645b7a7e1893b08d98, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3956,8 +3956,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 718, y: 215.45}
-  m_SizeDelta: {x: 356.39, y: 59.93}
+  m_AnchoredPosition: {x: 718, y: 181}
+  m_SizeDelta: {x: 350, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &547763021
 MonoBehaviour:
@@ -4035,7 +4035,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: f535ea79bea11d44ea097f0402000631, type: 3}
+  m_Sprite: {fileID: 21300000, guid: cafcbaa73f94e6645b7a7e1893b08d98, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -9176,9 +9176,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Credit
-
-'
+  m_Text: Credit
 --- !u!222 &1172219898
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -9419,8 +9417,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 718, y: 133.5}
-  m_SizeDelta: {x: 356.39, y: 59.93}
+  m_AnchoredPosition: {x: 718, y: 81}
+  m_SizeDelta: {x: 350, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1194018176
 MonoBehaviour:
@@ -9498,7 +9496,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: f535ea79bea11d44ea097f0402000631, type: 3}
+  m_Sprite: {fileID: 21300000, guid: cafcbaa73f94e6645b7a7e1893b08d98, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -13387,7 +13385,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1918925176}
   m_Layer: 5
-  m_Name: GameObject
+  m_Name: TableMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
