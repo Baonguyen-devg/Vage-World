@@ -2,9 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Pathfinding;
 
 public class TimelineController : AutoMonobehaviour
 {
+    [SerializeField] private Pathfinding.GridGraph map;
     [SerializeField] private static TimelineController instance;
     [SerializeField] private int timeAppearBoss;
     [SerializeField] private LevelManagerSO levelManagerSO;
@@ -19,7 +21,19 @@ public class TimelineController : AutoMonobehaviour
     {
         TimelineController.instance = this;
         base.LoadComponent();
+       /* this.LoadAiMap();*/
         this.LoadLevelManagerSO();
+    }
+
+    protected virtual void LoadAiMap()
+    {
+        if (this.map != null) return;
+        this.map = GameObject.Find("Map").GetComponent<GridGraph>();
+    }
+
+    protected virtual void Start()
+    {
+        AstarPath.active.Scan();
     }
 
     protected virtual void LoadLevelManagerSO()

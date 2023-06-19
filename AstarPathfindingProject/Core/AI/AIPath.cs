@@ -21,7 +21,7 @@ namespace Pathfinding {
 	/// Here is a video of this script being used move an agent around (technically it uses the <see cref="Pathfinding.Examples.MineBotAI"/> script that inherits from this one but adds a bit of animation support for the example scenes):
 	/// [Open online documentation to see videos]
 	///
-	/// \section variables Quick overview of the variables
+	/// \section variables Quick overview of the variablesD
 	/// In the inspector in Unity, you will see a bunch of variables. You can view detailed information further down, but here's a quick overview.
 	///
 	/// The <see cref="repathRate"/> determines how often it will search for new paths, if you have fast moving targets, you might want to set it to a lower value.

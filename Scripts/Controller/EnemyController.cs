@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Pathfinding;
 
 public class EnemyController : AutoMonobehaviour
 {
@@ -26,7 +27,7 @@ public class EnemyController : AutoMonobehaviour
     {
         base.LoadComponent();
         this.LoadModel();
-        this.LoadMovement();
+        /*   this.LoadMovement();*/
         this.LoadImpact();
         this.LoadDamagedSender();
         this.LoadDamagedReceiver();
@@ -92,11 +93,11 @@ public class EnemyController : AutoMonobehaviour
 
     public virtual void DoAttack()
     {
-        this.Movement.SetTarget(GameObject.Find("Player").transform);
+        gameObject.GetComponent<AIDestinationSetter>().target = GameObject.Find("Player").transform;
     }
 
     public virtual void StopAttack()
     {
-        this.Movement.SetTarget(this.posRoot);
+        gameObject.GetComponent<AIDestinationSetter>().target = this.posRoot;
     }
 }

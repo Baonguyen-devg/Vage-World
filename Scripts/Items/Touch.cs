@@ -27,9 +27,9 @@ public class Touch : AutoMonobehaviour
     {
         if (this.materialCtrl == null)
             this.materialCtrl = GameObject.Find("MaterialController").GetComponent<MaterialController>();
-
         this.materialCtrl.IncreaseNumber(transform.parent.name, 1);
         ItemSpawner.Instance.Despawn(transform.parent);
+        AstarPath.active.Scan();
     }
 
     public virtual void OnMouseEnter()

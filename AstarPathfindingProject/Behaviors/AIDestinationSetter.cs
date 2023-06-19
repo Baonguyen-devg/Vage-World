@@ -33,7 +33,12 @@ namespace Pathfinding {
 
 		/// <summary>Updates the AI's destination every frame</summary>
 		void Update () {
-			if (target != null && ai != null) ai.destination = target.position;
+			if (target != null && ai != null)
+			{
+				ai.destination = target.position;
+             /*   transform.parent.position = transform.position;
+				transform.position = Vector3.zero*/
+            }
 		}
 	}
 }
