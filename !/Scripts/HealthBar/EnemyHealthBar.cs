@@ -1,10 +1,11 @@
+using DamageReceiver;
 using UnityEngine;
 
 public class EnemyHealthBar : AutoMonobehaviour
 {
-    [SerializeField] protected EnemyDamageReceiver damageReceiver;
+    [SerializeField] private EnemyDamageReceiver damageReceiver;
 
-    public EnemyDamageReceiver DamagedReceiver => this.damagedReceiver;
+    public EnemyDamageReceiver DamageReceiver => damageReceiver;
 
     protected override void LoadComponent()
     {
@@ -12,12 +13,8 @@ public class EnemyHealthBar : AutoMonobehaviour
         this.LoadDamagedReceiver();
     }
 
-    protected virtual void LoadDamagedReceiver()
-    {
-        if (this.damagedReceiver != null) return;
-        this.damagedReceiver = transform.parent.parent.GetComponentInChildren<EnemyDamagedReceiver>();
-        Debug.Log(transform.name + ": Load Enemy DamagedReceiver", gameObject);
-    }
+    protected virtual void LoadDamagedReceiver() =>
+        this.damageReceiver ??= transform.parent.parent.GetComponentInChildren<EnemyDamageReceiver>();
 
     public virtual void ChangeHealthBar(float percent)
     {

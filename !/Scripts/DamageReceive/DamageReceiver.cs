@@ -20,8 +20,6 @@ namespace DamageReceiver
             this.ResetHealthToMaximum();
         }
 
-        //-- Main Solution --------------------------------------------------//
-
         protected virtual void CheckDead()
         {
             if (this.IsDead())
@@ -45,8 +43,6 @@ namespace DamageReceiver
         protected virtual void DecreaseHealth(int health) =>
             this.currentHealth = (this.isDead) ? this.currentHealth
             : Mathf.Max(0, this.currentHealth - health);
-
-        //-- Abstract path ------------------------------------------------//
 
         protected abstract void OnDead();
     }

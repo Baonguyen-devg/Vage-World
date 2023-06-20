@@ -1,26 +1,24 @@
 using UnityEngine;
 
-public class PlayerDamagedReceiver : DamagedReceiver
+namespace DamageReceiver
 {
-    [SerializeField] protected PlayerController controller;
-
-    protected override void LoadComponent()
+    internal class PlayerDamagedReceiver : DamageReceiver
     {
-        base.LoadComponent();
-        this.LoadController();
-    }
+        [SerializeField] protected PlayerController controller;
 
-    protected virtual void LoadController()
-    {
-        if (this.controller != null) return;
-        this.controller = transform.parent.GetComponent<PlayerController>();
-        Debug.Log(transform.name + ": Load Player Controller", gameObject);
-    }
+        protected override void LoadComponent()
+        {
+            base.LoadComponent();
+            this.LoadController();
+        }
 
-    protected override void OnDead()
-    {
-        base.OnDead();
-        this.controller.Model.GetComponent<Animator>().SetTrigger("Die");
-        UIController.Instance.LoseGame();
+        protected virtual void LoadController() =>
+              this.controller ??= transform.parent.GetComponent<PlayerController>();
+
+        protected override void OnDead()
+        {
+            this.controller.Model.GetComponent<Animator>().SetTrigger("Die");
+            UIController.Instance.LoseGame();
+        }
     }
 }
