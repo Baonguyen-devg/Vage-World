@@ -1,0 +1,80 @@
+using System.Collections;
+using UnityEngine;
+
+namespace DamageReceiver
+{
+    public class EnemyDamageReceiver : DamageReceiver
+    {
+        [SerializeField] protected EnemyController controller;
+        [SerializeField] protected bool stop = false;
+
+        protected override void LoadComponent()
+        {
+            base.LoadComponent();
+            this.LoadEnemyController();
+        }
+
+        protected virtual void LoadEnemyController()
+        {
+            if (this.controller != null) return;
+            this.controller = transform.parent.GetComponent<EnemyController>();
+            Debug.Log(transform.name + ": Load Enemy Controller", gameObject);
+        }
+
+        protected virtual float CalculatePercentHealth() => 
+            this.currentHealth / this.maximumHealth;
+
+        protected override void DecreaseHealth(int deduct)
+        {
+            base.DecreaseHealth(deduct);
+
+            this.controller.HealthBar.ChangeHealthBar(this.CalculatePercentHealth());
+            this.controller.HealthBar.transform.parent.gameObject.SetActive(true);
+
+            SpriteRenderer render = this.controller.Model.GetComponent<SpriteRenderer>();
+            if (this.stop == false)
+            {
+                render.color = new Color32(221, 83, 11, 255);
+                Invoke("ResetColor", 0.05f);
+            }
+            Invoke("DisappearHealthbar", 1f);
+        }
+
+        protected virtual void ChangeColorReceiverDamage()
+
+        protected virtual void ResetColor()
+        {
+            SpriteRenderer render = this.controller.Model.GetComponent<SpriteRenderer>();
+            render.color = new Color32(255, 255, 255, 255);
+        }
+
+        protected virtual void DisappearHealthbar()
+        {
+            this.controller.HealthBar.transform.parent.gameObject.SetActive(false);
+        }
+
+        protected override void OnDead()
+        {
+            EnemySpawner.Instance.Despawn(transform.parent);
+            if (transform.parent.name == "Boss") UIController.Instance.WinGame();
+        }
+
+        public virtual void StopMoving(float time)
+        {
+            this.stop = true;
+            this.controller.Movement.gameObject.SetActive(false);
+            this.controller.Model.GetComponent<Animator>().enabled = false;
+            this.controller.Model.GetComponent<SpriteRenderer>().color = new Color32(34, 84, 176, 255);
+            StartCoroutine(this.ContinueMoving(time));
+        }
+
+        protected IEnumerator ContinueMoving(float time)
+        {
+            yield return new WaitForSeconds(time);
+            this.stop = false;
+            this.controller.Movement.gameObject.SetActive(true);
+            this.controller.Model.GetComponent<Animator>().enabled = true;
+            this.controller.Model.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 255);
+        }
+    }
+}
