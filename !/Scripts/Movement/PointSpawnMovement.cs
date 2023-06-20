@@ -1,21 +1,20 @@
 using UnityEngine;
 
-public class PointSpawnMovement : Movement
+namespace Movement
 {
-    [SerializeField] protected float distance = 2;
-
-    protected virtual void Update()
+    internal abstract class PointSpawnMovement : AutoMonobehaviour
     {
-        Vector2 pos = this.GetPos();
-        pos.Normalize();
-        float angle = Mathf.Atan2(pos.y, pos.x) * Mathf.Rad2Deg;
+        protected virtual void Update() =>
+            this.RotationFollowPosition(this.GetPos().normalized);
 
-        Vector3 newRota = new Vector3(0, 0, angle - 90);
-        transform.parent.parent.rotation = Quaternion.Euler(newRota);
-    }
+        protected virtual void RotationFollowPosition(Vector2 position)
+        {
+            float angle = Mathf.Atan2(position.y, position.x) * Mathf.Rad2Deg;
+            Vector3 newRota = new Vector3(0, 0, angle - 90);
+            transform.parent.parent.rotation = Quaternion.Euler(newRota);
+        }
 
-    protected virtual Vector2 GetPos()
-    {
-        return Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.parent.parent.position;
+        protected virtual Vector2 GetPos() =>
+            Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.parent.parent.position;
     }
 }

@@ -24,7 +24,7 @@ namespace DamageReceiver
         protected virtual void LoadSpriteRender() =>
             this.render ??= this.controller.Model.GetComponent<SpriteRenderer>();
 
-        protected override void DecreaseHealth(int health)
+        public override void DecreaseHealth(int health)
         {
             base.DecreaseHealth(health);
             this.HitEffect();

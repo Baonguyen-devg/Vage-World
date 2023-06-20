@@ -40,7 +40,7 @@ namespace DamageReceiver
             : Mathf.Min(this.maximumHealth, this.currentHealth + health);
 
 
-        protected virtual void DecreaseHealth(int health) =>
+        public virtual void DecreaseHealth(int health) =>
             this.currentHealth = (this.isDead) ? this.currentHealth
             : Mathf.Max(0, this.currentHealth - health);
 
