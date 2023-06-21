@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class EnemyShootingAttack : ShootingAttack
 {
+    [SerializeField] protected Transform target;
     [SerializeField] protected EnemyController controller;
  
     protected override void LoadComponent()
@@ -13,12 +14,9 @@ public class EnemyShootingAttack : ShootingAttack
         this.LoadPointSpawn();
     }
 
-    protected virtual void LoadPointSpawn()
-    {
+    protected virtual void LoadPointSpawn() {  /*For Override */  }
 
-    }
-
-    protected override void LoadTarget() =>
+    protected virtual void LoadTarget() =>
         this.target = (this.target == null) ? GameObject.Find("Player").transform : this.target;
 
     protected virtual void LoadController() =>

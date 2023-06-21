@@ -2,51 +2,53 @@ using UnityEngine;
 
 public class Touch : AutoMonobehaviour
 {
-    [SerializeField] protected ItemController controller;
-    public ItemController Controller => this.controller;
     [SerializeField] protected bool haveTouch = false;
 
-    [SerializeField] protected MaterialController materialCtrl;
+    [Header("Necessary Controlers")]
+    [SerializeField] protected ItemController itemController;
+    [SerializeField] protected MaterialController materialController;
+    [SerializeField] protected LootMaterial lootMaterial;
 
     protected override void LoadComponent()
     {
         base.LoadComponent();
         this.LoadItemController();
+        this.LoadLootMaterialOfPlayer();
+        this.LoadMaterialController();
     }
+
+    protected virtual void LoadMaterialController() =>
+        this.materialController = (this.materialController != null) ? this.materialController
+            : GameObject.Find("MaterialController").GetComponent<MaterialController>();
+
+    protected virtual void LoadLootMaterialOfPlayer() =>
+        this.lootMaterial = (this.lootMaterial != null) ? this.lootMaterial
+            : GameObject.Find("Player").transform.Find("LootMaterial").GetComponent<LootMaterial>();
+
+    protected virtual void LoadItemController() =>
+        this.itemController = (this.itemController != null) ? this.itemController
+            : transform.parent.GetComponent<ItemController>();
 
     protected virtual void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F) && this.haveTouch == true)
-                GameObject.Find("Player").transform.
-                    Find("LootMaterial").GetComponent<LootMaterial>()
-                    .SetItemToPickup(transform.parent.gameObject, transform.GetComponent<Touch>());
-    }
-
-    protected virtual void LoadItemController()
-    {
-        if (this.controller != null) return;
-        this.controller = transform.parent.GetComponent<ItemController>();
-        Debug.Log(transform.name + ": Load ItemController", gameObject); ;
+        if (Input.GetKeyDown(KeyCode.F) && this.haveTouch)
+               this.lootMaterial.SetItemToPickup(transform.parent.gameObject, transform.GetComponent<Touch>());
     }
 
     public virtual void Loot()
     {
-        if (this.materialCtrl == null)
-            this.materialCtrl = GameObject.Find("MaterialController").GetComponent<MaterialController>();
-        this.materialCtrl.IncreaseNumber(transform.parent.name, 1);
+        this.materialController.IncreaseNumber(transform.parent.name, 1);
         ItemSpawner.Instance.Despawn(transform.parent);
         AstarPath.active.Scan();
     }
 
-    public virtual void OnMouseEnter()
-    {
-        this.controller.Frame.Find("Model").gameObject.SetActive(true);
-        this.haveTouch = true;
-    }
+    public virtual void OnMouseEnter() => this.ChangeStatusFrameAndHaveTouchTo(true);
 
-    public virtual void OnMouseExit()
+    public virtual void OnMouseExit() => this.ChangeStatusFrameAndHaveTouchTo(false);
+
+    protected virtual void ChangeStatusFrameAndHaveTouchTo(bool newStatus)
     {
-        this.controller.Frame.Find("Model").gameObject.SetActive(false);
-        this.haveTouch = false;
-    }
+        this.itemController.Frame.Find("Model").gameObject.SetActive(newStatus);
+        this.haveTouch = newStatus;
+    } 
 }

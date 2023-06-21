@@ -3,8 +3,7 @@ using UnityEngine;
 public class CloseCombatAttack : Attack
 {
     [SerializeField] protected Transform target;
-
-    public void SetTarget(Transform target) { this.target = target; }
+    [SerializeField] protected float distanceToCloseCombat = 1f;
 
     protected override void LoadComponent()
     {
@@ -12,15 +11,5 @@ public class CloseCombatAttack : Attack
         this.LoadTarget();
     }
 
-    protected virtual void LoadTarget()
-    {
-        //For override
-    }
-
-    protected override bool CanAttack()
-    {
-        if (this.target == null) return false;
-        if (Vector2.Distance(transform.parent.position, this.target.position) >= 1) return false;
-        return base.CanAttack();
-    }
+    protected virtual void LoadTarget() {  /* For override*/  }
 }
