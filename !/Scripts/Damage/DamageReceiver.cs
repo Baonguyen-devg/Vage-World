@@ -2,13 +2,15 @@ using UnityEngine;
 
 namespace DamageReceiver
 {
-    internal abstract class DamageReceiver : AutoMonobehaviour
+    public abstract class DamageReceiver : AutoMonobehaviour
     {
         [Header("The Object's currentHealth informations"), Space(10)]
         [SerializeField] protected int currentHealth;
         [SerializeField] protected int maximumHealth;
 
         [Space(10), SerializeField] protected bool isDead = false;
+
+        public int CurrentHealth => this.currentHealth;
 
         protected virtual void OnEnable() => this.ResetHealthToMaximum();
 

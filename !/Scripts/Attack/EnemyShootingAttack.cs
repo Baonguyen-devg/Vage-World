@@ -14,18 +14,11 @@ public class EnemyShootingAttack : ShootingAttack
         this.LoadPointSpawn();
     }
 
-    protected override void LoadTarget()
-    {
-        base.LoadTarget();
-        this.target = GameObject.Find("Player").transform;
-    }
+    protected override void LoadTarget() =>
+        this.target ??= GameObject.Find("Player").transform;
 
-    protected virtual void LoadController()
-    {
-        if (this.controller != null) return;
-        this.controller = transform.parent.GetComponent<EnemyController>();
-        Debug.Log(transform.name + ": Load Controller", gameObject);
-    }
+    protected virtual void LoadController() =>
+        this.controller ??= transform.parent.GetComponent<EnemyController>();
 
     protected virtual void LoadPointSpawn()
     {

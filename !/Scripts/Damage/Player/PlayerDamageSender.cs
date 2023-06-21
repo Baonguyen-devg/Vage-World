@@ -5,9 +5,9 @@ using DamageReceiver;
 
 namespace DamageSender
 {
-    internal class PlayerDamageSender : DamageSender
+    public class PlayerDamageSender : DamageSender
     {
-        protected override void Send(Transform obj) =>
+        public override void Send(Transform obj) =>
          obj.GetComponentInChildren<EnemyDamageReceiver>()?.DecreaseHealth(this.dame);
     }
 }

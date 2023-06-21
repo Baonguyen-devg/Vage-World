@@ -1,9 +1,10 @@
 using UnityEngine;
 using UnityEngine.UI;
+using DamageReceiver;
 
 public class HealthBar : AutoMonobehaviour
 {
-    [SerializeField] protected PlayerDamagedReceiver playerDamagedReceiver;
+    [SerializeField] protected PlayerDamageReceiver playerDamageReceiver;
     [SerializeField] protected Slider slider;
 
     protected override void LoadComponent()
@@ -11,12 +12,12 @@ public class HealthBar : AutoMonobehaviour
         base.LoadComponent();
         this.LoadPlayer();
         this.LoadSlider();
-        this.slider.maxValue = this.playerDamagedReceiver.Health;
+        this.slider.maxValue = this.playerDamageReceiver.CurrentHealth;
     }
 
     protected virtual void Update()
     {
-        this.slider.value = this.playerDamagedReceiver.Health;
+        this.slider.value = this.playerDamageReceiver.CurrentHealth;
     }
 
     protected virtual void LoadSlider()
@@ -28,8 +29,8 @@ public class HealthBar : AutoMonobehaviour
 
     protected virtual void LoadPlayer()
     {
-        if (this.playerDamagedReceiver != null) return;
-        this.playerDamagedReceiver = GameObject.Find("Player").GetComponentInChildren<PlayerDamagedReceiver>();
+        if (this.playerDamageReceiver != null) return;
+        this.playerDamageReceiver = GameObject.Find("Player").GetComponentInChildren<PlayerDamageReceiver>();
         Debug.Log(transform.name + ": Load Player", gameObject);
     }
 

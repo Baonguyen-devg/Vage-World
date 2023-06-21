@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace DamageReceiver
 {
-    internal class PlayerDamageReceiver : DamageReceiver
+    public class PlayerDamageReceiver : DamageReceiver
     {
         [SerializeField] protected PlayerController controller;
 

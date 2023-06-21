@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Movement
 {
-    internal abstract class Movement : AutoMonobehaviour
+    public abstract class Movement : AutoMonobehaviour
     {
         [SerializeField] protected float speed = 0.05f;
         [SerializeField] protected float maximumSpeed = 1;

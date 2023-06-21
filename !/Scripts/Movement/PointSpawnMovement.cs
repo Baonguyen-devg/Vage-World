@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Movement
 {
-    internal abstract class PointSpawnMovement : AutoMonobehaviour
+    public abstract class PointSpawnMovement : AutoMonobehaviour
     {
         protected virtual void Update() =>
             this.RotationFollowPosition(this.GetPos().normalized);
@@ -14,7 +14,6 @@ namespace Movement
             transform.parent.parent.rotation = Quaternion.Euler(newRota);
         }
 
-        protected virtual Vector2 GetPos() =>
-            Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.parent.parent.position;
+        protected abstract Vector2 GetPos();
     }
 }

@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Movement
 {
-    internal class EnemyPointSpawnMovement : PointSpawnMovement
+    public class EnemyPointSpawnMovement : PointSpawnMovement
     {
         [SerializeField] private Transform player;
 

@@ -1,4 +1,3 @@
-using DamageReceiver;
 using UnityEngine;
 
 public class EnemyHealthBar : AutoMonobehaviour

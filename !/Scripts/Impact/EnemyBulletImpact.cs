@@ -1,8 +1,10 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyImpact : Impact
+public class EnemyBulletImpact : Impact
 {
-    [SerializeField] protected EnemyController controller;
+    [SerializeField] protected EnemyBulletController controller;
 
     protected override void LoadComponent()
     {
@@ -11,7 +13,7 @@ public class EnemyImpact : Impact
     }
 
     protected virtual void LoadController() =>
-        this.controller ??= transform.parent.parent.parent.GetComponent<EnemyController>();
+        this.controller ??= transform.parent.GetComponent<EnemyBulletController>();
 
     protected virtual void OnTriggerEnter2D(Collider2D collision)
     {

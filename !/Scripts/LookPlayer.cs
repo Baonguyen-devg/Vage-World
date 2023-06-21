@@ -1,4 +1,6 @@
 using UnityEngine;
+using Movement;
+using Pathfinding;
 
 public class LookPlayer : AutoMonobehaviour
 {
@@ -19,9 +21,9 @@ public class LookPlayer : AutoMonobehaviour
 
     protected virtual void FixedUpdate()
     {
-        if (this.controller.Movement.GetComponent<EnemyMovement>().Target == null) return;
+        if (this.controller.gameObject.GetComponent<AIDestinationSetter>().target == null) return;
 
-        if (transform.parent.localPosition.x > this.controller.Movement.GetComponent<EnemyMovement>().Target.localPosition.x)
+        if (transform.parent.localPosition.x > this.controller.gameObject.GetComponent<AIDestinationSetter>().target.localPosition.x)
             transform.rotation = Quaternion.Euler(0, 180, 0);
         else
             transform.rotation = Quaternion.Euler(0, 0, 0);

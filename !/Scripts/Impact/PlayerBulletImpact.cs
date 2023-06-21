@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class BulletImpact : Impact
+public class PlayerBulletImpact : Impact
 {
-    [SerializeField] protected BulletController controller;
+    [SerializeField] protected PlayerBulletController controller;
     [SerializeField] protected bool haveSkill2;
 
     protected override void LoadComponent()
@@ -19,7 +19,7 @@ public class BulletImpact : Impact
     protected virtual void LoadController()
     {
         if (this.controller != null) return;
-        this.controller = transform.parent.GetComponent<BulletController>();
+        this.controller = transform.parent.GetComponent<PlayerBulletController>();
         Debug.Log(transform.name + ": Load Controller", gameObject);
     }
 
@@ -28,6 +28,6 @@ public class BulletImpact : Impact
         if (collision.name == "Impact") return;
         if (collision.GetComponentInParent<EnemyController>() == null) return;
         if (transform.parent.name != "Tornado_Bullet") BulletSpawner.Instance.Despawn(transform.parent);
-        this.controller.DamagedSender.Send(collision.transform);
+        this.controller.DamageSender.Send(collision.transform);
     }
 }

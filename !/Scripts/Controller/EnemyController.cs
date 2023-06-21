@@ -1,13 +1,16 @@
 using Pathfinding;
 using UnityEngine;
+using DamageReceiver;
+using DamageSender;
+using Movement;
 
 public class EnemyController : AutoMonobehaviour
 {
     [SerializeField] protected Transform model;
     [SerializeField] protected EnemyMovement movement;
     [SerializeField] protected SignalImpact impact;
-    [SerializeField] protected EnemyDamagedSender damagedSender;
-    [SerializeField] protected EnemyDamagedReceiver damagedReceiver;
+    [SerializeField] protected EnemyDamageSender damageSender;
+    [SerializeField] protected EnemyDamageReceiver damageReceiver;
     [SerializeField] protected EnemyHealthBar healthBar;
     [SerializeField] protected EnemyCloseCombatAttack closeCombat;
     private CloseCombatAttack closeCombatComponent;
@@ -16,8 +19,8 @@ public class EnemyController : AutoMonobehaviour
     public EnemyMovement Movement => this.movement;
     public SignalImpact Impact => this.impact;
     public Transform Model => this.model;
-    public EnemyDamagedSender DamagedSender => this.damagedSender;
-    public EnemyDamagedReceiver DamagedReceiver => this.damagedReceiver;
+    public EnemyDamageSender DamageSender => this.damageSender;
+    public EnemyDamageReceiver DamageReceiver => this.damageReceiver;
     public EnemyHealthBar HealthBar => this.healthBar;
     public EnemyCloseCombatAttack CloseCombat => this.closeCombat;
 
@@ -25,7 +28,6 @@ public class EnemyController : AutoMonobehaviour
     {
         base.LoadComponent();
         this.LoadModel();
-        /*   this.LoadMovement();*/
         this.LoadImpact();
         this.LoadDamagedSender();
         this.LoadDamagedReceiver();
@@ -42,9 +44,9 @@ public class EnemyController : AutoMonobehaviour
 
     protected virtual void LoadDamagedReceiver()
     {
-        if (this.damagedReceiver != null) return;
-        this.damagedReceiver = transform.Find("DamagedReceiver").GetComponent<EnemyDamagedReceiver>();
-        Debug.Log(transform.name + ": Load DamagedReceiver", gameObject);
+        if (this.damageReceiver != null) return;
+        this.damageReceiver = transform.Find("DamageReceiver").GetComponent<EnemyDamageReceiver>();
+        Debug.Log(transform.name + ": Load DamageReceiver", gameObject);
     }
 
     protected virtual void LoadHealthBar()
@@ -56,9 +58,9 @@ public class EnemyController : AutoMonobehaviour
 
     protected virtual void LoadDamagedSender()
     {
-        if (this.damagedSender != null || transform.Find("DamagedSender") == null) return;
-        this.damagedSender = transform.Find("DamagedSender").GetComponent<EnemyDamagedSender>();
-        Debug.Log(transform.name + ": Load DamagedSender", gameObject);
+        if (this.damageSender != null || transform.Find("DamageSender") == null) return;
+        this.damageSender = transform.Find("DamageSender").GetComponent<EnemyDamageSender>();
+        Debug.Log(transform.name + ": Load DamageSender", gameObject);
     }
 
     protected virtual void LoadModel()
@@ -66,13 +68,6 @@ public class EnemyController : AutoMonobehaviour
         if (this.model != null) return;
         this.model = transform.Find("Model");
         Debug.Log(transform.name + ": Load Model", gameObject);
-    }
-
-    protected virtual void LoadMovement()
-    {
-        if (this.movement != null) return;
-        this.movement = transform.Find("Movement").GetComponent<EnemyMovement>();
-        Debug.Log(transform.name + ": Load EnemyMovement", gameObject);
     }
 
     protected virtual void LoadImpact()

@@ -3,13 +3,13 @@ using UnityEngine;
 
 namespace DamageReceiver
 {
-    internal class EnemyDamageReceiver : DamageReceiver
+    public class EnemyDamageReceiver : DamageReceiver
     {
         [SerializeField] protected EnemyController controller;
 
         [Header("Hit Effect!!!"), Space(10)]
-        [SerializeField] protected SpriteRenderer render; //SpriteRender in model of enemy
-        [SerializeField] protected float timeEffect = 0.5f; //Time effect happen
+        [SerializeField] protected SpriteRenderer render = null; //SpriteRender in model of enemy
+        [SerializeField] protected float timeEffect = 0.2f; //Time effect happen
 
         protected override void LoadComponent()
         {
@@ -22,7 +22,7 @@ namespace DamageReceiver
             this.controller ??= transform.parent.GetComponent<EnemyController>();
 
         protected virtual void LoadSpriteRender() =>
-            this.render ??= this.controller.Model.GetComponent<SpriteRenderer>();
+            this.render ??= this.controller?.Model?.GetComponent<SpriteRenderer>();
 
         public override void DecreaseHealth(int health)
         {
@@ -52,7 +52,7 @@ namespace DamageReceiver
         }
 
         protected virtual float CalculatePercentHealth() =>
-         this.currentHealth / this.maximumHealth;
+         (float)this.currentHealth / this.maximumHealth;
 
         protected virtual void DisappearHealthbar() =>
             this.controller.HealthBar.transform.parent.gameObject.SetActive(false);

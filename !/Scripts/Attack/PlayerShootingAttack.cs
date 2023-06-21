@@ -50,7 +50,7 @@ public class PlayerShootingAttack : ShootingAttack
     protected virtual void ZoomBullet(Transform bullet)
     {
         bullet.Find("Model").localScale += new Vector3(0.5f, 0.5f, 0);
-        bullet.GetComponent<BulletController>().DamagedSender.IncreaseDame(20);
+        bullet.GetComponent<PlayerBulletController>().DamageSender.IncreaseDame(20);
     }
 
     public override void ToAttack()
@@ -92,6 +92,6 @@ public class PlayerShootingAttack : ShootingAttack
     {
         base.HaveSkill2(bullet);
         if (this.skill2 == false) return;
-        bullet.Find("Impact").GetComponent<BulletImpact>().ChangeStatusSkill2(true);
+        bullet.Find("Impact").GetComponent<PlayerBulletImpact>().ChangeStatusSkill2(true);
     }
 }

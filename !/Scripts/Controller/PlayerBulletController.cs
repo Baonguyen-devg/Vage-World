@@ -1,12 +1,14 @@
 using UnityEngine;
+using DamageSender;
+using Movement;
 
-public class BulletController : AutoMonobehaviour
+public class PlayerBulletController : AutoMonobehaviour
 {
     [SerializeField] protected BulletMovement movement;
     [SerializeField] protected Transform model;
-    [SerializeField] protected BulletDamagedSender damagedSender;
+    [SerializeField] protected PlayerDamageSender damageSender;
 
-    public BulletDamagedSender DamagedSender => this.damagedSender;
+    public PlayerDamageSender DamageSender => this.damageSender;
 
     protected override void LoadComponent()
     {
@@ -32,8 +34,8 @@ public class BulletController : AutoMonobehaviour
 
     protected virtual void LoadDamagedSender()
     {
-        if (this.damagedSender != null) return;
-        this.damagedSender = transform.Find("DamagedSender").GetComponent<BulletDamagedSender>();
-        Debug.Log(transform.name + ": Load DamagedSender", gameObject);
+        if (this.damageSender != null) return;
+        this.damageSender = transform.Find("DamageSender").GetComponent<PlayerDamageSender>();
+        Debug.Log(transform.name + ": Load DamageSender", gameObject);
     }
 }

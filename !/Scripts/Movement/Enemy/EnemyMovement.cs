@@ -2,9 +2,11 @@ using UnityEngine;
 
 namespace Movement
 {
-    internal class EnemyMovement : Movement
+    public class EnemyMovement : Movement
     {
         [SerializeField] protected Transform target;
+
+        public Transform Target => this.target;
 
         public virtual void SetTarget(Transform target) => this.target = target;
 
