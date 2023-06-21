@@ -18,12 +18,17 @@ public class UISkill : AutoMonobehaviour
         this.LoadImageShader();
     }
 
-    protected virtual void LoadImageShader()
-    {
-        if (this.imageShader != null) return;
-        this.imageShader = transform.Find("ImageSkillShader").GetComponent<Image>();
-        Debug.Log(transform.name + ": Load ImageSkillShader", gameObject);
-    }
+    protected virtual void LoadButtomUpdate() =>
+        this.buttomUpdate = (this.buttomUpdate != null) ? this.buttomUpdate
+            : transform.Find("Update").Find("Button").GetComponent<Button>();
+
+    protected virtual void LoadSkillPrefab() =>
+        this.skill = (this.skill != null) ? this.skill
+            : SkillController.Instance.GetPrefabByName(gameObject.name);
+
+    protected virtual void LoadImageShader() =>
+        this.imageShader = (this.imageShader != null) ? this.imageShader
+            : transform.Find("ImageSkillShader").GetComponent<Image>();
 
     protected virtual void LoadListRender()
     {
@@ -32,11 +37,6 @@ public class UISkill : AutoMonobehaviour
 
         foreach (Transform objectRender in render)
             this.listRender.Add(objectRender.GetComponentInChildren<Image>());
-    }
-
-    protected virtual void Start()
-    {
-        Invoke("LoadUIMaterial", 1f);
     }
 
     protected virtual void LoadUIMaterial()
@@ -48,6 +48,8 @@ public class UISkill : AutoMonobehaviour
             this.listRender[index - 1].transform.parent.Find("Number").GetComponent<Text>().text = skillPrefab.Value.ToString();
         }
     }
+
+    protected virtual void Start() => Invoke("LoadUIMaterial", 0.5f);
 
     protected virtual void Update()
     {
@@ -64,23 +66,6 @@ public class UISkill : AutoMonobehaviour
         else this.buttomUpdate.gameObject.SetActive(false);
     }
 
-    protected virtual bool CheckEnoughMaterial()
-    {
-        if (this.skill.GetComponent<Skill>().CheckEnough()) return true;
-        return false;
-    }
-
-    protected virtual void LoadButtomUpdate()
-    {
-        if (this.buttomUpdate != null) return;
-        this.buttomUpdate = transform.Find("Update").Find("Button").GetComponent<Button>();
-        Debug.Log(transform.name + ": Load Buttom Update", gameObject);
-    }
-
-    protected virtual void LoadSkillPrefab()
-    {
-        if (this.skill != null) return;
-        this.skill = SkillController.Instance.GetPrefabByName(gameObject.name);
-        Debug.Log(transform.name + ": Load SkillPrefab", gameObject);
-    }
+    protected virtual bool CheckEnoughMaterial() =>
+        (this.skill.GetComponent<Skill>().CheckEnough()) ? true : false;
 }

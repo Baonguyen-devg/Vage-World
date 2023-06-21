@@ -26,11 +26,6 @@ public class GroupDecorObject : Group
         base.ChangeMapController(map);
     }
 
-    protected override void SpawnObject(Vector3 position, Quaternion rotation)
-    {
-        int key = Random.Range(3, 5);
-        Transform decorObject = DecorObjectSpawner.Instance.SpawnInRegion(this.objectSpawner, this.nameRegion, position, rotation);
-        if (decorObject == null) return;
-        /*decorObject.GetComponent<DecorObjectController>().Model.localScale = new Vector3(key, key, 1);*/
-    }
+    protected override void SpawnObject(Vector3 position, Quaternion rotation) =>
+        DecorObjectSpawner.Instance.SpawnInRegion(this.objectSpawner, this.nameRegion, position, rotation);
 }

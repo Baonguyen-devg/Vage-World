@@ -8,10 +8,7 @@ public class PointSpawnEnemy : AutoMonobehaviour
     [SerializeField] private double timeStopAttack;
     [SerializeField] private double rateTimeAttack;
 
-    public virtual void Add(Transform enemy)
-    {
-        this.listEnemy.Add(enemy);
-    }
+    public virtual void Add(Transform enemy) => this.listEnemy.Add(enemy);
 
     public virtual void FixedUpdate()
     {
@@ -30,8 +27,5 @@ public class PointSpawnEnemy : AutoMonobehaviour
             enemy.GetComponent<EnemyController>().DoAttack();
     }
 
-    public virtual void RequestEnemiesStopAttack()
-    {
-        this.requestAttack = false;
-    }
+    public virtual void RequestEnemiesStopAttack() => this.requestAttack = false;
 }

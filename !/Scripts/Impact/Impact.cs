@@ -14,19 +14,12 @@ public class Impact : AutoMonobehaviour
         this.LoadRigidbody2D();
     }
 
-    protected virtual void LoadCollider2D()
-    {
-        if (this.colli2D != null) return;
-        this.colli2D = GetComponent<Collider2D>();
-        Debug.Log(transform.name + ": Load Collider2D", gameObject);
-    }
-
-    protected virtual void LoadRigidbody2D()
-    {
-        if (this.rigid2D != null) return;
-        this.rigid2D = GetComponent<Rigidbody2D>();
-        Debug.Log(transform.name + ": Load Rigidbody2D", gameObject);
-    }
+    protected virtual void LoadCollider2D() =>
+        this.colli2D = (this.colli2D != null) ? this.colli2D
+            : GetComponent<Collider2D>();
 
 
+    protected virtual void LoadRigidbody2D() =>
+        this.rigid2D = (this.rigid2D != null) ? this.rigid2D
+            : GetComponent<Rigidbody2D>();
 }

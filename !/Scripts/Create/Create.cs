@@ -22,12 +22,10 @@ public class Create : AutoMonobehaviour
         this.LoadMapController();
     }
 
-    protected virtual void LoadMapController()
-    {
-        if (this.mapController != null) return;
-        this.mapController = GetComponentInParent<MapController>();
-        Debug.Log(transform.name + ": Load MapController", gameObject);
-    }
+    protected virtual void LoadMapController() =>
+        this.mapController = (this.mapController != null) ? this.mapController
+            : GetComponentInParent<MapController>();
+
 
     protected virtual void Start()
     {
@@ -38,8 +36,7 @@ public class Create : AutoMonobehaviour
     public virtual void CreateGroup()
     {
         this.canPush = new bool[this.widthMap + 1, this.heightMap + 1];
-        for (int i = 1; i <= this.numberGroup; i++)
-            this.Group();
+        for (int i = 1; i <= this.numberGroup; i++) this.Group();
     }
 
     protected virtual void Group()
@@ -87,8 +84,7 @@ public class Create : AutoMonobehaviour
         }
     }
 
-    protected virtual bool CheckDistance(Vector3 posTartget, Vector3 posPresent)
-    {
-        return (Vector3.Distance(posPresent, posTartget) > this.distanceMax);
-    }
+    protected virtual bool CheckDistance(Vector3 posTartget, Vector3 posPresent) =>
+        (Vector3.Distance(posPresent, posTartget) > this.distanceMax);
+
 }

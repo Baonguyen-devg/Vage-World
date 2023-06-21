@@ -11,22 +11,16 @@ public class PlayerBulletImpact : Impact
         this.LoadController();
     }
 
-    public virtual void ChangeStatusSkill2(bool status)
-    {
-        this.haveSkill2 = status;
-    }
+    public virtual void ChangeStatusSkill2(bool status) => this.haveSkill2 = status;
 
-    protected virtual void LoadController()
-    {
-        if (this.controller != null) return;
-        this.controller = transform.parent.GetComponent<PlayerBulletController>();
-        Debug.Log(transform.name + ": Load Controller", gameObject);
-    }
+    protected virtual void LoadController() =>
+        this.controller = (this.controller != null) ? this.controller
+            : transform.parent.GetComponent<PlayerBulletController>();
+
 
     protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.name == "Impact") return;
-        if (collision.GetComponentInParent<EnemyController>() == null) return;
+        if (collision.name == "Impact" || collision.GetComponentInParent<EnemyController>() == null) return;
         if (transform.parent.name != "Tornado_Bullet") BulletSpawner.Instance.Despawn(transform.parent);
         this.controller.DamageSender.Send(collision.transform);
     }

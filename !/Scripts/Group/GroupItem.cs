@@ -20,15 +20,12 @@ public class GroupItem : Group
         Debug.LogWarning(transform.name + ": Load GroupGrassSO" + resPath, gameObject);
     }
 
-
     public override void ChangeMapController(MapController map)
     {
         this.objectSpawner = ItemSpawner.Instance.GetRandomPrefab();
         base.ChangeMapController(map);
     }
 
-    protected override void SpawnObject(Vector3 position, Quaternion rotation)
-    {
+    protected override void SpawnObject(Vector3 position, Quaternion rotation) =>
         ItemSpawner.Instance.SpawnInRegion(this.objectSpawner, this.nameRegion, position, rotation);
-    }
 }

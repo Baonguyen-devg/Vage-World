@@ -17,12 +17,10 @@ public class MaterialController : AutoMonobehaviour
         this.LoadMaterialUI();
     }
 
-    protected virtual void LoadMaterialUI()
-    {
-        if (this.MaterialUI != null) return;
-        this.MaterialUI = GameObject.Find("Canvas").transform.Find("Panel").Find("BoxItems").GetComponent<UIMaterialController>();
-        Debug.Log(transform.name + ": Load MaterialUI", gameObject);
-    }
+    protected virtual void LoadMaterialUI() =>
+        this.MaterialUI = (this.MaterialUI != null) ? this.MaterialUI
+            : GameObject.Find("Canvas").transform.Find("Panel").Find("BoxItems").GetComponent<UIMaterialController>();
+
 
     protected virtual void LoadMaterial()
     {

@@ -21,13 +21,16 @@ public class Touch : AutoMonobehaviour
         this.materialController = (this.materialController != null) ? this.materialController
             : GameObject.Find("MaterialController").GetComponent<MaterialController>();
 
+
     protected virtual void LoadLootMaterialOfPlayer() =>
         this.lootMaterial = (this.lootMaterial != null) ? this.lootMaterial
             : GameObject.Find("Player").transform.Find("LootMaterial").GetComponent<LootMaterial>();
 
+
     protected virtual void LoadItemController() =>
         this.itemController = (this.itemController != null) ? this.itemController
             : transform.parent.GetComponent<ItemController>();
+
 
     protected virtual void Update()
     {

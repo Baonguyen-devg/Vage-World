@@ -8,16 +8,13 @@ public class EnemyController : AutoMonobehaviour
 {
     [SerializeField] protected Transform model;
     [SerializeField] protected EnemyMovement movement;
-    [SerializeField] protected SignalImpact impact;
     [SerializeField] protected EnemyDamageSender damageSender;
     [SerializeField] protected EnemyDamageReceiver damageReceiver;
     [SerializeField] protected EnemyHealthBar healthBar;
     [SerializeField] protected EnemyCloseCombatAttack closeCombat;
-    private CloseCombatAttack closeCombatComponent;
     private Transform posRoot;
 
     public EnemyMovement Movement => this.movement;
-    public SignalImpact Impact => this.impact;
     public Transform Model => this.model;
     public EnemyDamageSender DamageSender => this.damageSender;
     public EnemyDamageReceiver DamageReceiver => this.damageReceiver;
@@ -28,7 +25,6 @@ public class EnemyController : AutoMonobehaviour
     {
         base.LoadComponent();
         this.LoadModel();
-        this.LoadImpact();
         this.LoadDamagedSender();
         this.LoadDamagedReceiver();
         this.LoadHealthBar();
@@ -70,13 +66,6 @@ public class EnemyController : AutoMonobehaviour
         Debug.Log(transform.name + ": Load Model", gameObject);
     }
 
-    protected virtual void LoadImpact()
-    {
-        if (this.impact != null || transform.Find("SignalImpact") == null) return;
-        this.impact = transform.Find("SignalImpact").GetComponent<SignalImpact>();
-        Debug.Log(transform.name + ": Load SignalImpact", gameObject);
-    }
-
     protected virtual void LoadCloseCombat()
     {
         if (this.closeCombat != null || transform.Find("CloseCombat") == null) return;
@@ -84,13 +73,9 @@ public class EnemyController : AutoMonobehaviour
         Debug.Log(transform.name + ": Load CloseCombat", gameObject);
     }
 
-    public virtual void DoAttack()
-    {
+    public virtual void DoAttack() =>
         gameObject.GetComponent<AIDestinationSetter>().target = GameObject.Find("Player").transform;
-    }
 
-    public virtual void StopAttack()
-    {
-        gameObject.GetComponent<AIDestinationSetter>().target = this.posRoot;
-    }
+    public virtual void StopAttack() =>
+         gameObject.GetComponent<AIDestinationSetter>().target = this.posRoot;
 }
