@@ -3,12 +3,21 @@ using UnityEngine;
 
 public class PlayerShootingAttack : ShootingAttack
 {
+    [SerializeField] protected Transform posShoote;
     [SerializeField] protected List<Transform> pointSpawnsSkillOne;
 
     protected override void LoadComponent()
     {
         base.LoadComponent();
         this.LoadPointSpawnSkillOne();
+        this.LoadPosShoote();
+    }
+
+    protected virtual void LoadPosShoote()
+    {
+        if (this.posShoote != null) return;
+        this.posShoote = transform.Find("PointSpawn");
+        Debug.Log(transform.name + ": Load PosShoote", gameObject);
     }
 
     protected virtual void LoadPointSpawnSkillOne()

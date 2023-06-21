@@ -235,7 +235,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1804020214}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &12608896
 MonoBehaviour:
@@ -382,7 +382,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movement: {fileID: 365546387}
   model: {fileID: 1233560190}
-  damageSender: {fileID: 0}
+  damageSender: {fileID: 1863968087}
 --- !u!1 &34091600
 GameObject:
   m_ObjectHideFlags: 0
@@ -2004,6 +2004,52 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 165676319}
   m_CullTransparentMesh: 1
+--- !u!1 &170082277
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 170082278}
+  - component: {fileID: 170082279}
+  m_Layer: 0
+  m_Name: Shoote
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &170082278
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 170082277}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 328981583}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &170082279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 170082277}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65eb76d958101764883b726b5d52f23c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nameTrigger: 
+  ctrll: {fileID: 1804020215}
 --- !u!1 &170155226
 GameObject:
   m_ObjectHideFlags: 0
@@ -4520,7 +4566,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 328981583}
-  - component: {fileID: 328981584}
   m_Layer: 0
   m_Name: Stoning
   m_TagString: Untagged
@@ -4539,24 +4584,11 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.25, y: 0.25, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 170082278}
   m_Father: {fileID: 1614469987}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &328981584
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 328981582}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65eb76d958101764883b726b5d52f23c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nameTrigger: 
-  ctrll: {fileID: 1804020215}
 --- !u!1 &333842854
 GameObject:
   m_ObjectHideFlags: 0
@@ -6023,8 +6055,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   listRandomMap: []
-  levelSkill: 4
-  baseLevel: 7
+  levelSkill: 3
+  baseLevel: 4
   timeDelay: 9
 --- !u!1 &397202021
 GameObject:
@@ -10752,6 +10784,52 @@ MonoBehaviour:
   mapController: {fileID: 1844089067}
   landList: []
   levelManagerSO: {fileID: 0}
+--- !u!1 &638761657
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 638761658}
+  - component: {fileID: 638761659}
+  m_Layer: 0
+  m_Name: Shoote
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &638761658
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 638761657}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1557579972}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &638761659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 638761657}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47423221688ea1342b5d1696fd959349, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nameTrigger: 
+  ctrll: {fileID: 1804020215}
 --- !u!1 &642694623
 GameObject:
   m_ObjectHideFlags: 0
@@ -14719,7 +14797,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1804020214}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &844147915
 MonoBehaviour:
@@ -18624,7 +18702,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1804020214}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1047433037
 BoxCollider2D:
@@ -18755,14 +18833,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1053835214}
-  - component: {fileID: 1053835215}
   m_Layer: 0
-  m_Name: Shooting
+  m_Name: PointsShooteLaser
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1053835214
 Transform:
   m_ObjectHideFlags: 0
@@ -18771,7 +18848,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1053835213}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.15, y: 1.4949999, z: 0}
+  m_LocalPosition: {x: 0.15, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -18783,38 +18860,9 @@ Transform:
   - {fileID: 1522382436}
   - {fileID: 397202022}
   - {fileID: 87992587}
-  m_Father: {fileID: 1804020214}
+  m_Father: {fileID: 1554353219}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1053835215
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1053835213}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fc5ac3c477847d40b6363a2c75e7710, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackDelay: 0
-  skill1: 0
-  skill2: 0
-  skill3: 0
-  attackTimer: 0
-  posShoote: {fileID: 0}
-  target: {fileID: 0}
-  controller: {fileID: 0}
-  pointSpawns:
-  - {fileID: 1139253665}
-  - {fileID: 25150953}
-  - {fileID: 1994093784}
-  - {fileID: 465082231}
-  - {fileID: 971639568}
-  - {fileID: 1522382436}
-  - {fileID: 397202022}
-  - {fileID: 87992587}
 --- !u!1 &1054367154
 GameObject:
   m_ObjectHideFlags: 0
@@ -18922,7 +18970,7 @@ Transform:
   - {fileID: 1359810625}
   - {fileID: 323768845}
   m_Father: {fileID: 1804020214}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1064295195
 GameObject:
@@ -22422,7 +22470,6 @@ MonoBehaviour:
   skill2: 0
   skill3: 0
   attackTimer: 0
-  posShoote: {fileID: 789189402}
   target: {fileID: 774405703}
   controller: {fileID: 642694625}
   pointSpawns:
@@ -27455,8 +27502,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1423674698}
   - component: {fileID: 1423674700}
-  - component: {fileID: 1423674699}
   - component: {fileID: 1423674701}
+  - component: {fileID: 1423674702}
   m_Layer: 0
   m_Name: Discoloration
   m_TagString: Untagged
@@ -27479,20 +27526,6 @@ Transform:
   m_Father: {fileID: 1386604901}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1423674699
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1423674697}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f04509a8abc135a419995b488390ab9e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  boxCollider: {fileID: 1423674700}
-  rigidBody: {fileID: 0}
 --- !u!61 &1423674700
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -27534,12 +27567,26 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
+--- !u!114 &1423674702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1423674697}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f04509a8abc135a419995b488390ab9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boxCollider: {fileID: 1423674700}
+  rigidBody: {fileID: 1423674701}
 --- !u!1 &1425969882
 GameObject:
   m_ObjectHideFlags: 0
@@ -28193,8 +28240,8 @@ MonoBehaviour:
   skill2: 0
   skill3: 0
   attackTimer: 0
-  posShoote: {fileID: 800899187}
   target: {fileID: 0}
+  posShoote: {fileID: 800899187}
   pointSpawnsSkillOne:
   - {fileID: 270913385}
   - {fileID: 656308608}
@@ -30165,6 +30212,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1774633621}
+  - {fileID: 1053835214}
   m_Father: {fileID: 1804020214}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -30180,17 +30228,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a29b6d5f7f131eb4eae42ccb44a4b37f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDelay: 1
+  attackDelay: 2
   skill1: 0
   skill2: 0
   skill3: 0
   attackTimer: 0
-  posShoote: {fileID: 1774633621}
   target: {fileID: 774405703}
   controller: {fileID: 1804020215}
-  pointSpawns: []
-  pointShooteStone: {fileID: 0}
-  pointsShooteLaser: []
+  pointShooteStone: {fileID: 1774633621}
+  pointsShooteLaser:
+  - {fileID: 1139253665}
+  - {fileID: 25150953}
+  - {fileID: 1994093784}
+  - {fileID: 465082231}
+  - {fileID: 971639568}
+  - {fileID: 1522382436}
+  - {fileID: 397202022}
+  - {fileID: 87992587}
 --- !u!1 &1557194735
 GameObject:
   m_ObjectHideFlags: 0
@@ -30276,7 +30330,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1557579972}
-  - component: {fileID: 1557579973}
   m_Layer: 0
   m_Name: Laser
   m_TagString: Untagged
@@ -30295,24 +30348,11 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.25, y: 0.25, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 638761658}
   m_Father: {fileID: 1614469987}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1557579973
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1557579971}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 47423221688ea1342b5d1696fd959349, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nameTrigger: 
-  ctrll: {fileID: 1804020215}
 --- !u!1 &1557760398
 GameObject:
   m_ObjectHideFlags: 0
@@ -31410,7 +31450,7 @@ Transform:
   - {fileID: 1557579972}
   - {fileID: 1621884582}
   m_Father: {fileID: 1804020214}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &1614469988
 Animator:
@@ -31913,10 +31953,8 @@ MonoBehaviour:
   skill2: 0
   skill3: 0
   attackTimer: 0
-  posShoote: {fileID: 1791467770}
   target: {fileID: 0}
   controller: {fileID: 0}
-  pointSpawns: []
 --- !u!1 &1635629313
 GameObject:
   m_ObjectHideFlags: 0
@@ -33484,7 +33522,7 @@ MonoBehaviour:
   rigid2D: {fileID: 774405707}
   movement: {x: 0, y: 0}
   controller: {fileID: 774405706}
-  animator: {fileID: 0}
+  animator: {fileID: 323944155}
 --- !u!1 &1727594288
 GameObject:
   m_ObjectHideFlags: 0
@@ -34158,7 +34196,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1774633621}
   m_Layer: 0
-  m_Name: PointSpawn
+  m_Name: PointShooteStone
   m_TagString: Untagged
   m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -34569,7 +34607,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1804020214
 Transform:
   m_ObjectHideFlags: 0
@@ -34583,7 +34621,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1554353219}
-  - {fileID: 1053835214}
   - {fileID: 1614469987}
   - {fileID: 12608895}
   - {fileID: 1047433035}
@@ -34608,8 +34645,8 @@ MonoBehaviour:
   model: {fileID: 1614469987}
   movement: {fileID: 0}
   impact: {fileID: 0}
-  damageSender: {fileID: 0}
-  damageReceiver: {fileID: 0}
+  damageSender: {fileID: 844147915}
+  damageReceiver: {fileID: 1047433038}
   healthBar: {fileID: 323768846}
   closeCombat: {fileID: 12608896}
 --- !u!58 &1804020216
@@ -36083,7 +36120,7 @@ GameObject:
   - component: {fileID: 1863968086}
   - component: {fileID: 1863968087}
   m_Layer: 0
-  m_Name: DamagedSender
+  m_Name: DamageSender
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -36116,8 +36153,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cf8fdcffc324034fb20b23331c16820, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dame: 5
-  maximumDame: 10
+  dame: 50
+  maximumDame: 100
 --- !u!1 &1866206705
 GameObject:
   m_ObjectHideFlags: 0
@@ -36869,7 +36906,7 @@ Transform:
   - {fileID: 1094359336}
   - {fileID: 526477621}
   m_Father: {fileID: 1804020214}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1913945708
 MonoBehaviour:
@@ -36888,7 +36925,7 @@ MonoBehaviour:
   - {fileID: 1094359336}
   - {fileID: 526477621}
   controller: {fileID: 1804020215}
-  NextAttack: 5
+  NextAttack: 3
   rateTime: 3
   count: 0
 --- !u!1 &1914532558
@@ -39780,8 +39817,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   listRandomMap: []
-  levelSkill: 3
-  baseLevel: 6
+  levelSkill: 2
+  baseLevel: 4
   timeDelay: 7
 --- !u!1 &2042434004
 GameObject:
@@ -40240,7 +40277,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   listRandomMap: []
   levelSkill: 2
-  baseLevel: 5
+  baseLevel: 3
   timeDelay: 5
 --- !u!1 &2057810085
 GameObject:

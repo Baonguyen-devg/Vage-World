@@ -32,10 +32,20 @@ namespace Movement
             (this.rigid2D.gravityScale, this.rigid2D.freezeRotation) = (0, true);
         }
 
+        public virtual void UpdateGetInputAxis(float axisX, float axisY) =>
+            (this.movement.x, this.movement.y) = (axisX, axisY);
+
         protected virtual void Update()
         {
-            movement.x = Input.GetAxis("Horizontal");
-            movement.y = Input.GetAxis("Vertical");
+            float x = Input.GetAxis("Horizontal");
+            float y = Input.GetAxis("Vertical");
+            if (x != 0 || y != 0 )
+            {
+                transform.parent.Find("LootMaterial").GetComponent<LootMaterial>().SetItemToPickup(null, null);
+                this.UpdateGetInputAxis(x, y);
+            }
+            else if (transform.parent.Find("LootMaterial").GetComponent<LootMaterial>().itemToPickup == null)
+                    this.UpdateGetInputAxis(x, y);
 
             this.FlipLeft();
             this.SetAnimatorFLoats();

@@ -6,7 +6,7 @@ public class BossEnemyShootingAttack : EnemyShootingAttack
 {
     [SerializeField] private Transform pointShooteStone;
     [SerializeField] private List<Transform> pointsShooteLaser;
-    
+
     protected override void LoadPointSpawn()
     {
         this.pointShooteStone ??= this.transform.Find("PointShooteStone");
@@ -18,10 +18,10 @@ public class BossEnemyShootingAttack : EnemyShootingAttack
 
     public virtual void ToAttack(string nameBullet)
     {
-        if (nameBullet.Equals("StoneBullet"))
+        if (nameBullet.Equals("Stoning_Bullet"))
             this.Shoote(nameBullet, this.pointShooteStone);
 
-        if (nameBullet.Equals("LaserBullet"))
+        if (nameBullet.Equals("Laser_Bullet"))
             foreach (Transform pointShoote in this.pointsShooteLaser)
                 this.Shoote(nameBullet, pointShoote);
     }

@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class ShootingAttack : Attack
 {
-    [SerializeField] protected Transform posShoote;
-
     [SerializeField] protected Transform target;
 
     public void SetTarget(Transform target) { this.target = target; }
@@ -11,20 +9,12 @@ public class ShootingAttack : Attack
     protected override void LoadComponent()
     {
         base.LoadComponent();
-        this.LoadPosShoote();
         this.LoadTarget();
     }
 
     protected virtual void LoadTarget()
     {
         //For override
-    }
-
-    protected virtual void LoadPosShoote()
-    {
-        if (this.posShoote != null) return;
-        this.posShoote = transform.Find("PointSpawn");
-        Debug.Log(transform.name + ": Load PosShoote", gameObject);
     }
 
     protected virtual void Shoote(string nameBullet, Transform posShoote)
