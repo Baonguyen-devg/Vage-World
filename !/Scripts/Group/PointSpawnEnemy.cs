@@ -10,7 +10,7 @@ public class PointSpawnEnemy : AutoMonobehaviour
 
     public virtual void Add(Transform enemy) => this.listEnemy.Add(enemy);
 
-    public virtual void FixedUpdate()
+    public virtual void Update()
     {
         if (this.requestAttack == true)
             this.timeStopAttack = Time.time + this.rateTimeAttack;

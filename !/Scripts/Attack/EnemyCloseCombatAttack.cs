@@ -3,7 +3,6 @@ using UnityEngine;
 public class EnemyCloseCombatAttack : CloseCombatAttack
 {
     [SerializeField] protected BehaviorManager behaviourManager;
-    [SerializeField] protected string nameBehaviour;
 
     protected override void LoadComponent()
     {
@@ -21,7 +20,7 @@ public class EnemyCloseCombatAttack : CloseCombatAttack
     {
         base.ToAttack();
         this.attackTimer = 0;
-        this.behaviourManager.GetBehaviorByName(this.nameBehaviour).gameObject.SetActive(true);
+        transform.parent.GetComponent<EnemyController>().Model.GetComponent<Animator>().SetTrigger("Attack");
     }
 
     protected override bool CanAttack()

@@ -35,8 +35,9 @@ namespace Movement
         public virtual void UpdateGetInputAxis(float axisX, float axisY) =>
             (this.movement.x, this.movement.y) = (axisX, axisY);
 
-        protected virtual void Update()
+        protected override void Update()
         {
+            base.Update();
             float x = Input.GetAxis("Horizontal");
             float y = Input.GetAxis("Vertical");
             if (x != 0 || y != 0 )

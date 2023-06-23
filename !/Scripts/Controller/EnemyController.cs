@@ -73,9 +73,12 @@ public class EnemyController : AutoMonobehaviour
         Debug.Log(transform.name + ": Load CloseCombat", gameObject);
     }
 
-    public virtual void DoAttack() =>
+    public virtual void DoAttack()
+    {
         gameObject.GetComponent<AIDestinationSetter>().target = GameObject.Find("Player").transform;
+        this.model.GetComponent<BehaviorManager>().GetBehaviorByName("Run").gameObject.SetActive(true);
+    }
 
     public virtual void StopAttack() =>
-         gameObject.GetComponent<AIDestinationSetter>().target = this.posRoot;
+        gameObject.GetComponent<AIDestinationSetter>().target = this.posRoot;
 }
