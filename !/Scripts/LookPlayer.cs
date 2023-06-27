@@ -19,11 +19,11 @@ public class LookPlayer : AutoMonobehaviour
         Debug.Log(transform.name + ": Load Enemy Controller", gameObject);
     }
 
-    protected virtual void FixedUpdate()
+    protected virtual void Update()
     {
-        if (this.controller.gameObject.GetComponent<AIDestinationSetter>().target == null) return;
+        if (this.controller.RandomlyMovement.TargetFollow == null) return;
 
-        if (transform.parent.localPosition.x > this.controller.gameObject.GetComponent<AIDestinationSetter>().target.localPosition.x)
+        if (transform.parent.localPosition.x > this.controller.RandomlyMovement.TargetFollow.localPosition.x)
             transform.rotation = Quaternion.Euler(0, 180, 0);
         else
             transform.rotation = Quaternion.Euler(0, 0, 0);

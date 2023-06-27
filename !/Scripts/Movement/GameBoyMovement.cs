@@ -7,7 +7,7 @@ namespace Movement
     public class GameBoyMovement : Movement
     {
         [SerializeField] protected Transform player;
-        [SerializeField] protected float distanceToPlayer = 3;
+        [SerializeField] protected float distanceToPlayer = 1;
         [SerializeField] protected Animator animator;
 
         [SerializeField] protected Vector3 pos;
@@ -28,16 +28,17 @@ namespace Movement
 
         protected override void Move()
         {
+            if (Vector2.Distance(transform.parent.position, this.player.position) <= distanceToPlayer) return;
             pos = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - this.player.position);
-            this.direction = (pos - transform.parent.position);
+            this.direction = (this.player.position - transform.parent.position);
             pos.Normalize();
             this.direction.Normalize();
      
-            this.animator.SetFloat("Horizontal", pos.x);
-            this.animator.SetFloat("Vertical", pos.y);
-/*
-            pos = this.player.position + pos * this.distanceToPlayer;
-            transform.parent.position = Vector3.Lerp(transform.parent.position, pos, this.speed);*/
+            this.animator.SetFloat("Horizontal", direction.x);
+            this.animator.SetFloat("Vertical", direction.y);
+
+            Vector3 position = transform.parent.position + this.direction;
+            transform.parent.position = Vector3.Lerp(transform.parent.position, position, this.speed);
         }
     }
 }

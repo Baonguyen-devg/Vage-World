@@ -21,14 +21,14 @@ namespace Movement
         }
 
         protected virtual void LoadController() =>
-            this.controller ??= transform.parent.GetComponent<PlayerController>();
+            this.controller ??= transform.parent?.GetComponent<PlayerController>();
 
         protected virtual void LoadAnimator() =>
-            this.animator ??= this.controller.Model.GetComponent<Animator>();
+            this.animator ??= this.controller.Model?.GetComponent<Animator>();
 
         protected virtual void LoadRigidbody2D()
         {
-            this.rigid2D ??= transform.parent.GetComponent<Rigidbody2D>();
+            this.rigid2D ??= transform.parent?.GetComponent<Rigidbody2D>();
             (this.rigid2D.gravityScale, this.rigid2D.freezeRotation) = (0, true);
         }
 

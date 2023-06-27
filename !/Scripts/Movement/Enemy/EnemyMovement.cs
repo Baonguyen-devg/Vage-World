@@ -4,16 +4,20 @@ namespace Movement
 {
     public class EnemyMovement : Movement
     {
-        [SerializeField] protected Transform target;
+        [SerializeField] private Vector3 directionFollow;
+        [SerializeField] private bool stopMove = false;
 
-        public Transform Target => this.target;
+        public void SetDirectionFollow(Vector3 direction) => this.directionFollow = direction;
 
-        public virtual void SetTarget(Transform target) => this.target = target;
+        private void Move(Vector3 direction) =>
+             transform.parent.position = Vector3.Lerp(transform.parent.position, transform.parent.position + direction, this.speed);
+
+        public virtual void SetStopMove(bool status) => this.stopMove = status;
 
         protected override void Move()
         {
-            if (this.target == null) return;
-            transform.parent.position = Vector3.Lerp(transform.parent.position, this.target.position, this.speed);
+            if (!this.stopMove) return;
+            this.Move(this.directionFollow);
         }
     }
 }

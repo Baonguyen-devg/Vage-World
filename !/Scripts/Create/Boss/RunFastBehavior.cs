@@ -8,8 +8,7 @@ public class RunFastBehavior : Behaviour
     protected override void OnEnable()
     {
         base.OnEnable();
-        this.ctrll.GetComponent<AIPath>().enabled = true;
-        this.ctrll.GetComponent<AIPath>().maxSpeed = 4;
+        this.ctrll.Movement.SetStopMove(true);
         GameObject.Find("Camera").GetComponent<Animator>().SetTrigger("RunShaking");
     }
 }

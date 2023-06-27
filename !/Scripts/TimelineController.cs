@@ -29,11 +29,6 @@ public class TimelineController : AutoMonobehaviour
         this.map = GameObject.Find("Map").GetComponent<GridGraph>();
     }
 
-    protected virtual void Start()
-    {
-        AstarPath.active.Scan();
-    }
-
     protected virtual void LoadLevelManagerSO()
     {
         if (this.levelManagerSO != null) return;

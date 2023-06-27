@@ -12,7 +12,7 @@ public class StoningBehaviour : Behaviour
 
     protected override void OnEnable()
     {
-        this.ctrll.GetComponent<AIPath>().enabled = false;
+        this.ctrll.Movement.SetStopMove(false);
         this.ctrll.transform.
           Find("AttackShoote").GetComponent<BossEnemyShootingAttack>().ToAttack("Stoning_Bullet");
     }
