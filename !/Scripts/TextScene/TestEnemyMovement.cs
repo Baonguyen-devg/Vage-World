@@ -10,5 +10,5 @@ public class TestEnemyMovement : AutoMonobehaviour
     private void Update() => this.Move(this.directionFollow);
 
     private void Move(Vector3 direction) =>
-         transform.parent.position = Vector3.Lerp(transform.parent.position, transform.parent.position + direction, 0.005f);
+         transform.parent.position = Vector3.Lerp(transform.parent.position, transform.parent.position + direction, 0.01f);
 }

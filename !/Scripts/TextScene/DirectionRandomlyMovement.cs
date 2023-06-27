@@ -5,20 +5,35 @@ using UnityEngine;
 public class DirectionRandomlyMovement : AutoMonobehaviour
 {
     //This value describe distance betweens 2 directions = 10
-    private const int rate_Part_Crirle = 10;
+    private const int rate_Part_Crirle = 1;
     private const string persudo_Messenge_Random = "VageWorld"; //Seed for random
     private const int maximum_Distance_Point = 2;
     private const int radian_Followed = 60;
+    private const float time_Delay_Create = 0;
 
+    [SerializeField] private List<Vector2> avoidDirections;
     [SerializeField] private List<int> validDirections;
     [SerializeField] private Transform targetFollow = null;
     [SerializeField] private List<Vector2> directions;
     [SerializeField] private TestEnemyController controller;
+    [SerializeField] private float timeCount = 0;
+    [SerializeField] private bool stopCreate = false;
 
     private void LoadController() =>
         this.controller ??= transform.parent?.GetComponent<TestEnemyController>();
 
-    private void Update() => this.CheckAndLoadNewDirections();
+    private void Update()
+    {
+        if (this.stopCreate == true) return;
+        if (this.timeCount <= time_Delay_Create)
+        {
+            this.timeCount += Time.deltaTime;
+            return;
+        }
+
+        this.timeCount = 0;
+        this.CheckAndLoadNewDirections();
+    }
 
     public DirectionRandomlyMovement() { }
 
@@ -28,11 +43,25 @@ public class DirectionRandomlyMovement : AutoMonobehaviour
         this.targetFollow = GameObject.Find("Player").transform;
         int numberDirection = (int)360 / rate_Part_Crirle;
         this.directions = new List<Vector2>();
-        this.validDirections = new List<int>(numberDirection);
+        this.validDirections = new List<int>();
+        this.avoidDirections = new List<Vector2>();
 
         //Using to add directions into list follow rate_Part_Crirle
         for (int i = 0; i < numberDirection; i++)
             this.directions.Add(this.GetPostionFromAngle(2f * Mathf.PI / (float)numberDirection * i));
+    }
+
+    private IEnumerator SetStopCreate(bool status)
+    {
+        yield return new WaitForSeconds(1f);
+        this.stopCreate = status;
+    }
+    public virtual void AddAnAvoidDirection(Vector3 direction) => this.avoidDirections.Add(direction);
+
+    public virtual void RemoveAnAvoidDirection(Vector3 coordinate)
+    {
+        int index = this.avoidDirections.FindIndex(x => x.Equals(coordinate));
+        if (index != -1) this.avoidDirections.RemoveAt(index);
     }
 
     private float GetRadian(float angle) => angle * Mathf.Deg2Rad;
@@ -53,7 +82,29 @@ public class DirectionRandomlyMovement : AutoMonobehaviour
             if (this.OutsideTargetFollow(i * rate_Part_Crirle))
                 this.validDirections.Add(i);
 
+        this.DodgeAvoidDirection();
+        if (this.validDirections.Count <= 10)
+        {
+            float angle = Mathf.Repeat(this.GetAngle(this.GetAngleFromPosition(this.targetFollow.position)), 360f) + Random.Range(90, 180);
+            if (angle >= 360) angle = angle % 360;
+            this.stopCreate = true; 
+            this.validDirections.Add((int)angle / rate_Part_Crirle);
+            StartCoroutine(this.SetStopCreate(false));
+        }
         this.CreateRandomlyDirection();
+    }
+
+    private void DodgeAvoidDirection()
+    {
+        List<int> removeValidDirections = new List<int>();
+
+        foreach (Vector3 avoid in this.avoidDirections)
+            foreach (int valid in this.validDirections)
+                if (CalculateAngleDiscrepancy(avoid, valid * rate_Part_Crirle) <= 40)
+                    removeValidDirections.Add(valid);
+
+        foreach (int indexRemoved in removeValidDirections)
+            this.validDirections.Remove(indexRemoved);
     }
 
     private void CreateRandomlyDirection() =>
@@ -63,9 +114,9 @@ public class DirectionRandomlyMovement : AutoMonobehaviour
     {
         for (int i = 0; i < this.validDirections.Count; i++)
         {
-            Color colorDrawLine = (validDirection == this.validDirections[i]) ? Color.white : Color.black;
+            Color colorDrawLine = (validDirection == this.validDirections[i]) ? Color.white : Color.gray;
             Vector3 pos = transform.parent.position + new Vector3(this.directions[this.validDirections[i]].x, this.directions[this.validDirections[i]].y, 0);
-            Debug.DrawLine(transform.parent.position, pos, colorDrawLine);
+            Debug.DrawLine(transform.parent.position, pos, colorDrawLine, 0.01f);
         }
 
         Vector3 directionNormalize = new Vector3(this.directions[validDirection].x, this.directions[validDirection].y, 0);
