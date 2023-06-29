@@ -3,6 +3,8 @@ using UnityEngine;
 public class EnemyCloseCombatAttack : CloseCombatAttack
 {
     [SerializeField] protected BehaviorManager behaviourManager;
+    protected virtual void LoadBehaviourManager() =>
+        this.behaviourManager ??= transform?.parent?.GetComponent<EnemyController>()?.Model?.GetComponent<BehaviorManager>();
 
     protected override void LoadComponent()
     {
@@ -10,11 +12,8 @@ public class EnemyCloseCombatAttack : CloseCombatAttack
         this.LoadBehaviourManager();
     }
 
-    protected virtual void LoadBehaviourManager() =>
-        this.behaviourManager = (this.behaviourManager != null) ? this.behaviourManager
-            : transform.parent.GetComponent<EnemyController>().Model.GetComponent<BehaviorManager>();
-
-    protected override void LoadTarget() => this.target = GameObject.Find("Player").transform;
+    protected override void LoadTarget() => 
+        this.target = GameObject.Find("Player").transform;
 
     public override void ToAttack()
     {

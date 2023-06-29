@@ -60,10 +60,7 @@ public class UIController : AutoMonobehaviour
         this.LoadUI("GameUI");
     }
 
-    public virtual void Continue()
-    {
-        this.Game();
-    }
+    public virtual void Continue() => this.Game();
 
     public virtual void PlayAgain()
     {

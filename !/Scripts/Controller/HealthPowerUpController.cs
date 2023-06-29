@@ -1,18 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
-using DamageSender;
 using UnityEngine;
 
 public class HealthPowerUpController : AutoMonobehaviour
 {
     [SerializeField] protected HealPowerUPItemImpact impact;
-
-    protected override void LoadComponent()
-    {
-        base.LoadComponent();
-        this.LoadImpact();
-    }
-
+    public HealPowerUPItemImpact Impact => this.impact;
     protected virtual void LoadImpact() =>
         this.impact ??= transform.Find("Impact").GetComponent<HealPowerUPItemImpact>();
+
+    protected override void LoadComponent() => this.LoadImpact();
 }

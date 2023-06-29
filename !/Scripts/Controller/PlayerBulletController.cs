@@ -5,10 +5,17 @@ using Movement;
 public class PlayerBulletController : AutoMonobehaviour
 {
     [SerializeField] protected BulletMovement movement;
-    [SerializeField] protected Transform model;
-    [SerializeField] protected PlayerDamageSender damageSender;
+    protected virtual void LoadMovement() => 
+        this.movement ??= transform?.Find("Movement")?.GetComponent<BulletMovement>();
 
+    [SerializeField] protected Transform model;
+    protected virtual void LoadModel() =>
+        this.model ??= transform?.Find("Model");
+
+    [SerializeField] protected PlayerDamageSender damageSender;
     public PlayerDamageSender DamageSender => this.damageSender;
+    protected virtual void LoadDamagedSender() =>
+        this.damageSender ??= transform?.Find("DamageSender")?.GetComponent<PlayerDamageSender>();
 
     protected override void LoadComponent()
     {
@@ -16,26 +23,5 @@ public class PlayerBulletController : AutoMonobehaviour
         this.LoadMovement();
         this.LoadModel();
         this.LoadDamagedSender();
-    }
-
-    protected virtual void LoadMovement()
-    {
-        if (this.movement != null) return;
-        this.movement = transform.Find("Movement").GetComponent<BulletMovement>();
-        Debug.Log(transform.name + ": Load BulletMovement", gameObject);
-    }
-
-    protected virtual void LoadModel()
-    {
-        if (this.model != null) return;
-        this.model = transform.Find("Model");
-        Debug.Log(transform.name + ": Load Model", gameObject);
-    }
-
-    protected virtual void LoadDamagedSender()
-    {
-        if (this.damageSender != null) return;
-        this.damageSender = transform.Find("DamageSender").GetComponent<PlayerDamageSender>();
-        Debug.Log(transform.name + ": Load DamageSender", gameObject);
     }
 }

@@ -5,12 +5,7 @@ public class ListPrefab : AutoMonobehaviour
 {
     [SerializeField] protected List<Transform> listPrefabs;
     public List<Transform> ListPrefabs => this.listPrefabs;
-
-    protected override void LoadComponent()
-    {
-        base.LoadComponent();
-        this.LoadPrefabs();
-    }
+    protected override void LoadComponent() => this.LoadPrefabs();
 
     protected virtual void LoadPrefabs()
     {
@@ -19,8 +14,6 @@ public class ListPrefab : AutoMonobehaviour
             this.listPrefabs.Add(prefab);
     }
 
-    public virtual Transform GetRandomPrefab()
-    {
-        return this.listPrefabs[Random.Range(0, this.listPrefabs.Count)];
-    }
+    public virtual Transform GetRandomPrefab() =>
+        this.listPrefabs[Random.Range(0, this.listPrefabs.Count)];
 }

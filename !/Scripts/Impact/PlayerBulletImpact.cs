@@ -3,6 +3,9 @@ using UnityEngine;
 public class PlayerBulletImpact : Impact
 {
     [SerializeField] protected PlayerBulletController controller;
+    protected virtual void LoadController() =>
+        this.controller ??= transform?.parent?.GetComponent<PlayerBulletController>();
+
     [SerializeField] protected bool haveSkill2;
 
     protected override void LoadComponent()
@@ -12,11 +15,6 @@ public class PlayerBulletImpact : Impact
     }
 
     public virtual void ChangeStatusSkill2(bool status) => this.haveSkill2 = status;
-
-    protected virtual void LoadController() =>
-        this.controller = (this.controller != null) ? this.controller
-            : transform.parent.GetComponent<PlayerBulletController>();
-
 
     protected virtual void OnTriggerEnter2D(Collider2D collision)
     {

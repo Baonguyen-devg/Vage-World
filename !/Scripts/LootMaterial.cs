@@ -9,11 +9,8 @@ public class LootMaterial : AutoMonobehaviour
     [SerializeField] protected Touch itemTouch;
     [SerializeField] protected float distanceCanPick = 0.8f;
 
-    public virtual void SetItemToPickup(GameObject item, Touch itemTouch)
-    {
-        this.itemToPickup = item;   
-        this.itemTouch = itemTouch;
-    }
+    public virtual void SetItemToPickup(GameObject item, Touch itemTouch) =>
+        (this.itemToPickup, this.itemTouch) = (item, itemTouch);
 
     private void Update()
     {
@@ -31,6 +28,5 @@ public class LootMaterial : AutoMonobehaviour
             transform.parent.Find("Movement").GetComponent<PlayerMovement>().
                 UpdateGetInputAxis(pos.x, pos.y);
         }
-
     }
 }

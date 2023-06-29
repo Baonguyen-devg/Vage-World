@@ -5,19 +5,10 @@ using Pathfinding;
 public class LookPlayer : AutoMonobehaviour
 {
     [SerializeField] protected EnemyController controller;
+    protected virtual void LoadEnemyController() =>
+        this.controller ??= transform?.parent?.GetComponent<EnemyController>();
 
-    protected override void LoadComponent()
-    {
-        base.LoadComponent();
-        this.LoadEnemyController();
-    }
-
-    protected virtual void LoadEnemyController()
-    {
-        if (this.controller != null) return;
-        this.controller = transform.parent.GetComponent<EnemyController>();
-        Debug.Log(transform.name + ": Load Enemy Controller", gameObject);
-    }
+    protected override void LoadComponent() => this.LoadEnemyController();
 
     protected virtual void Update()
     {

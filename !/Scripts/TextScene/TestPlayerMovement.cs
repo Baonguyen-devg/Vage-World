@@ -6,14 +6,10 @@ public class TestPlayerMovement : AutoMonobehaviour
 {
     [SerializeField] private int speed = 10;
     [SerializeField] private Rigidbody2D rigid2D;
+    private void LoadRigid2D() => 
+        this.rigid2D ??= transform.parent.GetComponent<Rigidbody2D>();
 
-    protected override void LoadComponent()
-    {
-        base.LoadComponent();
-        this.LoadRigid2D();
-    }
-
-    private void LoadRigid2D() => this.rigid2D ??= transform.parent.GetComponent<Rigidbody2D>();
+    protected override void LoadComponent() => this.LoadRigid2D();
 
     private void Update()
     {

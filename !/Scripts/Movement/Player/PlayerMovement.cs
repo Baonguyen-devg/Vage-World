@@ -6,11 +6,22 @@ namespace Movement
     {
         [Header("Player Movement"), Space(10)]
         [SerializeField] protected Rigidbody2D rigid2D;
-        [SerializeField] protected Vector2 movement;
+        protected virtual void LoadRigidbody2D()
+        {
+            this.rigid2D ??= transform.parent?.GetComponent<Rigidbody2D>();
+            (this.rigid2D.gravityScale, this.rigid2D.freezeRotation) = (0, true);
+        }
 
         [Header("Player Controller"), Space(10)]
         [SerializeField] protected PlayerController controller;
+        protected virtual void LoadController() =>
+            this.controller ??= transform.parent?.GetComponent<PlayerController>();
+
         [SerializeField] protected Animator animator;
+        protected virtual void LoadAnimator() =>
+            this.animator ??= this.controller.Model?.GetComponent<Animator>();
+
+        [SerializeField] protected Vector2 movement;
 
         protected override void LoadComponent()
         {
@@ -18,18 +29,6 @@ namespace Movement
             this.LoadRigidbody2D();
             this.LoadController();
             this.LoadAnimator();
-        }
-
-        protected virtual void LoadController() =>
-            this.controller ??= transform.parent?.GetComponent<PlayerController>();
-
-        protected virtual void LoadAnimator() =>
-            this.animator ??= this.controller.Model?.GetComponent<Animator>();
-
-        protected virtual void LoadRigidbody2D()
-        {
-            this.rigid2D ??= transform.parent?.GetComponent<Rigidbody2D>();
-            (this.rigid2D.gravityScale, this.rigid2D.freezeRotation) = (0, true);
         }
 
         public virtual void UpdateGetInputAxis(float axisX, float axisY) =>

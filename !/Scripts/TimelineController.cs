@@ -4,13 +4,20 @@ using UnityEngine;
 
 public class TimelineController : AutoMonobehaviour
 {
-    [SerializeField] private Pathfinding.GridGraph map;
     [SerializeField] private static TimelineController instance;
     [SerializeField] private int timeAppearBoss;
-    [SerializeField] private LevelManagerSO levelManagerSO;
     [SerializeField] private Boolean spawnBoss;
-
     [SerializeField] private Transform boss;
+
+    [SerializeField] private LevelManagerSO levelManagerSO;
+    protected virtual void LoadLevelManagerSO()
+    {
+        if (this.levelManagerSO != null) return;
+        string resPath = "Level/EasyLevel";
+        this.levelManagerSO = Resources.Load<LevelManagerSO>(resPath);
+        Debug.LogWarning(transform.name + ": Load GroupDecorObjectSO" + resPath, gameObject);
+        this.LoadInformationMap();
+    }
 
     public int TimeAppearBoss { get => timeAppearBoss; }
     public static TimelineController Instance { get => instance; }
@@ -19,22 +26,7 @@ public class TimelineController : AutoMonobehaviour
     {
         TimelineController.instance = this;
         base.LoadComponent();
-        /* this.LoadAiMap();*/
         this.LoadLevelManagerSO();
-    }
-
-    protected virtual void LoadAiMap()
-    {
-        if (this.map != null) return;
-        this.map = GameObject.Find("Map").GetComponent<GridGraph>();
-    }
-
-    protected virtual void LoadLevelManagerSO()
-    {
-        if (this.levelManagerSO != null) return;
-        string resPath = "Level/EasyLevel";
-        this.levelManagerSO = Resources.Load<LevelManagerSO>(resPath);
-        Debug.LogWarning(transform.name + ": Load GroupDecorObjectSO" + resPath, gameObject);
         this.LoadInformationMap();
     }
 
@@ -46,8 +38,6 @@ public class TimelineController : AutoMonobehaviour
         this.spawnBoss = true;
     }
 
-    protected virtual void LoadInformationMap()
-    {
+    protected virtual void LoadInformationMap() =>
         this.timeAppearBoss = this.levelManagerSO.TimeAppearBoss;
-    }
 }
