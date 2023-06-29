@@ -5,6 +5,6 @@ public class AttackBehaviour : Behaviour
     protected override void OnEnable()
     {
         base.OnEnable();
-        this.ctrll.Movement.SetStopMove(false);
+        this.ctrll.Movement.gameObject.SetActive(false);
     }
 }

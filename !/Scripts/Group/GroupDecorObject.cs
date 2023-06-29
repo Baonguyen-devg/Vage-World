@@ -1,31 +1,30 @@
 using UnityEngine;
 
-public class GroupDecorObject : Group
+namespace Group
 {
-    [SerializeField] protected GroupSO decorObejctSO;
-
-    protected override void LoadComponent()
+    public class GroupDecorObject : Group
     {
-        base.LoadComponent();
-        this.LoadDecorObjectSO();
-    }
+        [SerializeField] protected GroupSO decorObejctSO;
 
-    protected virtual void LoadDecorObjectSO()
-    {
-        if (this.decorObejctSO != null) return;
-        string resPath = "Group/" + transform.name;
-        this.decorObejctSO = Resources.Load<GroupSO>(resPath);
-        this.maxNumber = this.decorObejctSO.MaxOSNumber;
-        this.minNumber = this.decorObejctSO.MinOSNumber;
-        Debug.LogWarning(transform.name + ": Load GroupDecorObjectSO" + resPath, gameObject);
-    }
+        protected override void LoadComponent()
+        {
+            base.LoadComponent();
+            this.LoadDecorObjectSO();
+        }
 
-    public override void ChangeMapController(MapController map)
-    {
-        this.objectSpawner = DecorObjectSpawner.Instance.GetRandomPrefab();
-        base.ChangeMapController(map);
-    }
+        protected override void Awake()
+        {
+            this.objectSpawner = DecorObjectSpawner.Instance.GetRandomPrefab();
+            base.Awake();
+        }
 
-    protected override void SpawnObject(Vector3 position, Quaternion rotation) =>
-        DecorObjectSpawner.Instance.SpawnInRegion(this.objectSpawner, this.nameRegion, position, rotation);
+        protected virtual void LoadDecorObjectSO()
+        {
+            this.decorObejctSO ??= Resources.Load<GroupSO>("Group/" + transform.name);
+            (this.maxNumber, this.minNumber) = (this.decorObejctSO.MaxOSNumber, this.decorObejctSO.MinOSNumber);
+        }
+
+        protected override void SpawnObject(Vector3 position, Quaternion rotation) =>
+            DecorObjectSpawner.Instance.SpawnInRegion(this.objectSpawner, "Forest", position, rotation);
+    }
 }

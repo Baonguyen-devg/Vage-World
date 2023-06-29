@@ -1,71 +1,54 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Group : AutoMonobehaviour
+namespace Group
 {
-    protected int[] col = { 0, 0, -1, 1 };
-    protected int[] row = { -1, 1, 0, 0 };
-
-    [SerializeField] protected int numberObject;
-    [SerializeField] protected bool[,] haveObject;
-    [SerializeField] protected string objectSpawner;
-    [SerializeField] protected MapController mapController;
-    [SerializeField] protected string nameRegion;
-
-    [Header("Spawning Number")]
-    [SerializeField] protected int minNumber = 5;
-    [SerializeField] protected int maxNumber = 7;
-
-    public virtual void ChangeMapController(MapController map)
+    public abstract class Group : AutoMonobehaviour
     {
-        this.mapController = map;
-        string region = this.mapController.name;
-        this.nameRegion = region.Substring(9, region.Length - 9);
+        protected int[] col = { 0, 0, -1, 1 };
+        protected int[] row = { -1, 1, 0, 0 };
 
-        this.numberObject = Random.Range(this.minNumber, this.maxNumber);
-        this.CreateObject(transform.parent.position);
-    }
+        [SerializeField] protected int numberObject;
+        [SerializeField] protected string objectSpawner;
+        [SerializeField] protected Queue<Vector2> landList;
 
-    protected virtual void CreateObject(Vector3 position)
-    {
-        int count = 0;
-        position = new Vector3(position.x, position.y, 0);
+        [SerializeField] protected MapController mapController;
+        protected virtual void LoadMapController() =>
+            this.mapController ??= GameObject.Find("CreateMapForest").GetComponent<MapController>();
 
-        Queue<Vector3> landList = new Queue<Vector3>();
-        landList.Enqueue(position);
-        while (count != this.numberObject && landList.Count != 0)
+        [Header("Spawning Number")]
+        [SerializeField] protected int minNumber = 5;
+        [SerializeField] protected int maxNumber = 7;
+
+        protected override void LoadComponent() => this.LoadMapController();
+
+        protected override void Awake()
         {
-            Vector3 pos = landList.Dequeue();
-            for (int i = 0; i < 4; i++)
-            {
-                int x = (int)pos.x + col[i];
-                int y = (int)pos.y + row[i];
-                if (this.mapController.CreateMap.GetLand(x, y) == null) continue;
-                if (++count > this.numberObject) break;
-
-                this.mapController.CreateMap.RemoveLand(x, y);
-                landList.Enqueue(new Vector3(x, y, 0));
-
-                Vector3 posGroup = new Vector3(x, y, 0);
-                Quaternion rotGroup = transform.parent.rotation;
-                this.SpawnObject(posGroup, rotGroup);
-            }
-
+            this.landList = new Queue<Vector2>();
+            this.numberObject = Random.Range(this.minNumber, this.maxNumber);
+            this.CreateObject(transform.parent.position);
         }
-    }
 
-    protected virtual void SpawnObject(Vector3 position, Quaternion rotation)
-    {
-        //For override
-    }
+        protected virtual void CreateObject(Vector3 position)
+        {
+            int count = 0;
+            landList.Enqueue(position);
+            while (count <= this.numberObject && landList.Count != 0)
+            {
+                Vector3 pos = landList.Dequeue();
+                for (int i = 0; i < 4; i++)
+                {
+                    int x = (int)pos.x + col[i], y = (int)pos.y + row[i];
+                    if (this.mapController.CreateMap.GetLand(x, y) == null) continue;
+                    if (++count > this.numberObject) break;
 
-    protected virtual bool CheckPos(int x, int y)
-    {
-        int width = this.mapController.CreateMap.WidthMap;
-        int height = this.mapController.CreateMap.HeightMap;
+                    this.mapController.CreateMap.RemoveLand(x, y);
+                    landList.Enqueue(new Vector2(x, y));
+                    this.SpawnObject(new Vector2(x, y), transform.parent.rotation);
+                }
+            }
+        }
 
-        if (x < 1 || y < 1 || x > width || y > height) return false;
-        if (this.mapController.CreateMap.CheckSea(x, y)) return false;
-        return true;
+        protected abstract void SpawnObject(Vector3 position, Quaternion rotation);
     }
 }

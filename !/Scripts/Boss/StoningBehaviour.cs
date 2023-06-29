@@ -1,7 +1,7 @@
 using Pathfinding;
 using UnityEngine;
 
-public class LaserBehaviour : Behaviour
+public class StoningBehaviour : Behaviour
 {
     protected override void loadEnemyController()
     {
@@ -12,8 +12,8 @@ public class LaserBehaviour : Behaviour
 
     protected override void OnEnable()
     {
-        this.ctrll.Movement.SetStopMove(false);
+        this.ctrll.Movement.gameObject.SetActive(false);
         this.ctrll.transform.
-            Find("AttackShoote").GetComponent<BossEnemyShootingAttack>().ToAttack("Laser_Bullet");
+          Find("AttackShoote").GetComponent<BossEnemyShootingAttack>().ToAttack("Stoning_Bullet");
     }
 }

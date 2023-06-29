@@ -49,6 +49,7 @@ public class EnemyController : AutoMonobehaviour
         this.randomlyMovement ??= transform.Find("DirectionRandomlyMovement").GetComponent<CreateRandomDirection>();
 
     private Transform posRoot;
+    [SerializeField] private bool nearRoot;
 
     protected override void LoadComponent()
     {
@@ -62,22 +63,39 @@ public class EnemyController : AutoMonobehaviour
         this.LoadRandomlyMovement();
     }
 
+    private void Update() => this.NearPosRoot();
+
+    private void NearPosRoot()
+    {
+        if (this.nearRoot == false) return;
+        if (Vector2.Distance(transform.position, this.posRoot.position) <= 0.5f)
+        {
+            this.nearRoot = false;
+            this.randomlyMovement.gameObject.SetActive(false);
+            this.model.GetComponent<BehaviorManager>().GetBehaviorByName("Idle").gameObject.SetActive(true);
+        }
+    }
+
     protected virtual void Start()
     {
         GameObject pos = new GameObject();
         pos.transform.position = transform.position;
         this.posRoot = pos.transform;
+        this.posRoot.SetParent(GameObject.Find("HolderGameObject").transform);
     }
 
     public virtual void DoAttack()
     {
-        this.randomlyMovement.SetTargetFollow(GameObject.Find("Player").transform);
-        this.model.GetComponent<BehaviorManager>().GetBehaviorByName("Run").gameObject.SetActive(true);
         this.RandomlyMovement.gameObject.SetActive(true);
+        this.randomlyMovement.SetTargetFollow(GameObject.Find("Player").transform);
+
+        this.model.GetComponent<BehaviorManager>().GetBehaviorByName("Run").gameObject.SetActive(true);
+        this.nearRoot = false;
     }
 
     public virtual void StopAttack()
     {
+        this.nearRoot = true;
         this.randomlyMovement.SetTargetFollow(posRoot);
     }
 }

@@ -1,27 +1,35 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class CreateMap : AutoMonobehaviour
 {
     protected int[] col = { 0, 1, -1, 0, 0, 1, 1, -1, -1 };
     protected int[] row = { -1, 0, 0, 1, 0, -1, 1, 1, -1 };
+
+    [Header("Adjusting the parameters of the map"), Space(10)]
     [SerializeField] protected int heightMap = 50;
+    public int HeightMap => this.heightMap;
     [SerializeField] protected int widthMap = 50;
+    public int WidthMap => this.widthMap;
+
     [SerializeField] protected int randomFillPercent;
     [SerializeField] protected int smoothPercent;
     [SerializeField] protected int rateChangeColor;
 
+    [Header("Sloving the creating map"), Space(10)]
     [SerializeField] protected int[,] titles;
     [SerializeField] protected int[,] colorTitles;
     [SerializeField] protected string seed = "Baonguyen.devG";
     [SerializeField] protected MapController mapController;
+    protected virtual void LoadMapController() =>
+      this.mapController ??= GetComponentInParent<MapController>();
 
     public List<Transform> landList;
+
+    [Header("Scriptable Object LevelManager"), Space(10)]
     [SerializeField] private LevelManagerSO levelManagerSO;
-
-    public int HeightMap => this.heightMap;
-    public int WidthMap => this.widthMap;
-
+ 
     protected override void LoadComponent()
     {
         base.LoadComponent();
@@ -49,52 +57,16 @@ public class CreateMap : AutoMonobehaviour
 
     protected virtual void Start()
     {
-        string region = transform.parent.name;
         this.CreateBitRandom();
         this.SmoothMap();
-
-
         this.CreateMapRandom();
         this.mapController.CreateGroupEnemy.CreateGroup();
-        this.CreateObjectInMap();
-    }
-
-    public virtual void CreateObjectInMap()
-    {
         this.mapController.DecorObject.CreateGroup();
         this.mapController.CreateItem.CreateGroup();
     }
 
-    protected virtual void CreateLink()
-    {
-        Transform portal_1 = this.mapController.Link.Find("InPortal");
-        Transform portal_2 = this.mapController.Link.Find("OutPortal");
-
-        this.ChangePosPortal(portal_1);
-        this.ChangePosPortal(portal_2);
-    }
-
-    protected virtual void ChangePosPortal(Transform portal)
-    {
-        int key = Random.Range(0, this.landList.Count);
-        portal.position = this.landList[key].position;
-        this.RemoveLand((int)(this.landList[key].position.x + this.widthMap / 2), (int)(this.landList[key].position.y + this.heightMap / 2));
-    }
-
-    protected virtual void LoadMapController()
-    {
-        if (this.mapController != null) return;
-        this.mapController = GetComponentInParent<MapController>();
-        Debug.Log(transform.name + ": Load MapController", gameObject);
-    }
-
-    public virtual void AddLand(Transform land) => this.landList.Add(land);
-
-    public virtual void RemoveLand(int posX, int posY)
-    {
-        Transform land = this.GetLand(posX, posY);
-        this.landList.Remove(land);
-    }
+    public virtual void RemoveLand(int posX, int posY) =>
+        this.landList.Remove(this.GetLand(posX, posY));
 
     public virtual Transform GetLand(int X, int Y)
     {
@@ -170,51 +142,30 @@ public class CreateMap : AutoMonobehaviour
 
     protected virtual void SmoothMap()
     {
-        for (int i = 0; i < this.smoothPercent; i++)
-            this.Smooth();
+        for (int i = 1; i <= this.smoothPercent; i++)
+        {
+            this.Smooth(this.titles);
+            this.Smooth(this.colorTitles);
+        }
     }
 
-    protected virtual void Smooth()
+    protected virtual void Smooth(int[, ] smoothArray)
     {
         for (int i = 1; i <= this.widthMap; i++)
             for (int j = 1; j <= this.heightMap; j++)
-            {
-                int numberLandAround = this.LandAround(i, j);
-
-                if (numberLandAround > 4) this.titles[i, j] = 1;
-                else this.titles[i, j] = 0;
-            }
-
-        for (int i = 1; i <= this.widthMap; i++)
-            for (int j = 1; j <= this.heightMap; j++)
-            {
-                int numberColorLandAround = this.ColorAround(i, j);
-
-                if (numberColorLandAround > 4) this.colorTitles[i, j] = 1;
-                else this.colorTitles[i, j] = 0;
-            }
+                if (this.CountAround(i, j, smoothArray) > 4) smoothArray[i, j] = 1;
+                else smoothArray[i, j] = 0;
     }
 
-    public virtual bool CheckSea(int x, int y)
-    {
-        return (this.titles[x, y] == 1);
-    }
+    public virtual bool CheckSea(int x, int y) => (this.titles[x, y] == 1);
 
-    protected virtual int LandAround(int x, int y)
+    protected virtual int CountAround(int x, int y, int[,] titles)
     {
         int count = 0;
         for (int i = x - 1; i <= x + 1; i++)
             for (int j = y - 1; j <= y + 1; j++)
-                count = count + this.titles[i, j];
+                count += titles[i, j];
         return count;
     }
 
-    protected virtual int ColorAround(int x, int y)
-    {
-        int count = 0;
-        for (int i = x - 1; i <= x + 1; i++)
-            for (int j = y - 1; j <= y + 1; j++)
-                count = count + this.colorTitles[i, j];
-        return count;
-    }
 }
