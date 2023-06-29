@@ -57,11 +57,12 @@ public class CreateMap : AutoMonobehaviour
 
     protected virtual void Start()
     {
+        Application.targetFrameRate = 60;
         this.CreateBitRandom();
         this.SmoothMap();
         this.CreateMapRandom();
-        this.mapController.CreateGroupEnemy.CreateGroup();
-        this.mapController.DecorObject.CreateGroup();
+/*        this.mapController.CreateGroupEnemy.CreateGroup();
+        this.mapController.DecorObject.CreateGroup();*/
         this.mapController.CreateItem.CreateGroup();
     }
 

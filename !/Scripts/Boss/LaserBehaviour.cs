@@ -3,12 +3,8 @@ using UnityEngine;
 
 public class LaserBehaviour : Behaviour
 {
-    protected override void loadEnemyController()
-    {
-        if (this.ctrll != null) return;
-        this.ctrll = transform.parent.parent.parent.GetComponent<EnemyController>();
-        Debug.Log(transform.name + ": Load EnemyController", gameObject);
-    }
+    protected override void loadEnemyController() =>
+        this.ctrll ??= transform?.parent?.parent?.GetComponent<EnemyController>();
 
     protected override void OnEnable()
     {

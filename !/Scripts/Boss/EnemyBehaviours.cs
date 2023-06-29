@@ -5,19 +5,14 @@ public class EnemyBehaviours : AutoMonobehaviour
 {
     [SerializeField] protected List<Transform> listBehaviours;
     [SerializeField] protected EnemyController controller;
+    protected virtual void LoadController() =>
+        this.controller ??= transform?.parent?.GetComponent<EnemyController>();
 
     protected override void LoadComponent()
     {
         base.LoadComponent();
         this.LoadController();
         this.LoadListBehaviours();
-    }
-
-    protected virtual void LoadController()
-    {
-        if (this.controller != null) return;
-        this.controller = transform.parent.GetComponent<EnemyController>();
-        Debug.Log(transform.name + ": Load Controller", gameObject);
     }
 
     protected virtual void LoadListBehaviours()
