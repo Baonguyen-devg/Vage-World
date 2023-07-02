@@ -3,5 +3,5 @@ using UnityEngine;
 public class EnemyHealthBar : AutoMonobehaviour
 {
     public virtual void ChangeHealthBar(float percent)
-        => transform.localScale = new Vector2(percent, 1);
+        => transform.localScale = new Vector2(x: percent, y: 1);
 }

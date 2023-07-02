@@ -16,23 +16,23 @@ public class DragonEnemyShootingAttack : EnemyShootingAttack
     {
         if (this.pointSpawns.Count != 0) return;
         foreach (Transform pointSpawn in transform)
-            this.pointSpawns.Add(pointSpawn);
+            this.pointSpawns.Add(item: pointSpawn);
     }
 
     public override void ToAttack()
     {
         base.ToAttack();
-        this.controller.Model.GetComponent<Animator>().SetTrigger("Attack");
+        this.controller.Model.GetComponent<Animator>().SetTrigger(name: "Attack");
 
         string bullet = transform.parent.name + "_Bullet";
         foreach (Transform point in this.pointSpawns)
-            this.Shoote(bullet, point);
+            this.Shoote(nameBullet: bullet, posShoote: point);
     }
 
     protected override bool CanAttack()
     {
         if (this.target == null) return false;
-        if (Vector2.Distance(transform.parent.position, this.target.position) >= this.distanceCanShoote) return false;
+        if (Vector2.Distance(a: transform.parent.position, b: this.target.position) >= this.distanceCanShoote) return false;
         return base.CanAttack();
     }
 }

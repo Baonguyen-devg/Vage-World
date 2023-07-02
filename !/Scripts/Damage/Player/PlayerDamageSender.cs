@@ -8,6 +8,6 @@ namespace DamageSender
     public class PlayerDamageSender : DamageSender
     {
         public override void Send(Transform obj) =>
-         obj.GetComponentInChildren<EnemyDamageReceiver>()?.DecreaseHealth(this.dame);
+         obj.GetComponentInChildren<EnemyDamageReceiver>()?.DecreaseHealth(health: this.dame);
     }
 }

@@ -19,6 +19,6 @@ public class EnemyBehaviours : AutoMonobehaviour
     {
         if (this.listBehaviours.Count != 0) return;
         foreach (Transform behaviour in transform)
-            this.listBehaviours.Add(behaviour);
+            this.listBehaviours.Add(item: behaviour);
     }
 }

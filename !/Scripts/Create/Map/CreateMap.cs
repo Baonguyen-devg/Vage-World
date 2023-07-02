@@ -7,7 +7,7 @@ public class CreateMap : AutoMonobehaviour
     protected int[] col = { 0, 1, -1, 0, 0, 1, 1, -1, -1 };
     protected int[] row = { -1, 0, 0, 1, 0, -1, 1, 1, -1 };
 
-    [Header("Adjusting the parameters of the map"), Space(10)]
+    [Header(header: "Adjusting the parameters of the map"), Space(height: 10)]
     [SerializeField] protected int heightMap = 50;
     public int HeightMap => this.heightMap;
     [SerializeField] protected int widthMap = 50;
@@ -17,7 +17,7 @@ public class CreateMap : AutoMonobehaviour
     [SerializeField] protected int smoothPercent;
     [SerializeField] protected int rateChangeColor;
 
-    [Header("Sloving the creating map"), Space(10)]
+    [Header(header: "Sloving the creating map"), Space(height: 10)]
     [SerializeField] protected int[,] titles;
     [SerializeField] protected int[,] colorTitles;
     [SerializeField] protected string seed = "Baonguyen.devG";
@@ -26,8 +26,9 @@ public class CreateMap : AutoMonobehaviour
       this.mapController ??= GetComponentInParent<MapController>();
 
     public List<Transform> landList;
+    public List<Transform> seaList;
 
-    [Header("Scriptable Object LevelManager"), Space(10)]
+    [Header(header: "Scriptable Object LevelManager"), Space(height: 10)]
     [SerializeField] private LevelManagerSO levelManagerSO;
  
     protected override void LoadComponent()
@@ -41,8 +42,8 @@ public class CreateMap : AutoMonobehaviour
     {
         if (this.levelManagerSO != null) return;
         string resPath = "Level/EasyLevel";
-        this.levelManagerSO = Resources.Load<LevelManagerSO>(resPath);
-        Debug.LogWarning(transform.name + ": Load GroupDecorObjectSO" + resPath, gameObject);
+        this.levelManagerSO = Resources.Load<LevelManagerSO>(path: resPath);
+        Debug.LogWarning(message: transform.name + ": Load GroupDecorObjectSO" + resPath, context: gameObject);
         this.LoadInformationMap();
     }
 
@@ -61,13 +62,17 @@ public class CreateMap : AutoMonobehaviour
         this.CreateBitRandom();
         this.SmoothMap();
         this.CreateMapRandom();
-/*        this.mapController.CreateGroupEnemy.CreateGroup();
-        this.mapController.DecorObject.CreateGroup();*/
+        this.mapController.CreateGroupEnemy.CreateGroup();
+        this.mapController.DecorObject.CreateGroup();
         this.mapController.CreateItem.CreateGroup();
+        this.mapController.CreateSeaDecorObject.CreateGroup();
     }
 
     public virtual void RemoveLand(int posX, int posY) =>
-        this.landList.Remove(this.GetLand(posX, posY));
+        this.landList.Remove(item: this.GetLand(X: posX, Y: posY));
+
+    public virtual void RemoveSea(int posX, int posY) =>
+     this.landList.Remove(item: this.GetSea(X: posX, Y: posY));
 
     public virtual Transform GetLand(int X, int Y)
     {
@@ -76,18 +81,25 @@ public class CreateMap : AutoMonobehaviour
         return null;
     }
 
+    public virtual Transform GetSea(int X, int Y)
+    {
+        foreach (Transform sea in this.seaList)
+            if (sea.position == new Vector3(X, Y, 0)) return sea;
+        return null;
+    }
+
     protected virtual void CreateBitRandom()
     {
         this.seed = System.DateTime.Now.ToString() + this.seed;
         this.titles = new int[this.widthMap + 2, this.heightMap + 2];
         this.colorTitles = new int[this.widthMap + 2, this.heightMap + 2];
-        System.Random psuedo = new System.Random(this.seed.GetHashCode());
+        System.Random psuedo = new System.Random(Seed: this.seed.GetHashCode());
 
         for (int i = 1; i <= this.widthMap; i++)
             for (int j = 1; j <= this.heightMap; j++)
             {
                 if (i <= 2 || j <= 2 || i >= this.widthMap - 1 || j >= this.heightMap - 1) this.titles[i, j] = 1;
-                else this.titles[i, j] = (psuedo.Next(0, 100) < this.randomFillPercent) ? 1 : 0;
+                else this.titles[i, j] = (psuedo.Next(minValue: 0, maxValue: 100) < this.randomFillPercent) ? 1 : 0;
 
                 if (this.titles[i, j] == 0 && Random.Range(0, 10) <= this.rateChangeColor) this.colorTitles[i, j] = 1;
             }
@@ -95,58 +107,127 @@ public class CreateMap : AutoMonobehaviour
 
     protected virtual void CreateMapRandom()
     {
-        for (int i = 1; i <= this.widthMap; i++)
-            for (int j = 1; j <= this.heightMap; j++)
+        for (int i = 2; i < this.widthMap; i++)
+            for (int j = 2; j < this.heightMap; j++)
             {
                 Vector3 pos = new Vector3(i - this.widthMap / 2, j - this.heightMap / 2, 0);
                 Quaternion rot = transform.rotation;
 
                 Transform land = null, sea = null;
-                if (this.titles[i, j] == 0) land = MapSpawner.Instance.SpawnInRegion(MapSpawner.land_1, "Forest", pos, rot);
-                else sea = MapSpawner.Instance.SpawnInRegion(MapSpawner.sea_1, "Forest", pos, rot);
+                if (this.titles[i, j] == 0) 
+                    land = MapSpawner.Instance.SpawnInRegion(nameObject: MapSpawner.land_1, nameRegion: "Forest", postion: pos, rotation: rot);
+                else 
+                    sea = MapSpawner.Instance.SpawnInRegion(nameObject: MapSpawner.sea_1, nameRegion: "Forest", postion: pos, rotation: rot);
                 if (land == null)
                 {
-                    this.ChangeSide(i, j, sea);
+                    if (this.ChangeSide(x: i, y: j, sea: sea))
+                        this.seaList.Add(item: sea);
                     continue;
                 }
-                if (this.titles[i, j] == 0) this.landList.Add(land);
-                if (this.colorTitles[i, j] == 1) this.ChangeColor(land);
+                if (this.titles[i, j] == 0) this.landList.Add(item: land);
+                if (this.colorTitles[i, j] == 1) this.ChangeColor(land: land);
             }
     }
 
-    protected virtual void ChangeSide(int x, int y, Transform sea)
+    protected virtual bool ChangeSide(int x, int y, Transform sea)
     {
-        Transform model = sea.Find("Model");
+        Transform model = sea.Find(n: "Model");
+
+        if (this.titles[x + 1, y + 1] == 0 && this.titles[x, y + 1] == 1 && this.titles[x + 1, y] == 1)
+        {
+            model.Find(n: "EdgeLeftDown").gameObject.SetActive(value: true);
+            return false;
+
+        }
+
+        if (this.titles[x - 1, y + 1] == 0 && this.titles[x - 1, y] == 1 && this.titles[x, y + 1] == 1)
+        {
+            model.Find(n: "EdgeRightDown").gameObject.SetActive(value: true);
+            return false;
+
+        }
+
+        if (this.titles[x + 1, y - 1] == 0 && this.titles[x, y - 1] == 1 && this.titles[x + 1, y] == 1)
+        {
+            model.Find(n: "EdgeLeftUp").gameObject.SetActive(value: true);
+            return false;
+
+        }
+
+        if (this.titles[x - 1, y - 1] == 0 && this.titles[x, y - 1] == 1 && this.titles[x - 1, y] == 1)
+        {
+            model.Find(n: "EdgeRightUp").gameObject.SetActive(value: true);
+            return false;
+
+        }
+
+        if (this.titles[x + 1, y] == 0 && this.titles[x, y - 1] == 0 && this.titles[x, y + 1] != 0)
+        {
+            model.Find(n: "RightDown").gameObject.SetActive(value: true);
+            return false;
+        }
+
+        if (this.titles[x - 1, y] == 0 && this.titles[x, y - 1] == 0 && this.titles[x, y + 1] != 0)
+        {
+            model.Find(n: "LeftDown").gameObject.SetActive(value: true);
+            return false;
+        }
+
+        if (this.titles[x, y + 1] == 0 && this.titles[x + 1, y] == 0)
+        {
+            model.Find(n: "RightUp").gameObject.SetActive(value: true);
+            return false;
+        }
+
+        if (this.titles[x - 1, y] == 0 && this.titles[x, y + 1] == 0)
+        {
+            model.Find(n: "LeftUp").gameObject.SetActive(value: true);
+            return false;
+        }
+
 
         if (y >= 1 && this.titles[x, y - 1] == 0)
         {
-            model.Find("Bottom").gameObject.SetActive(true);
-            return;
+            model.Find(n: "Bottom").gameObject.SetActive(value: true);
+            return false;
         }
 
         if (y <= this.heightMap && this.titles[x, y + 1] == 0)
         {
-            model.Find("Top").gameObject.SetActive(true);
-            return;
+            model.Find(n: "Top").gameObject.SetActive(value: true);
+            return false;
         }
 
-        model.Find("Center").gameObject.SetActive(true);
+        if (x >= 1 && this.titles[x - 1, y] == 0)
+        {
+            model.Find(n: "Left").gameObject.SetActive(value: true);
+            return false;
+        }
+
+        if (x <= this.widthMap && this.titles[x + 1, y] == 0)
+        {
+            model.Find(n: "Right").gameObject.SetActive(value: true);
+            return false;
+        }
+
+        model.Find(n: "Center").gameObject.SetActive(value: true);
+        return true;
     }
 
     protected virtual void ChangeColor(Transform land)
     {
-        SpriteRenderer SRender = land.Find("Model").GetComponent<SpriteRenderer>();
-        SRender.color = new Color(SRender.color.r, SRender.color.g, SRender.color.b, 0.8f);
-        SpriteRenderer SMMRender = land.Find("MiniMap").GetComponent<SpriteRenderer>();
-        SMMRender.color = new Color(SMMRender.color.r, SMMRender.color.g, SMMRender.color.b, 0.8f);
+        SpriteRenderer SRender = land.Find(n: "Model").GetComponent<SpriteRenderer>();
+        SRender.color = new Color(r: SRender.color.r, g: SRender.color.g, b: SRender.color.b, a: 0.8f);
+        SpriteRenderer SMMRender = land.Find(n: "MiniMap").GetComponent<SpriteRenderer>();
+        SMMRender.color = new Color(r: SMMRender.color.r, g: SMMRender.color.g, b: SMMRender.color.b, a: 0.8f);
     }
 
     protected virtual void SmoothMap()
     {
         for (int i = 1; i <= this.smoothPercent; i++)
         {
-            this.Smooth(this.titles);
-            this.Smooth(this.colorTitles);
+            this.Smooth(smoothArray: this.titles);
+            this.Smooth(smoothArray: this.colorTitles);
         }
     }
 
@@ -154,7 +235,7 @@ public class CreateMap : AutoMonobehaviour
     {
         for (int i = 1; i <= this.widthMap; i++)
             for (int j = 1; j <= this.heightMap; j++)
-                if (this.CountAround(i, j, smoothArray) > 4) smoothArray[i, j] = 1;
+                if (this.CountAround(x: i, y: j, titles: smoothArray) > 4) smoothArray[i, j] = 1;
                 else smoothArray[i, j] = 0;
     }
 

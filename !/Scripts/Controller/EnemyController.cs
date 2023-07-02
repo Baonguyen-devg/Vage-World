@@ -68,11 +68,11 @@ public class EnemyController : AutoMonobehaviour
     private void NearPosRoot()
     {
         if (this.nearRoot == false) return;
-        if (Vector2.Distance(transform.position, this.posRoot.position) <= 0.5f)
+        if (Vector2.Distance(a: transform.position, b: this.posRoot.position) <= 0.5f)
         {
             this.nearRoot = false;
-            this.randomlyMovement.gameObject.SetActive(false);
-            this.model.GetComponent<BehaviorManager>().GetBehaviorByName("Idle").gameObject.SetActive(true);
+            this.randomlyMovement.gameObject.SetActive(value: false);
+            this.model.GetComponent<BehaviorManager>().GetBehaviorByName(name: "Idle").gameObject.SetActive(value: true);
         }
     }
 
@@ -81,21 +81,21 @@ public class EnemyController : AutoMonobehaviour
         GameObject pos = new GameObject();
         pos.transform.position = transform.position;
         this.posRoot = pos.transform;
-        this.posRoot.SetParent(GameObject.Find("HolderGameObject").transform);
+        this.posRoot.SetParent(p: GameObject.Find(name: "HolderGameObject").transform);
     }
 
     public virtual void DoAttack()
     {
-        this.RandomlyMovement.gameObject.SetActive(true);
-        this.randomlyMovement.SetTargetFollow(GameObject.Find("Player").transform);
+        this.RandomlyMovement.gameObject.SetActive(value: true);
+        this.randomlyMovement.SetTargetFollow(target: GameObject.Find(name: "Player").transform);
 
-        this.model.GetComponent<BehaviorManager>().GetBehaviorByName("Run").gameObject.SetActive(true);
+        this.model.GetComponent<BehaviorManager>().GetBehaviorByName(name: "Run").gameObject.SetActive(value: true);
         this.nearRoot = false;
     }
 
     public virtual void StopAttack()
     {
         this.nearRoot = true;
-        this.randomlyMovement.SetTargetFollow(posRoot);
+        this.randomlyMovement.SetTargetFollow(target: posRoot);
     }
 }

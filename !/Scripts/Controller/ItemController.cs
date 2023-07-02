@@ -5,12 +5,12 @@ public class ItemController : AutoMonobehaviour
     [SerializeField] protected Transform model;
     public Transform Model => this.model;
     protected virtual void LoadModel() =>
-        this.model ??= transform?.Find("Model");
+        this.model ??= transform?.Find(n: "Model");
 
     [SerializeField] protected Transform frame;
     public Transform Frame => this.frame;
     protected virtual void LoadFrame() =>
-        this.frame ??= transform?.Find("Frame");
+        this.frame ??= transform?.Find(n: "Frame");
 
     protected override void LoadComponent()
     {

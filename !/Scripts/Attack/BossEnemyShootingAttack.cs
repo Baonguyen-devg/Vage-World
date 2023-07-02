@@ -9,20 +9,20 @@ public class BossEnemyShootingAttack : EnemyShootingAttack
 
     protected override void LoadPointSpawn()
     {
-        this.pointShooteStone ??= this.transform.Find("PointShooteStone");
-        Transform points = this.transform.Find("PointsShooteLaser");
+        this.pointShooteStone ??= this.transform.Find(n: "PointShooteStone");
+        Transform points = this.transform.Find(n: "PointsShooteLaser");
 
         foreach (Transform pointShoote in points)
-            this.pointsShooteLaser.Add(pointShoote);
+            this.pointsShooteLaser.Add(item: pointShoote);
     }
 
     public virtual void ToAttack(string nameBullet)
     {
-        if (nameBullet.Equals("Stoning_Bullet"))
-            this.Shoote(nameBullet, this.pointShooteStone);
+        if (nameBullet.Equals(value: "Stoning_Bullet"))
+            this.Shoote(nameBullet: nameBullet, posShoote: this.pointShooteStone);
 
-        if (nameBullet.Equals("Laser_Bullet"))
+        if (nameBullet.Equals(value: "Laser_Bullet"))
             foreach (Transform pointShoote in this.pointsShooteLaser)
-                this.Shoote(nameBullet, pointShoote);
+                this.Shoote(nameBullet: nameBullet, posShoote: pointShoote);
     }
 }

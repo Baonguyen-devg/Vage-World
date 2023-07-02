@@ -6,10 +6,15 @@ namespace DamageReceiver
     public class EnemyDamageReceiver : DamageReceiver
     {
         [SerializeField] protected EnemyController controller;
+        protected virtual void LoadEnemyController() => 
+            this.controller ??= transform.parent.GetComponent<EnemyController>();
 
-        [Header("Hit Effect!!!"), Space(10)]
-        [SerializeField] protected SpriteRenderer render = null; //SpriteRender in model of enemy
+        [Header(header: "Hit Effect!!!"), Space(height: 10)]
         [SerializeField] protected float timeEffect = 0.2f; //Time effect happen
+
+        [SerializeField] protected SpriteRenderer render = null; //SpriteRender in model of enemy
+        protected virtual void LoadSpriteRender() =>
+            this.render ??= this.controller?.Model?.GetComponent<SpriteRenderer>();
 
         protected override void LoadComponent()
         {
@@ -18,48 +23,36 @@ namespace DamageReceiver
             this.LoadSpriteRender();
         }
 
-        protected virtual void LoadEnemyController() => 
-            this.controller ??= transform.parent.GetComponent<EnemyController>();
-
-        protected virtual void LoadSpriteRender() =>
-            this.render ??= this.controller?.Model?.GetComponent<SpriteRenderer>();
-
         public override void DecreaseHealth(int health)
         {
-            base.DecreaseHealth(health);
+            base.DecreaseHealth(health: health);
             this.HitEffect();
             this.UpgradeAndAppearHealthBar();
         }
  
-        //BEGIN: Effect when enemies receive damage;
-        //Change model to RED (211, 83, 11, 255) color when receive damage
         protected virtual void HitEffect()
         {
-            render.color = new Color32(221, 83, 11, 255);
-            Invoke("ResetColor", this.timeEffect);
+            render.color = new Color32(r: 221, g: 83, b: 11, a: 255);
+            Invoke(methodName: "ResetColor", time: this.timeEffect);
         }
 
-        //Change model to normal (255, 255, 255, 255) color after timeEffect
         protected virtual void ResetColor() =>
-           render.color = new Color32(255, 255, 255, 255);
+           render.color = new Color32(r: 255, g: 255, b: 255, a: 255);
         
-        //BEGIN: Behaviour to Health Bar;
         protected virtual void UpgradeAndAppearHealthBar()
         {
-            this.controller.HealthBar.ChangeHealthBar(this.CalculatePercentHealth());
-            this.controller.HealthBar.transform.parent.gameObject.SetActive(true);
-            Invoke("DisappearHealthbar", 1f);
+            this.controller.HealthBar.ChangeHealthBar(percent: this.CalculatePercentHealth());
+            this.controller.HealthBar.transform.parent.gameObject.SetActive(value: true);
+            Invoke(methodName: "DisappearHealthbar", time: 1f);
         }
 
         protected virtual float CalculatePercentHealth() =>
          (float)this.currentHealth / this.maximumHealth;
 
         protected virtual void DisappearHealthbar() =>
-            this.controller.HealthBar.transform.parent.gameObject.SetActive(false);
+            this.controller.HealthBar.transform.parent.gameObject.SetActive(value: false);
             
-        protected override void OnDead()
-        {
-            EnemySpawner.Instance.Despawn(transform.parent);
-        }
+        protected override void OnDead() =>
+            EnemySpawner.Instance.Despawn(obj: transform.parent);
     }
 }

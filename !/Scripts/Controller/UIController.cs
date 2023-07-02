@@ -10,7 +10,7 @@ public class UIController : AutoMonobehaviour
 
     protected virtual void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(key: KeyCode.Escape))
             this.PauseGame();
     }
 
@@ -26,38 +26,38 @@ public class UIController : AutoMonobehaviour
         if (this.listUI.Count != 0) return;
 
         foreach (Transform UI in transform)
-            this.listUI.Add(UI);
+            this.listUI.Add(item: UI);
     }
 
     protected virtual void LoadUI(string nameUI)
     {
         foreach (Transform UI in this.listUI)
-            if (nameUI.Equals(UI.name)) UI.gameObject.SetActive(true);
-            else UI.gameObject.SetActive(false);
+            if (nameUI.Equals(value: UI.name)) UI.gameObject.SetActive(value: true);
+            else UI.gameObject.SetActive(value: false);
     }
 
     public virtual void PauseGame()
     {
         Time.timeScale = 0f;
-        this.LoadUI("PauseGameUI");
+        this.LoadUI(nameUI: "PauseGameUI");
     }
 
     public virtual void LoseGame()
     {
         Time.timeScale = 0f;
-        this.LoadUI("LoseGameUI");
+        this.LoadUI(nameUI: "LoseGameUI");
     }
 
     public virtual void WinGame()
     {
         Time.timeScale = 0f;
-        this.LoadUI("WinGameUI");
+        this.LoadUI(nameUI: "WinGameUI");
     }
 
     public virtual void Game()
     {
         Time.timeScale = 1;
-        this.LoadUI("GameUI");
+        this.LoadUI(nameUI: "GameUI");
     }
 
     public virtual void Continue() => this.Game();
@@ -65,7 +65,7 @@ public class UIController : AutoMonobehaviour
     public virtual void PlayAgain()
     {
         Time.timeScale = 1;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SceneManager.LoadScene(sceneBuildIndex: SceneManager.GetActiveScene().buildIndex);
     }
 
     public virtual void QuitToMenu()
@@ -76,9 +76,9 @@ public class UIController : AutoMonobehaviour
 
         if (nextSceneIndex < 0)
         {
-            Debug.LogWarning("Scene don't exit!");
+            Debug.LogWarning(message: "Scene don't exit!");
             return;
         }
-        SceneManager.LoadScene(nextSceneIndex);
+        SceneManager.LoadScene(sceneBuildIndex: nextSceneIndex);
     }
 }

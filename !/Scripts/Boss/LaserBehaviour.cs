@@ -8,8 +8,8 @@ public class LaserBehaviour : Behaviour
 
     protected override void OnEnable()
     {
-        this.ctrll.Movement.gameObject.SetActive(false);
+        this.ctrll.Movement.gameObject.SetActive(value: false);
         this.ctrll.transform.
-            Find("AttackShoote").GetComponent<BossEnemyShootingAttack>().ToAttack("Laser_Bullet");
+            Find(n: "AttackShoote").GetComponent<BossEnemyShootingAttack>().ToAttack(nameBullet: "Laser_Bullet");
     }
 }

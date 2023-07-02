@@ -23,6 +23,11 @@ public class MapController : AutoMonobehaviour
     protected virtual void LoadCreateGroupEnemy() =>
         this.createGroupEnemy ??= transform.Find("CreateGroupEnemy")?.GetComponent<CreateGroupEnemy>();
 
+    [SerializeField] protected CreateSeaDecorObject createSeaDecorObject;
+    public CreateSeaDecorObject CreateSeaDecorObject => this.createSeaDecorObject;
+    protected virtual void LoadCreateSeaDecorObject() =>
+        this.createSeaDecorObject ??= transform.Find("CreateSeaDecorObject")?.GetComponent<CreateSeaDecorObject>();
+
     protected override void LoadComponent()
     {
         base.LoadComponent();
@@ -30,5 +35,6 @@ public class MapController : AutoMonobehaviour
         this.LoadCreateDecorObject();
         this.LoadCreateItem();
         this.LoadCreateGroupEnemy();
+        this.LoadCreateSeaDecorObject();
     }
 }

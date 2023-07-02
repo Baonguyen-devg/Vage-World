@@ -8,43 +8,39 @@ namespace Group
         protected int[] col = { 0, 0, -1, 1 };
         protected int[] row = { -1, 1, 0, 0 };
 
-        [SerializeField] protected int numberObject;
+        [Range(min: 0, max: 50), SerializeField] protected int numberObject;
         [SerializeField] protected string objectSpawner;
         [SerializeField] protected Queue<Vector2> landList;
 
         [SerializeField] protected MapController mapController;
         protected virtual void LoadMapController() =>
-            this.mapController ??= GameObject.Find("CreateMapForest").GetComponent<MapController>();
-
-        [Header("Spawning Number")]
-        [SerializeField] protected int minNumber = 5;
-        [SerializeField] protected int maxNumber = 7;
+            this.mapController ??= GameObject.Find(name: "CreateMapForest").GetComponent<MapController>();
 
         protected override void LoadComponent() => this.LoadMapController();
 
-        protected override void Awake()
+        public virtual void SetObjectSpawner(string nameObject)
         {
-            this.landList = new Queue<Vector2>();
-            this.numberObject = Random.Range(this.minNumber, this.maxNumber);
-            this.CreateObject(transform.parent.position);
+            this.objectSpawner = nameObject;
+            this.CreateObject(position: transform.parent.position);
         }
 
         protected virtual void CreateObject(Vector3 position)
         {
             int count = 0;
-            landList.Enqueue(position);
+            this.landList = new Queue<Vector2>();
+            landList.Enqueue(item: position);
             while (count <= this.numberObject && landList.Count != 0)
             {
                 Vector3 pos = landList.Dequeue();
                 for (int i = 0; i < 4; i++)
                 {
                     int x = (int)pos.x + col[i], y = (int)pos.y + row[i];
-                    if (this.mapController.CreateMap.GetLand(x, y) == null) continue;
+                    if (this.mapController.CreateMap.GetLand(X: x, Y: y) == null) continue;
                     if (++count > this.numberObject) break;
 
-                    this.mapController.CreateMap.RemoveLand(x, y);
-                    landList.Enqueue(new Vector2(x, y));
-                    this.SpawnObject(new Vector2(x, y), transform.parent.rotation);
+                    this.mapController.CreateMap.RemoveLand(posX: x, posY: y);
+                    landList.Enqueue(item: new Vector2(x, y));
+                    this.SpawnObject(position: new Vector2(x, y), rotation: transform.parent.rotation);
                 }
             }
         }

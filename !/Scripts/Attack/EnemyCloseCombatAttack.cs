@@ -13,7 +13,7 @@ public class EnemyCloseCombatAttack : CloseCombatAttack
     }
 
     protected override void LoadTarget() => 
-        this.target = GameObject.Find("Player").transform;
+        this.target = GameObject.Find(name: "Player").transform;
 
     public override void ToAttack()
     {
@@ -25,7 +25,7 @@ public class EnemyCloseCombatAttack : CloseCombatAttack
     protected override bool CanAttack()
     {
         if (this.target == null) return false;
-        if (Vector2.Distance(transform.parent.position, this.target.position) >= this.distanceToCloseCombat) return false;
+        if (Vector2.Distance(a: transform.parent.position, b: this.target.position) >= this.distanceToCloseCombat) return false;
         return base.CanAttack();
     }
 }

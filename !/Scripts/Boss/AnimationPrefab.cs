@@ -15,6 +15,6 @@ public class AnimationPrefab : AutoMonobehaviour
     {
         if (this.listAnimation.Count != 0) return;
         foreach (Transform prefab in transform)
-            this.listAnimation.Add(prefab);
+            this.listAnimation.Add(item: prefab);
     }
 }

@@ -41,7 +41,7 @@ namespace Movement
             float y = Input.GetAxis("Vertical");
             if (x != 0 || y != 0 )
             {
-                transform.parent.Find("LootMaterial").GetComponent<LootMaterial>().SetItemToPickup(null, null);
+                transform.parent.Find("LootMaterial").GetComponent<LootMaterial>().SetItemToPickup(null);
                 this.UpdateGetInputAxis(x, y);
             }
             else if (transform.parent.Find("LootMaterial").GetComponent<LootMaterial>().itemToPickup == null)

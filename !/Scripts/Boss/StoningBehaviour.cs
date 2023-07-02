@@ -8,8 +8,7 @@ public class StoningBehaviour : Behaviour
 
     protected override void OnEnable()
     {
-        this.ctrll.Movement.gameObject.SetActive(false);
-        this.ctrll.transform.
-          Find("AttackShoote").GetComponent<BossEnemyShootingAttack>().ToAttack("Stoning_Bullet");
+        base.OnEnable();
+        this.ctrll.transform.Find(n: "AttackShoote").GetComponent<BossEnemyShootingAttack>().ToAttack(nameBullet: "Stoning_Bullet");
     }
 }
