@@ -15,8 +15,7 @@ public class CreateMap : AutoMonobehaviour
 
     [SerializeField] protected int randomFillPercent;
     [SerializeField] protected int smoothPercent;
-    [SerializeField] protected int rateChangeColor;
-
+  
     [Header(header: "Sloving the creating map"), Space(height: 10)]
     [SerializeField] protected int[,] titles;
     [SerializeField] protected int[,] colorTitles;
@@ -53,7 +52,6 @@ public class CreateMap : AutoMonobehaviour
         this.heightMap = this.levelManagerSO.Height;
         this.smoothPercent = this.levelManagerSO.Smooth;
         this.randomFillPercent = this.levelManagerSO.RandomFillPercent;
-        this.rateChangeColor = this.levelManagerSO.RateChangeColor;
     }
 
     protected virtual void Start()
@@ -100,8 +98,6 @@ public class CreateMap : AutoMonobehaviour
             {
                 if (i <= 2 || j <= 2 || i >= this.widthMap - 1 || j >= this.heightMap - 1) this.titles[i, j] = 1;
                 else this.titles[i, j] = (psuedo.Next(minValue: 0, maxValue: 100) < this.randomFillPercent) ? 1 : 0;
-
-                if (this.titles[i, j] == 0 && Random.Range(0, 10) <= this.rateChangeColor) this.colorTitles[i, j] = 1;
             }
     }
 
@@ -125,7 +121,6 @@ public class CreateMap : AutoMonobehaviour
                     continue;
                 }
                 if (this.titles[i, j] == 0) this.landList.Add(item: land);
-                if (this.colorTitles[i, j] == 1) this.ChangeColor(land: land);
             }
     }
 
@@ -212,14 +207,6 @@ public class CreateMap : AutoMonobehaviour
 
         model.Find(n: "Center").gameObject.SetActive(value: true);
         return true;
-    }
-
-    protected virtual void ChangeColor(Transform land)
-    {
-        SpriteRenderer SRender = land.Find(n: "Model").GetComponent<SpriteRenderer>();
-        SRender.color = new Color(r: SRender.color.r, g: SRender.color.g, b: SRender.color.b, a: 0.8f);
-        SpriteRenderer SMMRender = land.Find(n: "MiniMap").GetComponent<SpriteRenderer>();
-        SMMRender.color = new Color(r: SMMRender.color.r, g: SMMRender.color.g, b: SMMRender.color.b, a: 0.8f);
     }
 
     protected virtual void SmoothMap()

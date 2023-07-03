@@ -7608,7 +7608,7 @@ MonoBehaviour:
   decorObject: {fileID: 1870759693}
   createItem: {fileID: 803574823}
   createGroupEnemy: {fileID: 65087871}
-  createSeaDecorObject: {fileID: 0}
+  createSeaDecorObject: {fileID: 1299286746}
 --- !u!1 &526477620
 GameObject:
   m_ObjectHideFlags: 0
