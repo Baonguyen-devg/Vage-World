@@ -7,8 +7,14 @@ namespace Movement
     public class GameBoyMovement : Movement
     {
         [SerializeField] protected Transform player;
+        protected virtual void LoadPlayer() =>
+            this.player ??= GameObject.Find("Player")?.transform;
+
         [SerializeField] protected float distanceToPlayer = 1;
+
         [SerializeField] protected Animator animator;
+        protected virtual void LoadAnimator() =>
+            this.animator ??= GameObject.Find("GameBoy")?.transform.Find("Model")?.GetComponent<Animator>();
 
         [SerializeField] protected Vector3 pos;
         [SerializeField] protected Vector3 direction;
@@ -19,12 +25,6 @@ namespace Movement
             this.LoadPlayer();
             this.LoadAnimator();
         }
-
-        protected virtual void LoadAnimator() =>
-            this.animator ??= GameObject.Find("GameBoy").transform.Find("Model").GetComponent<Animator>();
-
-        protected virtual void LoadPlayer() =>
-            this.player ??= GameObject.Find("Player").transform;
 
         protected override void Move()
         {

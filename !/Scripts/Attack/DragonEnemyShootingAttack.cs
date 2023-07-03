@@ -4,19 +4,19 @@ using UnityEngine;
 public class DragonEnemyShootingAttack : EnemyShootingAttack
 {
     [SerializeField] protected List<Transform> pointSpawns;
+    protected override void LoadPointSpawn()
+    {
+        if (this.pointSpawns.Count != 0) return;
+        foreach (Transform pointSpawn in transform)
+            this.pointSpawns.Add(item: pointSpawn);
+    }
+
     [SerializeField] protected float distanceCanShoote = 6f;
 
     protected override void LoadComponent()
     {
         base.LoadComponent();
         this.LoadPointSpawn();
-    }
-
-    protected override void LoadPointSpawn()
-    {
-        if (this.pointSpawns.Count != 0) return;
-        foreach (Transform pointSpawn in transform)
-            this.pointSpawns.Add(item: pointSpawn);
     }
 
     public override void ToAttack()

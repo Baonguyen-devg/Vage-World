@@ -12,20 +12,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b85759f00fd019243a4f311a375d0cf2, type: 3}
   m_Name: EasyLevel
   m_EditorClassIdentifier: 
-  height: 100
-  width: 100
-  smooth: 7
-  randomFillPercent: 47
-  rateDecorObject: 10
-  rateChangeColor: 10
+  height: 0
+  width: 0
+  smooth: 0
+  randomFillPercent: 0
   levelSkill: 0
   baseLevel: 0
-  rateSkill1: 0
+  rateSkill1: 5
   rateSkill2: 0
   rateSkill3: 0
   distanceBetween: 0
   number: 0
-  timeAppearBoss: 500
-  dame: 0
-  health: 0
-  speed: 0
+  timeAppearBoss: 0
+  boss:
+    health: 2679
+    dame: 3048
+    speed: 2679
+    distanceAttack: 6371
+    attackDelay: 1756
+    numberObject: 4
+    numberGroup: 5
+  skeleton:
+    health: 1017
+    dame: 0
+    speed: 0
+    distanceAttack: 0
+    attackDelay: 0
+    numberObject: 0
+    numberGroup: 0
+  dragonFly:
+    health: 0
+    dame: 0
+    speed: 0
+    distanceAttack: 0
+    attackDelay: 0
+    numberObject: 11
+    numberGroup: 0

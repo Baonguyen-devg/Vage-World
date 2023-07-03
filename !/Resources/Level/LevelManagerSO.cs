@@ -1,22 +1,27 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "LevelManager", menuName = "ScriptableObjects/LevelManager")]
 public class LevelManagerSO : ScriptableObject
 {
-    [System.Serializable] public class EnemyOS
+    [System.Serializable] public class EnemySO
     {
+        [Header(header: "Name Enemy: "), SerializeField] private string name;
+        [HideInInspector] public string Name => this.name;
+
         [Space(height: 3), Header(header: "[ Set Up Stats ] "), Space(height: 3)] //STATS
         //Maximum enemy's health is about 50 to 30000 (boss)
-        [Range(min: 50, max: 30000), SerializeField] private int health;
-        [HideInInspector] public int Health => this.health; 
+        [Range(min: 50, max: 30000), SerializeField] private int maximumHealth;
+        [HideInInspector] public int MaximumHealth => this.maximumHealth; 
 
         //Maximum enemy's dame is about to 50 to 30000 (boss)
         [Range(min: 50, max: 30000), SerializeField] private int dame;
         [HideInInspector] public int Dame => this.dame;
 
         //Maximum enemy's speed is about to 50 to 30000 (boss)
-        [Range(min: 50, max: 30000), SerializeField] private int speed;
-        [HideInInspector] public int Speed => this.speed;
+        [Range(min: 0.01f, max: 1), SerializeField] private float speed;
+        [HideInInspector] public float Speed => this.speed;
 
         [Space(height: 3), Header(header: "[ Set Up Attack ] "), Space(height: 3)] //ATTACK
          //Maximum enemy's distance can attack is about to 50 to 30000 (boss)
@@ -73,10 +78,8 @@ public class LevelManagerSO : ScriptableObject
     [HideInInspector] public int TimeAppearBoss => timeAppearBoss;
 
     [Space(3), Header("[ SET UP ENEMY ]"), Space(3)]
-    [SerializeField, Space(height: 3)] private EnemyOS boss = new EnemyOS();
-    [HideInInspector] public EnemyOS Boss => this.boss;
-    [SerializeField, Space(height: 3)] private EnemyOS skeleton = new EnemyOS();
-    [HideInInspector] public EnemyOS Skeleton => this.skeleton;
-    [SerializeField, Space(height: 3)] private EnemyOS dragonFly = new EnemyOS();
-    [HideInInspector] public EnemyOS DragonFly => this.dragonFly;
+    [SerializeField] private List<EnemySO> enemies = new List<EnemySO>();
+
+    public EnemySO GetEnemySOByName(string name) =>
+        enemies.FirstOrDefault(enemySO => enemySO.Name.Equals(value: name));
 }

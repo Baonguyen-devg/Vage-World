@@ -19,9 +19,13 @@ namespace DamageReceiver
         protected override void LoadComponent()
         {
             base.LoadComponent();
+            this.LoadMaximumHealth();
             this.LoadEnemyController();
             this.LoadSpriteRender();
         }
+
+        protected virtual void LoadMaximumHealth() =>
+            this.maximumHealth = (int) this.levelManagerSO?.GetEnemySOByName(transform.parent.name)?.MaximumHealth;
 
         public override void DecreaseHealth(int health)
         {

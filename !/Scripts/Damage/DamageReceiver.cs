@@ -2,19 +2,29 @@ using UnityEngine;
 
 namespace DamageReceiver
 {
+    [RequireComponent(requiredComponent: typeof(BoxCollider2D))]
     public abstract class DamageReceiver : AutoMonobehaviour
     {
+        protected const int default_Maximum_Health = 100;
+        protected const bool default_Is_Dead = false;
+
+        [Header(header: "[ Level Manager Scriptable Object ]"), Space(height: 10)]
+        [SerializeField] protected LevelManagerSO levelManagerSO = default;
+        protected virtual void LoadLevelManagerSO() =>
+             this.levelManagerSO ??= Resources.Load<LevelManagerSO>(path: "Level/EasyLevel");
+
         [Header(header: "The Object's currentHealth informations"), Space(height: 10)]
-        [SerializeField] protected int currentHealth;
-        [SerializeField] protected int maximumHealth;
+        [SerializeField] protected int currentHealth = 0;
+        [HideInInspector] public int CurrentHealth => this.currentHealth;
 
-        [Space(height: 10), SerializeField] protected bool isDead = false;
+        [SerializeField] protected int maximumHealth = default_Maximum_Health;
+        [SerializeField] protected bool isDead = default_Is_Dead;
 
-        public int CurrentHealth => this.currentHealth;
-
-        protected override void LoadComponent() => this.ResetHealthToMaximum();
         protected virtual void OnEnable() => this.ResetHealthToMaximum();
+
         protected virtual void FixedUpdate() => this.CheckDead();
+
+        protected override void LoadComponent() => this.LoadLevelManagerSO();
 
         protected virtual void CheckDead()
         {
