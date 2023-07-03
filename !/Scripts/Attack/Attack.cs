@@ -2,8 +2,15 @@ using UnityEngine;
 
 public abstract class Attack : AutoMonobehaviour
 {
+    [Header(header: "[ Level Manager Scriptable Object ]"), Space(height: 10)]
+    [SerializeField] protected LevelManagerSO levelManagerSO = default;
+    protected virtual void LoadLevelManagerSO() =>
+         this.levelManagerSO ??= Resources.Load<LevelManagerSO>(path: "Level/EasyLevel");
+
     [SerializeField] protected float attackDelay;
     [SerializeField] protected float attackTimer;
+
+    protected override void LoadComponent() => this.LoadLevelManagerSO();
 
     protected virtual void Update()
     {

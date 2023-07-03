@@ -15,8 +15,8 @@ public class LookPlayer : AutoMonobehaviour
         if (this.controller.RandomlyMovement.TargetFollow == null) return;
 
         if (transform.parent.localPosition.x > this.controller.RandomlyMovement.TargetFollow.localPosition.x)
-            transform.rotation = Quaternion.Euler(0, 180, 0);
+            transform.rotation = Quaternion.Euler(x: 0, y: 180, z: 0);
         else
-            transform.rotation = Quaternion.Euler(0, 0, 0);
+            transform.rotation = Quaternion.Euler(x: 0, y: 0, z: 0);
     }
 }

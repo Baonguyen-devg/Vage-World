@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 1155673}
   - component: {fileID: 1155674}
   m_Layer: 7
-  m_Name: Signal
+  m_Name: Signal_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -295,11 +295,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7d7dcc0db8d390459fe58a9cc99f590, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDelay: 1
+  levelManagerSO: {fileID: 11400000, guid: 660278c79c958234fbd0302fbd649509, type: 2}
+  attackDelay: 2
   attackTimer: 0
   target: {fileID: 774405703}
   distanceToCloseCombat: 1
-  behaviourManager: {fileID: 0}
+  behaviourManager: {fileID: 1614469990}
 --- !u!1 &20390356
 GameObject:
   m_ObjectHideFlags: 0
@@ -568,6 +569,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e281a615c4380da44957fcd87bc2d6d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelManagerSO: {fileID: 0}
   speed: 8
   maximumSpeed: 1
   minimumSpeed: 0.05
@@ -723,11 +725,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8854a07e3c50c0a45b95157da38a11ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelManagerSO: {fileID: 11400000, guid: 660278c79c958234fbd0302fbd649509, type: 2}
   resourceSpawners:
-  - nameResourceSpawner: Enemy_1
-    number: 5
-  - nameResourceSpawner: Enemy_2
-    number: 9
+  - nameResourceSpawner: Skeleton
+    number: 6
+  - nameResourceSpawner: DragonFly
+    number: 7
+  - nameResourceSpawner: Boss
+    number: 1
   mapController: {fileID: 520979283}
 --- !u!1 &79276850
 GameObject:
@@ -2920,7 +2925,7 @@ GameObject:
   - component: {fileID: 271974157}
   - component: {fileID: 271974158}
   m_Layer: 7
-  m_Name: Box
+  m_Name: Box_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2941,7 +2946,7 @@ Transform:
   - {fileID: 20390357}
   - {fileID: 1379051781}
   m_Father: {fileID: 1004789572}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &271974158
 MonoBehaviour:
@@ -3137,9 +3142,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 074a981b6c12d6b43aac07d1a25312a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelManagerSO: {fileID: 11400000, guid: 660278c79c958234fbd0302fbd649509, type: 2}
   speed: 0.03
   maximumSpeed: 1
-  minimumSpeed: 0.05
+  minimumSpeed: 0.01
   isMovingFast: 0
   directionFollow: {x: 0, y: 0, z: 0}
 --- !u!1 &297524179
@@ -4487,7 +4493,7 @@ GameObject:
   - component: {fileID: 358635839}
   - component: {fileID: 358635840}
   m_Layer: 8
-  m_Name: Enemy_1
+  m_Name: Skeleton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4548,7 +4554,7 @@ MonoBehaviour:
   model: {fileID: 1488419263}
   movement: {fileID: 1382748671}
   damageSender: {fileID: 1670367818}
-  damageReceiver: {fileID: 1838277627}
+  damageReceiver: {fileID: 0}
   healthBar: {fileID: 531000226}
   closeCombat: {fileID: 661892976}
   randomlyMovement: {fileID: 1614738401}
@@ -4663,6 +4669,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e281a615c4380da44957fcd87bc2d6d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelManagerSO: {fileID: 0}
   speed: 8
   maximumSpeed: 1
   minimumSpeed: 0.05
@@ -5945,6 +5952,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bfc34584b286664c99b1c72e7106f13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelManagerSO: {fileID: 0}
   speed: 1
   maximumSpeed: 1
   minimumSpeed: 0.05
@@ -8030,37 +8038,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &545427704
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 545427705}
-  m_Layer: 0
-  m_Name: Forest
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &545427705
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 545427704}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1839514270}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &565396070
 GameObject:
   m_ObjectHideFlags: 0
@@ -8258,6 +8235,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cf8fdcffc324034fb20b23331c16820, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelManagerSO: {fileID: 0}
   dame: 10
   maximumDame: 100
 --- !u!1 &601822160
@@ -9061,6 +9039,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69406af14e41c3f40b260ae64126b3fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelManagerSO: {fileID: 0}
   numberObject: 1
   objectSpawner: 
   mapController: {fileID: 520979283}
@@ -9261,6 +9240,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e8dfa53f4bd3b0498cb85406b3f5d86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelManagerSO: {fileID: 0}
   numberObject: 1
   objectSpawner: 
   mapController: {fileID: 520979283}
@@ -9555,7 +9535,7 @@ GameObject:
   - component: {fileID: 642694626}
   - component: {fileID: 642694627}
   m_Layer: 8
-  m_Name: Enemy_2
+  m_Name: DragonFly
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9615,7 +9595,7 @@ MonoBehaviour:
   model: {fileID: 733002076}
   movement: {fileID: 293181703}
   damageSender: {fileID: 0}
-  damageReceiver: {fileID: 1859498746}
+  damageReceiver: {fileID: 0}
   healthBar: {fileID: 1879292376}
   closeCombat: {fileID: 0}
   randomlyMovement: {fileID: 500310175}
@@ -9831,10 +9811,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7d7dcc0db8d390459fe58a9cc99f590, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDelay: 1
+  levelManagerSO: {fileID: 11400000, guid: 660278c79c958234fbd0302fbd649509, type: 2}
+  attackDelay: 2
   attackTimer: 0
   target: {fileID: 774405703}
-  distanceToCloseCombat: 0.5
+  distanceToCloseCombat: 1
   behaviourManager: {fileID: 1488419270}
 --- !u!1 &672228505
 GameObject:
@@ -11365,7 +11346,7 @@ GameObject:
   - component: {fileID: 792833344}
   - component: {fileID: 792833345}
   m_Layer: 7
-  m_Name: Stone
+  m_Name: Stone_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11584,6 +11565,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bfc34584b286664c99b1c72e7106f13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelManagerSO: {fileID: 0}
   speed: 1
   maximumSpeed: 1
   minimumSpeed: 0.05
@@ -11666,15 +11648,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8f8529a6b679674f98dc0cd7dc0fcbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelManagerSO: {fileID: 11400000, guid: 660278c79c958234fbd0302fbd649509, type: 2}
   resourceSpawners:
+  - nameResourceSpawner: Log
+    number: 15
+  - nameResourceSpawner: Stone
+    number: 15
   - nameResourceSpawner: Grass
     number: 15
-  - nameResourceSpawner: Log
-    number: 26
   - nameResourceSpawner: DragonTree
-    number: 27
-  - nameResourceSpawner: Stone
-    number: 23
+    number: 15
   mapController: {fileID: 520979283}
 --- !u!1 &804892385
 GameObject:
@@ -12497,6 +12480,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cf8fdcffc324034fb20b23331c16820, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelManagerSO: {fileID: 11400000, guid: 660278c79c958234fbd0302fbd649509, type: 2}
   dame: 50
   maximumDame: 100
 --- !u!1 &846984698
@@ -13367,6 +13351,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e281a615c4380da44957fcd87bc2d6d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelManagerSO: {fileID: 0}
   speed: 8
   maximumSpeed: 1
   minimumSpeed: 0.05
@@ -13657,7 +13642,7 @@ GameObject:
   - component: {fileID: 924033535}
   - component: {fileID: 924033536}
   m_Layer: 7
-  m_Name: GrassDecor
+  m_Name: Grass_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13678,7 +13663,7 @@ Transform:
   - {fileID: 414231857}
   - {fileID: 1403838354}
   m_Father: {fileID: 1004789572}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &924033536
 MonoBehaviour:
@@ -14483,6 +14468,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cf8fdcffc324034fb20b23331c16820, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelManagerSO: {fileID: 0}
   dame: 10
   maximumDame: 100
 --- !u!1 &1004789571
@@ -14514,12 +14500,12 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1386604901}
   - {fileID: 924033535}
   - {fileID: 1748394131}
+  - {fileID: 2072829525}
+  - {fileID: 1386604901}
   - {fileID: 1178871745}
   - {fileID: 271974157}
-  - {fileID: 2072829525}
   - {fileID: 792833344}
   - {fileID: 1155673}
   m_Father: {fileID: 1426629662}
@@ -14538,12 +14524,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   listPrefabs:
-  - {fileID: 1386604901}
   - {fileID: 924033535}
   - {fileID: 1748394131}
+  - {fileID: 2072829525}
+  - {fileID: 1386604901}
   - {fileID: 1178871745}
   - {fileID: 271974157}
-  - {fileID: 2072829525}
   - {fileID: 792833344}
   - {fileID: 1155673}
 --- !u!1 &1009059092
@@ -15396,10 +15382,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b63d4ed6ccea8da4985a4635d90704cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelManagerSO: {fileID: 11400000, guid: 660278c79c958234fbd0302fbd649509, type: 2}
   currentHealth: 0
   maximumHealth: 3000
   isDead: 0
-  controller: {fileID: 0}
+  controller: {fileID: 1804020218}
   timeEffect: 0.2
   render: {fileID: 1614469989}
 --- !u!1 &1049181513
@@ -16254,6 +16241,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57b1daf83c1023741b1ca117cf4747a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelManagerSO: {fileID: 0}
   numberObject: 1
   objectSpawner: 
   mapController: {fileID: 520979283}
@@ -16511,6 +16499,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e281a615c4380da44957fcd87bc2d6d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelManagerSO: {fileID: 0}
   speed: 9
   maximumSpeed: 1
   minimumSpeed: 0.05
@@ -16922,6 +16911,7 @@ Transform:
   m_Children:
   - {fileID: 358635836}
   - {fileID: 642694624}
+  - {fileID: 1804020214}
   m_Father: {fileID: 39984684}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -16940,6 +16930,7 @@ MonoBehaviour:
   listPrefabs:
   - {fileID: 358635836}
   - {fileID: 642694624}
+  - {fileID: 1804020214}
 --- !u!1 &1163581983
 GameObject:
   m_ObjectHideFlags: 0
@@ -17227,7 +17218,7 @@ GameObject:
   - component: {fileID: 1178871745}
   - component: {fileID: 1178871746}
   m_Layer: 7
-  m_Name: Bone
+  m_Name: Bone_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17248,7 +17239,7 @@ Transform:
   - {fileID: 690616386}
   - {fileID: 220381823}
   m_Father: {fileID: 1004789572}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1178871746
 MonoBehaviour:
@@ -17825,6 +17816,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c761a53862484934b9d518f9849b9331, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelManagerSO: {fileID: 0}
   speed: 0.05
   maximumSpeed: 1
   minimumSpeed: 0.001
@@ -17968,9 +17960,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 074a981b6c12d6b43aac07d1a25312a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelManagerSO: {fileID: 11400000, guid: 660278c79c958234fbd0302fbd649509, type: 2}
   speed: 0.03
   maximumSpeed: 1
-  minimumSpeed: 0.05
+  minimumSpeed: 0.01
   isMovingFast: 0
   directionFollow: {x: 0, y: 0, z: 0}
 --- !u!4 &1216650439
@@ -18033,13 +18026,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e81923e8273828c49b5e2a82f2c9596f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelManagerSO: {fileID: 11400000, guid: 660278c79c958234fbd0302fbd649509, type: 2}
   attackDelay: 2
   attackTimer: 0
   target: {fileID: 774405703}
   controller: {fileID: 642694627}
   pointSpawns:
   - {fileID: 789189402}
-  distanceCanShoote: 8
+  distanceCanShoote: 5
 --- !u!1 &1224695143
 GameObject:
   m_ObjectHideFlags: 0
@@ -18570,6 +18564,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d01d64f63dce9f84d8910137ab675aa8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelManagerSO: {fileID: 0}
   dame: 50
   maximumDame: 100
 --- !u!1 &1268540902
@@ -18804,6 +18799,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 237753f4b084d274e95058cf392a758f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelManagerSO: {fileID: 0}
   currentHealth: 0
   maximumHealth: 200
   isDead: 0
@@ -19085,17 +19081,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c984eba0890deff44b859dde9e519c07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resourceSpawners:
-  - nameResourceSpawner: Stone_1
-    number: 32
-  - nameResourceSpawner: Duckweed
-    number: 37
-  - nameResourceSpawner: Stone_2
-    number: 22
-  - nameResourceSpawner: Stone_3
-    number: 14
-  - nameResourceSpawner: SeaGrass_1
-    number: 50
+  levelManagerSO: {fileID: 11400000, guid: 660278c79c958234fbd0302fbd649509, type: 2}
+  resourceSpawners: []
   mapController: {fileID: 520979283}
 --- !u!1 &1306268120
 GameObject:
@@ -20764,9 +20751,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 074a981b6c12d6b43aac07d1a25312a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelManagerSO: {fileID: 11400000, guid: 660278c79c958234fbd0302fbd649509, type: 2}
   speed: 0.04
   maximumSpeed: 1
-  minimumSpeed: 0.05
+  minimumSpeed: 0.01
   isMovingFast: 0
   directionFollow: {x: 0, y: 0, z: 0}
 --- !u!1 &1384005142
@@ -20967,7 +20955,7 @@ Transform:
   - {fileID: 1149827545}
   - {fileID: 1423674698}
   m_Father: {fileID: 1004789572}
-  m_RootOrder: 0
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1386604902
 MonoBehaviour:
@@ -21882,6 +21870,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ccac44dede6a3141b4e65eabdffcb63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelManagerSO: {fileID: 0}
   attackDelay: 0.3
   attackTimer: 0
   posShoote: {fileID: 800899187}
@@ -22820,6 +22809,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a29b6d5f7f131eb4eae42ccb44a4b37f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelManagerSO: {fileID: 0}
   attackDelay: 2
   attackTimer: 0
   target: {fileID: 774405703}
@@ -23106,40 +23096,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d78f1f2847a90f642a03b4a6f322adcc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelManagerSO: {fileID: 0}
   numberObject: 5
   objectSpawner: Enemy_2
   mapController: {fileID: 520979283}
---- !u!1 &1561023573
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1561023574}
-  m_Layer: 0
-  m_Name: Sahara
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1561023574
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1561023573}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1839514270}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1563560788
 GameObject:
   m_ObjectHideFlags: 0
@@ -24971,37 +24931,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerDamageReceiver: {fileID: 0}
   slider: {fileID: 1658609658}
---- !u!1 &1660354065
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1660354066}
-  m_Layer: 0
-  m_Name: Swamp
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1660354066
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1660354065}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1839514270}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1665708790
 GameObject:
   m_ObjectHideFlags: 0
@@ -25163,7 +25092,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cf8fdcffc324034fb20b23331c16820, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dame: 20
+  levelManagerSO: {fileID: 11400000, guid: 660278c79c958234fbd0302fbd649509, type: 2}
+  dame: 50
   maximumDame: 100
 --- !u!1 &1674234500
 GameObject:
@@ -25831,6 +25761,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2c3b80c5697cb8498018ecdf51eece6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelManagerSO: {fileID: 0}
   speed: 4
   maximumSpeed: 5
   minimumSpeed: 0.05
@@ -25883,6 +25814,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e281a615c4380da44957fcd87bc2d6d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelManagerSO: {fileID: 0}
   speed: 8
   maximumSpeed: 1
   minimumSpeed: 0.05
@@ -26130,7 +26062,7 @@ GameObject:
   - component: {fileID: 1748394131}
   - component: {fileID: 1748394132}
   m_Layer: 7
-  m_Name: Grass
+  m_Name: Grass_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26151,7 +26083,7 @@ Transform:
   - {fileID: 811959268}
   - {fileID: 1729836146}
   m_Father: {fileID: 1004789572}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1748394132
 MonoBehaviour:
@@ -26396,7 +26328,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1804020213}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 2.92, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -26411,8 +26343,8 @@ Transform:
   - {fileID: 1046128158}
   - {fileID: 1913945707}
   - {fileID: 1060874172}
-  m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_Father: {fileID: 1160748318}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!58 &1804020216
 CircleCollider2D:
@@ -26465,8 +26397,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   model: {fileID: 1614469987}
   movement: {fileID: 1216650438}
-  damageSender: {fileID: 844147915}
-  damageReceiver: {fileID: 1047433038}
+  damageSender: {fileID: 0}
+  damageReceiver: {fileID: 0}
   healthBar: {fileID: 323768846}
   closeCombat: {fileID: 12608896}
   randomlyMovement: {fileID: 1688529996}
@@ -26562,6 +26494,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d01d64f63dce9f84d8910137ab675aa8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelManagerSO: {fileID: 0}
   dame: 10
   maximumDame: 10
 --- !u!1 &1827071265
@@ -26753,10 +26686,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b63d4ed6ccea8da4985a4635d90704cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelManagerSO: {fileID: 11400000, guid: 660278c79c958234fbd0302fbd649509, type: 2}
   currentHealth: 0
-  maximumHealth: 50
+  maximumHealth: 100
   isDead: 0
-  controller: {fileID: 0}
+  controller: {fileID: 358635839}
   timeEffect: 0.2
   render: {fileID: 1488419262}
 --- !u!1 &1839514269
@@ -26786,10 +26720,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 545427705}
-  - {fileID: 1561023574}
-  - {fileID: 1660354066}
+  m_Children: []
   m_Father: {fileID: 1432332209}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -27096,10 +27027,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b63d4ed6ccea8da4985a4635d90704cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelManagerSO: {fileID: 11400000, guid: 660278c79c958234fbd0302fbd649509, type: 2}
   currentHealth: 0
-  maximumHealth: 40
+  maximumHealth: 80
   isDead: 0
-  controller: {fileID: 0}
+  controller: {fileID: 642694627}
   timeEffect: 0.2
   render: {fileID: 733002079}
 --- !u!1 &1863968085
@@ -27146,6 +27078,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cf8fdcffc324034fb20b23331c16820, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelManagerSO: {fileID: 0}
   dame: 50
   maximumDame: 100
 --- !u!1 &1870759691
@@ -27192,23 +27125,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 421231eb5b961a54d9e196547715a4ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelManagerSO: {fileID: 11400000, guid: 660278c79c958234fbd0302fbd649509, type: 2}
   resourceSpawners:
+  - nameResourceSpawner: Grass_1
+    number: 15
+  - nameResourceSpawner: Grass_2
+    number: 15
+  - nameResourceSpawner: Grass_3
+    number: 15
   - nameResourceSpawner: Tree_1
-    number: 20
-  - nameResourceSpawner: GrassDecor
-    number: 20
-  - nameResourceSpawner: Grass
-    number: 10
-  - nameResourceSpawner: Bone
-    number: 2
-  - nameResourceSpawner: ThreeGrass
-    number: 5
-  - nameResourceSpawner: Stone
-    number: 5
-  - nameResourceSpawner: Signal
-    number: 2
-  - nameResourceSpawner: Box
-    number: 4
+    number: 15
+  - nameResourceSpawner: Bone_1
+    number: 15
+  - nameResourceSpawner: Box_1
+    number: 15
+  - nameResourceSpawner: Stone_1
+    number: 15
+  - nameResourceSpawner: Signal_1
+    number: 15
   mapController: {fileID: 520979283}
 --- !u!1 &1873092397
 GameObject:
@@ -29820,7 +29754,6 @@ MonoBehaviour:
   widthMap: 75
   randomFillPercent: 47
   smoothPercent: 7
-  rateChangeColor: 10
   seed: Baonguyen.devG
   mapController: {fileID: 520979283}
   landList: []
@@ -30503,7 +30436,7 @@ GameObject:
   - component: {fileID: 2072829525}
   - component: {fileID: 2072829526}
   m_Layer: 7
-  m_Name: ThreeGrass
+  m_Name: Grass_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30524,7 +30457,7 @@ Transform:
   - {fileID: 1195033892}
   - {fileID: 1911837779}
   m_Father: {fileID: 1004789572}
-  m_RootOrder: 5
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2072829526
 MonoBehaviour:

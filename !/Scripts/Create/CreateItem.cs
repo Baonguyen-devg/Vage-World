@@ -6,6 +6,14 @@ namespace CreatingPackage
 {
     public class CreateItem : Create
     {
+        protected override void LoadResourceSpawners()
+        {
+            this.resourceSpawners.Clear();
+            foreach (var itemSO in this.levelManagerSO.Items)
+                if (!itemSO.Name.Equals("This is a null element"))
+                    this.resourceSpawners.Add(new ResourceSpawner(itemSO.Name, itemSO.NumberGroup));
+        }
+
         protected override void Group(int pointer)
         {
             List<Transform> listFake = this.mapController.CreateMap.landList;
@@ -19,7 +27,7 @@ namespace CreatingPackage
                     SetObjectSpawner(nameObject: this.resourceSpawners[pointer].NameResourceSpawner);
             }
         }
-
+        
         protected override Transform SpawnObject(Vector3 position, Quaternion rotation) =>
             GroupItemSpawner.Instance?.SpawnInRegion
                 (nameObject: GroupItemSpawner.pointSpawn_1, nameRegion: "Forest", postion: position, rotation: rotation);

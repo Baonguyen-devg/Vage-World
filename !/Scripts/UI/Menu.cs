@@ -10,7 +10,7 @@ public class Menu : MonoBehaviour
 
         if (nextSceneIndex >= SceneManager.sceneCountInBuildSettings)
         {
-            Debug.LogWarning("Scene don't exit!");
+            Debug.LogWarning(message: "Scene don't exit!");
             return;
         }
         SceneManager.LoadScene(nextSceneIndex);
@@ -21,9 +21,6 @@ public class Menu : MonoBehaviour
 
     }
 
-    public void QuitGame()
-    {
-        Application.Quit();
-    }
+    public void QuitGame() => Application.Quit();
 }
 

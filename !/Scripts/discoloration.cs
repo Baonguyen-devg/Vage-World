@@ -1,7 +1,7 @@
 using UnityEngine;
 
-[RequireComponent(typeof(BoxCollider2D))]
-[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(requiredComponent: typeof(BoxCollider2D))]
+[RequireComponent(requiredComponent: typeof(Rigidbody2D))]
 public class discoloration : AutoMonobehaviour
 {
     [SerializeField] protected BoxCollider2D boxCollider;
@@ -29,13 +29,13 @@ public class discoloration : AutoMonobehaviour
     {
         if (collision.GetComponent<PlayerController>() == null
             && collision.GetComponent<EnemyController>() == null) return;
-        transform.parent.Find("Model").GetComponent<SpriteRenderer>().color = new(1f, 1f, 1f, 0.5f);
+        transform.parent.Find(n: "Model").GetComponent<SpriteRenderer>().color = new(r: 1f, g: 1f, b: 1f, a: 0.5f);
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.GetComponent<PlayerController>() == null
            && collision.GetComponent<EnemyController>() == null) return;
-        transform.parent.Find("Model").GetComponent<SpriteRenderer>().color = new(1f, 1f, 1f, 1f);
+        transform.parent.Find(n: "Model").GetComponent<SpriteRenderer>().color = new(r: 1f, g: 1f, b: 1f, a: 1f);
     }
 }

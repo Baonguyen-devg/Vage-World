@@ -17,7 +17,11 @@ public class EnemyShootingAttack : ShootingAttack
         this.LoadController();
         this.LoadTarget();
         this.LoadPointSpawn();
+        this.LoadAttackDelay();
     }
+
+    protected virtual void LoadAttackDelay() =>
+        this.attackDelay = (float)this.levelManagerSO?.GetEnemySOByName(transform.parent.name)?.AttackDelay;
 
     protected virtual void LoadPointSpawn() {  /*For Override */  }
 }

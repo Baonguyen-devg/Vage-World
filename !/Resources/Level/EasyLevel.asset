@@ -18,33 +18,84 @@ MonoBehaviour:
   randomFillPercent: 0
   levelSkill: 0
   baseLevel: 0
-  rateSkill1: 5
+  rateSkill1: 0
   rateSkill2: 0
   rateSkill3: 0
-  distanceBetween: 0
-  number: 0
-  timeAppearBoss: 0
-  boss:
-    health: 2679
-    dame: 3048
-    speed: 2679
-    distanceAttack: 6371
-    attackDelay: 1756
-    numberObject: 4
-    numberGroup: 5
-  skeleton:
-    health: 1017
+  timeAppearBoss: 300
+  enemies:
+  - name: This is a null element
+    maximumHealth: 0
     dame: 0
     speed: 0
     distanceAttack: 0
     attackDelay: 0
     numberObject: 0
     numberGroup: 0
-  dragonFly:
-    health: 0
-    dame: 0
-    speed: 0
-    distanceAttack: 0
-    attackDelay: 0
-    numberObject: 11
+  - name: Skeleton
+    maximumHealth: 100
+    dame: 50
+    speed: 0.04
+    distanceAttack: 1
+    attackDelay: 2
+    numberObject: 8
+    numberGroup: 6
+  - name: DragonFly
+    maximumHealth: 80
+    dame: 50
+    speed: 0.03
+    distanceAttack: 5
+    attackDelay: 2
+    numberObject: 7
+    numberGroup: 7
+  - name: Boss
+    maximumHealth: 3000
+    dame: 50
+    speed: 0.03
+    distanceAttack: 1
+    attackDelay: 2
+    numberObject: 0
+    numberGroup: 1
+  items:
+  - name: This is a null element
+    numberObject: 0
     numberGroup: 0
+  - name: Log
+    numberObject: 1
+    numberGroup: 50
+  - name: Stone
+    numberObject: 1
+    numberGroup: 15
+  - name: Grass
+    numberObject: 1
+    numberGroup: 15
+  - name: DragonTree
+    numberObject: 1
+    numberGroup: 15
+  decorObjects:
+  - name: This is a null element
+    numberObject: 0
+    numberGroup: 0
+  - name: Grass_1
+    numberObject: 1
+    numberGroup: 15
+  - name: Grass_2
+    numberObject: 1
+    numberGroup: 15
+  - name: Grass_3
+    numberObject: 1
+    numberGroup: 15
+  - name: Tree_1
+    numberObject: 1
+    numberGroup: 15
+  - name: Bone_1
+    numberObject: 1
+    numberGroup: 15
+  - name: Box_1
+    numberObject: 1
+    numberGroup: 15
+  - name: Stone_1
+    numberObject: 1
+    numberGroup: 15
+  - name: Signal_1
+    numberObject: 1
+    numberGroup: 15

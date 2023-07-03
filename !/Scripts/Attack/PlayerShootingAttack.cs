@@ -4,20 +4,13 @@ using UnityEngine;
 public class PlayerShootingAttack : ShootingAttack
 {
     [SerializeField] protected Transform posShoote;
-    [SerializeField] protected bool skill1, skill2, skill3;
-    [SerializeField] protected List<Transform> pointSpawnsSkillOne;
-
-    protected override void LoadComponent()
-    {
-        base.LoadComponent();
-        this.LoadPointSpawnSkillOne();
-        this.LoadPosShoote();
-    }
-
     protected virtual void LoadPosShoote() =>
         this.posShoote = (this.posShoote != null) ? this.posShoote
             : transform.Find(n: "PointSpawn");
 
+    [SerializeField] protected bool skill1, skill2, skill3;
+
+    [SerializeField] protected List<Transform> pointSpawnsSkillOne;
     protected virtual void LoadPointSpawnSkillOne()
     {
         if (this.pointSpawnsSkillOne.Count != 0) return;
@@ -25,6 +18,13 @@ public class PlayerShootingAttack : ShootingAttack
 
         foreach (Transform pointSpawn in point)
             this.pointSpawnsSkillOne.Add(item: pointSpawn);
+    }
+
+    protected override void LoadComponent()
+    {
+        base.LoadComponent();
+        this.LoadPointSpawnSkillOne();
+        this.LoadPosShoote();
     }
 
     public virtual void ChangeStatusSkill1(bool Status)

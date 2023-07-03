@@ -37,13 +37,13 @@ public class LootMaterial : AutoMonobehaviour
     {
         if (!LayerMask.NameToLayer(layerName: "item").Equals(obj: collision.gameObject.layer)) return;
         this.itemsCanPick.Add(item: collision.transform);
-        collision.GetComponent<Touch>().ChangeStatusFrameAndHaveTouchTo(true);
+        collision.GetComponent<Touch>().ChangeStatusFrameAndHaveTouchTo(newStatus: true);
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (!LayerMask.NameToLayer(layerName: "item").Equals(obj: collision.gameObject.layer)) return;
         this.itemsCanPick.Remove(item: collision.transform);
-        collision.GetComponent<Touch>().ChangeStatusFrameAndHaveTouchTo(false);
+        collision.GetComponent<Touch>().ChangeStatusFrameAndHaveTouchTo(newStatus: false);
     }
 }

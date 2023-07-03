@@ -8,6 +8,11 @@ namespace Group
         protected int[] col = { 0, 0, -1, 1 };
         protected int[] row = { -1, 1, 0, 0 };
 
+        [Header(header: "[ Level Manager Scriptable Object ]"), Space(height: 10)]
+        [SerializeField] protected LevelManagerSO levelManagerSO = default;
+        protected virtual void LoadLevelManagerSO() =>
+             this.levelManagerSO ??= Resources.Load<LevelManagerSO>(path: "Level/EasyLevel");
+
         [Range(min: 0, max: 50), SerializeField] protected int numberObject;
         [SerializeField] protected string objectSpawner;
         [SerializeField] protected Queue<Vector2> landList;
@@ -16,7 +21,11 @@ namespace Group
         protected virtual void LoadMapController() =>
             this.mapController ??= GameObject.Find(name: "CreateMapForest").GetComponent<MapController>();
 
-        protected override void LoadComponent() => this.LoadMapController();
+        protected override void LoadComponent()
+        {
+            this.LoadLevelManagerSO();
+            this.LoadMapController();
+        }
 
         public virtual void SetObjectSpawner(string nameObject)
         {

@@ -8,7 +8,7 @@ public class GroupDecorObjectSpawner : Spawner
     protected override void Awake()
     {
         if (instance == null) instance = this;
-        else Destroy(gameObject);
+        else Destroy(obj: gameObject);
         base.Awake();
     }
 }

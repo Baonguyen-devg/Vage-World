@@ -17,7 +17,11 @@ public class DragonEnemyShootingAttack : EnemyShootingAttack
     {
         base.LoadComponent();
         this.LoadPointSpawn();
+        this.LoadDistanceCanShoote();
     }
+
+    protected virtual void LoadDistanceCanShoote() =>
+        this.distanceCanShoote = (float)this.levelManagerSO?.GetEnemySOByName(transform.parent.name)?.DistanceAttack;
 
     public override void ToAttack()
     {

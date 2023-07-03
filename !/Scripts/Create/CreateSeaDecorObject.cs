@@ -20,6 +20,11 @@ namespace CreatingPackage
             }
         }
 
+        protected override void LoadResourceSpawners()
+        {
+            throw new System.NotImplementedException();
+        }
+
         protected override Transform SpawnObject(Vector3 position, Quaternion rotation) =>
             GroupSeaDecorObjectSpawner.Instance?.SpawnInRegion
                 (nameObject: GroupSeaDecorObjectSpawner.pointSpawn_1, nameRegion: "Forest", postion: position, rotation: rotation);

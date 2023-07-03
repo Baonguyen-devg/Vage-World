@@ -10,10 +10,18 @@ public class EnemyCloseCombatAttack : CloseCombatAttack
     {
         base.LoadComponent();
         this.LoadBehaviourManager();
+        this.LoadDistanceToCloseCombat();
+        this.LoadAttackDelay();
     }
 
     protected override void LoadTarget() => 
         this.target = GameObject.Find(name: "Player").transform;
+
+    protected virtual void LoadDistanceToCloseCombat() =>
+        this.distanceToCloseCombat = (float)this.levelManagerSO?.GetEnemySOByName(transform.parent.name)?.DistanceAttack;
+
+    protected virtual void LoadAttackDelay() =>
+        this.attackDelay = (float)this.levelManagerSO?.GetEnemySOByName(transform.parent.name)?.AttackDelay;
 
     public override void ToAttack()
     {

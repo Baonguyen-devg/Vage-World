@@ -29,21 +29,17 @@ public class CreateMap : AutoMonobehaviour
 
     [Header(header: "Scriptable Object LevelManager"), Space(height: 10)]
     [SerializeField] private LevelManagerSO levelManagerSO;
+    protected virtual void LoadLevelManagerSO()
+    {
+        this.levelManagerSO ??= Resources.Load<LevelManagerSO>(path: "Level/EasyLevel");
+        this.LoadInformationMap();
+    }
  
     protected override void LoadComponent()
     {
         base.LoadComponent();
         this.LoadMapController();
         this.LoadLevelManagerSO();
-    }
-
-    protected virtual void LoadLevelManagerSO()
-    {
-        if (this.levelManagerSO != null) return;
-        string resPath = "Level/EasyLevel";
-        this.levelManagerSO = Resources.Load<LevelManagerSO>(path: resPath);
-        Debug.LogWarning(message: transform.name + ": Load GroupDecorObjectSO" + resPath, context: gameObject);
-        this.LoadInformationMap();
     }
 
     protected virtual void LoadInformationMap()

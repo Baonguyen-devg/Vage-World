@@ -6,6 +6,14 @@ namespace CreatingPackage
 {
     public class CreateGroupEnemy : Create
     {
+        protected override void LoadResourceSpawners()
+        {
+            this.resourceSpawners.Clear();
+            foreach (var enemySO in this.levelManagerSO.Enemies)
+                if (!enemySO.Name.Equals("This is a null element"))
+                    this.resourceSpawners.Add(new ResourceSpawner(enemySO.Name, enemySO.NumberGroup));
+        }
+
         protected override void Group(int pointer)
         {
             List<Transform> listFake = this.mapController.CreateMap.landList;
