@@ -11,7 +11,7 @@ namespace Movement
         [Header(header: "[ Level Manager Scriptable Object ]"), Space(height: 10)]
         [SerializeField] protected LevelManagerSO levelManagerSO = default;
         protected virtual void LoadLevelManagerSO() =>
-             this.levelManagerSO ??= Resources.Load<LevelManagerSO>(path: "Level/EasyLevel");
+             this.levelManagerSO = Resources.Load<LevelManagerSO>(path: "Level/" + GameController.Instance.NameLevel);
 
         [SerializeField] protected float speed = default_Speed;
         [SerializeField] protected float maximumSpeed = default_Maximum_Speed;

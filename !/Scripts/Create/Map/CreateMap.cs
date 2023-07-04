@@ -31,7 +31,7 @@ public class CreateMap : AutoMonobehaviour
     [SerializeField] private LevelManagerSO levelManagerSO;
     protected virtual void LoadLevelManagerSO()
     {
-        this.levelManagerSO ??= Resources.Load<LevelManagerSO>(path: "Level/EasyLevel");
+        this.levelManagerSO = Resources.Load<LevelManagerSO>(path: "Level/" + GameController.Instance.NameLevel);
         this.LoadInformationMap();
     }
  
@@ -59,7 +59,7 @@ public class CreateMap : AutoMonobehaviour
         this.mapController.CreateGroupEnemy.CreateGroup();
         this.mapController.DecorObject.CreateGroup();
         this.mapController.CreateItem.CreateGroup();
-        this.mapController.CreateSeaDecorObject.CreateGroup();
+        /*  this.mapController.CreateSeaDecorObject.CreateGroup();*/
     }
 
     public virtual void RemoveLand(int posX, int posY) =>

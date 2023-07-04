@@ -11,7 +11,7 @@ namespace DamageReceiver
         [Header(header: "[ Level Manager Scriptable Object ]"), Space(height: 10)]
         [SerializeField] protected LevelManagerSO levelManagerSO = default;
         protected virtual void LoadLevelManagerSO() =>
-             this.levelManagerSO ??= Resources.Load<LevelManagerSO>(path: "Level/EasyLevel");
+             this.levelManagerSO = Resources.Load<LevelManagerSO>(path: "Level/" + GameController.Instance.NameLevel);
 
         [Header(header: "The Object's currentHealth informations"), Space(height: 10)]
         [SerializeField] protected int currentHealth = 0;

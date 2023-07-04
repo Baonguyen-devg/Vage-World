@@ -90,9 +90,9 @@ public class LevelManagerSO : ScriptableObject
     }
 
     [Space(height: 3), Header(header: "[ SET UP MAP] ")]
-    [Range(min: 50, max: 200), SerializeField] private int height;
+    [Range(min: 0, max: 200), SerializeField] private int height;
     [HideInInspector] public int Height => this.height;
-    [Range(min: 50, max: 200), SerializeField] private int width;
+    [Range(min: 0, max: 200), SerializeField] private int width;
     [HideInInspector] public int Width => this.width;
     [Range(min: 0, max: 10), SerializeField] private int smooth;
     [HideInInspector] public int Smooth => smooth;

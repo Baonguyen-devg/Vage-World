@@ -11,7 +11,7 @@ public class Skill : AutoMonobehaviour
     [Header(header: "[ Level Manager Scriptable Object ]"), Space(height: 10)]
     [SerializeField] protected LevelManagerSO levelManagerSO = default;
     protected virtual void LoadLevelManagerSO() =>
-         this.levelManagerSO ??= Resources.Load<LevelManagerSO>(path: "Level/EasyLevel");
+         this.levelManagerSO = Resources.Load<LevelManagerSO>(path: "Level/" + GameController.Instance.NameLevel);
 
     [SerializeField] protected List<Transform> listRandomMap;
     [SerializeField] protected Dictionary<Transform, int> listRandomMaterial;

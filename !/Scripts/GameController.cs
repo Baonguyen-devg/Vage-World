@@ -3,22 +3,25 @@ using UnityEngine;
 
 public class GameController : AutoMonobehaviour
 {
+    protected const string default_Level = "EasyLevel_1";
+
+    [SerializeField] private string nameLevel = default_Level;
+    public string NameLevel => this.nameLevel;
+
     [SerializeField] private static GameController instance;
     public static GameController Instance => instance; 
 
     [SerializeField] private int timeAppearBoss;
     public int TimeAppearBoss => this.timeAppearBoss; 
+    protected virtual void LoadInformationMap() =>
+        this.timeAppearBoss = this.levelManagerSO.TimeAppearBoss;
 
     [SerializeField] private Boolean spawnBoss;
     [SerializeField] private Transform boss;
-
     [SerializeField] private LevelManagerSO levelManagerSO;
     protected virtual void LoadLevelManagerSO()
-    {
-        if (this.levelManagerSO != null) return;
-        string resPath = "Level/EasyLevel";
-        this.levelManagerSO = Resources.Load<LevelManagerSO>(resPath);
-        Debug.LogWarning(transform.name + ": Load GroupDecorObjectSO" + resPath, gameObject);
+    { 
+        this.levelManagerSO = Resources.Load<LevelManagerSO>(path: "Level/" + GameController.Instance.NameLevel);
         this.LoadInformationMap();
     }
 
@@ -37,7 +40,4 @@ public class GameController : AutoMonobehaviour
         this.boss.gameObject.SetActive(value: true);
         this.spawnBoss = true;
     }
-
-    protected virtual void LoadInformationMap() =>
-        this.timeAppearBoss = this.levelManagerSO.TimeAppearBoss;
 }

@@ -10,8 +10,8 @@ namespace CreatingPackage
         {
             this.resourceSpawners.Clear();
             foreach (var decorSO in this.levelManagerSO.DecorObjects)
-                if (!decorSO.Name.Equals("This is a null element"))
-                    this.resourceSpawners.Add(new ResourceSpawner(decorSO.Name, decorSO.NumberGroup));
+                if (!decorSO.Name.Equals(value: "This is a null element"))
+                    this.resourceSpawners.Add(item: new ResourceSpawner(nameResourceSpawner: decorSO.Name, number: decorSO.NumberGroup));
         }
 
         protected override void Group(int pointer)

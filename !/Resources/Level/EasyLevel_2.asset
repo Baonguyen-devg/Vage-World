@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b85759f00fd019243a4f311a375d0cf2, type: 3}
-  m_Name: EasyLevel 1
+  m_Name: EasyLevel_2
   m_EditorClassIdentifier: 
-  height: 75
-  width: 75
+  height: 45
+  width: 45
   smooth: 7
-  randomFillPercent: 47
+  randomFillPercent: 43
   timeAppearBoss: 300
   skills:
   - name: This is a null element
@@ -49,16 +49,16 @@ MonoBehaviour:
     speed: 0.04
     distanceAttack: 1
     attackDelay: 2
-    numberObject: 8
-    numberGroup: 6
+    numberObject: 4
+    numberGroup: 4
   - name: DragonFly
     maximumHealth: 80
     dame: 50
     speed: 0.03
     distanceAttack: 5
     attackDelay: 2
-    numberObject: 7
-    numberGroup: 7
+    numberObject: 3
+    numberGroup: 2
   - name: Boss
     maximumHealth: 3000
     dame: 50
@@ -73,7 +73,7 @@ MonoBehaviour:
     numberGroup: 0
   - name: Log
     numberObject: 1
-    numberGroup: 50
+    numberGroup: 15
   - name: Stone
     numberObject: 1
     numberGroup: 15
@@ -89,25 +89,25 @@ MonoBehaviour:
     numberGroup: 0
   - name: Grass_1
     numberObject: 1
-    numberGroup: 15
+    numberGroup: 5
   - name: Grass_2
     numberObject: 1
-    numberGroup: 15
+    numberGroup: 5
   - name: Grass_3
     numberObject: 1
-    numberGroup: 15
+    numberGroup: 5
   - name: Tree_1
     numberObject: 1
-    numberGroup: 50
+    numberGroup: 5
   - name: Bone_1
     numberObject: 1
-    numberGroup: 15
+    numberGroup: 5
   - name: Box_1
     numberObject: 1
-    numberGroup: 15
+    numberGroup: 5
   - name: Stone_1
     numberObject: 1
-    numberGroup: 15
+    numberGroup: 5
   - name: Signal_1
     numberObject: 1
-    numberGroup: 15
+    numberGroup: 5
