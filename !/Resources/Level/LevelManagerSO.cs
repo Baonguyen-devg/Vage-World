@@ -73,6 +73,21 @@ public class LevelManagerSO : ScriptableObject
         [HideInInspector] public int NumberGroup => this.numberGroup;
     }
 
+    [System.Serializable] public class SkillSO
+    {
+        [Header(header: "Name Skill: "), SerializeField] private string name;
+        [HideInInspector] public string Name => this.name;
+
+        [Space(height: 3), Header(header: "[ SET UP SKILL ]"), Space(height: 3)]
+        [Range(min: 2, max: 4), SerializeField] private int levelSkill;
+        [HideInInspector] public int LevelSkill => levelSkill;
+        [Range(min: 5, max: 25), SerializeField] private int baseLevel;
+        [HideInInspector] public int BaseLevel => baseLevel;
+
+        [Space(height: 3), Header(header: "[ SET UP RATE OF SKILLs ]"), Space(height: 3)]
+        [Range(min: 0, max: 20), SerializeField] private float timeDelay;
+        [HideInInspector] public float TimeDelay => this.timeDelay;
+    }
 
     [Space(height: 3), Header(header: "[ SET UP MAP] ")]
     [Range(min: 50, max: 200), SerializeField] private int height;
@@ -84,42 +99,35 @@ public class LevelManagerSO : ScriptableObject
     [Range(min: 0, max: 100), SerializeField] private int randomFillPercent;
     [HideInInspector] public int RandomFillPercent => randomFillPercent;
 
-    [Space(height: 3), Header(header: "[ SET UP SKILL ]"), Space(height: 3)]
-    [Range(min: 2, max: 4), SerializeField] private int levelSkill;
-    [HideInInspector] public int LevelSkill => levelSkill;
-    [Range(min: 5, max: 25), SerializeField] private int baseLevel;
-    [HideInInspector] public int BaseLevel => baseLevel;
-
-    [Space(height: 3), Header(header: "[ SET UP RATE OF SKILLs ]"), Space(height: 3)]
-    [Range(min: 2, max: 5), SerializeField] private int rateSkill1;
-    [HideInInspector] public int RateSkill1 => rateSkill1;
-    [Range(min: 2, max: 5), SerializeField] private int rateSkill2;
-    [HideInInspector] public int RateSkill2 => rateSkill2;
-    [Range(min: 2, max: 5), SerializeField] private int rateSkill3;
-    [HideInInspector] public int RateSkill3 => rateSkill3;
-
     [Space(3), Header("[ SET UP TIMELINE ]"), Space(3)]
     [SerializeField] private int timeAppearBoss;
     [HideInInspector] public int TimeAppearBoss => timeAppearBoss;
+
+    [Space(3), Header("[ SET UP SKILL ]"), Space(3)]
+    [SerializeField] private List<SkillSO> skills = new List<SkillSO>();
+    [HideInInspector] public List<SkillSO> Skills => this.skills;
+
+    public SkillSO GetSkillSOByName(string name) =>
+        skills.FirstOrDefault(skillSO => skillSO.Name.Equals(value: name));
 
     [Space(3), Header("[ SET UP ENEMY ]"), Space(3)]
     [SerializeField] private List<EnemySO> enemies = new List<EnemySO>();
     [HideInInspector] public List<EnemySO> Enemies => this.enemies;
 
+    public EnemySO GetEnemySOByName(string name) =>
+        enemies.FirstOrDefault(enemySO => enemySO.Name.Equals(value: name));
+
     [Space(3), Header("[ SET UP ITEM ]"), Space(3)]
     [SerializeField] private List<ItemSO> items = new List<ItemSO>();
     [HideInInspector] public List<ItemSO> Items => this.items;
+
+    public ItemSO GetItemSOByName(string name) =>
+        items.FirstOrDefault(itemSO => itemSO.Name.Equals(value: name));
 
     [Space(3), Header("[ SET UP DECOR OBJECT ]"), Space(3)]
     [SerializeField] private List<DecorSO> decorObjects = new List<DecorSO>();
     [HideInInspector] public List<DecorSO> DecorObjects => this.decorObjects;
 
-    public EnemySO GetEnemySOByName(string name) =>
-       enemies.FirstOrDefault(enemySO => enemySO.Name.Equals(value: name));
-
-    public ItemSO GetItemSOByName(string name) =>
-       items.FirstOrDefault(itemSO => itemSO.Name.Equals(value: name));
-
     public DecorSO GetDecorSOByName(string name) =>
-       decorObjects.FirstOrDefault(decorSO => decorSO.Name.Equals(value: name));
+        decorObjects.FirstOrDefault(decorSO => decorSO.Name.Equals(value: name));
 }

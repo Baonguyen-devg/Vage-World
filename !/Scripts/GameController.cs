@@ -1,10 +1,14 @@
 using System;
 using UnityEngine;
 
-public class TimelineController : AutoMonobehaviour
+public class GameController : AutoMonobehaviour
 {
-    [SerializeField] private static TimelineController instance;
+    [SerializeField] private static GameController instance;
+    public static GameController Instance => instance; 
+
     [SerializeField] private int timeAppearBoss;
+    public int TimeAppearBoss => this.timeAppearBoss; 
+
     [SerializeField] private Boolean spawnBoss;
     [SerializeField] private Transform boss;
 
@@ -18,12 +22,9 @@ public class TimelineController : AutoMonobehaviour
         this.LoadInformationMap();
     }
 
-    public int TimeAppearBoss { get => timeAppearBoss; }
-    public static TimelineController Instance { get => instance; }
-
     protected override void LoadComponent()
     {
-        TimelineController.instance = this;
+        GameController.instance = this;
         base.LoadComponent();
         this.LoadLevelManagerSO();
         this.LoadInformationMap();
@@ -33,7 +34,7 @@ public class TimelineController : AutoMonobehaviour
     {
         if (this.spawnBoss == true) return;
         if (Time.time < this.timeAppearBoss) return;
-        this.boss.gameObject.SetActive(true);
+        this.boss.gameObject.SetActive(value: true);
         this.spawnBoss = true;
     }
 

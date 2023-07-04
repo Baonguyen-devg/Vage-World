@@ -24,13 +24,13 @@ public class SkillController : AutoMonobehaviour
 
     [SerializeField] protected float timeSkill2;
     public float TimeSkill2 => this.timeSkill2;
-
+  
     [SerializeField] protected float timeSkill3;
     public float TimeSkill3 => this.timeSkill3;
 
     [SerializeField] protected PlayerShootingAttack attack;
     protected virtual void LoadPlayerAttack() =>
-        this.attack ??= GameObject.Find(name: "Player")?.transform.Find(n: "Attack")?.GetComponent<PlayerShootingAttack>();
+        this.attack ??= GameObject.Find(name: "GameBoy")?.transform.Find(n: "Attack")?.GetComponent<PlayerShootingAttack>();
 
     public virtual void SetTimeSkillOne(bool status)
     {
