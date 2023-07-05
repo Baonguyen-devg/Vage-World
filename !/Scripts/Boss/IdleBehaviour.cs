@@ -1,5 +1,3 @@
-using Pathfinding;
-
 public class IdleBehaviour : Behaviour
 {
     protected override void OnEnable()

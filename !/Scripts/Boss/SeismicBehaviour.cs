@@ -1,5 +1,3 @@
-using Pathfinding;
-
 public class SeismicBehaviour : Behaviour
 {
     protected override void OnEnable()

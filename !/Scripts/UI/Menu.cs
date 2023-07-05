@@ -1,26 +1,47 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
-public class Menu : MonoBehaviour
+public class Menu : AutoMonobehaviour
 {
-    public void PlayGame()
+    [SerializeField] private List<Button> buttonLevels = new List<Button>();
+    private void LoadButtomLevels()
     {
-        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-        int nextSceneIndex = currentSceneIndex + 1;
-
-        if (nextSceneIndex >= SceneManager.sceneCountInBuildSettings)
-        {
-            Debug.LogWarning(message: "Scene don't exit!");
-            return;
-        }
-        SceneManager.LoadScene(nextSceneIndex);
+        Transform holder = transform.Find(n: "LevelTable")?.Find(n: "Table");
+        foreach (Transform button in holder) 
+            this.buttonLevels.Add(item: button.GetComponent<Button>());
     }
 
-    public void ShowCredits()
-    {
+    protected override void LoadComponent() => this.LoadButtomLevels();
 
+    protected override void Awake()
+    {
+        base.Awake();
+        int unlockedLevel = PlayerPrefs.GetInt(key: "Unlockedlevel", defaultValue: 1);
+
+        foreach (Button button in this.buttonLevels) 
+            this.ChangeStatusButton(button: button, status: false);
+
+        for (int i = 0; i < unlockedLevel; i++)
+            this.ChangeStatusButton(button: this.buttonLevels[i], status: true);
     }
 
-    public void QuitGame() => Application.Quit();
+    private void ChangeStatusButton(Button button, bool status)
+    {
+        button.interactable = status;
+        button.transform.Find("Lock").gameObject.SetActive(!status);
+    }
+
+    public virtual void LoadEasyLevel(string nameLevel)
+    {
+        GameController.Instance.SetNameLevel(nameLevel: nameLevel);
+        this.PlayGame();
+    }
+
+    public virtual void PlayGame() =>
+        SceneManager.LoadScene(sceneBuildIndex: SceneManager.GetActiveScene().buildIndex + 1);
+
+    public virtual void QuitGame() => Application.Quit();
 }
 

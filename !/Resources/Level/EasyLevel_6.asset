@@ -1,0 +1,113 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b85759f00fd019243a4f311a375d0cf2, type: 3}
+  m_Name: EasyLevel_6
+  m_EditorClassIdentifier: 
+  height: 75
+  width: 75
+  smooth: 7
+  randomFillPercent: 47
+  timeAppearBoss: 300
+  skills:
+  - name: This is a null element
+    levelSkill: 0
+    baseLevel: 0
+    timeDelay: 0
+  - name: Skill1
+    levelSkill: 2
+    baseLevel: 5
+    timeDelay: 5
+  - name: Skill2
+    levelSkill: 2
+    baseLevel: 5
+    timeDelay: 7
+  - name: Skill3
+    levelSkill: 3
+    baseLevel: 5
+    timeDelay: 9
+  enemies:
+  - name: This is a null element
+    maximumHealth: 0
+    dame: 0
+    speed: 0
+    distanceAttack: 0
+    attackDelay: 0
+    numberObject: 0
+    numberGroup: 0
+  - name: Skeleton
+    maximumHealth: 100
+    dame: 50
+    speed: 0.04
+    distanceAttack: 1
+    attackDelay: 2
+    numberObject: 8
+    numberGroup: 6
+  - name: DragonFly
+    maximumHealth: 80
+    dame: 50
+    speed: 0.03
+    distanceAttack: 5
+    attackDelay: 2
+    numberObject: 7
+    numberGroup: 7
+  - name: Boss
+    maximumHealth: 3000
+    dame: 50
+    speed: 0.03
+    distanceAttack: 1
+    attackDelay: 2
+    numberObject: 0
+    numberGroup: 1
+  items:
+  - name: This is a null element
+    numberObject: 0
+    numberGroup: 0
+  - name: Log
+    numberObject: 1
+    numberGroup: 50
+  - name: Stone
+    numberObject: 1
+    numberGroup: 15
+  - name: Grass
+    numberObject: 1
+    numberGroup: 15
+  - name: DragonTree
+    numberObject: 1
+    numberGroup: 15
+  decorObjects:
+  - name: This is a null element
+    numberObject: 0
+    numberGroup: 0
+  - name: Grass_1
+    numberObject: 1
+    numberGroup: 15
+  - name: Grass_2
+    numberObject: 1
+    numberGroup: 15
+  - name: Grass_3
+    numberObject: 1
+    numberGroup: 15
+  - name: Tree_1
+    numberObject: 1
+    numberGroup: 50
+  - name: Bone_1
+    numberObject: 1
+    numberGroup: 15
+  - name: Box_1
+    numberObject: 1
+    numberGroup: 15
+  - name: Stone_1
+    numberObject: 1
+    numberGroup: 15
+  - name: Signal_1
+    numberObject: 1
+    numberGroup: 15

@@ -1,5 +1,4 @@
 using UnityEngine;
-using Pathfinding;
 
 public class BossEnemyBehaviours : EnemyBehaviours
 {

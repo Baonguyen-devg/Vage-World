@@ -1,4 +1,3 @@
-using Pathfinding;
 using UnityEngine;
 
 public class StoningBehaviour : Behaviour

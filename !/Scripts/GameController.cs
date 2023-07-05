@@ -7,6 +7,8 @@ public class GameController : AutoMonobehaviour
 
     [SerializeField] private string nameLevel = default_Level;
     public string NameLevel => this.nameLevel;
+    public void SetNameLevel(string nameLevel) => 
+        this.nameLevel = nameLevel;
 
     [SerializeField] private static GameController instance;
     public static GameController Instance => instance; 
@@ -23,6 +25,12 @@ public class GameController : AutoMonobehaviour
     { 
         this.levelManagerSO = Resources.Load<LevelManagerSO>(path: "Level/" + GameController.Instance.NameLevel);
         this.LoadInformationMap();
+    }
+
+    protected override void Awake()
+    {
+        base.Awake();
+        GameObject.DontDestroyOnLoad(gameObject);
     }
 
     protected override void LoadComponent()

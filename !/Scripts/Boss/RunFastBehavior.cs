@@ -1,6 +1,5 @@
 using UnityEngine;
 using Movement;
-using Pathfinding;
 
 public class RunFastBehavior : Behaviour
 {
