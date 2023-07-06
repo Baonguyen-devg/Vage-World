@@ -18,7 +18,7 @@ public class Menu : AutoMonobehaviour
     protected override void Awake()
     {
         base.Awake();
-        int unlockedLevel = PlayerPrefs.GetInt(key: "Unlockedlevel", defaultValue: 1);
+        int unlockedLevel = PlayerPrefs.GetInt(key: "UnlockedLevel", defaultValue: 1);
 
         foreach (Button button in this.buttonLevels) 
             this.ChangeStatusButton(button: button, status: false);
@@ -32,10 +32,10 @@ public class Menu : AutoMonobehaviour
         button.interactable = status;
         button.transform.Find("Lock").gameObject.SetActive(!status);
     }
-
-    public virtual void LoadEasyLevel(string nameLevel)
+    
+    public virtual void LoadEasyLevel(int Level)
     {
-        GameController.Instance.SetNameLevel(nameLevel: nameLevel);
+        GameController.Instance.SetNameLevel(level: Level);
         this.PlayGame();
     }
 

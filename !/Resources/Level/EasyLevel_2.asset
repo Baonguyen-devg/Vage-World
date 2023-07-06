@@ -111,3 +111,16 @@ MonoBehaviour:
   - name: Signal_1
     numberObject: 1
     numberGroup: 5
+  missions:
+  - name: This is a null element
+    actionFollow: 
+    number: 0
+  - name: Skeleton
+    actionFollow: Skill
+    number: 10
+  - name: DragonFly
+    actionFollow: Skill
+    number: 8
+  - name: Grass
+    actionFollow: Pick
+    number: 5

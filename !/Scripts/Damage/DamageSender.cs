@@ -10,7 +10,7 @@ namespace DamageSender
         [Header(header: "[ Level Manager Scriptable Object ]"), Space(height: 10)]
         [SerializeField] protected LevelManagerSO levelManagerSO = default;
         protected virtual void LoadLevelManagerSO() =>
-             this.levelManagerSO = Resources.Load<LevelManagerSO>(path: "Level/" + GameController.Instance.NameLevel);
+             this.levelManagerSO = Resources.Load<LevelManagerSO>(path: "Level/" + "EasyLevel_" + GameController.Instance.Level.ToString());
 
         [Header(header: "Object's damage sender"), Space(height: 10)]
         [SerializeField] protected int dame = 0;

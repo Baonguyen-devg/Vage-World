@@ -4,9 +4,6 @@ namespace Movement
 {
     public abstract class PointSpawnMovement : AutoMonobehaviour
     {
-        protected virtual void Update() =>
-            this.RotationFollowPosition(this.GetPos().normalized);
-
         protected virtual void RotationFollowPosition(Vector2 position)
         {
             float angle = Mathf.Atan2(position.y, position.x) * Mathf.Rad2Deg;

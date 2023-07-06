@@ -6,6 +6,14 @@ namespace CreatingPackage
 {
     public class CreateSeaDecorObject : Create
     {
+        protected override void LoadResourceSpawners()
+        {
+            this.resourceSpawners.Clear();
+            foreach (var decorSO in this.levelManagerSO.SeaDecorObjects)
+                if (!decorSO.Name.Equals(value: "This is a null element"))
+                    this.resourceSpawners.Add(item: new ResourceSpawner(nameResourceSpawner: decorSO.Name, number: decorSO.NumberGroup));
+        }
+
         protected override void Group(int pointer)
         {
             List<Transform> listFake = this.mapController.CreateMap.seaList;
@@ -18,11 +26,6 @@ namespace CreatingPackage
                 objectSpawner.GetComponentInChildren<GroupSeaDecorObject>().
                     SetObjectSpawner(nameObject: this.resourceSpawners[pointer].NameResourceSpawner);
             }
-        }
-
-        protected override void LoadResourceSpawners()
-        {
-            throw new System.NotImplementedException();
         }
 
         protected override Transform SpawnObject(Vector3 position, Quaternion rotation) =>

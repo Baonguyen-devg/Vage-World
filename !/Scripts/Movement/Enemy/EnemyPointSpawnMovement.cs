@@ -8,6 +8,9 @@ namespace Movement
         protected virtual void LoadPlayer() =>
             this.player ??= GameObject.Find("Player").transform;
 
+        protected virtual void Update() =>
+            this.RotationFollowPosition(this.GetPos().normalized);
+
         protected override void LoadComponent()
         {
             base.LoadComponent();

@@ -3,12 +3,12 @@ using UnityEngine;
 
 public class GameController : AutoMonobehaviour
 {
-    protected const string default_Level = "EasyLevel_1";
+    protected const int default_Level = 1;
 
-    [SerializeField] private string nameLevel = default_Level;
-    public string NameLevel => this.nameLevel;
-    public void SetNameLevel(string nameLevel) => 
-        this.nameLevel = nameLevel;
+    [SerializeField] private int level = default_Level;
+    public int Level => this.level;
+    public void SetNameLevel(int level) => 
+        this.level = level;
 
     [SerializeField] private static GameController instance;
     public static GameController Instance => instance; 
@@ -23,20 +23,22 @@ public class GameController : AutoMonobehaviour
     [SerializeField] private LevelManagerSO levelManagerSO;
     protected virtual void LoadLevelManagerSO()
     { 
-        this.levelManagerSO = Resources.Load<LevelManagerSO>(path: "Level/" + GameController.Instance.NameLevel);
+        this.levelManagerSO = Resources.Load<LevelManagerSO>(path: "Level/" + "EasyLevel_" + GameController.Instance.Level.ToString());
         this.LoadInformationMap();
     }
 
     protected override void Awake()
     {
-        base.Awake();
+        if (instance != null) return;
+        GameController.instance = this;
         GameObject.DontDestroyOnLoad(gameObject);
+        base.Awake();
     }
 
     protected override void LoadComponent()
     {
-        GameController.instance = this;
         base.LoadComponent();
+        GameController.instance = this;
         this.LoadLevelManagerSO();
         this.LoadInformationMap();
     }

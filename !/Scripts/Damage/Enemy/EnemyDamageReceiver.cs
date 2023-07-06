@@ -6,7 +6,7 @@ namespace DamageReceiver
     public class EnemyDamageReceiver : DamageReceiver
     {
         [SerializeField] protected EnemyController controller;
-        protected virtual void LoadEnemyController() => 
+        protected virtual void LoadEnemyController() =>
             this.controller ??= transform.parent.GetComponent<EnemyController>();
 
         [Header(header: "Hit Effect!!!"), Space(height: 10)]
@@ -25,7 +25,7 @@ namespace DamageReceiver
         }
 
         protected virtual void LoadMaximumHealth() =>
-            this.maximumHealth = (int) this.levelManagerSO?.GetEnemySOByName(transform.parent.name)?.MaximumHealth;
+            this.maximumHealth = (int)this.levelManagerSO?.GetEnemySOByName(transform.parent.name)?.MaximumHealth;
 
         public override void DecreaseHealth(int health)
         {
@@ -33,7 +33,7 @@ namespace DamageReceiver
             this.HitEffect();
             this.UpgradeAndAppearHealthBar();
         }
- 
+
         protected virtual void HitEffect()
         {
             render.color = new Color32(r: 221, g: 83, b: 11, a: 255);
@@ -42,7 +42,7 @@ namespace DamageReceiver
 
         protected virtual void ResetColor() =>
            render.color = new Color32(r: 255, g: 255, b: 255, a: 255);
-        
+
         protected virtual void UpgradeAndAppearHealthBar()
         {
             this.controller.HealthBar.ChangeHealthBar(percent: this.CalculatePercentHealth());
@@ -55,8 +55,11 @@ namespace DamageReceiver
 
         protected virtual void DisappearHealthbar() =>
             this.controller.HealthBar.transform.parent.gameObject.SetActive(value: false);
-            
-        protected override void OnDead() =>
+
+        protected override void OnDead()
+        {
             EnemySpawner.Instance.Despawn(obj: transform.parent);
+            AchievementController.Instance.GetAchievementByName(name: transform.parent.name)?.Increase(1);
+        }
     }
 }

@@ -39,6 +39,7 @@ public class Touch : AutoMonobehaviour
     {
         this.materialController.IncreaseNumber(nameMaterial: transform.parent.name, number: 1);
         ItemSpawner.Instance.Despawn(obj: transform.parent);
+        AchievementController.Instance?.GetAchievementByName(name: transform.parent.name)?.Increase(number: 1);
     }
 
     public virtual void ChangeStatusFrameAndHaveTouchTo(bool newStatus)

@@ -6,11 +6,7 @@ public class UIMaterialController : AutoMonobehaviour
 {
     [SerializeField] protected List<Transform> listUIMaterial;
 
-    protected override void LoadComponent()
-    {
-        base.LoadComponent();
-        this.LoadListUIMaterial();
-    }
+    protected override void LoadComponent() => this.LoadListUIMaterial();
 
     protected virtual void LoadListUIMaterial()
     {

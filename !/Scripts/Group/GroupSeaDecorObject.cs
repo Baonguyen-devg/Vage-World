@@ -7,6 +7,13 @@ namespace Group
     {
         [SerializeField] protected Queue<Vector2> seaList;
 
+        public override void SetObjectSpawner(string nameObject)
+        {
+            this.objectSpawner = nameObject;
+            this.numberObject = this.levelManagerSO.GetSeaDecorSOByName(nameObject).NumberObject;
+            this.CreateObject(position: transform.parent.position);
+        }
+
         protected override void CreateObject(Vector3 position)
         {
             int count = 0;

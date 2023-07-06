@@ -111,3 +111,32 @@ MonoBehaviour:
   - name: Signal_1
     numberObject: 1
     numberGroup: 2
+  seaDecorObjects:
+  - name: This is a null element
+    numberObject: 0
+    numberGroup: 0
+  - name: Stone_1
+    numberObject: 1
+    numberGroup: 5
+  - name: Stone_2
+    numberObject: 1
+    numberGroup: 5
+  - name: Stone_3
+    numberObject: 1
+    numberGroup: 5
+  - name: Duckweed
+    numberObject: 1
+    numberGroup: 5
+  missions:
+  - name: This is a null element
+    actionFollow: Skill
+    number: 1
+  - name: Skeleton
+    actionFollow: Skill
+    number: 6
+  - name: Log
+    actionFollow: Pick
+    number: 8
+  - name: Grass
+    actionFollow: Pick
+    number: 10

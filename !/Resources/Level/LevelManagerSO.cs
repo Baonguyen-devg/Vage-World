@@ -89,6 +89,22 @@ public class LevelManagerSO : ScriptableObject
         [HideInInspector] public float TimeDelay => this.timeDelay;
     }
 
+    [System.Serializable] public class MissionSO
+    {
+        private const string default_Name = "Enemy";
+        private const int default_Number = 1;
+        private const string default_Action_Follow = "Skill";
+
+        [SerializeField] private string name = default_Name;
+        [HideInInspector] public string Name => this.name;
+
+        [SerializeField] private string actionFollow = default_Action_Follow;
+        public string ActionFollow => this.actionFollow;
+
+        [Range(min: 0, max: 50), SerializeField] private int number = default_Number;
+        [HideInInspector] public int Number => number;
+    }
+
     [Space(height: 3), Header(header: "[ SET UP MAP] ")]
     [Range(min: 0, max: 200), SerializeField] private int height;
     [HideInInspector] public int Height => this.height;
@@ -130,4 +146,18 @@ public class LevelManagerSO : ScriptableObject
 
     public DecorSO GetDecorSOByName(string name) =>
         decorObjects.FirstOrDefault(decorSO => decorSO.Name.Equals(value: name));
+
+    [Space(3), Header("[ SET UP SEA DECOR OBJECT ]"), Space(3)]
+    [SerializeField] private List<DecorSO> seaDecorObjects = new List<DecorSO>();
+    [HideInInspector] public List<DecorSO> SeaDecorObjects => this.seaDecorObjects;
+
+    public DecorSO GetSeaDecorSOByName(string name) =>
+      seaDecorObjects.FirstOrDefault(decorSO => decorSO.Name.Equals(value: name));
+
+    [Space(3), Header("[ SET UP MISSION ]"), Space(3)]
+    [SerializeField] private List<MissionSO> missions = new List<MissionSO>();
+    [HideInInspector] public List<MissionSO> Missions => this.missions;
+
+    public MissionSO GetMissionSOByName(string name) =>
+        missions.FirstOrDefault(missionSO => missionSO.Name.Equals(value: name));
 }
