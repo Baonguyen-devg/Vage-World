@@ -123,6 +123,15 @@ public class LevelManagerSO : ScriptableObject
     [SerializeField] private List<SkillSO> skills = new List<SkillSO>();
     [HideInInspector] public List<SkillSO> Skills => this.skills;
 
+    [SerializeField] private bool haveSkill1 = default;
+    public bool HaveSkill1 => this.haveSkill1;
+    
+    [SerializeField] private bool haveSkill2 = default;
+    public bool HaveSkill2 => this.haveSkill2;
+    
+    [SerializeField] private bool haveSkill3 = default;
+    public bool HaveSkill3 => this.haveSkill3;
+
     public SkillSO GetSkillSOByName(string name) =>
         skills.FirstOrDefault(skillSO => skillSO.Name.Equals(value: name));
 

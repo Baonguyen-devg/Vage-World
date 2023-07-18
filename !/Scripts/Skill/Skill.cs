@@ -42,6 +42,21 @@ public class Skill : AutoMonobehaviour
     protected override void LoadComponentInAwakeAfter()
     {
         base.LoadComponentInAwakeAfter();
+        if (transform.name.Equals("Skill1") && !this.levelManagerSO.HaveSkill1)
+        {
+            this.gameObject.SetActive(false);
+            return;
+        }
+        if (transform.name.Equals("Skill2") && !this.levelManagerSO.HaveSkill2)
+        {
+            this.gameObject.SetActive(false);
+            return;
+        }
+        if (transform.name.Equals("Skill3") && !this.levelManagerSO.HaveSkill3)
+        {
+            this.gameObject.SetActive(false);
+            return;
+        }
         this.LoadLevelSkill();
         this.LoadBaseLevel();
         this.LoadTimeDelay();

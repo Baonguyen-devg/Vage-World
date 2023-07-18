@@ -47,7 +47,11 @@ public class UISkill : AutoMonobehaviour
     {
         yield return StartCoroutine(base.LoadWaitForLongTime());
         this.LoadSkillPrefab();
-        this.LoadUIMaterial();
+        if (!this.skill.gameObject.activeSelf)
+        {
+            this.gameObject.SetActive(false);
+        }
+        else this.LoadUIMaterial();
     }
 
     protected virtual void Update()

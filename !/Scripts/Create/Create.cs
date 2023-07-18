@@ -35,8 +35,10 @@ namespace CreatingPackage
 
         protected override void LoadComponent() => this.LoadMapController();
 
-        protected override void LoadComponentInAwakeBefore() => this.LoadLevelManagerSO();
-        protected override void LoadComponentInAwakeAfter() => this.LoadResourceSpawners();
+        protected override void LoadComponentInAwakeAfter() {
+            this.LoadLevelManagerSO();
+            this.LoadResourceSpawners();
+        }
 
         public virtual void CreateGroup() => 
             Enumerable.Range(start: 0, count: this.resourceSpawners.Count)
