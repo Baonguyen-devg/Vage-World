@@ -30,7 +30,7 @@ public class SkillController : AutoMonobehaviour
 
     [SerializeField] protected PlayerShootingAttack attack;
     protected virtual void LoadPlayerAttack() =>
-        this.attack ??= GameObject.Find(name: "GameBoy")?.transform.Find(n: "Attack")?.GetComponent<PlayerShootingAttack>();
+        this.attack ??= GameObject.Find(name: "Supporters")?.GetComponent<PlayerShootingAttack>();
 
     public virtual void SetTimeSkillOne(bool status)
     {
@@ -56,10 +56,15 @@ public class SkillController : AutoMonobehaviour
 
     protected override void LoadComponent()
     {
-        SkillController.instance = this;
         base.LoadComponent();
         this.LoadSkillPrefab();
         this.LoadPlayerAttack();
+    }
+
+    protected override void LoadComponentInAwakeBefore()
+    {
+        base.LoadComponentInAwakeBefore();
+        SkillController.instance = this;
     }
 
     protected virtual void Update()
@@ -86,7 +91,7 @@ public class SkillController : AutoMonobehaviour
     public virtual Transform GetPrefabByName(string namePrefab)
     {
         foreach (Transform prefab in this.skillPrefab)
-            if (namePrefab == prefab.name) return prefab;
+            if (namePrefab.Equals(prefab.name)) return prefab;
         return null;
     }
 }

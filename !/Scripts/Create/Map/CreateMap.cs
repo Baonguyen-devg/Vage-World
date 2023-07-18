@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -10,6 +11,7 @@ public class CreateMap : AutoMonobehaviour
     [Header(header: "Adjusting the parameters of the map"), Space(height: 10)]
     [SerializeField] protected int heightMap = 50;
     public int HeightMap => this.heightMap;
+
     [SerializeField] protected int widthMap = 50;
     public int WidthMap => this.widthMap;
 
@@ -20,6 +22,7 @@ public class CreateMap : AutoMonobehaviour
     [SerializeField] protected int[,] titles;
     [SerializeField] protected int[,] colorTitles;
     [SerializeField] protected string seed = "Baonguyen.devG";
+
     [SerializeField] protected MapController mapController;
     protected virtual void LoadMapController() =>
       this.mapController ??= GetComponentInParent<MapController>();
@@ -29,18 +32,10 @@ public class CreateMap : AutoMonobehaviour
 
     [Header(header: "Scriptable Object LevelManager"), Space(height: 10)]
     [SerializeField] private LevelManagerSO levelManagerSO;
-    protected virtual void LoadLevelManagerSO()
-    {
+    protected virtual void LoadLevelManagerSO() =>
         this.levelManagerSO = Resources.Load<LevelManagerSO>(path: "Level/" + "EasyLevel_" + GameController.Instance.Level.ToString());
-        this.LoadInformationMap();
-    }
- 
-    protected override void LoadComponent()
-    {
-        base.LoadComponent();
-        this.LoadMapController();
-        this.LoadLevelManagerSO();
-    }
+
+    protected override void LoadComponent() => this.LoadMapController();
 
     protected virtual void LoadInformationMap()
     {
@@ -50,16 +45,44 @@ public class CreateMap : AutoMonobehaviour
         this.randomFillPercent = this.levelManagerSO.RandomFillPercent;
     }
 
-    protected virtual void Start()
+    protected override void LoadComponentInAwakeBefore()
     {
+        base.LoadComponentInAwakeBefore();
+        this.LoadLevelManagerSO();
+    }
+
+    protected override void LoadComponentInAwakeAfter()
+    {
+        base.LoadComponentInAwakeAfter();
+        this.LoadInformationMap();
         Application.targetFrameRate = 60;
+    }
+
+    protected override void Start()
+    {
         this.CreateBitRandom();
-        this.SmoothMap();
+        this.SmoothMap();        
+        base.Start();
+    }
+
+    protected override IEnumerator LoadWaitForShortTime()
+    {
+        yield return StartCoroutine(base.LoadWaitForShortTime());
         this.CreateMapRandom();
-        this.mapController.CreateGroupEnemy.CreateGroup();
+    }
+
+    protected override IEnumerator LoadWaitForMediumTime()
+    {
+        yield return StartCoroutine(base.LoadWaitForMediumTime());
         this.mapController.DecorObject.CreateGroup();
-        this.mapController.CreateItem.CreateGroup();
         this.mapController.CreateSeaDecorObject.CreateGroup();
+    }
+
+    protected override IEnumerator LoadWaitForLongTime()
+    {
+        yield return StartCoroutine(base.LoadWaitForLongTime());
+        this.mapController.CreateItem.CreateGroup();
+        this.mapController.CreateGroupEnemy.CreateGroup();
     }
 
     public virtual void RemoveLand(int posX, int posY) =>

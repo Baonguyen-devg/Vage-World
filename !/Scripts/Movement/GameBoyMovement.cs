@@ -14,11 +14,7 @@ public class GameBoyMovement : AutoMonobehaviour
     [SerializeField] protected float distanceToPlayer = 1;
     [SerializeField] protected float angle;
 
-    protected override void LoadComponent()
-    {
-        base.LoadComponent();
-        this.LoadPlayer();
-    }
+    protected override void LoadComponent() => this.LoadPlayer();
 
     protected virtual void Update() => Move();
 

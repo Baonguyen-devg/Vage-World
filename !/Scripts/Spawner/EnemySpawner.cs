@@ -6,9 +6,9 @@ public class EnemySpawner : Spawner
 
     public static EnemySpawner Instance => instance;
 
-    protected override void LoadComponent()
+    protected override void LoadComponentInAwakeBefore()
     {
+        base.LoadComponentInAwakeBefore();
         EnemySpawner.instance = this;
-        base.LoadComponent();
     }
 }

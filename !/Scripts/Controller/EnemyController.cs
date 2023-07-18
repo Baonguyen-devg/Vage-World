@@ -75,7 +75,7 @@ public class EnemyController : AutoMonobehaviour
         }
     }
 
-    protected virtual void Start()
+    protected override void LoadComponentInAwakeBefore()
     {
         GameObject pos = new GameObject();
         pos.transform.position = transform.position;

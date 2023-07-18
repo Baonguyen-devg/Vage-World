@@ -27,16 +27,21 @@ public class CreateRandomDirection : AutoMonobehaviour
     private void LoadController() =>
         this.controller ??= transform.parent?.GetComponent<EnemyController>();
 
-    protected override void LoadComponent()
+    protected override void LoadComponent() => this.LoadController();
+
+    protected override void LoadComponentInAwakeBefore()
     {
-        this.LoadController();
+        base.LoadComponentInAwakeBefore();
         this.targetFollow = GameObject.Find("Player").transform;
-        int numberDirection = (int)360 / rate_Part_Crirle;
         this.directions = new List<Vector2>();
         this.validDirections = new List<int>();
         this.avoidDirections = new List<Vector2>();
+    }
 
-        //Using to add directions into list follow rate_Part_Crirle
+    protected override void LoadComponentInAwakeAfter()
+    {
+        base.LoadComponentInAwakeAfter();
+        int numberDirection = (int)360 / rate_Part_Crirle;
         for (int i = 0; i < numberDirection; i++)
             this.directions.Add(this.GetPostionFromAngle(2f * Mathf.PI / (float)numberDirection * i));
     }

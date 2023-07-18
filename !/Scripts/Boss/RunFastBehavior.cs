@@ -3,7 +3,6 @@ using Movement;
 
 public class RunFastBehavior : Behaviour
 {
-
     protected override void OnEnable()
     {
         base.OnEnable();

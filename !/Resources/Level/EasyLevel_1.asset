@@ -48,7 +48,7 @@ MonoBehaviour:
     dame: 50
     speed: 0.04
     distanceAttack: 1
-    attackDelay: 2
+    attackDelay: 4
     numberObject: 4
     numberGroup: 3
   - name: DragonFly
@@ -57,8 +57,8 @@ MonoBehaviour:
     speed: 0.03
     distanceAttack: 5
     attackDelay: 2
-    numberObject: 0
-    numberGroup: 0
+    numberObject: 4
+    numberGroup: 2
   - name: Boss
     maximumHealth: 3000
     dame: 50
@@ -136,7 +136,7 @@ MonoBehaviour:
     number: 6
   - name: Log
     actionFollow: Pick
-    number: 8
+    number: 3
   - name: Grass
     actionFollow: Pick
-    number: 10
+    number: 4

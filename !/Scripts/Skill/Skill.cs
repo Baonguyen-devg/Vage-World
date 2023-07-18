@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -31,18 +32,24 @@ public class Skill : AutoMonobehaviour
     protected virtual void LoadTimeDelay() =>
         this.timeDelay = (float)this.levelManagerSO?.GetSkillSOByName(transform.name).TimeDelay;
 
-    protected override void LoadComponent()
+    protected override void LoadComponentInAwakeBefore()
     {
-        base.LoadComponent();
+        base.LoadComponentInAwakeBefore();
         this.LoadLevelManagerSO();
+        this.listRandomMaterial = new Dictionary<Transform, int>();
+    }
+
+    protected override void LoadComponentInAwakeAfter()
+    {
+        base.LoadComponentInAwakeAfter();
         this.LoadLevelSkill();
         this.LoadBaseLevel();
         this.LoadTimeDelay();
     }
 
-    protected virtual void Start()
-    {
+    protected override void Start() {
         this.RandomPositionMap();
+        this.LoadLevelSkill();
         this.RandomMaterial();
     }
 
@@ -55,7 +62,6 @@ public class Skill : AutoMonobehaviour
 
     protected virtual void RandomMaterial()
     {
-        this.listRandomMaterial = new Dictionary<Transform, int>();
         int minRandom = this.baseLevel * (this.levelSkill - 1);
         int maxRandom = this.baseLevel * (this.levelSkill + 1);
 
@@ -81,6 +87,7 @@ public class Skill : AutoMonobehaviour
 
     public virtual bool CheckEnough()
     {
+        if (this.listRandomMaterial.Count == 0) return false;
         foreach (KeyValuePair<Transform, int> key in this.listRandomMaterial)
             if (key.Value > MaterialController.Instance.GetNumberMaterial(nameMaterial: key.Key.name)) return false;
         return true;

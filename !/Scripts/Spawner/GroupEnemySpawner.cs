@@ -4,9 +4,9 @@ public class GroupEnemySpawner : Spawner
     public static string pointSpawn_1 = "PointSpawn_1";
     public static GroupEnemySpawner Instance => instance;
 
-    protected override void LoadComponent()
+    protected override void LoadComponentInAwakeBefore()
     {
+        base.LoadComponentInAwakeBefore();
         GroupEnemySpawner.instance = this;
-        base.LoadComponent();
     }
 }

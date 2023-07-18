@@ -28,10 +28,15 @@ public class UISkillController : AutoMonobehaviour
 
     protected override void LoadComponent()
     {
-        UISkillController.instance = this;
         base.LoadComponent();
         this.LoadSkillPrefab();
         this.LoadMaterialFramePrefab();
+    }
+
+    protected override void LoadComponentInAwakeBefore()
+    {
+        base.LoadComponentInAwakeBefore();
+        UISkillController.instance = this;
     }
 
     public virtual Image GetPrefabByName(string _name)

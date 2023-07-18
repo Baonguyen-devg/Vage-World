@@ -3,7 +3,7 @@ using UnityEngine;
 public class BossEnemyBehaviours : EnemyBehaviours
 {
     [SerializeField] protected string[] standBehaviours = { "Laser", "Stoning", "Seismic", "Idle" };
-    [SerializeField] protected string[] runBeharviours = { "Run", "RunFast" };
+    [SerializeField] protected string[] runBehaviours = { "Run", "RunFast" };
 
     [SerializeField] protected double NextAttack, rateTime;
     [SerializeField] protected int count = 0;
@@ -12,14 +12,20 @@ public class BossEnemyBehaviours : EnemyBehaviours
     {
         if (Time.time < this.NextAttack) return;
         this.NextAttack = Time.time + this.rateTime;
+        this.DoBehaviour();
+    }
 
+    protected virtual void DoBehaviour() 
+    {
         this.controller.Model.GetComponent<Animator>().SetTrigger(name: this.listBehaviours[this.count].name);
-        
-        foreach (string nameBehaviour in this.standBehaviours)
-            if (nameBehaviour.Equals(value: this.listBehaviours[this.count].name))
-                this.controller.Movement.gameObject.SetActive(value: false);
+        this.SetStandBehaivours();
+        this.SetRunBehaviours();
+        this.count = (this.count + 1) % this.listBehaviours.Count;
+    }
 
-        foreach (string nameBehaviour in this.runBeharviours)
+    protected virtual void SetRunBehaviours()
+    {
+        foreach (string nameBehaviour in this.runBehaviours)
             if (nameBehaviour.Equals(value: this.listBehaviours[this.count].name))
             {
                 this.controller.Movement.gameObject.SetActive(value: true);
@@ -28,7 +34,12 @@ public class BossEnemyBehaviours : EnemyBehaviours
                 else
                     this.controller.Movement.DecreaseSpeed(speed: 0.02f);
             }
+    }
 
-        this.count = (this.count + 1) % this.listBehaviours.Count;
+    protected virtual void SetStandBehaivours()
+    {
+        foreach (string nameBehaviour in this.standBehaviours)
+            if (nameBehaviour.Equals(value: this.listBehaviours[this.count].name))
+                this.controller.Movement.gameObject.SetActive(value: false);
     }
 }

@@ -19,9 +19,14 @@ namespace DamageReceiver
         protected override void LoadComponent()
         {
             base.LoadComponent();
-            this.LoadMaximumHealth();
             this.LoadEnemyController();
             this.LoadSpriteRender();
+        }
+
+        protected override void LoadComponentInAwakeAfter()
+        {
+            base.LoadComponentInAwakeAfter();
+            this.LoadMaximumHealth();
         }
 
         protected virtual void LoadMaximumHealth() =>

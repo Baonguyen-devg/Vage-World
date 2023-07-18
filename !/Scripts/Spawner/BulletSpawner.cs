@@ -8,9 +8,9 @@ public class BulletSpawner : Spawner
 
     public static BulletSpawner Instance => instance;
 
-    protected override void LoadComponent()
+    protected override void LoadComponentInAwakeBefore()
     {
-        base.LoadComponent();
+        base.LoadComponentInAwakeBefore();
         BulletSpawner.instance = this;
     }
 }

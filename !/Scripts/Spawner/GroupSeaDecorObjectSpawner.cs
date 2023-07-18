@@ -5,10 +5,9 @@ public class GroupSeaDecorObjectSpawner : Spawner
 
     public static GroupSeaDecorObjectSpawner Instance => instance;
 
-    protected override void Awake()
+    protected override void LoadComponentInAwakeBefore()
     {
-        if (instance == null) instance = this;
-        else Destroy(obj: gameObject);
-        base.Awake();
+        base.LoadComponentInAwakeBefore();
+        GroupSeaDecorObjectSpawner.instance = this;
     }
 }

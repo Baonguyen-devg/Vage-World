@@ -21,11 +21,8 @@ namespace Group
         protected virtual void LoadMapController() =>
             this.mapController ??= GameObject.Find(name: "CreateMapForest").GetComponent<MapController>();
 
-        protected override void LoadComponent()
-        {
-            this.LoadLevelManagerSO();
-            this.LoadMapController();
-        }
+        protected override void LoadComponent() => this.LoadMapController();
+        protected override void LoadComponentInAwakeBefore() => this.LoadLevelManagerSO();
 
         public virtual void SetObjectSpawner(string nameObject)
         {

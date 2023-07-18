@@ -49,7 +49,7 @@ MonoBehaviour:
     speed: 0.04
     distanceAttack: 1
     attackDelay: 2
-    numberObject: 4
+    numberObject: 5
     numberGroup: 4
   - name: DragonFly
     maximumHealth: 80
@@ -57,7 +57,7 @@ MonoBehaviour:
     speed: 0.03
     distanceAttack: 5
     attackDelay: 2
-    numberObject: 3
+    numberObject: 5
     numberGroup: 2
   - name: Boss
     maximumHealth: 3000
@@ -73,42 +73,58 @@ MonoBehaviour:
     numberGroup: 0
   - name: Log
     numberObject: 1
-    numberGroup: 15
+    numberGroup: 20
   - name: Stone
     numberObject: 1
-    numberGroup: 15
+    numberGroup: 20
   - name: Grass
     numberObject: 1
-    numberGroup: 15
+    numberGroup: 20
   - name: DragonTree
     numberObject: 1
-    numberGroup: 15
+    numberGroup: 20
   decorObjects:
   - name: This is a null element
     numberObject: 0
     numberGroup: 0
   - name: Grass_1
     numberObject: 1
-    numberGroup: 5
+    numberGroup: 10
   - name: Grass_2
     numberObject: 1
-    numberGroup: 5
+    numberGroup: 10
   - name: Grass_3
     numberObject: 1
-    numberGroup: 5
+    numberGroup: 10
   - name: Tree_1
     numberObject: 1
-    numberGroup: 5
+    numberGroup: 25
   - name: Bone_1
     numberObject: 1
-    numberGroup: 5
+    numberGroup: 10
   - name: Box_1
     numberObject: 1
     numberGroup: 5
   - name: Stone_1
     numberObject: 1
-    numberGroup: 5
+    numberGroup: 10
   - name: Signal_1
+    numberObject: 1
+    numberGroup: 5
+  seaDecorObjects:
+  - name: This is a null element
+    numberObject: 0
+    numberGroup: 0
+  - name: Stone_1
+    numberObject: 1
+    numberGroup: 5
+  - name: Stone_2
+    numberObject: 1
+    numberGroup: 5
+  - name: Stone_3
+    numberObject: 1
+    numberGroup: 5
+  - name: Duckweed
     numberObject: 1
     numberGroup: 5
   missions:

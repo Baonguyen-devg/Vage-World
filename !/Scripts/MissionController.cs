@@ -38,10 +38,9 @@ public class MissionController : AutoMonobehaviour
     }
     public List<ResourceMission> Missions => this.missions;
 
-    protected override void LoadComponent() {
-        this.LoadLevelManagerSO();
-        this.LoadResourceMission();
-    }
+    protected override void LoadComponentInAwakeBefore() => this.LoadLevelManagerSO();
+
+    protected override void LoadComponentInAwakeAfter() => this.LoadResourceMission();
 
     private void Update() => this.CheckEnoughMission();
 

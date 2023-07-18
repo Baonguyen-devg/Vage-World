@@ -5,6 +5,13 @@ using UnityEngine.SceneManagement;
 public class UIController : AutoMonobehaviour
 {
     [SerializeField] protected List<Transform> listUI;
+    protected virtual void LoadListUI()
+    {
+        if (this.listUI.Count != 0) return;
+        foreach (Transform UI in transform)
+            this.listUI.Add(item: UI);
+    }
+
     [SerializeField] protected static UIController instance;
     public static UIController Instance => instance;
 
@@ -14,20 +21,13 @@ public class UIController : AutoMonobehaviour
             this.PauseGame();
     }
 
-    protected override void LoadComponent()
+    protected override void LoadComponentInAwakeBefore()
     {
+        base.LoadComponentInAwakeBefore();
         UIController.instance = this;
-        base.LoadComponent();
-        this.LoadListUI();
     }
 
-    protected virtual void LoadListUI()
-    {
-        if (this.listUI.Count != 0) return;
-
-        foreach (Transform UI in transform)
-            this.listUI.Add(item: UI);
-    }
+    protected override void LoadComponent() => this.LoadListUI();
 
     protected virtual void LoadUI(string nameUI)
     {

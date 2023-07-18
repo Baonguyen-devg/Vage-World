@@ -17,6 +17,11 @@ public class EnemyShootingAttack : ShootingAttack
         this.LoadController();
         this.LoadTarget();
         this.LoadPointSpawn();
+    }
+
+    protected override void LoadComponentInAwakeAfter()
+    {
+        base.LoadComponentInAwakeAfter();
         this.LoadAttackDelay();
     }
 

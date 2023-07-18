@@ -17,6 +17,11 @@ public class DragonEnemyShootingAttack : EnemyShootingAttack
     {
         base.LoadComponent();
         this.LoadPointSpawn();
+    }
+
+    protected override void LoadComponentInAwakeAfter()
+    {
+        base.LoadComponentInAwakeAfter();
         this.LoadDistanceCanShoote();
     }
 

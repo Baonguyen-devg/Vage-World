@@ -8,9 +8,9 @@ public class ItemSpawner : Spawner
 
     public List<Transform> ListPrefab => this.listPrefab;
 
-    protected override void LoadComponent()
+    protected override void LoadComponentInAwakeBefore()
     {
+        base.LoadComponentInAwakeBefore();
         ItemSpawner.instance = this;
-        base.LoadComponent();
     }
 }

@@ -5,10 +5,9 @@ public class GroupDecorObjectSpawner : Spawner
 
     public static GroupDecorObjectSpawner Instance => instance;
 
-    protected override void Awake()
+    protected override void LoadComponentInAwakeBefore()
     {
-        if (instance == null) instance = this;
-        else Destroy(obj: gameObject);
-        base.Awake();
+        base.LoadComponentInAwakeBefore();
+        GroupDecorObjectSpawner.instance = this;
     }
 }

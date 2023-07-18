@@ -5,23 +5,6 @@ public class MaterialController : AutoMonobehaviour
 {
     [SerializeField] protected static MaterialController instance;
     [SerializeField] protected List<Transform> listMaterial;
-    [SerializeField] protected UIMaterialController MaterialUI;
-
-    public static MaterialController Instance => instance;
-
-    protected override void LoadComponent()
-    {
-        MaterialController.instance = this;
-        base.LoadComponent();
-        this.LoadMaterial();
-        this.LoadMaterialUI();
-    }
-
-    protected virtual void LoadMaterialUI() =>
-        this.MaterialUI = (this.MaterialUI != null) ? this.MaterialUI
-            : GameObject.Find("Canvas").transform.Find("Panel").Find("BoxItems").GetComponent<UIMaterialController>();
-
-
     protected virtual void LoadMaterial()
     {
         if (this.listMaterial.Count != 0) return;
@@ -30,6 +13,21 @@ public class MaterialController : AutoMonobehaviour
         foreach (Transform material in materials)
             this.listMaterial.Add(material);
     }
+
+    [SerializeField] protected UIMaterialController MaterialUI;
+    protected virtual void LoadMaterialUI() =>
+        this.MaterialUI = (this.MaterialUI != null) ? this.MaterialUI
+            : GameObject.Find("Canvas").transform.Find("Panel").Find("BoxItems").GetComponent<UIMaterialController>();
+
+    public static MaterialController Instance => instance;
+
+    protected override void LoadComponent()
+    {
+        this.LoadMaterial();
+        this.LoadMaterialUI();
+    }
+
+    protected override void LoadComponentInAwakeBefore() => MaterialController.instance = this;
 
     public virtual void IncreaseNumber(string nameMaterial, int number)
     {

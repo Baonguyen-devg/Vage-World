@@ -8,9 +8,9 @@ public class MapSpawner : Spawner
 
     public static MapSpawner Instance => instance;
 
-    protected override void LoadComponent()
+    protected override void LoadComponentInAwakeBefore()
     {
+        base.LoadComponentInAwakeBefore();
         MapSpawner.instance = this;
-        base.LoadComponent();
     }
 }

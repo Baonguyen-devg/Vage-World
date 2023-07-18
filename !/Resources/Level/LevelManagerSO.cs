@@ -10,7 +10,7 @@ public class LevelManagerSO : ScriptableObject
         [Header(header: "Name Enemy: "), SerializeField] private string name;
         [HideInInspector] public string Name => this.name;
 
-        [Space(height: 3), Header(header: "[ Set Up Stats ] "), Space(height: 3)] //STATS
+        [Space(height: 3), Header(header: "[ Set Up Stats ]"), Space(height: 3)] //STATS
         //Maximum enemy's health is about 50 to 30000 (boss)
         [Range(min: 50, max: 30000), SerializeField] private int maximumHealth;
         [HideInInspector] public int MaximumHealth => this.maximumHealth;

@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,7 +7,7 @@ public class UISkill : AutoMonobehaviour
 {
     [SerializeField] protected Transform skill;
     protected virtual void LoadSkillPrefab() =>
-        this.skill ??= SkillController.Instance?.GetPrefabByName(gameObject.name);
+        this.skill = SkillController.Instance?.GetPrefabByName(gameObject.name);
 
     [SerializeField] protected Button buttomUpdate;
     protected virtual void LoadButtomUpdate() =>
@@ -15,21 +16,18 @@ public class UISkill : AutoMonobehaviour
     [SerializeField] protected List<Image> listRender;
     protected virtual void LoadListRender()
     {
-        if (this.listRender.Count != 0) return;
         Transform render = transform.Find(n: "MaterialFrame").Find(n: "NumberInfor");
-
         foreach (Transform objectRender in render)
             this.listRender.Add(item: objectRender.GetComponentInChildren<Image>());
     }
 
     [SerializeField] protected Image imageShader;
     protected virtual void LoadImageShader() =>
-        this.imageShader ??= transform.Find("ImageSkillShader")?.GetComponent<Image>();
+        this.imageShader = transform.Find("ImageSkillShader")?.GetComponent<Image>();
 
     protected override void LoadComponent()
     {
         base.LoadComponent();
-        this.LoadSkillPrefab();
         this.LoadButtomUpdate();
         this.LoadListRender();
         this.LoadImageShader();
@@ -45,7 +43,12 @@ public class UISkill : AutoMonobehaviour
         }
     }
 
-    protected virtual void Start() => Invoke(methodName: "LoadUIMaterial", time: 0.5f);
+    protected override IEnumerator LoadWaitForLongTime()
+    {
+        yield return StartCoroutine(base.LoadWaitForLongTime());
+        this.LoadSkillPrefab();
+        this.LoadUIMaterial();
+    }
 
     protected virtual void Update()
     {

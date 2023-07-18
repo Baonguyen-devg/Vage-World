@@ -6,19 +6,25 @@ public class EnemyCloseCombatAttack : CloseCombatAttack
     protected virtual void LoadBehaviourManager() =>
         this.behaviourManager ??= transform?.parent?.GetComponent<EnemyController>()?.Model?.GetComponent<BehaviorManager>();
 
+    [SerializeField] protected Animator animator;
+    protected virtual void LoadAnimator() =>
+        this.animator = transform.parent.GetComponent<EnemyController>().Model.GetComponent<Animator>();
+
     protected override void LoadComponent()
     {
         base.LoadComponent();
         this.LoadBehaviourManager();
-        this.LoadDistanceToCloseCombat();
+        this.LoadAnimator();
+    }
+
+    protected override void LoadComponentInAwakeAfter()
+    {
+        base.LoadComponentInAwakeAfter();
         this.LoadAttackDelay();
     }
 
     protected override void LoadTarget() => 
         this.target = GameObject.Find(name: "Player").transform;
-
-    protected virtual void LoadDistanceToCloseCombat() =>
-        this.distanceToCloseCombat = (float)this.levelManagerSO?.GetEnemySOByName(transform.parent.name)?.DistanceAttack;
 
     protected virtual void LoadAttackDelay() =>
         this.attackDelay = (float)this.levelManagerSO?.GetEnemySOByName(transform.parent.name)?.AttackDelay;
@@ -27,13 +33,10 @@ public class EnemyCloseCombatAttack : CloseCombatAttack
     {
         base.ToAttack();
         this.attackTimer = 0;
-        transform.parent.GetComponent<EnemyController>().Model.GetComponent<Animator>().SetTrigger("Attack");
+        animator.SetTrigger("Attack");
+        Invoke("SetRunAnimation", 1f);
+        
     }
 
-    protected override bool CanAttack()
-    {
-        if (this.target == null) return false;
-        if (Vector2.Distance(a: transform.parent.position, b: this.target.position) >= this.distanceToCloseCombat) return false;
-        return base.CanAttack();
-    }
+    private void SetRunAnimation() => this.animator.SetTrigger("Run");
 }

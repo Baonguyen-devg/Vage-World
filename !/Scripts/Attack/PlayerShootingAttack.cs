@@ -3,44 +3,37 @@ using UnityEngine;
 
 public class PlayerShootingAttack : ShootingAttack
 {
-    [SerializeField] protected Transform posShoote;
-    protected virtual void LoadPosShoote() =>
-        this.posShoote = (this.posShoote != null) ? this.posShoote
-            : transform.Find(n: "PointSpawn");
-
     [SerializeField] protected bool skill1, skill2, skill3;
 
-    [SerializeField] protected List<Transform> pointSpawnsSkillOne;
-    protected virtual void LoadPointSpawnSkillOne()
+    [SerializeField] protected List<Transform> pointShootes;
+    protected virtual void LoadPointShootes()
     {
-        if (this.pointSpawnsSkillOne.Count != 0) return;
-        Transform point = transform.Find(n: "PointSpawnSkill1");
-
-        foreach (Transform pointSpawn in point)
-            this.pointSpawnsSkillOne.Add(item: pointSpawn);
+        if (this.pointShootes.Count != 0) return;
+        foreach (Transform supporter in transform)
+            this.pointShootes.Add(item: supporter.Find("Book")?.Find("Point")?.transform);
     }
 
     protected override void LoadComponent()
     {
         base.LoadComponent();
-        this.LoadPointSpawnSkillOne();
-        this.LoadPosShoote();
+        this.LoadPointShootes();
+    }
+
+    public virtual void SetActiveTeamSupporter(bool status)
+    {
+        for (int i = 0; i < this.pointShootes.Count; i++)
+        {
+            if (i == 0) continue;
+            this.pointShootes[i].parent.gameObject.SetActive(status);
+            this.pointShootes[i].parent.parent.Find("Model").gameObject.SetActive(status);
+        }
     }
 
     public virtual void ChangeStatusSkill1(bool Status)
     {
         this.skill1 = Status;
-        if (this.skill1 == false) 
-            this.SetPosAndStatusShoote(pointSpawn1: "PointSpawn", pointSpawn2: "PointSpawnSkill1");
-        else 
-            this.SetPosAndStatusShoote(pointSpawn1: "PointSpawnSkill1", pointSpawn2: "PointSpawn");
-    }
-
-    protected virtual void SetPosAndStatusShoote(string pointSpawn1, string pointSpawn2)
-    {
-        this.posShoote = transform.Find(n: pointSpawn1);
-        this.posShoote.gameObject.SetActive(value: true);
-        transform.Find(n: pointSpawn2).gameObject.SetActive(value: false);
+        if (this.skill1 == false) this.SetActiveTeamSupporter(false);
+        else this.SetActiveTeamSupporter(true);
     }
 
     public virtual void ChangeStatusSkill2(bool Status) => this.skill2 = Status;
@@ -49,40 +42,31 @@ public class PlayerShootingAttack : ShootingAttack
 
     protected virtual void ZoomBullet(Transform bullet)
     {
-        bullet.Find(n: "Model").localScale += new Vector3(0.5f, 0.5f, 0);
+        bullet.Find(n: "Model").localScale += new Vector3(1, 1, 0);
         bullet.GetComponent<PlayerBulletController>().DamageSender.IncreaseDame(dame: 20);
     }
-
+    
     public override void ToAttack()
     {
         base.ToAttack();
-
-        string bullet = (this.skill3) ? BulletSpawner.torandoBullet : BulletSpawner.playerBullet;
-        Transform bulletSpawn;
-
         if (!Input.GetMouseButton(button: 0)) return;
 
-        if (this.skill1 == true)
+        string bullet = (this.skill3) ? BulletSpawner.torandoBullet : BulletSpawner.playerBullet;
+
+        foreach (Transform point in this.pointShootes)
         {
-            foreach (Transform point in this.pointSpawnsSkillOne)
-            {
-                point.gameObject.SetActive(value: true);
-                bulletSpawn = this.ShooteAndReturnBullet(nameBullet: bullet, posShoote: point);
-                if (this.skill2) this.ZoomBullet(bullet: bulletSpawn);
-            }
-            SkillController.Instance.SetTimeSkillOne(status: false);
-            this.ChangeStatusSkill1(Status: false);
-        }
-        else
-        {
-            bulletSpawn = this.ShooteAndReturnBullet(nameBullet: bullet, posShoote: this.posShoote);
+            if (!point.gameObject.activeInHierarchy) continue;
+            Transform bulletSpawn = this.ShooteAndReturnBullet(nameBullet: bullet, posShoote: point);
             if (this.skill2) this.ZoomBullet(bullet: bulletSpawn);
         }
 
-        transform.Find(n: "PointSpawn").Find(n: "Model").GetComponent<Animator>().SetTrigger(name: "Bow");
+        if (this.skill1 == true) SkillController.Instance.SetTimeSkillOne(status: false);
+        this.ChangeStatusSkill1(Status: false);
+
+        if (this.skill3 == true) SkillController.Instance.SetTimeSkillThree(status: false);
+        this.ChangeStatusSkill3(Status: false);
 
         if (this.skill2 == true) SkillController.Instance.SetTimeSkillTwo(status: false);
-        if (this.skill3 == true) SkillController.Instance.SetTimeSkillThree(status: false);
         this.ChangeStatusSkill2(Status: false);
     }
 

@@ -20,9 +20,9 @@ public class LootMaterial : AutoMonobehaviour
 
         if (Vector3.Distance(a: transform.position, b: itemToPickup.transform.position) <= this.distanceCanPick)
         {
-            this.itemToPickup.GetComponent<Touch>().Loot();
+            this.itemToPickup?.GetComponent<Touch>()?.Loot();
             this.SetItemToPickup(item: null);
-            this.itemsCanPick.Remove(item: this.itemToPickup);
+            this.itemsCanPick?.Remove(item: this.itemToPickup);
         }
         else
         {

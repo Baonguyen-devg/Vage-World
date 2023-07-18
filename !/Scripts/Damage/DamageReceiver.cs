@@ -24,7 +24,7 @@ namespace DamageReceiver
 
         protected virtual void FixedUpdate() => this.CheckDead();
 
-        protected override void LoadComponent() => this.LoadLevelManagerSO();
+        protected override void LoadComponentInAwakeBefore() => this.LoadLevelManagerSO();
 
         protected virtual void CheckDead()
         {

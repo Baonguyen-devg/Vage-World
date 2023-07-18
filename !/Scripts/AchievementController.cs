@@ -20,7 +20,7 @@ public class AchievementController : AutoMonobehaviour
 {
     [SerializeField] private static AchievementController instance;
     public static AchievementController Instance => instance;
-    protected override void LoadComponent() => AchievementController.instance = this;
+    protected override void LoadComponentInAwakeBefore() => AchievementController.instance = this;
 
     [SerializeField] private List<Achievement> achievements;
     
