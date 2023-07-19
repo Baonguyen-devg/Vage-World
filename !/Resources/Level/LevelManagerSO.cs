@@ -65,11 +65,11 @@ public class LevelManagerSO : ScriptableObject
 
         [Space(height: 3), Header(header: "[ Set Up Creating ] "), Space(height: 3)] //CREATING
         //Maximum enemy's numberObject is about to 0 to 50 (boss)
-        [Range(min: 0, max: 50), SerializeField] protected int numberObject;
+        [Range(min: 0, max: 200), SerializeField] protected int numberObject;
         [HideInInspector] public int NumberObject => this.numberObject;
 
         //Maximum enemy's numberGroup is about to 0 to 50 (boss)
-        [Range(min: 0, max: 50), SerializeField] protected int numberGroup;
+        [Range(min: 0, max: 200), SerializeField] protected int numberGroup;
         [HideInInspector] public int NumberGroup => this.numberGroup;
     }
 

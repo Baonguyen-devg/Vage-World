@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   height: 100
   width: 100
-  smooth: 7
-  randomFillPercent: 47
+  smooth: 9
+  randomFillPercent: 42
   timeAppearBoss: 300
   skills:
   - name: This is a null element
@@ -52,16 +52,16 @@ MonoBehaviour:
     speed: 0.04
     distanceAttack: 1
     attackDelay: 2
-    numberObject: 8
-    numberGroup: 6
+    numberObject: 6
+    numberGroup: 10
   - name: DragonFly
     maximumHealth: 80
     dame: 50
     speed: 0.03
     distanceAttack: 5
     attackDelay: 2
-    numberObject: 7
-    numberGroup: 7
+    numberObject: 5
+    numberGroup: 8
   - name: Boss
     maximumHealth: 3000
     dame: 50
@@ -76,70 +76,73 @@ MonoBehaviour:
     numberGroup: 0
   - name: Log
     numberObject: 1
-    numberGroup: 50
+    numberGroup: 35
   - name: Stone
     numberObject: 1
-    numberGroup: 15
+    numberGroup: 35
   - name: Grass
     numberObject: 1
-    numberGroup: 15
+    numberGroup: 35
   - name: DragonTree
     numberObject: 1
-    numberGroup: 15
+    numberGroup: 35
   decorObjects:
   - name: This is a null element
     numberObject: 0
     numberGroup: 0
   - name: Grass_1
     numberObject: 1
-    numberGroup: 15
+    numberGroup: 30
   - name: Grass_2
     numberObject: 1
-    numberGroup: 15
+    numberGroup: 30
   - name: Grass_3
     numberObject: 1
-    numberGroup: 15
+    numberGroup: 30
   - name: Tree_1
     numberObject: 1
-    numberGroup: 50
+    numberGroup: 70
   - name: Bone_1
     numberObject: 1
-    numberGroup: 15
+    numberGroup: 25
   - name: Box_1
     numberObject: 1
-    numberGroup: 15
+    numberGroup: 20
   - name: Stone_1
     numberObject: 1
-    numberGroup: 15
+    numberGroup: 20
   - name: Signal_1
     numberObject: 1
-    numberGroup: 15
+    numberGroup: 10
   seaDecorObjects:
   - name: This is a null element
     numberObject: 0
     numberGroup: 0
   - name: Stone_1
     numberObject: 1
-    numberGroup: 5
+    numberGroup: 20
   - name: Stone_2
     numberObject: 1
-    numberGroup: 5
+    numberGroup: 20
   - name: Stone_3
     numberObject: 1
-    numberGroup: 5
+    numberGroup: 20
   - name: Duckweed
     numberObject: 1
-    numberGroup: 5
+    numberGroup: 15
   missions:
   - name: This is a null element
     actionFollow: 
     number: 0
   - name: Skeleton
     actionFollow: Skill
-    number: 10
+    number: 30
   - name: DragonFly
     actionFollow: Skill
-    number: 8
-  - name: Grass
+    number: 21
+  - name: DragonTree
     actionFollow: Pick
-    number: 5
+    number: 15
+  - name: Log
+    actionFollow: Pick
+    number: 20
