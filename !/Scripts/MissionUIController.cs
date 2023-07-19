@@ -49,22 +49,17 @@ public class MissionUIController : AutoMonobehaviour
         }
     }
 
-    protected override void LoadComponentInAwakeBefore()
-    {
-        base.LoadComponentInAwakeBefore();
-        this.LoadLevelManagerSO();
-    }
-
-    protected override void LoadComponentInAwakeAfter()
-    {
-        base.LoadComponentInAwakeAfter();
-        this.LoadMissionUIs();
-    }
-
     protected override void LoadComponent()
     {
         this.LoadHolder();
         this.LoadMissionUIPrefab();
+    }
+
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+        this.LoadLevelManagerSO();
+        this.LoadMissionUIs();
     }
 
     protected virtual void Update()

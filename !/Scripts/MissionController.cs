@@ -38,7 +38,7 @@ public class MissionController : AutoMonobehaviour
     }
     public List<ResourceMission> Missions => this.missions;
 
-    protected override void LoadComponentInAwakeAfter() {
+    protected override void OnEnable() {
         this.LoadLevelManagerSO();
         this.LoadResourceMission();
     }
@@ -63,7 +63,7 @@ public class MissionController : AutoMonobehaviour
 
     private void WinGame()
     {
-        UIController.Instance.WinGame();
+        GameController.Instance.WinGame();
         if (GameController.Instance.Level >= PlayerPrefs.GetInt(key: "UnlockedLevel", defaultValue: 1))
         {
             PlayerPrefs.SetInt(key: "UnlockedLevel", value: PlayerPrefs.GetInt(key: "UnlockedLevel", defaultValue: 1) + 1);

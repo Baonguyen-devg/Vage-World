@@ -35,7 +35,7 @@ namespace CreatingPackage
 
         protected override void LoadComponent() => this.LoadMapController();
 
-        protected override void LoadComponentInAwakeAfter() {
+        protected override void OnEnable() {
             this.LoadLevelManagerSO();
             this.LoadResourceSpawners();
         }

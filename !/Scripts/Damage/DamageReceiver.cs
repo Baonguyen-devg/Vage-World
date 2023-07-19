@@ -20,11 +20,13 @@ namespace DamageReceiver
         [SerializeField] protected int maximumHealth = default_Maximum_Health;
         [SerializeField] protected bool isDead = default_Is_Dead;
 
-        protected virtual void OnEnable() => this.ResetHealthToMaximum();
+        protected override void OnEnable()
+        {
+            this.LoadLevelManagerSO();
+            this.ResetHealthToMaximum();
+        }
 
         protected virtual void FixedUpdate() => this.CheckDead();
-
-        protected override void LoadComponentInAwakeBefore() => this.LoadLevelManagerSO();
 
         protected virtual void CheckDead()
         {

@@ -45,24 +45,23 @@ public class CreateMap : AutoMonobehaviour
         this.randomFillPercent = this.levelManagerSO.RandomFillPercent;
     }
 
-    protected override void LoadComponentInAwakeBefore()
+    protected override void OnEnable()
     {
-        base.LoadComponentInAwakeBefore();
+        base.OnEnable();
         this.LoadLevelManagerSO();
-    }
-
-    protected override void LoadComponentInAwakeAfter()
-    {
-        base.LoadComponentInAwakeAfter();
         this.LoadInformationMap();
-        Application.targetFrameRate = 60;
     }
 
     protected override void Start()
     {
-        this.CreateBitRandom();
-        this.SmoothMap();        
+        this.CreateBoneMap();  
         base.Start();
+    }
+
+    protected virtual void CreateBoneMap()
+    {
+        this.CreateBitRandom();
+        this.SmoothMap();
     }
 
     protected override IEnumerator LoadWaitForShortTime()

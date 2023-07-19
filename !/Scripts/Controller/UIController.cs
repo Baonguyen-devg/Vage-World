@@ -18,7 +18,7 @@ public class UIController : AutoMonobehaviour
     protected virtual void Update()
     {
         if (Input.GetKeyDown(key: KeyCode.Escape))
-            this.PauseGame();
+            this.LoadPauseGameUI();
     }
 
     protected override void LoadComponentInAwakeBefore()
@@ -36,35 +36,26 @@ public class UIController : AutoMonobehaviour
             else UI.gameObject.SetActive(value: false);
     }
 
-    public virtual void PauseGame()
-    {
-        Time.timeScale = 0f;
-        this.LoadUI(nameUI: "PauseGameUI");
-    }
+    public virtual void LoadPauseGameUI() => this.LoadUI(nameUI: "Pause_Game_UI");
 
-    public virtual void LoseGame()
-    {
-        Time.timeScale = 0f;
-        this.LoadUI(nameUI: "LoseGameUI");
-    }
+    public virtual void LoadLoseGameUI() => this.LoadUI(nameUI: "Lose_Game_UI");
 
-    public virtual void WinGame()
-    {
-        Time.timeScale = 0f;
-        this.LoadUI(nameUI: "WinGameUI");
-    }
+    public virtual void LoadWinGameUI() => this.LoadUI(nameUI: "Win_Game_UI");
 
-    public virtual void Game()
-    {
-        Time.timeScale = 1;
-        this.LoadUI(nameUI: "GameUI");
-    }
+    public virtual void Game() => this.LoadUI(nameUI: "Game_UI");
 
     public virtual void Continue() => this.Game();
 
     public virtual void PlayAgain()
     {
         Time.timeScale = 1;
+        SceneManager.LoadScene(sceneBuildIndex: SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public virtual void NextGame()
+    {
+        GameController.Instance.SetNameLevel(GameController.Instance.Level + 1);
+        GameController.Instance.LoadLevelManagerSO();
         SceneManager.LoadScene(sceneBuildIndex: SceneManager.GetActiveScene().buildIndex);
     }
 

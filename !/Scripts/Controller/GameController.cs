@@ -27,26 +27,48 @@ public class GameController : AutoMonobehaviour
     [SerializeField] private Boolean spawnBoss;
     [SerializeField] private Transform boss;
     [SerializeField] private LevelManagerSO levelManagerSO;
-    protected virtual void LoadLevelManagerSO() =>
+    public virtual void LoadLevelManagerSO() =>
          this.levelManagerSO = Resources.Load<LevelManagerSO>(path: "Level/" + "EasyLevel_" + GameController.Instance.Level.ToString());
+
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+        this.LoadLevelManagerSO();
+        this.LoadTimelineGame();
+        Application.targetFrameRate = 60;
+    }
 
     protected override void LoadComponentInAwakeBefore()
     {
-        this.LoadSingleton();
-        this.LoadLevelManagerSO();
-    }
-
-    protected override void LoadComponentInAwakeAfter()
-    {
         base.LoadComponentInAwakeAfter();
-        this.LoadTimelineGame();
+        this.LoadSingleton();
     }
 
     protected virtual void Update()
     {
+        if (Input.GetKey(KeyCode.Escape)) this.PauseGame();
+
         if (this.spawnBoss == true) return;
         if (Time.time < this.timeAppearBoss) return;
         this.boss.gameObject.SetActive(value: true);
         this.spawnBoss = true;
+    }
+
+    public virtual void WinGame()
+    {
+        Time.timeScale = 0f;
+        UIController.Instance.LoadWinGameUI();
+    }
+
+    public virtual void LoseGame()
+    {
+        Time.timeScale = 0f;
+        UIController.Instance.LoadLoseGameUI();
+    }
+
+    public virtual void PauseGame()
+    {
+        Time.timeScale = 0f;
+        UIController.Instance.LoadPauseGameUI();
     }
 }

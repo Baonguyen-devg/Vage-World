@@ -6,9 +6,9 @@ namespace Movement
     {
         [SerializeField] private Vector3 directionFollow;
 
-        protected override void LoadComponent()
+        protected override void OnEnable()
         {
-            base.LoadComponent();
+            base.OnEnable();
             this.LoadSpeed();
         }
 

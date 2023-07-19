@@ -11,9 +11,9 @@ namespace DamageSender
         public override void Send(Transform obj) =>
             obj.GetComponentInChildren<PlayerDamageReceiver>()?.DecreaseHealth(health: this.dame);
 
-        protected override void LoadComponentInAwakeAfter()
+        protected override void OnEnable()
         {
-            base.LoadComponentInAwakeAfter();
+            base.OnEnable();
             this.LoadDamage();
         }
     }

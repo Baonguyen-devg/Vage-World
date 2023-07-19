@@ -17,9 +17,9 @@ public class EnemyCloseCombatAttack : CloseCombatAttack
         this.LoadAnimator();
     }
 
-    protected override void LoadComponentInAwakeAfter()
+    protected override void OnEnable()
     {
-        base.LoadComponentInAwakeAfter();
+        base.OnEnable();
         this.LoadAttackDelay();
     }
 

@@ -3,21 +3,13 @@ using UnityEngine;
 
 public class AutoMonobehaviour : MonoBehaviour
 {
-    protected virtual void Reset() => this.LoadComponentInReset();
-
-    protected virtual void LoadComponentInReset()
-    {
-        this.LoadComponent();
-        this.LoadComponentReset();
-    }
-
-    protected virtual void LoadComponentReset() { /* For Override */ }
+    protected virtual void Reset() => this.LoadComponent();
 
     protected virtual void LoadComponent() { /* For Override */ }
 
     protected virtual void Awake()
     {
-        this.LoadComponentInReset();
+        this.LoadComponent();
         this.LoadComponentInAwakeBefore();
         this.LoadComponentInAwakeAfter();
     }
@@ -25,6 +17,8 @@ public class AutoMonobehaviour : MonoBehaviour
     protected virtual void LoadComponentInAwakeBefore() { /* For Override */ }
 
     protected virtual void LoadComponentInAwakeAfter() { /* For Override */ }
+
+    protected virtual void OnEnable() { /* For Override */ }
 
     protected virtual void Start()
     {

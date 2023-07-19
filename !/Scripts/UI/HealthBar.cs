@@ -17,6 +17,11 @@ public class HealthBar : AutoMonobehaviour
         base.LoadComponent();
         this.LoadPlayer();
         this.LoadSlider();
+    }
+
+    protected override void OnEnable()
+    {
+        base.OnEnable();
         this.slider.maxValue = this.playerDamageReceiver.CurrentHealth;
     }
 

@@ -32,7 +32,6 @@ public class CreateRandomDirection : AutoMonobehaviour
     protected override void LoadComponentInAwakeBefore()
     {
         base.LoadComponentInAwakeBefore();
-        this.targetFollow = GameObject.Find("Player").transform;
         this.directions = new List<Vector2>();
         this.validDirections = new List<int>();
         this.avoidDirections = new List<Vector2>();
@@ -41,6 +40,7 @@ public class CreateRandomDirection : AutoMonobehaviour
     protected override void LoadComponentInAwakeAfter()
     {
         base.LoadComponentInAwakeAfter();
+        this.targetFollow = GameObject.Find("Player").transform;
         int numberDirection = (int)360 / rate_Part_Crirle;
         for (int i = 0; i < numberDirection; i++)
             this.directions.Add(this.GetPostionFromAngle(2f * Mathf.PI / (float)numberDirection * i));

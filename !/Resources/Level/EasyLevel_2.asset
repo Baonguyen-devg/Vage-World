@@ -34,6 +34,9 @@ MonoBehaviour:
     levelSkill: 3
     baseLevel: 5
     timeDelay: 9
+  haveSkill1: 1
+  haveSkill2: 0
+  haveSkill3: 0
   enemies:
   - name: This is a null element
     maximumHealth: 0

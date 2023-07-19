@@ -9,6 +9,6 @@ public class Behaviour : AutoMonobehaviour
 
     protected override void LoadComponent() => this.loadEnemyController();
 
-    protected virtual void OnEnable() =>
+    protected override void OnEnable() =>
         this.ctrll.Model.GetComponent<Animator>().SetTrigger(name: transform.name);
 }

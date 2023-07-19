@@ -23,9 +23,9 @@ namespace DamageReceiver
             this.LoadSpriteRender();
         }
 
-        protected override void LoadComponentInAwakeAfter()
+        protected override void OnEnable()
         {
-            base.LoadComponentInAwakeAfter();
+            base.OnEnable();
             this.LoadMaximumHealth();
         }
 

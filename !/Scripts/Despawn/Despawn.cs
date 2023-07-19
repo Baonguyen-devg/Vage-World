@@ -1,7 +1,5 @@
 public abstract class Despawn : AutoMonobehaviour
 {
-    protected virtual void OnEnable() { /* For override */ }
-
     protected virtual void Update()
     {
         if (!this.CanDespawn()) return;

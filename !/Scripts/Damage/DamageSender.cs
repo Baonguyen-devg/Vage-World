@@ -16,7 +16,7 @@ namespace DamageSender
         [SerializeField] protected int dame = 0;
         [SerializeField] protected int maximumDame = default_Maximum_Damage;
 
-        protected override void LoadComponentInAwakeBefore() => this.LoadLevelManagerSO();
+        protected override void OnEnable() => this.LoadLevelManagerSO();
 
         public virtual void IncreaseDame(int dame) =>
             this.dame = Mathf.Min(a: this.dame + dame, b: this.maximumDame);

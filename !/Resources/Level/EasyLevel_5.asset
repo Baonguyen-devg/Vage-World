@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b85759f00fd019243a4f311a375d0cf2, type: 3}
   m_Name: EasyLevel_5
   m_EditorClassIdentifier: 
-  height: 75
-  width: 75
+  height: 90
+  width: 90
   smooth: 7
   randomFillPercent: 47
   timeAppearBoss: 300
@@ -34,6 +34,9 @@ MonoBehaviour:
     levelSkill: 3
     baseLevel: 5
     timeDelay: 9
+  haveSkill1: 1
+  haveSkill2: 1
+  haveSkill3: 1
   enemies:
   - name: This is a null element
     maximumHealth: 0
@@ -111,3 +114,32 @@ MonoBehaviour:
   - name: Signal_1
     numberObject: 1
     numberGroup: 15
+  seaDecorObjects:
+  - name: This is a null element
+    numberObject: 0
+    numberGroup: 0
+  - name: Stone_1
+    numberObject: 1
+    numberGroup: 5
+  - name: Stone_2
+    numberObject: 1
+    numberGroup: 5
+  - name: Stone_3
+    numberObject: 1
+    numberGroup: 5
+  - name: Duckweed
+    numberObject: 1
+    numberGroup: 5
+  missions:
+  - name: This is a null element
+    actionFollow: 
+    number: 0
+  - name: Skeleton
+    actionFollow: Skill
+    number: 10
+  - name: DragonFly
+    actionFollow: Skill
+    number: 8
+  - name: Grass
+    actionFollow: Pick
+    number: 5

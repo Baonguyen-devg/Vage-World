@@ -10,7 +10,7 @@ public abstract class Attack : AutoMonobehaviour
     [SerializeField] protected float attackDelay;
     [SerializeField] protected float attackTimer;
 
-    protected override void LoadComponentInAwakeBefore() => this.LoadLevelManagerSO();
+    protected override void OnEnable() => this.LoadLevelManagerSO();
 
     protected virtual void Update()
     {

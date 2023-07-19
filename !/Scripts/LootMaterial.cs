@@ -11,6 +11,12 @@ public class LootMaterial : AutoMonobehaviour
     [SerializeField] private float distanceCanPick = 0.8f;
     [SerializeField] private List<Transform> itemsCanPick;
 
+    protected override void LoadComponentInAwakeBefore()
+    {
+        base.LoadComponentInAwakeBefore();
+        this.itemsCanPick = new List<Transform>();
+    }
+
     public virtual void SetItemToPickup(Transform item) => this.itemToPickup = item;
 
     private void Update()
@@ -36,6 +42,8 @@ public class LootMaterial : AutoMonobehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (!LayerMask.NameToLayer(layerName: "item").Equals(obj: collision.gameObject.layer)) return;
+        if (collision.GetComponent<Touch>() == null) return;
+
         this.itemsCanPick.Add(item: collision.transform);
         collision.GetComponent<Touch>().ChangeStatusFrameAndHaveTouchTo(newStatus: true);
     }
@@ -43,6 +51,8 @@ public class LootMaterial : AutoMonobehaviour
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (!LayerMask.NameToLayer(layerName: "item").Equals(obj: collision.gameObject.layer)) return;
+        if (collision.GetComponent<Touch>() == null) return;
+
         this.itemsCanPick.Remove(item: collision.transform);
         collision.GetComponent<Touch>().ChangeStatusFrameAndHaveTouchTo(newStatus: false);
     }

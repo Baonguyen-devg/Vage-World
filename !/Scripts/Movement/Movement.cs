@@ -19,7 +19,7 @@ namespace Movement
 
         [SerializeField] protected bool isMovingFast = false;
 
-        protected override void LoadComponent() => this.LoadLevelManagerSO();
+        protected override void OnEnable() => this.LoadLevelManagerSO();
       
         protected virtual void Update() => this.Move();
 

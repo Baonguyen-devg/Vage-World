@@ -12,10 +12,15 @@ public class InputController : AutoMonobehaviour
 
     protected override void LoadComponent()
     {
-        InputController.instance = this;
         base.LoadComponent();
         this.LoadMouseInput();
         this.LoadKeyBoardInput();
+    }
+
+    protected override void LoadComponentInAwakeBefore()
+    {
+        base.LoadComponentInAwakeBefore();
+        InputController.instance = this;
     }
 
     protected virtual void LoadMouseInput()

@@ -45,7 +45,7 @@ namespace DamageReceiver
         protected override void OnDead()
         {
             this.controller.Model.GetComponent<Animator>().SetTrigger(name: "Die");
-            UIController.Instance.LoseGame();
+            GameController.Instance.LoseGame();
         }
     }
 }
