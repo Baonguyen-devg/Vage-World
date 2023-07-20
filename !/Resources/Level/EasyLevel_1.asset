@@ -17,6 +17,10 @@ MonoBehaviour:
   smooth: 7
   randomFillPercent: 38
   timeAppearBoss: 300
+  maximumHealth: 0
+  dame: 25
+  speed: 0
+  attackDelay: 1
   skills:
   - name: This is a null element
     levelSkill: 0
@@ -60,8 +64,8 @@ MonoBehaviour:
     speed: 0.03
     distanceAttack: 5
     attackDelay: 2
-    numberObject: 4
-    numberGroup: 2
+    numberObject: 0
+    numberGroup: 0
   - name: Boss
     maximumHealth: 3000
     dame: 50

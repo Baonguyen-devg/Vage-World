@@ -18998,10 +18998,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   numberLevel: 1
-  timeAppearBoss: 300
+  timeAppearBoss: 0
   spawnBoss: 0
   boss: {fileID: 0}
-  levelManagerSO: {fileID: 11400000, guid: 72764f8fa8b5bd54986b976bd6cc9692, type: 2}
+  levelManagerSO: {fileID: 0}
 --- !u!1 &2037381431
 GameObject:
   m_ObjectHideFlags: 0

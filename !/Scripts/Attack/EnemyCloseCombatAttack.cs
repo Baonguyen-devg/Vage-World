@@ -1,7 +1,13 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyCloseCombatAttack : CloseCombatAttack
 {
+    [SerializeField] protected EnemyController controller;
+    protected virtual void LoadController() =>
+        this.controller ??= transform.parent.GetComponent<EnemyController>();
+
     [SerializeField] protected BehaviorManager behaviourManager;
     protected virtual void LoadBehaviourManager() =>
         this.behaviourManager ??= transform?.parent?.GetComponent<EnemyController>()?.Model?.GetComponent<BehaviorManager>();
@@ -15,6 +21,7 @@ public class EnemyCloseCombatAttack : CloseCombatAttack
         base.LoadComponent();
         this.LoadBehaviourManager();
         this.LoadAnimator();
+        this.LoadController();
     }
 
     protected override void OnEnable()
@@ -33,10 +40,15 @@ public class EnemyCloseCombatAttack : CloseCombatAttack
     {
         base.ToAttack();
         this.attackTimer = 0;
+        this.controller.Stand();
+
         animator.SetTrigger("Attack");
-        Invoke("SetRunAnimation", 1f);
-        
+        StartCoroutine(SetRunAnimation());
     }
 
-    private void SetRunAnimation() => this.animator.SetTrigger("Run");
+    protected virtual IEnumerator SetRunAnimation()
+    {
+        yield return new WaitForSeconds(1);
+        this.controller.DoAttack();
+    }
 }

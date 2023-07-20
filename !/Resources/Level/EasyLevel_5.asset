@@ -17,6 +17,10 @@ MonoBehaviour:
   smooth: 9
   randomFillPercent: 41
   timeAppearBoss: 300
+  maximumHealth: 0
+  dame: 25
+  speed: 0
+  attackDelay: 1
   skills:
   - name: This is a null element
     levelSkill: 0

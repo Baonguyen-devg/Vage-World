@@ -7,7 +7,16 @@ namespace DamageSender
 {
     public class PlayerDamageSender : DamageSender
     {
+        protected virtual void LoadDamage() =>
+            this.dame = (int)this.levelManagerSO?.Dame;
+
         public override void Send(Transform obj) =>
          obj.GetComponentInChildren<EnemyDamageReceiver>()?.DecreaseHealth(health: this.dame);
+
+        protected override void OnEnable()
+        {
+            base.OnEnable();
+            this.LoadDamage();
+        }
     }
 }

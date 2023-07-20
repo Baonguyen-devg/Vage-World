@@ -44,7 +44,11 @@ public class UIController : AutoMonobehaviour
 
     public virtual void Game() => this.LoadUI(nameUI: "Game_UI");
 
-    public virtual void Continue() => this.Game();
+    public virtual void Continue()
+    {
+        Time.timeScale = 1;
+        this.Game();
+    }
 
     public virtual void PlayAgain()
     {
@@ -54,6 +58,7 @@ public class UIController : AutoMonobehaviour
 
     public virtual void NextGame()
     {
+        Time.timeScale = 1;
         GameController.Instance.SetNameLevel(GameController.Instance.Level + 1);
         GameController.Instance.LoadLevelManagerSO();
         SceneManager.LoadScene(sceneBuildIndex: SceneManager.GetActiveScene().buildIndex);

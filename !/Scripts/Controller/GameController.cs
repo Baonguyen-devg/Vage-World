@@ -35,13 +35,13 @@ public class GameController : AutoMonobehaviour
         base.OnEnable();
         this.LoadLevelManagerSO();
         this.LoadTimelineGame();
-        Application.targetFrameRate = 60;
     }
 
     protected override void LoadComponentInAwakeBefore()
     {
         base.LoadComponentInAwakeAfter();
         this.LoadSingleton();
+        Application.targetFrameRate = 60;
     }
 
     protected virtual void Update()

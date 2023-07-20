@@ -19,9 +19,9 @@ public class EnemyShootingAttack : ShootingAttack
         this.LoadPointSpawn();
     }
 
-    protected override void LoadComponentInAwakeAfter()
+    protected override void OnEnable()
     {
-        base.LoadComponentInAwakeAfter();
+        base.OnEnable();
         this.LoadAttackDelay();
     }
 

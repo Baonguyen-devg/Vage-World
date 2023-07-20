@@ -36,6 +36,7 @@ public class Menu : AutoMonobehaviour
     public virtual void LoadEasyLevel(int Level)
     {
         GameController.Instance.SetNameLevel(level: Level);
+        GameController.Instance.LoadLevelManagerSO();
         this.PlayGame();
     }
 

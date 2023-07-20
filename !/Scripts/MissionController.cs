@@ -38,6 +38,8 @@ public class MissionController : AutoMonobehaviour
     }
     public List<ResourceMission> Missions => this.missions;
 
+    [SerializeField] protected bool isWinGame = false;
+
     protected override void OnEnable() {
         this.LoadLevelManagerSO();
         this.LoadResourceMission();
@@ -47,6 +49,7 @@ public class MissionController : AutoMonobehaviour
 
     private void CheckEnoughMission(int Count = 0)
     {
+        if (this.isWinGame) return;
         foreach (ResourceMission mission in this.missions)
             if (this.Check(mission: mission)) Count = Count + 1;
 
@@ -63,6 +66,7 @@ public class MissionController : AutoMonobehaviour
 
     private void WinGame()
     {
+        this.isWinGame = true;
         GameController.Instance.WinGame();
         if (GameController.Instance.Level >= PlayerPrefs.GetInt(key: "UnlockedLevel", defaultValue: 1))
         {

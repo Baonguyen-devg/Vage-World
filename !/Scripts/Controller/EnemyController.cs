@@ -85,16 +85,25 @@ public class EnemyController : AutoMonobehaviour
 
     public virtual void DoAttack()
     {
-        this.RandomlyMovement.gameObject.SetActive(value: true);
+        this.randomlyMovement.gameObject.SetActive(value: true);
         this.randomlyMovement.SetTargetFollow(target: GameObject.Find(name: "Player").transform);
+        this.movement.gameObject.SetActive(true);
 
-        this.model.GetComponent<BehaviorManager>().GetBehaviorByName(name: "Run").gameObject.SetActive(value: true);
+        this.model.GetComponent<Animator>().SetTrigger("Run");
         this.nearRoot = false;
     }
 
     public virtual void StopAttack()
     {
         this.nearRoot = true;
+        this.randomlyMovement.gameObject.SetActive(value: true);
         this.randomlyMovement.SetTargetFollow(target: posRoot);
+        this.movement.gameObject.SetActive(true);
+    }
+
+    public virtual void Stand()
+    {
+        this.movement.gameObject.SetActive(false);
+        this.randomlyMovement.gameObject.SetActive(false);
     }
 }

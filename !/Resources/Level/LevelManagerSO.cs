@@ -119,6 +119,27 @@ public class LevelManagerSO : ScriptableObject
     [SerializeField] private int timeAppearBoss;
     [HideInInspector] public int TimeAppearBoss => timeAppearBoss;
 
+
+
+    [Space(3), Header("[ SET UP PLAYER ]"), Space(3)]
+    [Space(height: 3), Header(header: "[ Set Up Stats ]"), Space(height: 3)] 
+                                                                             
+    [Range(min: 50, max: 30000), SerializeField] private int maximumHealth;
+    [HideInInspector] public int MaximumHealth => this.maximumHealth;
+
+    [Range(min: 0, max: 100), SerializeField] private int dame;
+    [HideInInspector] public int Dame => this.dame;
+
+    [Range(min: 0.01f, max: 1), SerializeField] private float speed;
+    [HideInInspector] public float Speed => this.speed;
+
+    [Space(height: 3), Header(header: "[ Set Up Attack ] "), Space(height: 3)] 
+                                                                               
+    [Range(min: 0, max: 10), SerializeField] private float attackDelay;
+    [HideInInspector] public float AttackDelay => this.attackDelay;
+
+
+
     [Space(3), Header("[ SET UP SKILL ]"), Space(3)]
     [SerializeField] private List<SkillSO> skills = new List<SkillSO>();
     [HideInInspector] public List<SkillSO> Skills => this.skills;
