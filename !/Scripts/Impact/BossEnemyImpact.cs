@@ -1,11 +1,21 @@
 using UnityEngine;
 
-public class BossEnemyImpact : EnemyImpact
+public class BossEnemyImpact : Impact
 {
-    protected override void OnEnable() =>
-        GameObject.Find(name: "Camera").GetComponent<Animator>().SetTrigger(name: "Shaking");
+   /* [SerializeField] protected BossDemonController controller;
+    protected virtual void LoadBossDemonController() =>
+        this.controller ??= transform.parent.parent.GetComponent<BossDemonController>();
 
-    protected override void LoadController() =>
-        this.controller = (this.controller != null) ? this.controller
-            : transform.parent.parent.parent.GetComponent<EnemyController>();
+    protected override void LoadComponent()
+    {
+        base.LoadComponent();
+        this.LoadBossDemonController();
+    }
+
+    protected virtual void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.name == "Player") this.SendDame(collision.transform);
+    }
+
+    protected virtual void SendDame(Transform obj) => this.controller.DamageSender.Send(obj);*/
 }

@@ -34,6 +34,7 @@ public class PlayerCloseCombatAttack : CloseCombatAttack
         if (!Input.GetMouseButtonDown(0)) return;
 
         this.attackTimer = 0;
+        SFXSpawner.Instance.PlaySound("Sound_Slash_Sword");
         this.animator.SetTrigger("SlashLeft");
         StartCoroutine(ResetRotation());
     }

@@ -58,6 +58,7 @@ public class GameController : AutoMonobehaviour
     {
         Time.timeScale = 0f;
         UIController.Instance.LoadWinGameUI();
+        SFXSpawner.Instance.PlaySound("Sound_Win_Game");
     }
 
     public virtual void LoseGame()

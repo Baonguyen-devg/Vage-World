@@ -1,25 +1,26 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace DamageReceiver
 {
-    public class EnemyDamageReceiver : DamageReceiver
+    public class BossDemonEnemyDamageReceiver : DamageReceiver
     {
-        [SerializeField] protected EnemyController controller;
-        protected virtual void LoadEnemyController() =>
-            this.controller ??= transform.parent.GetComponent<EnemyController>();
+        [SerializeField] protected BossDemonController controller;
+        protected virtual void LoadBossDemonController() =>
+            this.controller ??= transform.parent.GetComponent<BossDemonController>();
 
         [Header(header: "Hit Effect!!!"), Space(height: 10)]
-        [SerializeField] protected float timeEffect = 0.2f; //Time effect happen
+        [SerializeField] protected float timeEffect = 0.2f;
 
-        [SerializeField] protected SpriteRenderer render = null; //SpriteRender in model of enemy
+        [SerializeField] protected SpriteRenderer render = null; 
         protected virtual void LoadSpriteRender() =>
             this.render ??= this.controller?.Model?.GetComponent<SpriteRenderer>();
 
         protected override void LoadComponent()
         {
             base.LoadComponent();
-            this.LoadEnemyController();
+            this.LoadBossDemonController();
             this.LoadSpriteRender();
         }
 
@@ -51,16 +52,8 @@ namespace DamageReceiver
 
         protected virtual void UpgradeAndAppearHealthBar()
         {
-            this.controller.HealthBar.ChangeHealthBar(percent: this.CalculatePercentHealth());
-            this.controller.HealthBar.transform.parent.gameObject.SetActive(value: true);
-            Invoke(methodName: "DisappearHealthbar", time: 1f);
+          
         }
-
-        protected virtual float CalculatePercentHealth() =>
-         (float)this.currentHealth / this.maximumHealth;
-
-        protected virtual void DisappearHealthbar() =>
-            this.controller.HealthBar.transform.parent.gameObject.SetActive(value: false);
 
         protected override void OnDead()
         {

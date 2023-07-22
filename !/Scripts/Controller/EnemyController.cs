@@ -45,7 +45,7 @@ public class EnemyController : AutoMonobehaviour
     [SerializeField] protected CreateRandomDirection randomlyMovement;
     public CreateRandomDirection RandomlyMovement => this.randomlyMovement;
     private void LoadRandomlyMovement() =>
-        this.randomlyMovement ??= transform.Find("DirectionRandomlyMovement").GetComponent<CreateRandomDirection>();
+        this.randomlyMovement ??= transform.Find("DirectionRandomlyMovement")?.GetComponent<CreateRandomDirection>();
 
     private Transform posRoot;
     [SerializeField] private bool nearRoot;
