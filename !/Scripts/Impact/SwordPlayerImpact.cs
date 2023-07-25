@@ -19,8 +19,6 @@ public class SwordPlayerImpact : Impact
         if (collision.name == "Impact") return;
         if (collision.GetComponentInParent<EnemyController>() == null && 
             collision.GetComponentInParent<BossDemonController>() == null) return; 
-
-        VFXSpawner.Instance.SpawnInRegion("Impact_Sword", "Forest", collision.transform.position, collision.transform.rotation);
         this.controller.DamageSender.Send(collision.transform);
     }
 }

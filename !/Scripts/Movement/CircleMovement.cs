@@ -9,7 +9,8 @@ public abstract class CircleMovement : AutoMonobehaviour
     [SerializeField] protected Transform targetFollow;
     protected abstract void LoadTargetFollow();
 
-    [SerializeField] protected float speed = default_Speed;
+    [SerializeField] protected float speedRotation = default_Speed;
+    [SerializeField] protected float speedMove= default_Speed;
     [SerializeField] protected float distanceToTarget = 1;
     [SerializeField] protected float angle;
 
@@ -20,11 +21,15 @@ public abstract class CircleMovement : AutoMonobehaviour
 
     protected virtual Vector3 PosToMove(Transform target)
     {
-        float x = this.targetFollow.position.x + this.distanceToTarget * Mathf.Cos(f: angle);
-        float y = this.targetFollow.position.y + this.distanceToTarget * Mathf.Sin(f: angle);
-        this.angle = this.angle + this.speed;
+        float x = Mathf.Cos(f: this.angle * Mathf.Deg2Rad);
+        float y = Mathf.Sin(f: this.angle * Mathf.Deg2Rad);
 
-        return new Vector3(x: x, y: y, z: transform.parent.position.z);
+        float distanceXY = this.distanceToTarget / Mathf.Sqrt(x * x + y * y);
+        this.angle = this.angle + this.speedRotation;
+
+        Vector3 pos = new Vector3(x:target.localPosition.x + x * distanceXY, 
+            y: target.localPosition.y + y * distanceXY, z: transform.parent.position.z);
+        return pos;
     }
 
     protected abstract void Move(Vector3 posToMove);

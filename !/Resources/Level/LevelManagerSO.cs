@@ -19,7 +19,7 @@ public class LevelManagerSO : ScriptableObject
         [Range(min: 0, max: 100), SerializeField] private int dame;
         [HideInInspector] public int Dame => this.dame;
 
-        //Maximum enemy's speed is about to 50 to 30000 (boss)
+        //Maximum enemy's speedRotation is about to 50 to 30000 (boss)
         [Range(min: 0.01f, max: 1), SerializeField] private float speed;
         [HideInInspector] public float Speed => this.speed;
 

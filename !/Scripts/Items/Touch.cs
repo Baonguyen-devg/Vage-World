@@ -39,6 +39,7 @@ public class Touch : AutoMonobehaviour
     {
         this.materialController.IncreaseNumber(nameMaterial: transform.parent.name, number: 1);
         ItemSpawner.Instance.Despawn(obj: transform.parent);
+        VFXSpawner.Instance.SpawnInRegion("Number_Pick_Item", "Forest", transform.position, transform.rotation);
         AchievementController.Instance?.GetAchievementByName(name: transform.parent.name)?.Increase(number: 1);
     }
 

@@ -30,11 +30,14 @@ namespace DamageReceiver
         {
             base.DecreaseHealth(health: health);
             this.redScreen.SetTrigger(name: "RedScreen");
+            this.redScreen.transform.parent.parent.GetComponent<Animator>().SetTrigger("Shaking");
             this.HitEffect();
         }
 
         protected virtual void HitEffect()
         {
+            VFXSpawner.Instance.SpawnInRegion("Impact_Sword", "Forest", transform.position, transform.rotation);
+            SFXSpawner.Instance.PlaySound("Sound_Red_Screen");
             render.color = new Color32(r: 221, g: 83, b: 11, a: 150);
             Invoke(methodName: "ResetColor", time: this.timeEffect);
         }
