@@ -31,7 +31,7 @@ public class MissionController : AutoMonobehaviour
     [SerializeField] private List<ResourceMission> missions;
     protected virtual void LoadResourceMission()
     {
-        this.missions.Clear();
+        this.missions = new List<ResourceMission>();
         foreach (var missionSO in this.levelManagerSO.Missions)
             if (!missionSO.Name.Equals(value: "This is a null element"))
                 this.missions.Add(new ResourceMission(nameResourceMission: missionSO.Name, action: missionSO.ActionFollow, number: missionSO.Number));
@@ -39,8 +39,16 @@ public class MissionController : AutoMonobehaviour
     public List<ResourceMission> Missions => this.missions;
 
     [SerializeField] protected bool isWinGame = false;
+    [SerializeField] protected bool startCheck = false;
+
+    protected override IEnumerator LoadWaitForLongTime()
+    {
+        yield return StartCoroutine(base.LoadWaitForLongTime());
+        this.startCheck = true;
+    }
 
     protected override void OnEnable() {
+        base.OnEnable();
         this.LoadLevelManagerSO();
         this.LoadResourceMission();
     }
@@ -49,7 +57,7 @@ public class MissionController : AutoMonobehaviour
 
     private void CheckEnoughMission(int Count = 0)
     {
-        if (this.isWinGame) return;
+        if (this.isWinGame || !this.startCheck) return;
         foreach (ResourceMission mission in this.missions)
             if (this.Check(mission: mission)) Count = Count + 1;
 

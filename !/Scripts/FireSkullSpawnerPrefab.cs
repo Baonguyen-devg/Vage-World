@@ -14,7 +14,7 @@ public class FireSkullSpawnerPrefab : AutoMonobehaviour
 
     [SerializeField] protected BossDemonController controller;
     protected void LoadBossDemonController() =>
-        this.controller = transform.parent?.GetComponent<BossDemonController>();
+        this.controller = transform.parent?.parent?.GetComponent<BossDemonController>();
 
     protected override void LoadComponent()
     {
@@ -28,14 +28,19 @@ public class FireSkullSpawnerPrefab : AutoMonobehaviour
         base.OnEnable();
         this.controller.Movement.gameObject.SetActive(false);
         StartCoroutine(this.ContinueMove());
+        StartCoroutine(this.SpawnFireSkull());
+    }
 
+    protected virtual IEnumerator SpawnFireSkull()
+    {
+        yield return new WaitForSeconds(1f);
         foreach (Transform space in this.spacePrefabs)
             space.GetComponent<SpacePrefab>().Spawner("Fire_Skull");
     }
 
     protected virtual IEnumerator ContinueMove()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
         this.controller.Movement.gameObject.SetActive(true);
         gameObject.SetActive(false);
     }

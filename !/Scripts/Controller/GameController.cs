@@ -37,7 +37,7 @@ public class GameController : AutoMonobehaviour
         this.LoadTimelineGame();
     }
 
-    protected override void LoadComponentInAwakeBefore()
+    protected override void LoadComponentInAwakeAfter()
     {
         base.LoadComponentInAwakeAfter();
         this.LoadSingleton();
@@ -58,7 +58,7 @@ public class GameController : AutoMonobehaviour
     {
         Time.timeScale = 0f;
         UIController.Instance.LoadWinGameUI();
-        SFXSpawner.Instance.PlaySound("Sound_Win_Game");
+        SFXSpawner.Instance.PlaySound("Sound_Win_Game", "Forest");
     }
 
     public virtual void LoseGame()

@@ -20,6 +20,8 @@ public class PlayerBulletImpact : Impact
     {
         if (collision.name == "Impact" || collision.GetComponentInParent<EnemyController>() == null) return;
         if (transform.parent.name != "Tornado_Bullet") BulletSpawner.Instance.Despawn(transform.parent);
+        VFXSpawner.Instance.SpawnInRegion("Impact_Bullet_Fire", "Forest", collision.transform.position, collision.transform.rotation);
+        SFXSpawner.Instance.PlaySound("Sound_Impact_Fire", "Forest");
         this.controller.DamageSender.Send(collision.transform);
     }
 }

@@ -1,9 +1,14 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class UIController : AutoMonobehaviour
 {
+    [SerializeField] protected static UIController instance;
+    public static UIController Instance => instance;
+
     [SerializeField] protected List<Transform> listUI;
     protected virtual void LoadListUI()
     {
@@ -12,8 +17,18 @@ public class UIController : AutoMonobehaviour
             this.listUI.Add(item: UI);
     }
 
-    [SerializeField] protected static UIController instance;
-    public static UIController Instance => instance;
+    protected override void LoadComponent()
+    {
+        base.LoadComponent();
+        this.LoadListUI();
+    }
+
+    protected override void LoadComponentInAwakeBefore()
+    {
+        base.LoadComponentInAwakeBefore();
+        UIController.instance = this;
+        this.LoadUI("Load_Screen");
+    }
 
     protected virtual void Update()
     {
@@ -21,19 +36,11 @@ public class UIController : AutoMonobehaviour
             this.LoadPauseGameUI();
     }
 
-    protected override void LoadComponentInAwakeBefore()
-    {
-        base.LoadComponentInAwakeBefore();
-        UIController.instance = this;
-    }
-
-    protected override void LoadComponent() => this.LoadListUI();
-
-    protected virtual void LoadUI(string nameUI)
+    public virtual void LoadUI(string nameUI)
     {
         foreach (Transform UI in this.listUI)
-            if (nameUI.Equals(value: UI.name)) UI.gameObject.SetActive(value: true);
-            else UI.gameObject.SetActive(value: false);
+            if (nameUI.Equals(value: UI.name)) 
+                UI.gameObject.SetActive(value: true);
     }
 
     public virtual void LoadPauseGameUI() => this.LoadUI(nameUI: "Pause_Game_UI");

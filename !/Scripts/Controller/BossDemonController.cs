@@ -6,13 +6,11 @@ using Movement;
 
 public class BossDemonController : AutoMonobehaviour
 {
-    //Model Component
     [SerializeField] protected Transform model;
     public Transform Model => this.model;
     protected virtual void LoadModel() =>
         this.model ??= transform.Find("Model");
 
-    //DamagedReceiver Component
     [SerializeField] protected BossDemonEnemyDamageReceiver damageReceiver;
     public BossDemonEnemyDamageReceiver DamageReceiver => this.damageReceiver;
     protected virtual void LoadDamagedReceiver() =>

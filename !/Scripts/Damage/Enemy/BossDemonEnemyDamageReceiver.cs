@@ -59,7 +59,7 @@ namespace DamageReceiver
         {
             EnemySpawner.Instance.Despawn(obj: transform.parent);
             VFXSpawner.Instance.SpawnInRegion("Smoke_Die_Enemy", "Forest", transform.parent.position, transform.parent.rotation);
-            SFXSpawner.Instance.PlaySound("Sound_Smoke_Die_Enemy");
+            SFXSpawner.Instance.PlaySound("Sound_Smoke_Die_Enemy", "Forest");
             AchievementController.Instance.GetAchievementByName(name: transform.parent.name)?.Increase(1);
         }
     }

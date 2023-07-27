@@ -28,7 +28,7 @@ public class LootMaterial : AutoMonobehaviour
         {
             this.itemToPickup?.GetComponent<Touch>()?.Loot();
             this.SetItemToPickup(item: null);
-            SFXSpawner.Instance.PlaySound("Sound_Collect_Material");
+            SFXSpawner.Instance.PlaySound("Sound_Collect_Material", "Forest");
             this.itemsCanPick?.Remove(item: this.itemToPickup);
         }
         else

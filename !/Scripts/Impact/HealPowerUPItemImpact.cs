@@ -10,7 +10,7 @@ public class HealPowerUPItemImpact : Impact
     {
         if (!collision.name.Equals("Player")) return;
         collision.GetComponent<PlayerController>().DamageReceiver.IncreaseHealth(this.healthPoint);
-        SFXSpawner.Instance.PlaySound("Sound_Heal");
+        SFXSpawner.Instance.PlaySound("Sound_Heal", "Forest");
         transform.parent.gameObject.SetActive(false);
     }
 }

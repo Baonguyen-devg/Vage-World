@@ -37,7 +37,7 @@ namespace DamageReceiver
         protected virtual void HitEffect()
         {
             VFXSpawner.Instance.SpawnInRegion("Impact_Sword", "Forest", transform.position, transform.rotation);
-            SFXSpawner.Instance.PlaySound("Sound_Red_Screen");
+            SFXSpawner.Instance.PlaySound("Sound_Red_Screen", "Forest");
             render.color = new Color32(r: 221, g: 83, b: 11, a: 150);
             Invoke(methodName: "ResetColor", time: this.timeEffect);
         }

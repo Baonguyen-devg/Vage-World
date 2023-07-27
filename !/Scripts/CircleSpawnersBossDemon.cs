@@ -13,14 +13,43 @@ public class CircleSpawnersBossDemon : AutoMonobehaviour
     }
     public List<Transform> CirclePrefabs => this.circlePrefabs;
 
-    protected override void LoadComponent() => this.LoadCirclePrefabs();
+    [SerializeField] protected BossDemonController controller;
+    protected virtual void LoadController() =>
+        this.controller = transform.parent?.parent?.GetComponent<BossDemonController>();
+
+    [SerializeField] protected Animator animatorBoss;
+    protected virtual void LoadAnimator() =>
+        this.animatorBoss = transform.parent?.parent?.Find("Model")?.GetComponent<Animator>();
+
+    protected override void LoadComponent()
+    {
+        this.LoadAnimator();
+        this.LoadCirclePrefabs();
+        this.LoadController();
+    }
 
     protected override void OnEnable()
     {
         base.OnEnable();
+        this.animatorBoss.SetTrigger("Breath");
+        this.controller.Movement.gameObject.SetActive(false);
+        StartCoroutine(this.Accumulation());
+        StartCoroutine(this.DisActive());
+    }
+
+    protected virtual IEnumerator Accumulation()
+    {
+        yield return new WaitForSeconds(1.2f);
         foreach (Transform circle in this.circlePrefabs)
             circle.gameObject.SetActive(true);
-        StartCoroutine(this.DisActive());
+        StartCoroutine(this.SetAnimationIdle());
+    }
+
+    protected virtual IEnumerator SetAnimationIdle()
+    {
+        yield return new WaitForSeconds(0.5f);
+        this.controller.Movement.gameObject.SetActive(true);
+        this.animatorBoss.SetTrigger("Idle");
     }
 
     protected virtual IEnumerator DisActive()

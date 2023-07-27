@@ -12,11 +12,20 @@ public class PlayerShootingAttack : ShootingAttack
         foreach (Transform supporter in transform)
             this.pointShootes.Add(item: supporter.Find("Book")?.Find("Point")?.transform);
     }
+    public List<Transform> PointShootes => this.pointShootes;
 
     protected override void LoadComponent()
     {
         base.LoadComponent();
         this.LoadPointShootes();
+    }
+
+    public virtual int GetIndexPrefab(Transform prefab)
+    {
+        foreach (Transform point in this.pointShootes)
+            if (prefab.name.Equals(point.name))
+                return this.pointShootes.IndexOf(prefab);
+        return 0;
     }
 
     public virtual void SetActiveTeamSupporter(bool status)

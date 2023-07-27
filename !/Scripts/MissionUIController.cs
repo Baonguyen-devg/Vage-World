@@ -34,7 +34,7 @@ public class MissionUIController : AutoMonobehaviour
 
     [SerializeField] private List<missionUI> missionUIs;
     protected virtual void LoadMissionUIs() {
-        this.missionUIs = new List<missionUI>();
+        this.missionUIs.Clear();
         foreach (var mission in this.levelManagerSO.Missions)
         {
             if (mission.Name.Equals("This is a null element")) continue;
@@ -55,6 +55,12 @@ public class MissionUIController : AutoMonobehaviour
         this.LoadMissionUIPrefab();
     }
 
+    protected override void LoadComponentInAwakeAfter()
+    {
+        base.LoadComponentInAwakeAfter();
+        this.missionUIs = new List<missionUI>();
+    }
+
     protected override void OnEnable()
     {
         base.OnEnable();
@@ -71,7 +77,6 @@ public class MissionUIController : AutoMonobehaviour
             mission.GetUIMission.transform.Find("Process").Find("Background").GetComponent<Image>().fillAmount = percent;
             if (percent == 1f) mission.GetUIMission.transform.Find("Process").Find("Finished").gameObject.SetActive(true); 
         }
-
     }
 
     public virtual float GetPercentMissionByName(string name, int number)
