@@ -8,8 +8,8 @@ public class CreateRandomDirection : AutoMonobehaviour
     private const int rate_Part_Crirle = 2;
     private const string persudo_Messenge_Random = "VageWorld"; //Seed for random
     private const int maximum_Distance_Point = 2;
-    private const int radian_Followed = 80;
-    private const float time_Delay_Create = 0.2f;
+    private const int radian_Followed = 45;
+    private const float time_Delay_Create = 0.5f;
 
     [SerializeField] private List<Vector2> avoidDirections;
     [SerializeField] private List<int> validDirections;
@@ -59,10 +59,6 @@ public class CreateRandomDirection : AutoMonobehaviour
         this.CheckAndLoadNewDirections();
     }
 
-    //Calculate Method For Random Direction 
-    private float GetRadian(float angle) => 
-        angle * Mathf.Deg2Rad;
-
     private float GetAngle(float radian) => 
         radian * Mathf.Rad2Deg;
 
@@ -98,12 +94,6 @@ public class CreateRandomDirection : AutoMonobehaviour
 
     private bool OutsideTargetFollow(float radian) =>
         (this.CalculateAngleDiscrepancy(this.targetFollow.position, radian) <= radian_Followed);
-
-    public virtual void RemoveAnAvoidDirection(Vector3 coordinate)
-    {
-        int index = this.avoidDirections.FindIndex(x => x.Equals(coordinate));
-        if (index != -1) this.avoidDirections.RemoveAt(index);
-    }
 
     private void CheckAndLoadNewDirections()
     {

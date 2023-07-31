@@ -1,5 +1,7 @@
 using System;
+using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameController : AutoMonobehaviour
 {
@@ -42,6 +44,11 @@ public class GameController : AutoMonobehaviour
         base.LoadComponentInAwakeAfter();
         this.LoadSingleton();
         Application.targetFrameRate = 60;
+    }
+
+    public virtual void CoroutineStateMachineBehaviour(IEnumerator coroutine)
+    {
+        StartCoroutine(coroutine);
     }
 
     protected virtual void Update()

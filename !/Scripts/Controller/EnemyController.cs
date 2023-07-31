@@ -9,7 +9,7 @@ public class EnemyController : AutoMonobehaviour
     [SerializeField] protected Transform model;
     public Transform Model => this.model;
     protected virtual void LoadModel() =>
-        this.model ??= transform.Find("Model");
+        this.model = transform.Find("Model");
 
     //Movement Component
     [SerializeField] protected EnemyMovement movement;
@@ -47,6 +47,11 @@ public class EnemyController : AutoMonobehaviour
     private void LoadRandomlyMovement() =>
         this.randomlyMovement ??= transform.Find("DirectionRandomlyMovement")?.GetComponent<CreateRandomDirection>();
 
+    [SerializeField] protected BehaviorManager behaviorManager;
+    public BehaviorManager BehaviorManager => this.behaviorManager;
+    private void LoadBehaviorManager() =>
+        this.behaviorManager ??= transform.Find("Behaviours")?.GetComponent<BehaviorManager>();
+
     private Transform posRoot;
     [SerializeField] private bool nearRoot;
 
@@ -60,19 +65,20 @@ public class EnemyController : AutoMonobehaviour
         this.LoadHealthBar();
         this.LoadCloseCombat();
         this.LoadRandomlyMovement();
+        this.LoadBehaviorManager();
     }
 
     private void Update() => this.NearPosRoot();
 
     private void NearPosRoot()
     {
-        if (this.nearRoot == false) return;
+       /* if (this.nearRoot == false) return;
         if (Vector2.Distance(a: transform.position, b: this.posRoot.position) <= 0.5f)
         {
             this.nearRoot = false;
             this.randomlyMovement.gameObject.SetActive(value: false);
             this.model.GetComponent<BehaviorManager>().GetBehaviorByName(name: "Idle").gameObject.SetActive(value: true);
-        }
+        }*/
     }
 
     protected override void LoadComponentInAwakeBefore()
@@ -87,9 +93,7 @@ public class EnemyController : AutoMonobehaviour
     {
         this.randomlyMovement.gameObject.SetActive(value: true);
         this.randomlyMovement.SetTargetFollow(target: GameObject.Find(name: "Player").transform);
-        this.movement.gameObject.SetActive(true);
 
-        this.model.GetComponent<Animator>().SetTrigger("Run");
         this.nearRoot = false;
     }
 
@@ -98,12 +102,10 @@ public class EnemyController : AutoMonobehaviour
         this.nearRoot = true;
         this.randomlyMovement.gameObject.SetActive(value: true);
         this.randomlyMovement.SetTargetFollow(target: posRoot);
-        this.movement.gameObject.SetActive(true);
     }
 
     public virtual void Stand()
     {
-        this.movement.gameObject.SetActive(false);
         this.randomlyMovement.gameObject.SetActive(false);
     }
 }

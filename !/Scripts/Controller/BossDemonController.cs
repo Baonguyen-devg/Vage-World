@@ -13,6 +13,7 @@ public class BossDemonController : AutoMonobehaviour
 
     [SerializeField] protected BossDemonEnemyDamageReceiver damageReceiver;
     public BossDemonEnemyDamageReceiver DamageReceiver => this.damageReceiver;
+
     protected virtual void LoadDamagedReceiver() =>
        this.damageReceiver ??= transform.Find("DamageReceiver")?.GetComponent<BossDemonEnemyDamageReceiver>();
 

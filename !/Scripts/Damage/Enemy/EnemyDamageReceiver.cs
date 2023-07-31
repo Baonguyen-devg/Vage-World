@@ -14,7 +14,7 @@ namespace DamageReceiver
 
         [SerializeField] protected SpriteRenderer render = null; //SpriteRender in model of enemy
         protected virtual void LoadSpriteRender() =>
-            this.render ??= this.controller?.Model?.GetComponent<SpriteRenderer>();
+            this.render = this.controller?.Model?.GetComponent<SpriteRenderer>();
 
         protected override void LoadComponent()
         {
@@ -65,10 +65,17 @@ namespace DamageReceiver
 
         protected override void OnDead()
         {
-            EnemySpawner.Instance.Despawn(obj: transform.parent);
+            this.SpawnCoins(Random.Range(3, 5));
             VFXSpawner.Instance.SpawnInRegion("Smoke_Die_Enemy", "Forest", transform.parent.position, transform.parent.rotation);
             SFXSpawner.Instance.PlaySound("Sound_Smoke_Die_Enemy", "Forest");
             AchievementController.Instance.GetAchievementByName(name: transform.parent.name)?.Increase(1);
+            EnemySpawner.Instance.Despawn(obj: transform.parent);
+        }
+
+        protected virtual void SpawnCoins(int numberCoin)
+        {
+            for (int i = 0; i < numberCoin; i++)
+                ItemSpawner.Instance.SpawnInRegion("Coin", "Forest", transform.position, transform.rotation);
         }
     }
 }

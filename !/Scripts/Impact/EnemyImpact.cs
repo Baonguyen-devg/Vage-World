@@ -4,7 +4,7 @@ public class EnemyImpact : Impact
 {
     [SerializeField] protected EnemyController controller;
     protected virtual void LoadController() =>
-        this.controller ??= transform.parent.parent.parent.GetComponent<EnemyController>();
+        this.controller = transform.parent?.parent?.GetComponent<EnemyController>();
 
     protected override void LoadComponent()
     {

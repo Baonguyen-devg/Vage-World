@@ -3,21 +3,28 @@ using UnityEngine;
 
 public class BehaviorManager : AutoMonobehaviour
 {
-    [SerializeField] private List<Transform> listBehaviors;
-
-    protected override void LoadComponent() => this.loadBehaviors();
-
-    protected virtual void loadBehaviors()
+    [SerializeField] protected List<Transform> behaviours;
+    protected virtual void LoadBehaviours()
     {
-        if (this.listBehaviors.Count != 0) return;
-        foreach (Transform behavior in transform)
-            this.listBehaviors.Add(item: behavior);
+        this.behaviours.Clear();
+        foreach (Transform behaviour in transform)
+            this.behaviours.Add(behaviour);
     }
 
-    public virtual Transform GetBehaviorByName(string name)
+    [SerializeField] protected int count = 0;
+
+    protected override void LoadComponent()
     {
-        foreach (Transform behavior in this.listBehaviors)
-            if (name.Equals(value: behavior.name)) return behavior;
-        return null;
+        base.LoadComponent();
+        this.LoadBehaviours();
+    }
+
+    public virtual void DoBehaviour()
+    {
+        this.count = (this.count + 1) % this.behaviours.Count;
+        foreach (Transform behaviour in this.behaviours)
+            behaviour.gameObject.SetActive(false);
+
+        this.behaviours[count].gameObject.SetActive(true);
     }
 }

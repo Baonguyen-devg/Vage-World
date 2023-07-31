@@ -4,11 +4,6 @@ using UnityEngine;
 
 public class BossDemonBehaviours : AutoMonobehaviour
 {
-    [SerializeField] protected Animator animatorBackgroundColor;
-    protected virtual void LoadAnimatorBackgroundColor() =>
-        this.animatorBackgroundColor = GameObject.Find("Camera")?.transform.Find("Main Camera")?.
-            Find("Background_Color")?.GetComponent<Animator>();
-
     [SerializeField] protected List<Transform> behaviours;
     protected virtual void LoadBehaviours()
     {
@@ -24,7 +19,6 @@ public class BossDemonBehaviours : AutoMonobehaviour
     {
         base.LoadComponent();
         this.LoadBehaviours();
-        this.LoadAnimatorBackgroundColor();
     }
 
     protected virtual void Update()
@@ -42,7 +36,6 @@ public class BossDemonBehaviours : AutoMonobehaviour
         foreach (Transform behaviour in this.behaviours)
             behaviour.gameObject.SetActive(false);
 
-        this.animatorBackgroundColor.SetTrigger("Black_Screen");
         this.behaviours[count].gameObject.SetActive(true);
     }
 }

@@ -21,11 +21,17 @@ public class CircleSpawnersBossDemon : AutoMonobehaviour
     protected virtual void LoadAnimator() =>
         this.animatorBoss = transform.parent?.parent?.Find("Model")?.GetComponent<Animator>();
 
+    [SerializeField] protected Animator animatorBackgroundColor;
+    protected virtual void LoadAnimatorBackgroundColor() =>
+        this.animatorBackgroundColor = GameObject.Find("Camera")?.transform.Find("Main Camera")?.
+            Find("Background_Color")?.GetComponent<Animator>();
+
     protected override void LoadComponent()
     {
         this.LoadAnimator();
         this.LoadCirclePrefabs();
         this.LoadController();
+        this.LoadAnimatorBackgroundColor();
     }
 
     protected override void OnEnable()
@@ -33,6 +39,8 @@ public class CircleSpawnersBossDemon : AutoMonobehaviour
         base.OnEnable();
         this.animatorBoss.SetTrigger("Breath");
         this.controller.Movement.gameObject.SetActive(false);
+        this.animatorBackgroundColor.SetTrigger("Black_Screen");
+        SFXSpawner.Instance.PlaySound("Sound_Boss_Demon_Roar", "Forest");
         StartCoroutine(this.Accumulation());
         StartCoroutine(this.DisActive());
     }
