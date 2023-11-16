@@ -5,13 +5,12 @@ using UnityEngine;
 public class SwordPlayerImpact : Impact
 {
     [SerializeField] protected PlayerController controller;
-    protected virtual void LoadController() =>
-        this.controller ??= GameObject.Find("Player")?.GetComponent<PlayerController>();
 
+    [ContextMenu("Load Component")]
     protected override void LoadComponent()
     {
         base.LoadComponent();
-        this.LoadController();
+        controller ??= GameObject.Find("Player")?.GetComponent<PlayerController>();
     }
 
     protected virtual void OnTriggerEnter2D(Collider2D collision)
@@ -19,6 +18,6 @@ public class SwordPlayerImpact : Impact
         if (collision.name == "Impact") return;
         if (collision.GetComponentInParent<EnemyController>() == null && 
             collision.GetComponentInParent<BossDemonController>() == null) return; 
-        this.controller.DamageSender.Send(collision.transform);
+        controller.DamageSender.Send(collision.transform);
     }
 }

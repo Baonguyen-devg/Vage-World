@@ -3,58 +3,72 @@ using System.Collections.Generic;
 using UnityEngine;
 using Movement;
 
-[RequireComponent(requiredComponent: typeof(Rigidbody2D))]
-[RequireComponent(requiredComponent: typeof(CircleCollider2D))]
+[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(CircleCollider2D))]
 public class LootMaterial : AutoMonobehaviour
 {
-    [SerializeField] public Transform itemToPickup;
-    [SerializeField] private float distanceCanPick = 0.8f;
-    [SerializeField] private List<Transform> itemsCanPick;
+    [SerializeField] private Touch _itemToPickup;
+    [SerializeField] private PlayerMovement _playerMovement;
 
-    protected override void LoadComponentInAwakeBefore()
-    {
-        base.LoadComponentInAwakeBefore();
-        this.itemsCanPick = new List<Transform>();
-    }
+    [SerializeField] private float _distanceCanPick = 0.8f;
+    [SerializeField] private List<Touch> _itemsCanPick = new List<Touch>();
 
-    public virtual void SetItemToPickup(Transform item) => this.itemToPickup = item;
+    [ContextMenu("Load Component")]
+    protected override void LoadComponent() =>
+        _playerMovement = transform.parent.Find("Movement").GetComponent<PlayerMovement>();
 
     private void Update()
     {
-        if (Input.GetKeyDown(key: KeyCode.Space) && this.itemsCanPick.Count != 0) this.itemToPickup = this.itemsCanPick[0];
-        if (this.itemToPickup == null) return;
+        bool spacePress = Manager.InputManager.GetInstance().IsSpacePress();
+        if (spacePress && _itemsCanPick.Count != 0) _itemToPickup = _itemsCanPick[0]; 
 
-        if (Vector3.Distance(a: transform.position, b: itemToPickup.transform.position) <= this.distanceCanPick)
+        if (_itemToPickup == null) return;
+ 
+        if (IsPlayerCloseEnoughToPickup())
         {
-            this.itemToPickup?.GetComponent<Touch>()?.Loot();
-            this.SetItemToPickup(item: null);
-            SFXSpawner.Instance.PlaySound("Sound_Collect_Material", "Forest");
-            this.itemsCanPick?.Remove(item: this.itemToPickup);
+            _itemToPickup.Loot();
+            _itemsCanPick.Remove(_itemToPickup);
+            SetItemToPickup(null);
         }
-        else
-        {
-            Vector2 pos = (itemToPickup.transform.position - transform.parent.position);
-            pos.Normalize();
-            transform.parent.Find(n: "Movement").GetComponent<PlayerMovement>().
-                UpdateGetInputAxis(axisX: pos.x, axisY: pos.y);
-        }
+        else MoveTowardsItem();
     }
+
+    private void MoveTowardsItem()
+    {
+        Vector2 pos = (_itemToPickup.transform.position - transform.parent.position).normalized;
+        _playerMovement.UpdateGetInputAxis(pos.x, pos.y);
+    }
+
+    private bool IsPlayerCloseEnoughToPickup() =>
+        Vector3.Distance(transform.parent.position, _itemToPickup.transform.position) <= _distanceCanPick;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!LayerMask.NameToLayer(layerName: "item").Equals(obj: collision.gameObject.layer)) return;
-        if (collision.GetComponent<Touch>() == null) return;
+        Touch touch = GetTouchByCollision(collision);
+        if (touch == null) return;
 
-        this.itemsCanPick.Add(item: collision.transform);
-        collision.GetComponent<Touch>().ChangeStatusFrameAndHaveTouchTo(newStatus: true);
+        _itemsCanPick.Add(touch);
+        touch.ChangeStatusFrameAndHaveTouchTo(true);
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (!LayerMask.NameToLayer(layerName: "item").Equals(obj: collision.gameObject.layer)) return;
-        if (collision.GetComponent<Touch>() == null) return;
+        Touch touch = GetTouchByCollision(collision);
+        if (touch == null) return;
 
-        this.itemsCanPick.Remove(item: collision.transform);
-        collision.GetComponent<Touch>().ChangeStatusFrameAndHaveTouchTo(newStatus: false);
+        _itemsCanPick.Remove(touch);
+        touch.ChangeStatusFrameAndHaveTouchTo(false);
     }
+
+    private Touch GetTouchByCollision(Collider2D collision)
+    {
+        if (!LayerMask.NameToLayer("item").Equals(collision.gameObject.layer)) return null;
+        Touch touch = collision.GetComponent<Touch>();
+        return touch;
+    }
+
+    public virtual void SetItemToPickup(Transform item) =>
+        _itemToPickup = item?.GetComponent<Touch>();
+
+    public virtual Touch GetItemToPickup() => _itemToPickup;
 }

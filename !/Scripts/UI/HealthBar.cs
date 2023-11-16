@@ -4,27 +4,26 @@ using DamageReceiver;
 
 public class HealthBar : AutoMonobehaviour
 {
-    [SerializeField] protected PlayerDamageReceiver playerDamageReceiver;
-    protected virtual void LoadPlayer() =>
-        this.playerDamageReceiver ??= GameObject.Find("Player")?.GetComponentInChildren<PlayerDamageReceiver>();
+    [SerializeField] private PlayerDamageReceiver _playerDamageReceiver;
+    [SerializeField] private Slider _slider;
 
-    [SerializeField] protected Slider slider;
-    protected virtual void LoadSlider() =>
-         this.slider ??= GetComponentInParent<Slider>();
-
+    [ContextMenu("Load Component")]
     protected override void LoadComponent()
     {
-        base.LoadComponent();
-        this.LoadPlayer();
-        this.LoadSlider();
+        _playerDamageReceiver = GameObject.Find("Player").GetComponentInChildren<PlayerDamageReceiver>();
+        _slider = GetComponentInParent<Slider>();
     }
 
-    protected override void OnEnable()
+    protected override void Awake()
     {
-        base.OnEnable();
-        this.slider.maxValue = this.playerDamageReceiver.CurrentHealth;
+        base.Awake();
+        _slider.maxValue = _playerDamageReceiver.GetMaximumHealth();
+        PlayerDamageReceiver.PlayerReceiveDamageEvent += UpdateSlider;
+        UpdateSlider();
     }
 
-    protected virtual void Update() =>
-         this.slider.value = this.playerDamageReceiver.CurrentHealth;
+    private void UpdateSlider() =>
+         _slider.value = _playerDamageReceiver.GetCurrentHealth();
+
+    private void OnDisable() => PlayerDamageReceiver.PlayerReceiveDamageEvent -= UpdateSlider;
 }

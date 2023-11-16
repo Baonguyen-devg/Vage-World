@@ -1,43 +1,34 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyCloseCombatAttack : AutoMonobehaviour
 {
+    private readonly int SLASH_LEFT_TRIGGER = Animator.StringToHash("SlashLeft");
+
     [SerializeField] protected EnemyController controller;
-    protected virtual void LoadController() =>
-        this.controller = transform.parent?.parent?.GetComponent<EnemyController>();
-
     [SerializeField] protected Animator animator;
-    protected virtual void LoadAnimator() =>
-        this.animator = this.controller?.Model?.GetComponent<Animator>();
-
     [SerializeField] protected Animator animatorSword;
-    protected virtual void LoadAnimatorSword() =>
-        this.animatorSword = this.controller.transform.Find("Weapon")?.Find("Sword")?.GetComponent<Animator>();
-
     [SerializeField] protected Transform target;
-    protected virtual void LoadTarget() =>
-      this.target = GameObject.Find(name: "Player")?.transform;
 
+    [ContextMenu("Load Component")]
     protected override void LoadComponent()
     {
         base.LoadComponent();
-        this.LoadController();
-        this.LoadAnimator();
-        this.LoadAnimatorSword();
-        this.LoadTarget();
+        controller = transform.parent.parent.GetComponent<EnemyController>();
+        animator = controller.Model.GetComponent<Animator>();
+        animatorSword = controller.transform.Find("Weapon").Find("Sword").GetComponent<Animator>();
+        target = GameObject.Find("Player").transform;
     }
 
     protected override void OnEnable()
     {
-        this.animatorSword.SetTrigger(name: "SlashLeft");
-        StartCoroutine(routine: this.SetRunAnimation());
+        animatorSword.SetTrigger(SLASH_LEFT_TRIGGER);
+        StartCoroutine(SetRunAnimation());
     }
 
     protected virtual IEnumerator SetRunAnimation()
     {
-        yield return new WaitForSeconds(seconds: 0.5f);
-        gameObject.SetActive(value: false);
+        yield return new WaitForSeconds(0.5f);
+        gameObject.SetActive(false);
     }
 }

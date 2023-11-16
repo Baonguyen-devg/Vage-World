@@ -3,15 +3,15 @@ using UnityEngine;
 
 public class AutoMonobehaviour : MonoBehaviour
 {
-    protected virtual void Reset() => this.LoadComponent();
+    protected virtual void Reset() => LoadComponent();
 
     protected virtual void LoadComponent() { /* For Override */ }
 
     protected virtual void Awake()
     {
-        this.LoadComponent();
-        this.LoadComponentInAwakeBefore();
-        this.LoadComponentInAwakeAfter();
+        LoadComponent();
+        LoadComponentInAwakeBefore();
+        LoadComponentInAwakeAfter();
     }
 
     protected virtual void LoadComponentInAwakeBefore() { /* For Override */ }

@@ -47,8 +47,8 @@ public class MissionController : AutoMonobehaviour
         this.startCheck = true;
     }
 
-    protected override void OnEnable() {
-        base.OnEnable();
+    protected override void LoadComponentInAwakeBefore() {
+        base.LoadComponentInAwakeBefore();
         this.LoadLevelManagerSO();
         this.LoadResourceMission();
     }

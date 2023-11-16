@@ -4,24 +4,24 @@ using UnityEngine;
 
 public class SupporterMovement : CircleMovement
 {
-    [SerializeField] protected PlayerShootingAttack playerShoote;
-    protected virtual void LoadCircleSpawners() =>
-        this.playerShoote = transform.parent?.parent?.GetComponent<PlayerShootingAttack>();
+    [SerializeField] protected Attack.PlayerShootingAttack playerShoote;
+    [SerializeField] protected Transform pointShoote;
 
     protected override void LoadTargetFollow() =>
-        this.targetFollow = GameObject.Find(name: "Player")?.transform;
+        targetFollow = GameObject.Find("Player").transform;
 
-    protected override void LoadComponentInAwakeBefore()
+    [ContextMenu("Load Component")]
+    protected override void LoadComponent()
     {
-        base.LoadComponentInAwakeBefore();
-        this.LoadCircleSpawners();
+        base.LoadComponent();
+        pointShoote = transform.parent.Find("Point");
+        playerShoote = transform.parent?.parent?.GetComponent<Attack.PlayerShootingAttack>();
     }
 
     protected override void OnEnable()
     {
         base.OnEnable();
-        this.angle = (float)360 / this.playerShoote.PointShootes.Count *
-            this.playerShoote.GetIndexPrefab(transform.parent);
+        angle = (float)360 / playerShoote.GetPointShootes().Count * playerShoote.GetIndexSupporter(pointShoote);
     }
 
     protected override void Move(Vector3 posToMove) =>

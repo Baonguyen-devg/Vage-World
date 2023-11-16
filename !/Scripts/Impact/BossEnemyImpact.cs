@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class BossEnemyImpact : Impact
 {
-   /* [SerializeField] protected BossDemonController controller;
+   /* [SerializeField] protected BossDemonController _controller;
     protected virtual void LoadBossDemonController() =>
-        this.controller ??= transform.parent.parent.GetComponent<BossDemonController>();
+        this._controller ??= transform.parent.parent.GetComponent<BossDemonController>();
 
     protected override void LoadComponent()
     {
@@ -17,5 +17,5 @@ public class BossEnemyImpact : Impact
         if (collision.name == "Player") this.SendDame(collision.transform);
     }
 
-    protected virtual void SendDame(Transform obj) => this.controller.DamageSender.Send(obj);*/
+    protected virtual void SendDame(Transform obj) => this._controller.DamageSender.Send(obj);*/
 }

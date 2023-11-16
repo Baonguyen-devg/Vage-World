@@ -14,11 +14,10 @@ namespace Movement
             Vector3 direction = GetPos();
             direction.Normalize();
 
-            Vector3 target = transform.parent.parent.position + direction * this.distanceToObject;
-            transform.parent.position = Vector2.Lerp(transform.parent.position, target, this.speed);
+            Vector3 target = transform.parent.parent.position + direction * distanceToObject;
+            transform.parent.position = Vector2.Lerp(transform.parent.position, target, speed);
         }
 
-        protected override Vector2 GetPos() =>
-            Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.parent.parent.position;
+        protected override Vector2 GetPos() => Manager.InputManager.GetInstance().GetMousePosition();
     }
 }

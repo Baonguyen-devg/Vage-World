@@ -1,11 +1,12 @@
 public class EnemySpawner : Spawner
 {
-    protected static EnemySpawner instance;
-    public static string enemy_1 = "Enemy_1";
-    public static string enemy_2 = "Enemy_2";
+    public static readonly string ENEMY_ONE = "Enemy_1";
+    public static readonly string ENEMY_TWO = "Enemy_2";
 
+    protected static EnemySpawner instance;
     public static EnemySpawner Instance => instance;
 
+    protected override string GetPath() => "Prefabs/Prefabs_Enemy";
     protected override void LoadComponentInAwakeBefore()
     {
         base.LoadComponentInAwakeBefore();

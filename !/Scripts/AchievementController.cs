@@ -7,14 +7,14 @@ using UnityEngine.UI;
 {
     protected const string default_Name_Achievement = "Skeleton";
 
-    [SerializeField] private string nameaAchievement = default_Name_Achievement;
-    public string NameAchievement => this.nameaAchievement;
-
     [SerializeField] private int numberHaving = default;
-    public int NumberHaving => this.numberHaving;
+    [SerializeField] private string nameaAchievement = default_Name_Achievement;
 
-    public virtual void Increase(int number) => this.numberHaving = this.numberHaving + 1;
-    public virtual bool IsEnough(int numberRequest) => (this.numberHaving >= numberRequest);
+    public virtual void Increase(int number) => numberHaving = numberHaving + 1;
+    public virtual bool IsEnough(int numberRequest) => (numberHaving >= numberRequest);
+    
+    public string NameAchievement => nameaAchievement;
+    public int NumberHaving => numberHaving;
 }
 
 public class AchievementController : AutoMonobehaviour
@@ -22,7 +22,8 @@ public class AchievementController : AutoMonobehaviour
     [SerializeField] private static AchievementController instance;
     public static AchievementController Instance => instance;
 
-    protected override void LoadComponent() => this.LoadCoinText();
+    [ContextMenu("Load Component")]
+    protected override void LoadComponent() => LoadCoinText();
     protected override void LoadComponentInAwakeBefore() => AchievementController.instance = this;
 
     [SerializeField] private List<Achievement> achievements;
@@ -31,23 +32,23 @@ public class AchievementController : AutoMonobehaviour
 
     [SerializeField] private Text coinText;
     protected virtual void LoadCoinText() =>
-        this.coinText = GameObject.Find("Canvas")?.transform.Find("Game_UI")?.Find("Coin")?.GetComponent<Text>();
+        coinText = GameObject.Find("Canvas")?.transform.Find("Game_UI")?.Find("Coin")?.Find("Text_Number")?.GetComponent<Text>();
 
     public virtual void IncreaseCoin(int number)
     {
-        this.coinNumber = this.coinNumber + number;
-        this.coinText.text = this.coinNumber.ToString();
+        coinNumber = coinNumber + number;
+        coinText.text = coinNumber.ToString();
     }
 
     public virtual void DecreaseCoin(int number)
     {
-        this.coinNumber = this.coinNumber - number;
-        this.coinText.text = this.coinNumber.ToString();
+        coinNumber = coinNumber - number;
+        coinText.text = coinNumber.ToString();
     }
 
     public Achievement GetAchievementByName(string name)
     {
-        foreach (Achievement achievement in this.achievements)
+        foreach (Achievement achievement in achievements)
             if (achievement.NameAchievement.Equals(value: name)) return achievement;
         return null;
     }

@@ -10,13 +10,13 @@ public class DespawnByTime : Despawn
     protected override void OnEnable()
     {
         base.OnEnable();
-        this.timeStartSpawn = 0;
+        timeStartSpawn = 0;
     }
 
     protected override bool CanDespawn()
     {
-        this.timeStartSpawn = this.timeStartSpawn + Time.deltaTime;
-        if (this.timeDespawn > timeStartSpawn) return false;
+        timeStartSpawn = timeStartSpawn + Time.deltaTime;
+        if (timeDespawn > timeStartSpawn) return false;
         else return true;
     }
 }

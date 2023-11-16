@@ -15,9 +15,9 @@ public class CreateRandomDirection : AutoMonobehaviour
     [SerializeField] private List<int> validDirections;
     [SerializeField] private Transform targetFollow = null;
 
-    public Transform TargetFollow => this.targetFollow;
+    public Transform TargetFollow => targetFollow;
     public virtual void SetTargetFollow(Transform target) => 
-        this.targetFollow = target;
+        targetFollow = target;
 
     [SerializeField] private List<Vector2> directions;
     [SerializeField] private float timeCount = 0;
@@ -25,38 +25,39 @@ public class CreateRandomDirection : AutoMonobehaviour
 
     [SerializeField] private EnemyController controller;
     private void LoadController() =>
-        this.controller ??= transform.parent?.GetComponent<EnemyController>();
+        controller ??= transform.parent?.GetComponent<EnemyController>();
 
-    protected override void LoadComponent() => this.LoadController();
+    [ContextMenu("Load Component")]
+    protected override void LoadComponent() => LoadController();
 
     protected override void LoadComponentInAwakeBefore()
     {
         base.LoadComponentInAwakeBefore();
-        this.directions = new List<Vector2>();
-        this.validDirections = new List<int>();
-        this.avoidDirections = new List<Vector2>();
+        directions = new List<Vector2>();
+        validDirections = new List<int>();
+        avoidDirections = new List<Vector2>();
     }
 
     protected override void LoadComponentInAwakeAfter()
     {
         base.LoadComponentInAwakeAfter();
-        this.targetFollow = GameObject.Find("Player").transform;
+        targetFollow = GameObject.Find("Player").transform;
         int numberDirection = (int)360 / rate_Part_Crirle;
         for (int i = 0; i < numberDirection; i++)
-            this.directions.Add(this.GetPostionFromAngle(2f * Mathf.PI / (float)numberDirection * i));
+            directions.Add(GetPostionFromAngle(2f * Mathf.PI / (float)numberDirection * i));
     }
 
     private void Update()
     {
-        if (this.stopCreate == true) return;
-        if (this.timeCount <= time_Delay_Create)
+        if (stopCreate == true) return;
+        if (timeCount <= time_Delay_Create)
         {
-            this.timeCount += Time.deltaTime;
+            timeCount += Time.deltaTime;
             return;
         }
 
-        this.timeCount = 0;
-        this.CheckAndLoadNewDirections();
+        timeCount = 0;
+        CheckAndLoadNewDirections();
     }
 
     private float GetAngle(float radian) => 
@@ -64,7 +65,7 @@ public class CreateRandomDirection : AutoMonobehaviour
 
     private float CalculateAngleDiscrepancy(Vector3 pos1, float radian)
     {
-        float angleBetween = Mathf.Abs(Mathf.Repeat(this.GetAngle(this.GetAngleFromPosition(pos1)), 360f) - radian);
+        float angleBetween = Mathf.Abs(Mathf.Repeat(GetAngle(GetAngleFromPosition(pos1)), 360f) - radian);
         return Mathf.Min(angleBetween, 360 - angleBetween);
     }
 
@@ -76,74 +77,74 @@ public class CreateRandomDirection : AutoMonobehaviour
 
     private int GetPersudoRandom(string messenge)
     {
-        if (this.validDirections.Count == 0) return 0;
+        if (validDirections.Count == 0) return 0;
         messenge = System.DateTime.Now.ToString() + messenge + transform.parent.GetInstanceID();
 
         System.Random psuedo = new System.Random(messenge.GetHashCode());
-        return psuedo.Next(this.validDirections.Count);
+        return psuedo.Next(validDirections.Count);
     }
 
     private IEnumerator SetStopCreate(bool status)
     {
         yield return new WaitForSeconds(0f);
-        this.stopCreate = status;
+        stopCreate = status;
     }
 
     public virtual void AddAnAvoidDirection(Vector3 direction) => 
-        this.avoidDirections.Add(direction);
+        avoidDirections.Add(direction);
 
     private bool OutsideTargetFollow(float radian) =>
-        (this.CalculateAngleDiscrepancy(this.targetFollow.position, radian) <= radian_Followed);
+        (CalculateAngleDiscrepancy(targetFollow.position, radian) <= radian_Followed);
 
     private void CheckAndLoadNewDirections()
     {
-        if (this.targetFollow == null) return;
-        this.validDirections.Clear();
+        if (targetFollow == null) return;
+        validDirections.Clear();
 
-        for (int i = 0; i < this.directions.Count; i++)
-            if (this.OutsideTargetFollow(i * rate_Part_Crirle))
-                this.validDirections.Add(i);
+        for (int i = 0; i < directions.Count; i++)
+            if (OutsideTargetFollow(i * rate_Part_Crirle))
+                validDirections.Add(i);
 
-        this.DodgeAvoidDirection();
-        if (this.validDirections.Count <= 2)
+        DodgeAvoidDirection();
+        if (validDirections.Count <= 2)
         {
-            float angle = Mathf.Repeat(this.GetAngle(this.GetAngleFromPosition(this.targetFollow.position)), 360f) + Random.Range(90, 180);
+            float angle = Mathf.Repeat(GetAngle(GetAngleFromPosition(targetFollow.position)), 360f) + Random.Range(90, 180);
             if (angle >= 360) angle = angle % 360;
-            this.stopCreate = true;
-            this.validDirections.Add((int)angle / rate_Part_Crirle);
-            StartCoroutine(this.SetStopCreate(false));
+            stopCreate = true;
+            validDirections.Add((int)angle / rate_Part_Crirle);
+            StartCoroutine(SetStopCreate(false));
         }
-        this.CreateRandomlyDirection();
+        CreateRandomlyDirection();
     }
 
     private void DodgeAvoidDirection()
     {
         List<int> removeValidDirections = new List<int>();
 
-        foreach (Vector3 avoid in this.avoidDirections)
-            foreach (int valid in this.validDirections)
+        foreach (Vector3 avoid in avoidDirections)
+            foreach (int valid in validDirections)
                 if (CalculateAngleDiscrepancy(avoid, valid * rate_Part_Crirle) <= 40)
                     removeValidDirections.Add(valid);
 
         foreach (int indexRemoved in removeValidDirections)
-            this.validDirections.Remove(indexRemoved);
+            validDirections.Remove(indexRemoved);
     }
 
     private void CreateRandomlyDirection() =>
-        this.DrawLineDirections(this.validDirections[this.GetPersudoRandom(persudo_Messenge_Random)]);
+        DrawLineDirections(validDirections[GetPersudoRandom(persudo_Messenge_Random)]);
 
     private void DrawLineDirections(int validDirection)
     {
-        for (int i = 0; i < this.validDirections.Count; i++)
+        for (int i = 0; i < validDirections.Count; i++)
         {
-            Color colorDrawLine = (validDirection == this.validDirections[i]) ? Color.white : Color.gray;
-            Vector3 pos = transform.parent.position + new Vector3(this.directions[this.validDirections[i]].x, this.directions[this.validDirections[i]].y, 0);
+            Color colorDrawLine = (validDirection == validDirections[i]) ? Color.white : Color.gray;
+            Vector3 pos = transform.parent.position + new Vector3(directions[validDirections[i]].x, directions[validDirections[i]].y, 0);
             Debug.DrawLine(transform.parent.position, pos, colorDrawLine, 0.01f);
         }
 
-        Vector3 directionNormalize = new Vector3(this.directions[validDirection].x, this.directions[validDirection].y, 0);
+        Vector3 directionNormalize = new Vector3(directions[validDirection].x, directions[validDirection].y, 0);
         directionNormalize.Normalize();
-        this.controller.Movement.SetDirectionFollow(directionNormalize);
+        controller.Movement.SetDirectionFollow(directionNormalize);
     }
 
 }

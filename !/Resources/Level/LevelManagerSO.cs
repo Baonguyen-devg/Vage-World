@@ -63,12 +63,11 @@ public class LevelManagerSO : ScriptableObject
         [Header(header: "Name Decor Object: "), SerializeField] private string name;
         [HideInInspector] public string Name => this.name;
 
-        [Space(height: 3), Header(header: "[ Set Up Creating ] "), Space(height: 3)] //CREATING
-        //Maximum enemy's numberObject is about to 0 to 50 (boss)
+        [Space(height: 3), Header(header: "[ Set Up Creating ] "), Space(height: 3)]
+       
         [Range(min: 0, max: 200), SerializeField] protected int numberObject;
         [HideInInspector] public int NumberObject => this.numberObject;
 
-        //Maximum enemy's numberGroup is about to 0 to 50 (boss)
         [Range(min: 0, max: 200), SerializeField] protected int numberGroup;
         [HideInInspector] public int NumberGroup => this.numberGroup;
     }

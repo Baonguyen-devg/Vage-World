@@ -7,9 +7,9 @@ public class BossDemonBehaviours : AutoMonobehaviour
     [SerializeField] protected List<Transform> behaviours;
     protected virtual void LoadBehaviours()
     {
-        this.behaviours.Clear();
+        behaviours.Clear();
         foreach(Transform behaviour in transform)
-            this.behaviours.Add(behaviour);
+            behaviours.Add(behaviour);
     }
 
     [SerializeField] protected double countTime, rateTime;
@@ -18,24 +18,24 @@ public class BossDemonBehaviours : AutoMonobehaviour
     protected override void LoadComponent()
     {
         base.LoadComponent();
-        this.LoadBehaviours();
+        LoadBehaviours();
     }
 
     protected virtual void Update()
     {
-        this.countTime = this.countTime + Time.deltaTime;
-        if (this.countTime < this.rateTime) return;
+        countTime = countTime + Time.deltaTime;
+        if (countTime < rateTime) return;
 
-        this.countTime = 0;
-        this.count = (this.count + 1) % this.behaviours.Count;
-        this.DoBehaviour(count);
+        countTime = 0;
+        count = (count + 1) % behaviours.Count;
+        DoBehaviour(count);
     }
 
     protected virtual void DoBehaviour(int count)
     {
-        foreach (Transform behaviour in this.behaviours)
+        foreach (Transform behaviour in behaviours)
             behaviour.gameObject.SetActive(false);
 
-        this.behaviours[count].gameObject.SetActive(true);
+        behaviours[count].gameObject.SetActive(true);
     }
 }

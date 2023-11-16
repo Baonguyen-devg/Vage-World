@@ -6,18 +6,16 @@ namespace Movement
     {
         [SerializeField] protected Transform player;
 
+        [ContextMenu("Load Component")]
         protected override void LoadComponent()
         {
             base.LoadComponent();
-            this.LoadPlayer();
+            player = GameObject.Find("Player").transform;
         }
-
-        protected virtual void LoadPlayer() =>
-            this.player ??= GameObject.Find("Player").transform;
 
         protected override void Move()
         {
-            transform.parent.position = Vector3.MoveTowards(transform.position, this.player.position, this.speed);
+            transform.parent.position = Vector3.Lerp(transform.position, player.position, speed);
             transform.parent.position = new Vector3(transform.parent.position.x, transform.parent.position.y, -10);
         }
     }

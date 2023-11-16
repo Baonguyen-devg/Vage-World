@@ -9,6 +9,6 @@ public class LaserBehaviour : Behaviour
     {
         this.ctrll.Movement.gameObject.SetActive(value: false);
         this.ctrll.transform.
-            Find(n: "AttackShoote").GetComponent<BossEnemyShootingAttack>().ToAttack(nameBullet: "Laser_Bullet");
+            Find(n: "AttackShoote").GetComponent<Attack.BossEnemyShootingAttack>().ToAttack(nameBullet: "Laser_Bullet");
     }
 }

@@ -1,14 +1,17 @@
 using UnityEngine;
 
-public class CloseCombatAttack : Attack
+namespace Attack
 {
-    [SerializeField] protected Transform target;
- 
-    protected override void LoadComponent()
+    public class CloseCombatAttack : Attack
     {
-        base.LoadComponent();
-        this.LoadTarget();
-    }
+        [SerializeField] protected Transform target;
 
-    protected virtual void LoadTarget() {  /* For override*/  }
+        protected override void LoadComponent()
+        {
+            base.LoadComponent();
+            LoadTarget();
+        }
+
+        protected virtual void LoadTarget() {  /* For override*/  }
+    }
 }

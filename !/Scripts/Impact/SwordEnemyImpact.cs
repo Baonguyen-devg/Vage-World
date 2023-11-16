@@ -6,14 +6,13 @@ using DamageSender;
 public class SwordEnemyImpact : EnemyImpact
 {
     [SerializeField] protected EnemyDamageSender damageSender;
-    protected virtual void LoadDamageSender() =>
-        this.damageSender = transform.parent?.parent?.Find("DamageSender").GetComponent<EnemyDamageSender>();
 
+    [ContextMenu("Load Component")]
     protected override void LoadComponent()
     {
         base.LoadComponent();
-        this.LoadDamageSender();
+        damageSender = transform.parent?.parent?.Find("DamageSender").GetComponent<EnemyDamageSender>();
     }
 
-    protected override void SendDame(Transform obj) => this.damageSender.Send(obj);
+    protected override void SendDame(Transform obj) => damageSender.Send(obj);
 }

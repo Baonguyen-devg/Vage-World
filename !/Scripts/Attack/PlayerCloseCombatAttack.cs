@@ -2,46 +2,43 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerCloseCombatAttack : CloseCombatAttack
+namespace Attack
 {
-    [SerializeField] protected Animator animator;
-    protected virtual void LoadAnimator() =>
-        this.animator = transform.Find("Sword")?.GetComponent<Animator>();
-
-    [SerializeField] protected Transform sword;
-    protected virtual void LoadSword() =>
-        this.sword = transform.Find("Sword");
-
-    protected override void LoadComponent()
+    public class PlayerCloseCombatAttack : CloseCombatAttack
     {
-        base.LoadComponent();
-        this.LoadSword();
-        this.LoadAnimator();
-    }
+        private readonly int TRIGGER_SLASH_LEFT = Animator.StringToHash("SlashLeft");
 
-    protected override void OnEnable()
-    {
-        base.OnEnable();
-        this.LoadAttackDelay();
-    }
+        [SerializeField] protected Animator animator;
+        [SerializeField] protected Transform sword;
+        [SerializeField] private float timeShootePrevious;
+        [SerializeField] private float mana;
 
-    protected virtual void LoadAttackDelay() =>
-        this.attackDelay = (float)this.levelManagerSO?.AttackDelay;
+        public static System.EventHandler Event_PlayerCloseCombat;
 
-    public override void ToAttack()
-    {
-        base.ToAttack();
-        if (!Input.GetMouseButtonDown(0)) return;
+        [ContextMenu("Load Component")]
+        protected override void LoadComponent()
+        {
+            base.LoadComponent();
+            sword = transform.Find("Sword");
+            animator = sword.GetComponent<Animator>();
+        }
 
-        this.attackTimer = 0;
-        SFXSpawner.Instance.PlaySound("Sound_Slash_Sword", "Forest");
-        this.animator.SetTrigger("SlashLeft");
-        StartCoroutine(ResetRotation());
-    }
+        public virtual bool SwordCloseCombat()
+        {
+            if (Time.time - timeShootePrevious < attackDelay) return false;
+            timeShootePrevious = Time.time;
 
-    protected virtual IEnumerator ResetRotation()
-    {
-        yield return new WaitForSeconds(0.4f);
-        this.animator.SetTrigger("Entry");
+            SFXSpawner.Instance.PlaySound(SFXSpawner.SOUND_SLASH_SWORD); 
+            animator.SetTrigger(TRIGGER_SLASH_LEFT);
+            return true;
+        }
+
+        protected override bool CanAttack()
+        {
+            bool isMouseButtonDown = Manager.InputManager.GetInstance().IsLeftMousePress();
+            return isMouseButtonDown;
+        }
+
+        public float GetMana() => mana;
     }
 }

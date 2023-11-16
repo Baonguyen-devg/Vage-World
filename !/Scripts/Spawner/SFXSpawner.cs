@@ -4,26 +4,28 @@ using UnityEngine;
 
 public class SFXSpawner : Spawner
 {
-    [SerializeField] protected static SFXSpawner instance;
+    public static readonly string SOUND_COLLECT_MATERIAL = "Sound_Collect_Material";
+    public static readonly string SOUND_RED_SCREEN = "Sound_Red_Screen";
+    public static readonly string SOUND_SLASH_SWORD = "Sound_Slash_Sword";
+
+    protected static SFXSpawner instance;
     public static SFXSpawner Instance => instance;
 
+    protected override string GetPath() => "Prefabs/Prefabs_SFX";
     protected override void LoadComponentInAwakeBefore()
     {
         base.LoadComponentInAwakeBefore();
         SFXSpawner.instance = this;
     }
 
-    public virtual void PlaySound(string soundName, string nameRegion)
+    public virtual void PlaySound(string soundName)
     {
-        Transform region = this.GetRegionByName(nameRegion);
-        if (region == null) return;
-  
-        Transform obj = this.GetObjectByName(soundName, region);
+        Transform obj = GetObjectByName(soundName);
         if (obj == null) return;
 
-        Transform objSpawn = this.GetPoolObject(obj);
+        Transform objSpawn = GetPoolObject(obj);
         objSpawn.gameObject.SetActive(true);
-        objSpawn.SetParent(this.holder);
+        objSpawn.SetParent(holder);
         objSpawn.GetComponent<AudioSource>().Play();
     }
 }

@@ -1,28 +1,31 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BossEnemyShootingAttack : EnemyShootingAttack
+namespace Attack
 {
-    [SerializeField] private Transform pointShooteStone;
-    [SerializeField] private List<Transform> pointsShooteLaser;
-
-    protected override void LoadPointSpawn()
+    public class BossEnemyShootingAttack : EnemyShootingAttack
     {
-        this.pointShooteStone ??= this.transform.Find(n: "PointShooteStone");
-        Transform points = this.transform.Find(n: "PointsShooteLaser");
+        [SerializeField] private Transform pointShooteStone;
+        [SerializeField] private List<Transform> pointsShooteLaser;
 
-        foreach (Transform pointShoote in points)
-            this.pointsShooteLaser.Add(item: pointShoote);
-    }
+        protected override void LoadPointSpawn()
+        {
+            pointShooteStone = transform.Find("PointShooteStone");
+            Transform points = transform.Find("PointsShooteLaser");
 
-    public virtual void ToAttack(string nameBullet)
-    {
-        if (nameBullet.Equals(value: "Stoning_Bullet"))
-            this.Shoote(nameBullet: nameBullet, posShoote: this.pointShooteStone);
+            if (pointsShooteLaser.Count != 0) pointsShooteLaser.Clear();
+            foreach (Transform pointShoote in points)
+                pointsShooteLaser.Add(pointShoote);
+        }
 
-        if (nameBullet.Equals(value: "Laser_Bullet"))
-            foreach (Transform pointShoote in this.pointsShooteLaser)
-                this.Shoote(nameBullet: nameBullet, posShoote: pointShoote);
+        public virtual void ToAttack(string nameBullet)
+        {
+            if (nameBullet.Equals(BulletSpawner.BULLET_STONE))
+                Shoote(nameBullet, pointShooteStone);
+
+            if (nameBullet.Equals(BulletSpawner.BULLET_LASER))
+                foreach (Transform pointShoote in pointsShooteLaser)
+                    Shoote(nameBullet, pointShoote);
+        }
     }
 }

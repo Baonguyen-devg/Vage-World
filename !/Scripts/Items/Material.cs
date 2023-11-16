@@ -2,27 +2,14 @@ using UnityEngine;
 
 public class Material : AutoMonobehaviour
 {
-    [SerializeField] protected NumberMaterial material;
     [SerializeField] protected int maximumNumber = 100;
-    public NumberMaterial InforMaterial => this.material;
+    [SerializeField] protected int _numberMaterial; 
 
-    protected override void LoadComponent()
-    {
-        base.LoadComponent();
-        this.material = new NumberMaterial(transform.name, 0);
-    }
+    public virtual void Increase(int number) =>
+        _numberMaterial = Mathf.Min(_numberMaterial + number, maximumNumber);
 
-    public virtual int Increase(int number)
-    {
-        int Number = Mathf.Min(this.material.numberMaterial + number, this.maximumNumber);
-        this.material.SetNumber(Number);
-        return Number;
-    }
+    public virtual void Decrease(int number) =>
+        _numberMaterial = Mathf.Max(_numberMaterial - number, 0);
 
-    public virtual int Decrease(int number)
-    {
-        int Number = Mathf.Max(this.material.numberMaterial - number, 0);
-        this.material.SetNumber(Mathf.Max(this.material.numberMaterial - number, 0));
-        return Number;
-    }
+    public int GetNumber() => _numberMaterial;
 }

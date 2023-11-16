@@ -6,15 +6,11 @@ namespace Group
 {
     public class GroupItem : Group
     {
-        public override void SetObjectSpawner(string nameObject)
+        protected override void SpawnObject(Vector3 position, Quaternion rotation)
         {
-            this.objectSpawner = nameObject;
-            this.numberObject = this.levelManagerSO.GetItemSOByName(nameObject).NumberObject;
-            this.CreateObject(position: transform.parent.position);
+            Transform item = ItemSpawner.Instance.Spawn(objectToSpawner);
+            item.SetPositionAndRotation(position, rotation);
+            item.gameObject.SetActive(true);
         }
-
-        protected override void SpawnObject(Vector3 position, Quaternion rotation) =>
-            ItemSpawner.Instance.SpawnInRegion
-                (nameObject: this.objectSpawner, nameRegion: "Forest", postion: position, rotation: rotation);
     }
 }

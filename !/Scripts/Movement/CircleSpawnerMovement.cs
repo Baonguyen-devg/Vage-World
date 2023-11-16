@@ -6,48 +6,45 @@ public class CircleSpawnerMovement : CircleMovement
 {
     [SerializeField] protected float timeCount = 0;
     [SerializeField] protected CircleSpawnersBossDemon circleSpawers;
-    protected virtual void LoadCircleSpawners() =>
-        this.circleSpawers = transform.parent?.parent?.GetComponent<CircleSpawnersBossDemon>();
-
     [SerializeField] protected float timeSpreadOut;
 
     protected override void LoadComponentInAwakeBefore()
     {
         base.LoadComponentInAwakeBefore();
-        this.LoadCircleSpawners();
+        circleSpawers = transform.parent?.parent?.GetComponent<CircleSpawnersBossDemon>();
     }
 
     protected override void LoadComponentInAwakeAfter()
     {
         base.LoadComponentInAwakeAfter();
-        this.angle = (float)360 / this.circleSpawers.CirclePrefabs.Count *
-            this.circleSpawers.GetIndexPrefab(transform.parent);
+        angle = (float)360 / circleSpawers.CirclePrefabs.Count *
+            circleSpawers.GetIndexPrefab(transform.parent);
     }
 
     protected override void OnEnable()
     {
         base.OnEnable();
         transform.parent.position = transform.parent.parent.position;
-        this.timeCount = this.timeSpreadOut;
+        timeCount = timeSpreadOut;
     }
 
     protected override void Update()
     {
-        this.timeCount = this.timeCount - Time.deltaTime;
-        if (this.timeCount <= 0) this.Move(this.GetNormailzeDiretionTarget());
+        timeCount = timeCount - Time.deltaTime;
+        if (timeCount <= 0) Move(GetNormailzeDiretionTarget());
         else base.Update();
     }
 
     protected virtual Vector3 GetNormailzeDiretionTarget()
     {
-        Vector3 direction = transform.parent.position - this.targetFollow.position;
+        Vector3 direction = transform.parent.position - targetFollow.position;
         direction.Normalize();
         return transform.parent.position + direction;
     }
 
     protected override void LoadTargetFollow() =>
-     this.targetFollow = GameObject.Find(name: "Boss_Demon")?.transform;
+     targetFollow = GameObject.Find("Boss_Demon")?.transform;
 
     protected override void Move(Vector3 posToMove) =>
-        transform.parent.position = Vector3.Lerp(transform.parent.position, posToMove, this.speedMove);
+        transform.parent.position = Vector3.Lerp(transform.parent.position, posToMove, speedMove);
 }

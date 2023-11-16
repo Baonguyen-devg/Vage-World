@@ -4,24 +4,20 @@ using Movement;
 
 public class PlayerBulletController : AutoMonobehaviour
 {
-    [SerializeField] protected BulletMovement movement;
-    protected virtual void LoadMovement() => 
-        this.movement ??= transform?.Find("Movement")?.GetComponent<BulletMovement>();
-
     [SerializeField] protected Transform model;
-    protected virtual void LoadModel() =>
-        this.model ??= transform?.Find("Model");
-
+    [SerializeField] protected BulletMovement movement;
     [SerializeField] protected PlayerDamageSender damageSender;
-    public PlayerDamageSender DamageSender => this.damageSender;
-    protected virtual void LoadDamagedSender() =>
-        this.damageSender ??= transform?.Find("DamageSender")?.GetComponent<PlayerDamageSender>();
 
+    [ContextMenu("Load Component")]
     protected override void LoadComponent()
     {
         base.LoadComponent();
-        this.LoadMovement();
-        this.LoadModel();
-        this.LoadDamagedSender();
+        model = transform.Find("Model");
+        movement = transform.Find("Movement").GetComponent<BulletMovement>();
+        damageSender = transform.Find("DamageSender").GetComponent<PlayerDamageSender>();
     }
+
+    public Transform Model => model;
+    public BulletMovement Movement => movement;
+    public PlayerDamageSender DamageSender => damageSender;
 }

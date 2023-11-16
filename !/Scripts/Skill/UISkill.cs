@@ -5,70 +5,62 @@ using UnityEngine.UI;
 
 public class UISkill : AutoMonobehaviour
 {
-    [SerializeField] protected Transform skill;
-    protected virtual void LoadSkillPrefab() =>
-        this.skill = SkillController.Instance?.GetPrefabByName(gameObject.name);
+    [SerializeField] protected SkillController skillController;
+    [SerializeField] protected UISkillController controller;
 
     [SerializeField] protected Button buttomUpdate;
-    protected virtual void LoadButtomUpdate() =>
-        this.buttomUpdate ??= transform.Find("Update")?.Find("Button")?.GetComponent<Button>();
-
     [SerializeField] protected List<Image> listRender;
+    [SerializeField] protected Image imageShader;
+
+    protected virtual void LoadSkillPrefab() => 
+       skillController = SkillManager.GetInstance().GetPrefabByName(gameObject.name);
+
     protected virtual void LoadListRender()
     {
-        Transform render = transform.Find(n: "MaterialFrame").Find(n: "NumberInfor");
+        listRender.Clear();
+        Transform render = transform.Find("MaterialFrame").Find("NumberInfor");
         foreach (Transform objectRender in render)
-            this.listRender.Add(item: objectRender.GetComponentInChildren<Image>());
+            listRender.Add(objectRender.GetComponentInChildren<Image>());
     }
 
-    [SerializeField] protected Image imageShader;
-    protected virtual void LoadImageShader() =>
-        this.imageShader = transform.Find("ImageSkillShader")?.GetComponent<Image>();
-
+    [ContextMenu("Load Component")]
     protected override void LoadComponent()
     {
         base.LoadComponent();
-        this.LoadButtomUpdate();
-        this.LoadListRender();
-        this.LoadImageShader();
+        controller = transform.parent.GetComponent<UISkillController>();
+        buttomUpdate ??= transform.Find("Update")?.Find("Button")?.GetComponent<Button>();
+
+        LoadListRender();
+        imageShader = transform.Find("ImageSkillShader")?.GetComponent<Image>();
     }
 
     protected virtual void LoadUIMaterial()
     {
         int index = 0;
-        foreach (KeyValuePair<Transform, int> skillPrefab in this.skill.GetComponent<Skill>().ListRandomMaterial)
+        foreach (KeyValuePair<Transform, int> skillPrefab in skillController.listRandomItems)
         {
-            this.listRender[index++].sprite = transform.parent.GetComponent<UISkillController>().GetPrefabByName(_name: "Image" + skillPrefab.Key.name).sprite;
-            this.listRender[index - 1].transform.parent.Find(n: "Number").GetComponent<Text>().text = skillPrefab.Value.ToString();
+            listRender[index].sprite = controller.GetPrefabByName("Image" + skillPrefab.Key.name).sprite;
+            listRender[index].transform.parent.GetComponentInChildren<Text>().text = skillPrefab.Value.ToString();
+            index = Mathf.Min(index + 1, skillController.listRandomItems.Count);
         }
     }
 
-    protected override IEnumerator LoadWaitForLongTime()
+    protected override IEnumerator LoadWaitForMediumTime()
     {
-        yield return StartCoroutine(base.LoadWaitForLongTime());
-        this.LoadSkillPrefab();
-        if (!this.skill.gameObject.activeSelf)
-        {
-            this.gameObject.SetActive(false);
-        }
-        else this.LoadUIMaterial();
+        yield return StartCoroutine(base.LoadWaitForMediumTime());
+        LoadSkillPrefab();
+
+        if (!skillController.gameObject.activeSelf) gameObject.SetActive(false);
+        else LoadUIMaterial();
     }
 
     protected virtual void Update()
     {
-        if (transform.name == "Skill1")
-            this.imageShader.fillAmount = (SkillController.Instance.TimeSkill1 - Time.time) / this.skill.GetComponent<Skill>().TimeDelay;
+        imageShader.fillAmount = (skillController.GetTimeCounter() - Time.time) / skillController.GetTimeDelay();
 
-        if (transform.name == "Skill2")
-            this.imageShader.fillAmount = (SkillController.Instance.TimeSkill2 - Time.time) / this.skill.GetComponent<Skill>().TimeDelay;
-
-        if (transform.name == "Skill3")
-            this.imageShader.fillAmount = (SkillController.Instance.TimeSkill3 - Time.time) / this.skill.GetComponent<Skill>().TimeDelay;
-
-        if (this.CheckEnoughMaterial()) this.buttomUpdate.gameObject.SetActive(value: true);
-        else this.buttomUpdate.gameObject.SetActive(value: false);
+        if (CheckEnoughMaterial()) buttomUpdate.gameObject.SetActive(true);
+        else buttomUpdate.gameObject.SetActive(false);
     }
 
-    protected virtual bool CheckEnoughMaterial() =>
-        (this.skill.GetComponent<Skill>().CheckEnough());
+    protected virtual bool CheckEnoughMaterial() => skillController.CheckEnough();
 }

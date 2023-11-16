@@ -3,66 +3,50 @@ using UnityEngine;
 
 public class Spawner : AutoMonobehaviour
 {
-    [SerializeField] protected List<Transform> listPrefab;
+    [Header("[ Scriptable Obejct ]"), Space(6)]
+    [SerializeField] protected PrefabsSO prefabSO;
+    [SerializeField] protected bool isNullScriptableObject;
+    [SerializeField] protected bool isLogger;
+
+    [SerializeField] protected List<Transform> prefabs;
     [SerializeField] protected List<Transform> poolObjects;
     [SerializeField] protected Transform holder;
 
+    [ContextMenu("Load Component")]
     protected override void LoadComponent()
     {
         base.LoadComponent();
-        this.LoadPrefab();
-        this.LoadHolder();
+        prefabSO = Resources.Load<PrefabsSO>(GetPath());
+        prefabs = prefabSO.GetPrefabs();
+        holder = transform.Find("Holder");
     }
 
-    protected virtual void LoadPrefab()
+    protected override void Awake()
     {
-        if (this.listPrefab.Count != 0) return;
-        Transform prefabObj = transform.Find("Prefab");
-        foreach (Transform prefab in prefabObj)
-            this.listPrefab.Add(prefab);
-    }
-
-    protected virtual void LoadHolder()
-    {
-        if (this.holder != null) return;
-        this.holder = transform.Find("Holder");
-        Debug.Log(transform.name + ": Load Holder", gameObject);
-    }
-
-    public virtual Transform FindRegion(string nameRegion)
-    {
-        Transform region = this.GetRegionByName(nameRegion);
-        if (region == null) return null;
-        return region;
-    }
-
-    public virtual Transform SpawnInRegion(string nameObject, string nameRegion, Vector3 postion, Quaternion rotation)
-    {
-        Transform region = this.GetRegionByName(nameRegion);
-        if (region == null)
+        base.Awake();
+        if (isNullScriptableObject && CheckNullScriptableObject())
         {
-            Debug.LogError(nameRegion + ": Can find Region");
-            return null;
+            if (isLogger) Debug.LogError($"Have errors when load scriptable in {name}", this);
+            gameObject.SetActive(false);
         }
+    }
 
-        Transform obj = this.GetObjectByName(nameObject, region);
-        if (obj == null)
-        {
-            Debug.LogError(nameObject + ": Can find object.");
-            return null;
-        }
+    protected virtual string GetPath() => null;
+    protected virtual bool CheckNullScriptableObject() => prefabSO == null;
 
-        Transform objSpawn = this.GetPoolObject(obj);
-        objSpawn.SetPositionAndRotation(postion, rotation);
+    public virtual Transform Spawn(string nameObject)
+    {
+        Transform obj = GetObjectByName(nameObject);
+        if (obj == null) return null;
 
-        objSpawn.gameObject.SetActive(true);
-        objSpawn.SetParent(this.holder);
+        Transform objSpawn = GetPoolObject(obj);
+        objSpawn.SetParent(holder);
         return objSpawn;
     }
 
-    protected virtual Transform GetObjectByName(string nameObject, Transform region)
+    protected virtual Transform GetObjectByName(string nameObject)
     {
-        foreach (Transform obj in region.GetComponent<ListPrefab>().ListPrefabs)
+        foreach (Transform obj in prefabs)
             if (obj.name == nameObject) return obj;
         return null;
     }
@@ -70,15 +54,15 @@ public class Spawner : AutoMonobehaviour
     public virtual void Despawn(Transform obj)
     {
         obj.gameObject.SetActive(false);
-        this.poolObjects.Add(obj);
+        poolObjects.Add(obj);
     }
 
     protected virtual Transform GetPoolObject(Transform obj)
     {
-        foreach (Transform prefab in this.poolObjects)
+        foreach (Transform prefab in poolObjects)
             if (obj.name == prefab.name && !prefab.gameObject.activeSelf)
             {
-                this.poolObjects.Remove(prefab);
+                poolObjects.Remove(prefab);
                 return prefab;
             }
 
@@ -87,19 +71,9 @@ public class Spawner : AutoMonobehaviour
         return newObject;
     }
 
-    protected virtual Transform GetRegionByName(string name)
-    {
-        foreach (Transform prefab in this.listPrefab)
-            if (name == prefab.name) return prefab;
-        return null;
-    }
-
     public virtual string GetRandomPrefab()
     {
-        int keyRegion = Random.Range(0, this.listPrefab.Count);
-        List<Transform> virtualList = this.listPrefab[keyRegion].GetComponent<ListPrefab>().ListPrefabs;
-
-        int keyObject = Random.Range(0, virtualList.Count);
-        return virtualList[keyObject].name;
+        int keyObject = Random.Range(0, prefabs.Count);
+        return prefabs[keyObject].name;
     }
 }

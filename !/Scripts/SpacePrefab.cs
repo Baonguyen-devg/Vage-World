@@ -21,7 +21,7 @@ public class SpacePrefab : AutoMonobehaviour
 
     public virtual void Spawner(string nameEnemy)
     {
-        foreach (Transform point in this.pointSpawners)
-            EnemySpawner.Instance.SpawnInRegion(nameEnemy, "Forest", point.position, point.rotation);
+       /* foreach (Transform point in this.pointSpawners)
+            EnemySpawner.Instance.Spawn(nameEnemy, "Forest", point.position, point.rotation);*/
     }
 }

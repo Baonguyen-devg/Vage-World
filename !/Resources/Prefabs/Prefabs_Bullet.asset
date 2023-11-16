@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0cd78c79302b1e4ca95e674c451e3d0, type: 3}
+  m_Name: Prefabs_Bullet
+  m_EditorClassIdentifier: 
+  prefabs:
+  - {fileID: 8792950975773220359, guid: de960f8fe48580d46b155a769868fa3a, type: 3}
+  - {fileID: 6349804576714705596, guid: f277449080a6bb54088e2d166f0f9bb5, type: 3}
+  - {fileID: 8755180757344629601, guid: 6b080394191fe374f934d02b0092d5eb, type: 3}
+  - {fileID: 2641326198095712130, guid: 196c3dbd62ad32f4192d5bc02ae4f2db, type: 3}
+  - {fileID: 2128980225746657770, guid: bbce13607acd7d84a927ba1d21709bdc, type: 3}

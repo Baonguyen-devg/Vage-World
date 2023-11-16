@@ -17,7 +17,7 @@ public class BossEnemyBehaviours : EnemyBehaviours
 
     protected virtual void DoBehaviour() 
     {
-        this.controller.Model.GetComponent<Animator>().SetTrigger(name: this.listBehaviours[this.count].name);
+        this.controller.Model.GetComponent<Animator>().SetTrigger(this.listBehaviours[this.count].name);
         this.SetStandBehaivours();
         this.SetRunBehaviours();
         this.count = (this.count + 1) % this.listBehaviours.Count;
@@ -26,20 +26,20 @@ public class BossEnemyBehaviours : EnemyBehaviours
     protected virtual void SetRunBehaviours()
     {
         foreach (string nameBehaviour in this.runBehaviours)
-            if (nameBehaviour.Equals(value: this.listBehaviours[this.count].name))
+            if (nameBehaviour.Equals(this.listBehaviours[this.count].name))
             {
-                this.controller.Movement.gameObject.SetActive(value: true);
-                if (this.listBehaviours[this.count].name.Equals(value: "RunFast"))
-                    this.controller.Movement.IncreaseSpeed(speed: 0.02f);
+                this.controller.Movement.gameObject.SetActive(true);
+                if (this.listBehaviours[this.count].name.Equals("RunFast"))
+                    this.controller.Movement.IncreaseSpeed(0.02f);
                 else
-                    this.controller.Movement.DecreaseSpeed(speed: 0.02f);
+                    this.controller.Movement.DecreaseSpeed(0.02f);
             }
     }
 
     protected virtual void SetStandBehaivours()
     {
         foreach (string nameBehaviour in this.standBehaviours)
-            if (nameBehaviour.Equals(value: this.listBehaviours[this.count].name))
-                this.controller.Movement.gameObject.SetActive(value: false);
+            if (nameBehaviour.Equals(this.listBehaviours[this.count].name))
+                this.controller.Movement.gameObject.SetActive(false);
     }
 }

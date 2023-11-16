@@ -4,42 +4,58 @@ namespace DamageReceiver
 {
     public class PlayerDamageReceiver : DamageReceiver
     {
-        [SerializeField] protected float timeEffect = 0.2f;
+        private readonly int TRIGEER_RED_SCREEN = Animator.StringToHash("RedScreen");
+        private readonly int TRIGEER_SHAKING = Animator.StringToHash("Shaking");
+        private readonly int TRIGEER_DIE = Animator.StringToHash("Die");
+        private readonly string PATH = "Characters/Player";
 
-        [SerializeField] protected Animator redScreen;
-        protected virtual void LoadRedScreen() =>
-            this.redScreen ??= GameObject.Find("Camera").transform.Find("Main Camera").Find("RedScreen").GetComponent<Animator>();
+        public static event System.Action PlayerReceiveDamageEvent;
 
-        [SerializeField] protected SpriteRenderer render;
-        protected virtual void LoadRender() =>
-            this.render ??= this.controller.Model.GetComponent<SpriteRenderer>();
+        [Header("[ Player Scriptable Object ]"), Space(10)]
+        [SerializeField] private CharacterSO playerSO;
+        [SerializeField] private float timeEffect = 0.2f;
 
-        [SerializeField] protected PlayerController controller;
-        protected virtual void LoadController() =>
-              this.controller ??= transform.parent.GetComponent<PlayerController>();
+        private Animator redScreen;
+        private SpriteRenderer render;
+        private PlayerController controller;
 
+        private void LoadLevelManagerSO() => playerSO = Resources.Load<CharacterSO>(PATH);
+        protected override void OnEnable()
+        {
+            base.OnEnable();
+            LoadLevelManagerSO();
+        }
+
+        [ContextMenu("Load Component")]
         protected override void LoadComponent()
         {
             base.LoadComponent();
-            this.LoadController();
-            this.LoadRender();
-            this.LoadRedScreen();
+            redScreen = GameObject.Find("Camera").transform.Find("Main Camera").Find("RedScreen").GetComponent<Animator>();
+            controller = transform.parent.GetComponent<PlayerController>();
+            render = controller.Model.GetComponent<SpriteRenderer>();
+
+            LoadLevelManagerSO();
+            maximumHealth = playerSO.GetHealth();
+            currentHealth = maximumHealth;
         }
 
         public override void DecreaseHealth(int health)
         {
-            base.DecreaseHealth(health: health);
-            this.redScreen.SetTrigger(name: "RedScreen");
-            this.redScreen.transform.parent.parent.GetComponent<Animator>().SetTrigger("Shaking");
-            this.HitEffect();
+            base.DecreaseHealth(health);
+            PlayerReceiveDamageEvent?.Invoke();
+            HitEffect();
         }
 
         protected virtual void HitEffect()
         {
-            VFXSpawner.Instance.SpawnInRegion("Impact_Sword", "Forest", transform.position, transform.rotation);
-            SFXSpawner.Instance.PlaySound("Sound_Red_Screen", "Forest");
+            redScreen.SetTrigger(TRIGEER_RED_SCREEN);
+            redScreen.transform.parent.parent.GetComponent<Animator>().SetTrigger(TRIGEER_SHAKING);
+
+            VFXSpawner.Instance.Spawn(VFXSpawner.PICK_ITEM);
+            SFXSpawner.Instance.PlaySound(SFXSpawner.SOUND_RED_SCREEN);
+
             render.color = new Color32(r: 221, g: 83, b: 11, a: 150);
-            Invoke(methodName: "ResetColor", time: this.timeEffect);
+            Invoke("ResetColor", timeEffect);
         }
 
         protected virtual void ResetColor() =>
@@ -47,7 +63,7 @@ namespace DamageReceiver
         
         protected override void OnDead()
         {
-            this.controller.Model.GetComponent<Animator>().SetTrigger(name: "Die");
+            controller.Model.GetComponent<Animator>().SetTrigger(TRIGEER_DIE);
             GameController.Instance.LoseGame();
         }
     }

@@ -10,27 +10,28 @@ public class UISkillController : AutoMonobehaviour
     [SerializeField] protected List<Transform> skillPrefab;
     protected virtual void LoadSkillPrefab()
     {
-        if (this.skillPrefab.Count != 0) return;
+        if (skillPrefab.Count != 0) return;
 
         foreach (Transform prefab in transform)
-            this.skillPrefab.Add(item: prefab);
+            skillPrefab.Add(prefab);
     }
 
     [SerializeField] protected List<Image> materialFramePrefab;
     protected virtual void LoadMaterialFramePrefab()
     {
-        if (this.materialFramePrefab.Count != 0) return;
-        Transform material = transform.Find(n: "MaterialFramePrefab");
+        if (materialFramePrefab.Count != 0) return;
+        Transform material = transform.Find("MaterialFramePrefab");
 
         foreach (Transform prefab in material)
-            this.materialFramePrefab.Add(item: prefab.GetComponent<Image>());
+            materialFramePrefab.Add(prefab.GetComponent<Image>());
     }
 
+    [ContextMenu("Load Component")]
     protected override void LoadComponent()
     {
         base.LoadComponent();
-        this.LoadSkillPrefab();
-        this.LoadMaterialFramePrefab();
+        LoadSkillPrefab();
+        LoadMaterialFramePrefab();
     }
 
     protected override void LoadComponentInAwakeBefore()
@@ -41,7 +42,7 @@ public class UISkillController : AutoMonobehaviour
 
     public virtual Image GetPrefabByName(string _name)
     {
-        foreach (Image prefab in this.materialFramePrefab)
+        foreach (Image prefab in materialFramePrefab)
             if (_name == prefab.name) return prefab;
         return null;
     }

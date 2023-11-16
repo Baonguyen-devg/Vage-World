@@ -4,31 +4,28 @@ using UnityEngine;
 
 public abstract class CircleMovement : AutoMonobehaviour
 {
-    protected const float default_Speed = 0.01f;
-
     [SerializeField] protected Transform targetFollow;
     protected abstract void LoadTargetFollow();
 
-    [SerializeField] protected float speedRotation = default_Speed;
-    [SerializeField] protected float speedMove= default_Speed;
+    [SerializeField] protected float speedRotation = 0.01f;
+    [SerializeField] protected float speedMove = 0.01f;
     [SerializeField] protected float distanceToTarget = 1;
     [SerializeField] protected float angle;
 
-    protected override void LoadComponent() => this.LoadTargetFollow();
-
-    protected virtual void Update() => 
-        this.Move(posToMove: this.PosToMove(target: this.targetFollow));
+    [ContextMenu("Load Component")]
+    protected override void LoadComponent() => LoadTargetFollow();
+    protected virtual void Update() => Move(PosToMove(targetFollow));
 
     protected virtual Vector3 PosToMove(Transform target)
     {
-        float x = Mathf.Cos(f: this.angle * Mathf.Deg2Rad);
-        float y = Mathf.Sin(f: this.angle * Mathf.Deg2Rad);
+        float x = Mathf.Cos(angle * Mathf.Deg2Rad);
+        float y = Mathf.Sin(angle * Mathf.Deg2Rad);
 
-        float distanceXY = this.distanceToTarget / Mathf.Sqrt(x * x + y * y);
-        this.angle = this.angle + this.speedRotation;
+        float distanceXY = distanceToTarget / Mathf.Sqrt(x * x + y * y);
+        angle = angle + speedRotation;
 
-        Vector3 pos = new Vector3(x:target.localPosition.x + x * distanceXY, 
-            y: target.localPosition.y + y * distanceXY, z: transform.parent.position.z);
+        Vector3 pos = new Vector3(target.localPosition.x + x * distanceXY, 
+            target.localPosition.y + y * distanceXY, transform.parent.position.z);
         return pos;
     }
 

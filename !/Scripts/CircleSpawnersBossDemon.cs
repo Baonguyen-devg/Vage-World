@@ -40,7 +40,7 @@ public class CircleSpawnersBossDemon : AutoMonobehaviour
         this.animatorBoss.SetTrigger("Breath");
         this.controller.Movement.gameObject.SetActive(false);
         this.animatorBackgroundColor.SetTrigger("Black_Screen");
-        SFXSpawner.Instance.PlaySound("Sound_Boss_Demon_Roar", "Forest");
+        SFXSpawner.Instance.PlaySound("Sound_Boss_Demon_Roar");
         StartCoroutine(this.Accumulation());
         StartCoroutine(this.DisActive());
     }

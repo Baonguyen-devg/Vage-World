@@ -1,97 +1,73 @@
+using System.Collections;
 using System.Collections.Generic;
+using UniRx;
 using UnityEngine;
 
-public class SkillController : AutoMonobehaviour
+public class SkillController : BaseLoadLevelManagerSO
 {
-    [SerializeField] protected static SkillController instance;
-    public static SkillController Instance => instance;
+    [SerializeField] protected List<Transform> items ;
+    [SerializeField] public Dictionary<Transform, int> listRandomItems
+       = new Dictionary<Transform, int>();
 
-    [SerializeField] protected List<Transform> skillPrefab;
-    protected virtual void LoadSkillPrefab()
+    [SerializeField] protected int levelSkill = 1;
+    [SerializeField] protected int baseLevel = 1;
+    [SerializeField] protected int itemNumber = 3;
+
+    [SerializeField] protected float timeDelay = 55;
+    [SerializeField] protected float timeCounter = 0;
+    [SerializeField] protected bool canUse;
+
+    protected override void Start()
     {
-        if (this.skillPrefab.Count != 0) return;
-        Transform skills = transform.Find(n: "SkillPrefab");
+        base.Start();
+        var skillSO = levelManagerSO?.GetSkillSOByName(transform.name);
+        (levelSkill, baseLevel, timeDelay) = (skillSO.LevelSkill, skillSO.BaseLevel, skillSO.TimeDelay);
 
-        foreach (Transform prefab in skills)
-            this.skillPrefab.Add(item: prefab);
+        Attack.PlayerShootingAttack.ShootePlayerEvent += SetTimeCounter;
+        Observable.EveryUpdate().Subscribe(_ => CountDown()).AddTo(this);
     }
 
-    [SerializeField] protected bool OnSkill1, OnSkill2, OnSkill3;
-    [SerializeField] protected bool useSKill1, useSkill2, useSkill3;
-
-    [SerializeField] protected float timeSkill1;
-    public float TimeSkill1 => this.timeSkill1;
-
-    [SerializeField] protected float timeSkill2;
-    public float TimeSkill2 => this.timeSkill2;
-  
-    [SerializeField] protected float timeSkill3;
-    public float TimeSkill3 => this.timeSkill3;
-
-    [SerializeField] protected PlayerShootingAttack attack;
-    protected virtual void LoadPlayerAttack() =>
-        this.attack ??= GameObject.Find(name: "Supporters")?.GetComponent<PlayerShootingAttack>();
-
-    public virtual void SetTimeSkillOne(bool status)
+    protected virtual void CountDown()
     {
-        if (this.OnSkill1 == false) this.OnSkill1 = true;
-
-        if (status == false) this.timeSkill1 = Time.time + this.GetPrefabByName(namePrefab: "Skill1").GetComponent<Skill>().TimeDelay;
-        this.useSKill1 = false;
+        if (timeCounter >= 0) timeCounter = timeCounter - Time.deltaTime;
+        canUse = (timeCounter < 0);
     }
 
-    public virtual void SetTimeSkillTwo(bool status)
+    protected override IEnumerator LoadWaitForShortTime()
     {
-        if (this.OnSkill2 == false) this.OnSkill2 = true;
-        if (status == false) this.timeSkill2 = Time.time + this.GetPrefabByName(namePrefab: "Skill2").GetComponent<Skill>().TimeDelay;
-        this.useSkill2 = false;
-    }
-    
-    public virtual void SetTimeSkillThree(bool status)
-    {
-        if (this.OnSkill3 == false) this.OnSkill3 = true;
-        if (status == false) this.timeSkill3 = Time.time + this.GetPrefabByName(namePrefab: "Skill3").GetComponent<Skill>().TimeDelay;
-        this.useSkill3 = false;
+        yield return StartCoroutine(base.LoadWaitForShortTime());
+        items = ItemSpawner.Instance.Prefabs;
+        CreateItems();
     }
 
-    protected override void LoadComponent()
+    protected virtual void CreateItems()
     {
-        base.LoadComponent();
-        this.LoadSkillPrefab();
-        this.LoadPlayerAttack();
-    }
+        int minRandom = baseLevel * (levelSkill - 1);
+        int maxRandom = baseLevel * (levelSkill + 1);
 
-    protected override void LoadComponentInAwakeBefore()
-    {
-        base.LoadComponentInAwakeBefore();
-        SkillController.instance = this;
-    }
-
-    protected virtual void Update()
-    {
-        if (Time.time > this.timeSkill1 && this.OnSkill1 && this.useSKill1 == false)
+        List<Transform> randoms = items;
+        for (int i = 0; i < Mathf.Min(itemNumber, items.Count); i++)
         {
-            this.attack.ChangeStatusSkill1(Status: true);
-            this.useSKill1 = true;
-        }
+            int value = Random.Range(minRandom, maxRandom);
+            int itemRandom = Random.Range(0, randoms.Count);
 
-        if (Time.time > this.timeSkill2 && this.OnSkill2 && this.useSkill2 == false)
-        {
-            this.attack.ChangeStatusSkill2(Status: true);
-            this.useSkill2 = true;
-        }
-
-        if (Time.time > this.timeSkill3 && this.OnSkill3 && this.useSkill3 == false)
-        {
-            this.attack.ChangeStatusSkill3(Status: true);
-            this.useSkill3 = true;
+            listRandomItems.Add(items[itemRandom], value);
+            randoms.Remove(randoms[itemRandom]);
         }
     }
 
-    public virtual Transform GetPrefabByName(string namePrefab)
+    public virtual bool CheckEnough()
     {
-        foreach (Transform prefab in this.skillPrefab)
-            if (namePrefab.Equals(prefab.name)) return prefab;
-        return null;
+        if (listRandomItems.Count == 0) return false;
+        foreach (KeyValuePair<Transform, int> key in listRandomItems)
+            if (key.Value > MaterialManager.Instance.GetNumberMaterial(key.Key.name)) return false;
+        return true;
     }
+
+    public bool IsCanUse() => canUse;
+    public float GetTimeDelay() => timeDelay;
+    public float GetTimeCounter() => timeCounter;
+
+    protected virtual void OnDisable() => Attack.PlayerShootingAttack.ShootePlayerEvent -= SetTimeCounter;
+    protected virtual void SetTimeCounter() => timeCounter = timeDelay;
 }

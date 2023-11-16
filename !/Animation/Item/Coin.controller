@@ -13,7 +13,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destinationPos: {x: 0, y: 0, z: 0}
+  distancePick: 2
   speed: 0.05
+  speedPick: 0.2
+  canPick: 0
+  player: {fileID: 0}
 --- !u!1107 &-4130121049614650555
 AnimatorStateMachine:
   serializedVersion: 6

@@ -1,47 +1,36 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DragonEnemyShootingAttack : EnemyShootingAttack
+namespace Attack
 {
-    [SerializeField] protected List<Transform> pointSpawns;
-    protected override void LoadPointSpawn()
+    public class DragonEnemyShootingAttack : EnemyShootingAttack
     {
-        if (this.pointSpawns.Count != 0) return;
-        foreach (Transform pointSpawn in transform)
-            this.pointSpawns.Add(item: pointSpawn);
-    }
+        [SerializeField] protected List<Transform> pointSpawns;
+        protected override void LoadPointSpawn()
+        {
+            if (pointSpawns.Count != 0) return;
+            foreach (Transform pointSpawn in transform)
+                pointSpawns.Add(pointSpawn);
+        }
 
-    [SerializeField] protected float distanceCanShoote = 6f;
+        [ContextMenu("Load Component")]
+        protected override void LoadComponent()
+        {
+            base.LoadComponent();
+            LoadPointSpawn();
+        }
 
-    protected override void LoadComponent()
-    {
-        base.LoadComponent();
-        this.LoadPointSpawn();
-    }
+        public override void ToAttack()
+        {
+            foreach (Transform point in pointSpawns)
+                Shoote(BulletSpawner.BULLET_DRAGONFLY, point);
+        }
 
-    protected override void OnEnable()
-    {
-        base.OnEnable();
-        this.LoadDistanceCanShoote();
-    }
-
-    protected virtual void LoadDistanceCanShoote() =>
-        this.distanceCanShoote = (float)this.levelManagerSO?.GetEnemySOByName(transform.parent.name)?.DistanceAttack;
-
-    public override void ToAttack()
-    {
-        base.ToAttack();
-        this.controller.Model.GetComponent<Animator>().SetTrigger(name: "Attack");
-
-        string bullet = transform.parent.name + "_Bullet";
-        foreach (Transform point in this.pointSpawns)
-            this.Shoote(nameBullet: bullet, posShoote: point);
-    }
-
-    protected override bool CanAttack()
-    {
-        if (this.target == null) return false;
-        if (Vector2.Distance(a: transform.parent.position, b: this.target.position) >= this.distanceCanShoote) return false;
-        return base.CanAttack();
+        protected override void CustomizeBullet(Transform bullet, Transform point)
+        {
+            base.CustomizeBullet(bullet, point);
+            bullet.position = point.position;
+        }
     }
 }

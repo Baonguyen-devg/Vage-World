@@ -8,23 +8,23 @@ public class Menu : AutoMonobehaviour
     [SerializeField] private List<Button> buttonLevels = new List<Button>();
     private void LoadButtomLevels()
     {
-        Transform holder = transform.Find(n: "LevelTable")?.Find(n: "Table");
+        Transform holder = transform.Find("LevelTable")?.Find("Table");
         foreach (Transform button in holder) 
-            this.buttonLevels.Add(item: button.GetComponent<Button>());
+            buttonLevels.Add(button.GetComponent<Button>());
     }
 
-    protected override void LoadComponent() => this.LoadButtomLevels();
+    protected override void LoadComponent() => LoadButtomLevels();
 
     protected override void Awake()
     {
         base.Awake();
-        int unlockedLevel = PlayerPrefs.GetInt(key: "UnlockedLevel", defaultValue: 1);
+        int unlockedLevel = PlayerPrefs.GetInt("UnlockedLevel", 1);
 
-        foreach (Button button in this.buttonLevels) 
-            this.ChangeStatusButton(button: button, status: false);
+        foreach (Button button in buttonLevels) 
+            ChangeStatusButton(button, false);
 
         for (int i = 0; i < unlockedLevel; i++)
-            this.ChangeStatusButton(button: this.buttonLevels[i], status: true);
+            ChangeStatusButton(buttonLevels[i], true);
     }
 
     private void ChangeStatusButton(Button button, bool status)
@@ -37,11 +37,11 @@ public class Menu : AutoMonobehaviour
     {
         GameController.Instance.SetNameLevel(level: Level);
         GameController.Instance.LoadLevelManagerSO();
-        this.PlayGame();
+        PlayGame();
     }
 
     public virtual void PlayGame() =>
-        SceneManager.LoadScene(sceneBuildIndex: SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
 
     public virtual void QuitGame() => Application.Quit();
 }

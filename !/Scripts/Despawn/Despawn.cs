@@ -2,8 +2,8 @@ public abstract class Despawn : AutoMonobehaviour
 {
     protected virtual void Update()
     {
-        if (!this.CanDespawn()) return;
-        this.DespawnObject();
+        if (!CanDespawn()) return;
+        DespawnObject();
     }
 
     public virtual void DespawnObject() { /* For override */ }

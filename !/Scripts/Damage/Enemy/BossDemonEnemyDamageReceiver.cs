@@ -7,44 +7,39 @@ namespace DamageReceiver
     public class BossDemonEnemyDamageReceiver : DamageReceiver
     {
         [SerializeField] protected BossDemonController controller;
-        protected virtual void LoadBossDemonController() =>
-            this.controller ??= transform.parent.GetComponent<BossDemonController>();
-
-        [Header(header: "Hit Effect!!!"), Space(height: 10)]
+        [SerializeField] protected SpriteRenderer render = null;
+        
+        [Header("Hit Effect!!!"), Space(10)]
         [SerializeField] protected float timeEffect = 0.2f;
-
-        [SerializeField] protected SpriteRenderer render = null; 
-        protected virtual void LoadSpriteRender() =>
-            this.render ??= this.controller?.Model?.GetComponent<SpriteRenderer>();
 
         protected override void LoadComponent()
         {
             base.LoadComponent();
-            this.LoadBossDemonController();
-            this.LoadSpriteRender();
+            controller ??= transform.parent.GetComponent<BossDemonController>();
+            render ??= controller?.Model?.GetComponent<SpriteRenderer>();
         }
 
         protected override void OnEnable()
         {
             base.OnEnable();
-            this.LoadMaximumHealth();
-            this.currentHealth = this.maximumHealth;
+            //LoadMaximumHealth();
+            currentHealth = maximumHealth;
         }
 
-        protected virtual void LoadMaximumHealth() =>
-            this.maximumHealth = (int)this.levelManagerSO?.GetEnemySOByName(transform.parent.name)?.MaximumHealth;
+        /*protected virtual void LoadMaximumHealth() =>
+            maximumHealth = (int)levelManagerSO?.GetEnemySOByName(transform.parent.name)?.MaximumHealth;*/
 
         public override void DecreaseHealth(int health)
         {
             base.DecreaseHealth(health: health);
-            this.HitEffect();
-            this.UpgradeAndAppearHealthBar();
+            HitEffect();
+            UpgradeAndAppearHealthBar();
         }
 
         protected virtual void HitEffect()
         {
             render.color = new Color32(r: 221, g: 83, b: 11, a: 255);
-            Invoke(methodName: "ResetColor", time: this.timeEffect);
+            Invoke(methodName: "ResetColor", time: timeEffect);
         }
 
         protected virtual void ResetColor() =>
@@ -58,9 +53,9 @@ namespace DamageReceiver
         protected override void OnDead()
         {
             EnemySpawner.Instance.Despawn(obj: transform.parent);
-            VFXSpawner.Instance.SpawnInRegion("Smoke_Die_Enemy", "Forest", transform.parent.position, transform.parent.rotation);
-            SFXSpawner.Instance.PlaySound("Sound_Smoke_Die_Enemy", "Forest");
-            AchievementController.Instance.GetAchievementByName(name: transform.parent.name)?.Increase(1);
+            VFXSpawner.Instance.Spawn("Smoke_Die_Enemy");
+            SFXSpawner.Instance.PlaySound("Sound_Smoke_Die_Enemy");
+            AchievementController.Instance.GetAchievementByName(transform.parent.name)?.Increase(1);
         }
     }
 }

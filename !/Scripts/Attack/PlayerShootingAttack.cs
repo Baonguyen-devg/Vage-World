@@ -1,89 +1,80 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerShootingAttack : ShootingAttack
+namespace Attack
 {
-    [SerializeField] protected bool skill1, skill2, skill3;
-
-    [SerializeField] protected List<Transform> pointShootes;
-    protected virtual void LoadPointShootes()
+    public class PlayerShootingAttack : ShootingAttack
     {
-        if (this.pointShootes.Count != 0) return;
-        foreach (Transform supporter in transform)
-            this.pointShootes.Add(item: supporter.Find("Book")?.Find("Point")?.transform);
-    }
-    public List<Transform> PointShootes => this.pointShootes;
+        [SerializeField] protected List<Transform> supporters;
+        [SerializeField] private float timeShootePrevious;
+        [SerializeField] private float mana = 100f;
 
-    protected override void LoadComponent()
-    {
-        base.LoadComponent();
-        this.LoadPointShootes();
-    }
+        public static event System.Action ShootePlayerEvent;
+        private string bulletName;
 
-    public virtual int GetIndexPrefab(Transform prefab)
-    {
-        foreach (Transform point in this.pointShootes)
-            if (prefab.name.Equals(point.name))
-                return this.pointShootes.IndexOf(prefab);
-        return 0;
-    }
-
-    public virtual void SetActiveTeamSupporter(bool status)
-    {
-        for (int i = 0; i < this.pointShootes.Count; i++)
+        [ContextMenu("Load Component")]
+        protected override void LoadComponent()
         {
-            if (i == 0) continue;
-            this.pointShootes[i].parent.gameObject.SetActive(status);
-            this.pointShootes[i].parent.parent.Find("Model").gameObject.SetActive(status);
-        }
-    }
-
-    public virtual void ChangeStatusSkill1(bool Status)
-    {
-        this.skill1 = Status;
-        if (this.skill1 == false) this.SetActiveTeamSupporter(false);
-        else this.SetActiveTeamSupporter(true);
-    }
-
-    public virtual void ChangeStatusSkill2(bool Status) => this.skill2 = Status;
-
-    public virtual void ChangeStatusSkill3(bool Status) => this.skill3 = Status;
-
-    protected virtual void ZoomBullet(Transform bullet)
-    {
-        bullet.Find(n: "Model").localScale += new Vector3(1, 1, 0);
-        bullet.GetComponent<PlayerBulletController>().DamageSender.IncreaseDame(dame: 20);
-    }
-    
-    public override void ToAttack()
-    {
-        base.ToAttack();
-        if (!Input.GetMouseButton(button: 0)) return;
-
-        string bullet = (this.skill3) ? BulletSpawner.torandoBullet : BulletSpawner.playerBullet;
-
-        foreach (Transform point in this.pointShootes)
-        {
-            if (!point.gameObject.activeInHierarchy) continue;
-            Transform bulletSpawn = this.ShooteAndReturnBullet(nameBullet: bullet, posShoote: point);
-            if (this.skill2) this.ZoomBullet(bullet: bulletSpawn);
+            base.LoadComponent();
+            if (supporters.Count != 0) return;
+            foreach (Transform supporter in transform)
+                supporters.Add(supporter.Find("Point")?.transform);
         }
 
-        if (this.skill1 == true) SkillController.Instance.SetTimeSkillOne(status: false);
-        this.ChangeStatusSkill1(Status: false);
+        public virtual void SetActiveTeamSupporter(bool status)
+        {
+            foreach (Transform supporter in supporters)
+            {
+                supporter.parent.gameObject.SetActive(status);
+                supporter.parent.parent.Find("Model").gameObject.SetActive(status);
+            }
+            supporters[0].gameObject.SetActive(true);
+        }
 
-        if (this.skill3 == true) SkillController.Instance.SetTimeSkillThree(status: false);
-        this.ChangeStatusSkill3(Status: false);
+        public virtual int GetIndexSupporter(Transform suppoterGet)
+        {
+            foreach (Transform supporter in supporters)
+                if (suppoterGet.GetInstanceID().Equals(supporter.GetInstanceID()))
+                    return supporters.IndexOf(supporter);
+            return 0;
+        }
 
-        if (this.skill2 == true) SkillController.Instance.SetTimeSkillTwo(status: false);
-        this.ChangeStatusSkill2(Status: false);
-    }
+        public virtual bool SupportShoote()
+        {
+            if (Time.time - timeShootePrevious < attackDelay) return false;
+            timeShootePrevious = Time.time;
 
-    protected virtual Transform ShooteAndReturnBullet(string nameBullet, Transform posShoote)
-    {
-        this.attackTimer = 0;
-        Transform bullet = this.GetBulletByName(nameBullet: nameBullet, pos: posShoote);
-        if (bullet.name == "Tornado_Bullet") bullet.Find(n: "Model").transform.rotation = Quaternion.Euler(0, 0, 0);
-        return bullet;
+            //bool isSkill3 = SkillManager.GetInstance().GetPrefabByName("Skill_3").IsCanUse();
+            bulletName = BulletSpawner.BULLET_PLAYER;
+            //bulletName = (isSkill3) ? BulletSpawner.torandoBullet : BulletSpawner.playerBullet;
+            
+            foreach (Transform point in supporters)
+            {
+                if (!point.gameObject.activeInHierarchy) continue;
+                Shoote(bulletName, point);
+            }
+            InvokeShootePlayerEvent();
+            return true;
+        }
+
+        protected override void CustomizeBullet(Transform bullet, Transform point)
+        {
+            base.CustomizeBullet(bullet, point);
+            bullet.position = point.position;
+  
+          /*  bool isSkill2 = SkillManager.GetInstance().GetPrefabByName("Skill_2").IsCanUse();
+            if (isSkill2) ZoomBullet(bullet);*/
+            bullet.gameObject.SetActive(true);
+        }
+
+        protected virtual void ZoomBullet(Transform bullet)
+        {
+            bullet.transform.localScale += new Vector3(1, 1, 0);
+            bullet.GetComponent<PlayerBulletController>().DamageSender.IncreaseDame(20);
+        }
+
+        public float GetMana() => mana;
+        private void InvokeShootePlayerEvent() => ShootePlayerEvent?.Invoke();
+        public List<Transform> GetPointShootes() => supporters;
     }
 }

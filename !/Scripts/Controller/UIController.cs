@@ -27,7 +27,7 @@ public class UIController : AutoMonobehaviour
     {
         base.LoadComponentInAwakeBefore();
         UIController.instance = this;
-        this.LoadUI("Load_Screen");
+       // this.LoadUI("Load_Screen");
     }
 
     protected virtual void Update()

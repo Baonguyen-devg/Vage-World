@@ -1,13 +1,19 @@
 using UnityEngine;
 
-public class ShootingAttack : Attack
+namespace Attack
 {
-    protected virtual void Shoote(string nameBullet, Transform posShoote)
+    public class ShootingAttack : Attack
     {
-        this.attackTimer = 0;
-        this.GetBulletByName(nameBullet: nameBullet, pos: posShoote);
-    }
+        protected virtual void Shoote(string nameBullet, Transform point)
+        {
+            attackTimer = 0;
+            Transform bullet = CreateBulletByName(nameBullet);
+            CustomizeBullet(bullet, point);
+        }
 
-    protected virtual Transform GetBulletByName(string nameBullet, Transform pos) =>
-         BulletSpawner.Instance.SpawnInRegion(nameObject: nameBullet, nameRegion: "Forest", postion: pos.position, rotation: pos.rotation);
+        protected virtual Transform CreateBulletByName(string nameBullet) =>
+            BulletSpawner.Instance.Spawn(nameBullet);
+
+        protected virtual void CustomizeBullet(Transform bullet, Transform point) { /* FOR OVERRIDE */ }
+    }
 }

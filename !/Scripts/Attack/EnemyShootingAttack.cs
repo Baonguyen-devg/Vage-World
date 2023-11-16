@@ -1,32 +1,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyShootingAttack : ShootingAttack
+namespace Attack
 {
-    [SerializeField] protected Transform target;
-    protected virtual void LoadTarget() =>
-        this.target = (this.target == null) ? GameObject.Find("Player").transform : this.target;
-
-    [SerializeField] protected EnemyController controller;
-    protected virtual void LoadController() =>
-        this.controller ??= transform.parent.GetComponent<EnemyController>();
- 
-    protected override void LoadComponent()
+    public class EnemyShootingAttack : ShootingAttack
     {
-        base.LoadComponent();
-        this.LoadController();
-        this.LoadTarget();
-        this.LoadPointSpawn();
+        [SerializeField] protected Transform target;
+        [SerializeField] protected EnemyController controller;
+
+        [ContextMenu("Load Component")]
+        protected override void LoadComponent()
+        {
+            base.LoadComponent();
+            controller = transform.parent.GetComponent<EnemyController>();
+            target = (target == null) ? GameObject.Find("Player").transform : target;
+            LoadPointSpawn();
+        }
+
+        protected override void OnEnable()
+        {
+            base.OnEnable();
+           // attackDelay = (float)levelManagerSO?.GetEnemySOByName(transform.parent.name)?.AttackDelay;
+        }
+
+        protected virtual void LoadPointSpawn() {  /*For Override */  }
     }
-
-    protected override void OnEnable()
-    {
-        base.OnEnable();
-        this.LoadAttackDelay();
-    }
-
-    protected virtual void LoadAttackDelay() =>
-        this.attackDelay = (float)this.levelManagerSO?.GetEnemySOByName(transform.parent.name)?.AttackDelay;
-
-    protected virtual void LoadPointSpawn() {  /*For Override */  }
 }

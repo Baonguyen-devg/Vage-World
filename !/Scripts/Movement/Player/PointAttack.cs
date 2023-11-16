@@ -6,8 +6,7 @@ namespace Movement
 {
     public class PointAttack : PointSpawnMovement
     {
-        protected virtual void Update() =>
-          this.RotationFollowPosition(this.GetPos().normalized);
+        protected virtual void Update() => RotationFollowPosition(GetPos());
 
         protected override void RotationFollowPosition(Vector2 position)
         {
@@ -16,7 +15,10 @@ namespace Movement
             transform.parent.rotation = Quaternion.Euler(newRota);
         }
 
-        protected override Vector2 GetPos() =>
-            Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.parent.position;
+        protected override Vector2 GetPos()
+        {
+            Vector3 mousePos = Manager.InputManager.GetInstance().GetMousePosition() ;
+            return (mousePos - transform.parent.position).normalized;
+        }
     }
 }

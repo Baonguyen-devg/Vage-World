@@ -1,28 +1,29 @@
 using UnityEngine;
+//using UniRx;
 
-public abstract class Attack : AutoMonobehaviour
+namespace Attack
 {
-    [Header(header: "[ Level Manager Scriptable Object ]"), Space(height: 10)]
-    [SerializeField] protected LevelManagerSO levelManagerSO = default;
-    protected virtual void LoadLevelManagerSO() =>
-         this.levelManagerSO = Resources.Load<LevelManagerSO>(path: "Level/" + "EasyLevel_" + GameController.Instance.Level.ToString());
-
-    [SerializeField] protected float attackDelay;
-    [SerializeField] protected float attackTimer;
-
-    protected override void OnEnable() => this.LoadLevelManagerSO();
-
-    protected virtual void Update()
+    public abstract class Attack : AutoMonobehaviour
     {
-        if (this.CanAttack()) this.ToAttack();
-    }
+        [SerializeField] protected float attackDelay;
+        [SerializeField] protected float attackTimer;
 
-    public virtual void ToAttack() {   /*For Override */  }
+        protected override void Awake()
+        {
+            base.Awake();
+           // Observable.EveryUpdate().Subscribe(_ => ToAttack()).AddTo(this);
+        }
 
-    protected virtual bool CanAttack()
-    {
-        this.attackTimer = this.attackTimer + Time.deltaTime;
-        if (this.attackTimer < this.attackDelay) return false;
-        return true;
+        public virtual void ToAttack()
+        {
+            if (!CanAttack()) return;
+        }
+
+        protected virtual bool CanAttack()
+        {
+            attackTimer = attackTimer + Time.deltaTime;
+            if (attackTimer < attackDelay) return false;
+            return true;
+        }
     }
 }

@@ -6,20 +6,20 @@ namespace Movement
     {
         [SerializeField] private Vector3 directionFollow;
 
-        protected virtual void LoadSpeed() =>
-            this.speed = (float)this.levelManagerSO?.GetEnemySOByName(transform.parent.name)?.Speed;
+       /* protected virtual void LoadSpeed() =>
+            speed = (float)levelManagerSO?.GetEnemySOByName(transform.parent.name)?.Speed;*/
 
         protected override void OnEnable()
         {
             base.OnEnable();
-            this.LoadSpeed();
+           // LoadSpeed();
         }
 
-        public void SetDirectionFollow(Vector3 direction) => this.directionFollow = direction;
+        public void SetDirectionFollow(Vector3 direction) => directionFollow = direction;
 
-        protected override void Move() => this.Move(direction: this.directionFollow);
+        protected override void Move() => Move(directionFollow);
 
         private void Move(Vector3 direction) =>
-             transform.parent.position = Vector3.Lerp(a: transform.parent.position, b: transform.parent.position + direction, t: this.speed);
+             transform.parent.position = Vector3.Lerp(transform.parent.position, transform.parent.position + direction, t: speed);
     }
 }

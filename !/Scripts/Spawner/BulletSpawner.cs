@@ -2,15 +2,19 @@ using UnityEngine;
 
 public class BulletSpawner : Spawner
 {
-    [SerializeField] protected static BulletSpawner instance;
-    public static string playerBullet = "Player_Bullet";
-    public static string torandoBullet = "Tornado_Bullet";
+    public static readonly string BULLET_PLAYER = "Player_Bullet";
+    public static readonly string BULLET_TORNADO = "Tornado_Bullet";
+    public static readonly string BULLET_DRAGONFLY = "DragonFly_Bullet";
+    public static readonly string BULLET_STONE = "Stone_Bullet";
+    public static readonly string BULLET_LASER = "Laser_Bullet";
 
+    protected static BulletSpawner instance;
     public static BulletSpawner Instance => instance;
 
+    protected override string GetPath() => "Prefabs/Prefabs_Bullet";
     protected override void LoadComponentInAwakeBefore()
     {
         base.LoadComponentInAwakeBefore();
-        BulletSpawner.instance = this;
+       BulletSpawner.instance = this;
     }
 }

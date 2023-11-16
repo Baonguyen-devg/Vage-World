@@ -7,19 +7,26 @@ namespace DamageSender
 {
     public class PlayerDamageSender : DamageSender
     {
-        protected virtual void LoadDamage() =>
-            this.dame = (int)this.levelManagerSO?.Dame;
+        private readonly string PATH = "Characters/Player";
+
+        [Header("[ Player Scriptable Object ]"), Space(10)]
+        [SerializeField] private CharacterSO playerSO;
+
+        protected virtual void LoadDamage() => dame = playerSO.GetDame();
+        private void LoadLevelManagerSO() => playerSO = Resources.Load<CharacterSO>(PATH);
+
+        [ContextMenu("Load Component")]
+        protected override void LoadComponent()
+        {
+            base.OnEnable();
+            LoadLevelManagerSO();
+            LoadDamage();
+        }
 
         public override void Send(Transform obj)
         {
-            obj.GetComponentInChildren<EnemyDamageReceiver>()?.DecreaseHealth(health: this.dame);
-            obj.GetComponent<BossDemonEnemyDamageReceiver>()?.DecreaseHealth(health: this.dame);
-        }
-
-        protected override void OnEnable()
-        {
-            base.OnEnable();
-            this.LoadDamage();
+            obj.GetComponentInChildren<EnemyDamageReceiver>()?.DecreaseHealth(dame);
+            obj.GetComponent<BossDemonEnemyDamageReceiver>()?.DecreaseHealth(dame);
         }
     }
 }

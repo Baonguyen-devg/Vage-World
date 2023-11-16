@@ -4,65 +4,78 @@ namespace Movement
 {
     internal class PlayerMovement : Movement
     {
+        private readonly int HORIZONTAL = Animator.StringToHash("Horizontal");
+        private readonly int VERTICAL = Animator.StringToHash("Vertical");
+        private readonly int SPEED = Animator.StringToHash("Speed");
+        private readonly string PATH = "Characters/Player";
+
+        [Header("[ Player Scriptable Object ]"), Space(10)]
+        [SerializeField] private CharacterSO _playerSO;
+   
         [Header("Player Movement"), Space(10)]
-        [SerializeField] protected Rigidbody2D rigid2D;
-        protected virtual void LoadRigidbody2D()
-        {
-            this.rigid2D ??= transform.parent?.GetComponent<Rigidbody2D>();
-            (this.rigid2D.gravityScale, this.rigid2D.freezeRotation) = (0, true);
-        }
+        [SerializeField] private Rigidbody2D _rigid2D;
+        [SerializeField] private LootMaterial _lootMaterial;
 
         [Header("Player Controller"), Space(10)]
-        [SerializeField] protected PlayerController controller;
-        protected virtual void LoadController() =>
-            this.controller ??= transform.parent?.GetComponent<PlayerController>();
+        [SerializeField] private PlayerController _controller;
+        [SerializeField] private Animator _animator;
+        [SerializeField] private Vector2 _movement;
 
-        [SerializeField] protected Animator animator;
-        protected virtual void LoadAnimator() =>
-            this.animator ??= this.controller.Model?.GetComponent<Animator>();
+        #region Load Component Methods
+        private void LoadLevelManagerSO() => _playerSO = Resources.Load<CharacterSO>(PATH);
+        private void LoadRigidbody2D()
+        {
+            _rigid2D = transform.parent.GetComponent<Rigidbody2D>();
+            (_rigid2D.gravityScale, _rigid2D.freezeRotation) = (0, true);
+        }
 
-        [SerializeField] protected Vector2 movement;
-
+        [ContextMenu("Load Component")]
         protected override void LoadComponent()
         {
             base.LoadComponent();
-            this.LoadRigidbody2D();
-            this.LoadController();
-            this.LoadAnimator();
+            LoadRigidbody2D();
+
+            _controller = transform.parent.GetComponent<PlayerController>();
+            _animator = _controller.Model.GetComponent<Animator>();
+            _lootMaterial = transform.parent.Find("Loot Material").GetComponent<LootMaterial>();
+
+            LoadLevelManagerSO();
+            speed = _playerSO.GetSpeed();
         }
+        #endregion
 
         public virtual void UpdateGetInputAxis(float axisX, float axisY) =>
-            (this.movement.x, this.movement.y) = (axisX, axisY);
+            (_movement.x, _movement.y) = (axisX, axisY);
 
         protected override void Update()
         {
             base.Update();
-            float x = Input.GetAxis("Horizontal");
-            float y = Input.GetAxis("Vertical");
+            float x = Manager.InputManager.GetInstance().GetAxisHorizontal();
+            float y = Manager.InputManager.GetInstance().GetAxisVertical();
             if (x != 0 || y != 0 )
             {
-                transform.parent.Find("LootMaterial").GetComponent<LootMaterial>().SetItemToPickup(null);
-                this.UpdateGetInputAxis(x, y);
+                _lootMaterial.SetItemToPickup(null);
+                UpdateGetInputAxis(x, y);
             }
-            else if (transform.parent.Find("LootMaterial").GetComponent<LootMaterial>().itemToPickup == null)
-                    this.UpdateGetInputAxis(x, y);
+            else if (_lootMaterial.GetItemToPickup() == null)
+                    UpdateGetInputAxis(x, y);
 
-            this.FlipLeft();
-            this.SetAnimatorFLoats();
+            FlipLeft();
+            SetAnimatorFLoats();
         }
 
-        protected virtual void FlipLeft() =>
-            this.controller.Model.transform.rotation =
-                (movement.x < 0) ? Quaternion.Euler(0, 180, 0) : Quaternion.Euler(0, 0, 0);
+        private void FlipLeft() =>
+            _controller.Model.transform.rotation =
+                (_movement.x < 0) ? Quaternion.Euler(0, 180, 0) : Quaternion.Euler(0, 0, 0);
 
-        protected virtual void SetAnimatorFLoats()
+        private void SetAnimatorFLoats()
         {
-            this.animator.SetFloat("Horizontal", movement.x);
-            this.animator.SetFloat("Vertical", movement.y);
-            this.animator.SetFloat("Speed", movement.magnitude);
+            _animator.SetFloat(HORIZONTAL, _movement.x);
+            _animator.SetFloat(VERTICAL, _movement.y);
+            _animator.SetFloat(SPEED, _movement.magnitude);
         }
 
         protected override void Move() =>
-             this.rigid2D.MovePosition(this.rigid2D.position + this.movement * this.speed * Time.fixedDeltaTime);
+             _rigid2D.MovePosition(_rigid2D.position + _movement * speed * Time.fixedDeltaTime);
     }
 }

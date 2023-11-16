@@ -48,7 +48,7 @@ public class ShooteBlueFlame : AutoMonobehaviour
     protected virtual IEnumerator Attack()
     {
         yield return new WaitForSeconds(0.5f);
-        SFXSpawner.Instance.PlaySound("Sound_Fire_Explosion", "Forest");
+        SFXSpawner.Instance.PlaySound("Sound_Fire_Explosion");
         this.animatorBoss.SetTrigger("Attack");
     }
 

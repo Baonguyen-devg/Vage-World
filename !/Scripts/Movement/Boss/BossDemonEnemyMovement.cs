@@ -15,27 +15,27 @@ namespace Movement
         protected override void LoadComponent()
         {
             base.LoadComponent();
-            this.LoadPlayer();
+            LoadPlayer();
         }
 
         protected override void LoadComponentInAwakeBefore()
         {
             base.LoadComponentInAwakeBefore();
-            this.timeStart = timeStart_Default;
+            timeStart = timeStart_Default;
         }
 
         protected virtual void LoadPlayer() =>
-            this.player ??= GameObject.Find("Player").transform;
+            player ??= GameObject.Find("Player").transform;
 
         protected override void Update()
         {
-            this.timeStart = this.timeStart - Time.deltaTime;
-            if (this.timeStart > 0) return;
-            if (Vector2.Distance(this.player.position, transform.parent.position) <= this.distanceStop) return;
+            timeStart = timeStart - Time.deltaTime;
+            if (timeStart > 0) return;
+            if (Vector2.Distance(player.position, transform.parent.position) <= distanceStop) return;
 
-            Vector3 direc = (this.player.position - transform.parent.position);
+            Vector3 direc = (player.position - transform.parent.position);
             direc.Normalize();
-            this.SetDirectionFollow(direc);
+            SetDirectionFollow(direc);
             base.Update();
         }
     }

@@ -5,79 +5,40 @@ using Movement;
 
 public class EnemyController : AutoMonobehaviour
 {
-    //Model Component
     [SerializeField] protected Transform model;
-    public Transform Model => this.model;
-    protected virtual void LoadModel() =>
-        this.model = transform.Find("Model");
-
-    //Movement Component
     [SerializeField] protected EnemyMovement movement;
-    public EnemyMovement Movement => this.movement;
-    private void LoadMovement() =>
-       this.movement ??= transform.Find("Movement")?.GetComponent<EnemyMovement>();
-
-    //EnemyDamageSender Component
     [SerializeField] protected EnemyDamageSender damageSender;
-    public EnemyDamageSender DamageSender => this.damageSender;
-    protected virtual void LoadDamagedSender() =>
-        this.damageSender ??= transform.Find("DamageSender")?.GetComponent<EnemyDamageSender>();
-
-    //DamagedReceiver Component
     [SerializeField] protected EnemyDamageReceiver damageReceiver;
-    public EnemyDamageReceiver DamageReceiver => this.damageReceiver;
-    protected virtual void LoadDamagedReceiver() =>
-       this.damageReceiver ??= transform.Find("DamageReceiver")?.GetComponent<EnemyDamageReceiver>();
-
-    //HealthBar Component
     [SerializeField] protected EnemyHealthBar healthBar;
-    public EnemyHealthBar HealthBar => this.healthBar;
-    protected virtual void LoadHealthBar() =>
-        this.healthBar ??= transform.Find("HealthBar")?.GetComponentInChildren<EnemyHealthBar>();
-
-    //EnemyCloseCombatAttack Component
-    [SerializeField] protected EnemyCloseCombatAttack closeCombat;
-    public EnemyCloseCombatAttack CloseCombat => this.closeCombat;
-    protected virtual void LoadCloseCombat() =>
-        this.closeCombat ??= transform.Find("CloseCombat")?.GetComponent<EnemyCloseCombatAttack>();
-
-    //CreateRandomDirection Component
     [SerializeField] protected CreateRandomDirection randomlyMovement;
-    public CreateRandomDirection RandomlyMovement => this.randomlyMovement;
-    private void LoadRandomlyMovement() =>
-        this.randomlyMovement ??= transform.Find("DirectionRandomlyMovement")?.GetComponent<CreateRandomDirection>();
-
     [SerializeField] protected BehaviorManager behaviorManager;
-    public BehaviorManager BehaviorManager => this.behaviorManager;
-    private void LoadBehaviorManager() =>
-        this.behaviorManager ??= transform.Find("Behaviours")?.GetComponent<BehaviorManager>();
 
     private Transform posRoot;
     [SerializeField] private bool nearRoot;
 
+    [ContextMenu("Load Component")]
     protected override void LoadComponent()
     {
         base.LoadComponent();
-        this.LoadModel();
-        this.LoadMovement();
-        this.LoadDamagedSender();
-        this.LoadDamagedReceiver();
-        this.LoadHealthBar();
-        this.LoadCloseCombat();
-        this.LoadRandomlyMovement();
-        this.LoadBehaviorManager();
+        model = transform.Find("Model");
+        movement ??= transform.Find("Movement")?.GetComponent<EnemyMovement>();
+        damageSender ??= transform.Find("DamageSender")?.GetComponent<EnemyDamageSender>();
+        damageReceiver ??= transform.Find("DamageReceiver")?.GetComponent<EnemyDamageReceiver>();
+        healthBar ??= transform.Find("HealthBar")?.GetComponentInChildren<EnemyHealthBar>();
+        randomlyMovement ??= transform.Find("DirectionRandomlyMovement")?.GetComponent<CreateRandomDirection>();
+        behaviorManager ??= transform.Find("Behaviours")?.GetComponent<BehaviorManager>();
     }
 
-    private void Update() => this.NearPosRoot();
+    private void Update() => NearPosRoot();
 
     private void NearPosRoot()
     {
-       /* if (this.nearRoot == false) return;
-        if (Vector2.Distance(a: transform.position, b: this.posRoot.position) <= 0.5f)
+       /* if ( .nearRoot == false) return;
+        if (Vector2.Distance(a: transform.position, b: .posRoot.position) <= 0.5f)
         {
-            this.nearRoot = false;
-            this.randomlyMovement.gameObject.SetActive(value: false);
-            this.model.GetComponent<BehaviorManager>().GetBehaviorByName(name: "Idle").gameObject.SetActive(value: true);
+            nearRoot = false;
+            randomlyMovement.gameObject.SetActive(value: false);
+            model.GetComponent<BehaviorManager>().GetBehaviorByName(name: "Idle").gameObject.SetActive(value: true);
         }*/
     }
 
@@ -85,27 +46,31 @@ public class EnemyController : AutoMonobehaviour
     {
         GameObject pos = new GameObject();
         pos.transform.position = transform.position;
-        this.posRoot = pos.transform;
-        this.posRoot.SetParent(p: GameObject.Find(name: "HolderGameObject").transform);
+        posRoot = pos.transform;
+        posRoot.SetParent(GameObject.Find("HolderGameObject").transform);
     }
 
     public virtual void DoAttack()
     {
-        this.randomlyMovement.gameObject.SetActive(value: true);
-        this.randomlyMovement.SetTargetFollow(target: GameObject.Find(name: "Player").transform);
-
-        this.nearRoot = false;
+        randomlyMovement.gameObject.SetActive(true);
+        randomlyMovement.SetTargetFollow(GameObject.Find("Player").transform);
+        nearRoot = false;
     }
 
     public virtual void StopAttack()
     {
-        this.nearRoot = true;
-        this.randomlyMovement.gameObject.SetActive(value: true);
-        this.randomlyMovement.SetTargetFollow(target: posRoot);
+        nearRoot = true;
+        randomlyMovement.gameObject.SetActive(true);
+        randomlyMovement.SetTargetFollow(posRoot);
     }
 
-    public virtual void Stand()
-    {
-        this.randomlyMovement.gameObject.SetActive(false);
-    }
+    public virtual void Stand() => randomlyMovement.gameObject.SetActive(false);
+
+    public Transform Model => model;
+    public EnemyMovement Movement => movement;
+    public EnemyDamageSender DamageSender => damageSender;
+    public EnemyDamageReceiver DamageReceiver => damageReceiver;
+    public EnemyHealthBar HealthBar => healthBar;
+    public CreateRandomDirection RandomlyMovement => randomlyMovement;
+    public BehaviorManager BehaviorManager => behaviorManager;
 }

@@ -6,18 +6,18 @@ namespace Movement
     {
         [SerializeField] private Transform player;
         protected virtual void LoadPlayer() =>
-            this.player ??= GameObject.Find("Player").transform;
+            player ??= GameObject.Find("Player").transform;
 
         protected virtual void Update() =>
-            this.RotationFollowPosition(this.GetPos().normalized);
+            RotationFollowPosition(GetPos().normalized);
 
         protected override void LoadComponent()
         {
             base.LoadComponent();
-            this.LoadPlayer();
+            LoadPlayer();
         }
 
         protected override Vector2 GetPos() =>
-            this.player.position - transform.parent.parent.position;
+            player.position - transform.parent.parent.position;
     }
 }

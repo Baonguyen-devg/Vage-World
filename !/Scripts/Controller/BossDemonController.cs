@@ -7,27 +7,19 @@ using Movement;
 public class BossDemonController : AutoMonobehaviour
 {
     [SerializeField] protected Transform model;
-    public Transform Model => this.model;
-    protected virtual void LoadModel() =>
-        this.model ??= transform.Find("Model");
-
     [SerializeField] protected BossDemonEnemyDamageReceiver damageReceiver;
-    public BossDemonEnemyDamageReceiver DamageReceiver => this.damageReceiver;
-
-    protected virtual void LoadDamagedReceiver() =>
-       this.damageReceiver ??= transform.Find("DamageReceiver")?.GetComponent<BossDemonEnemyDamageReceiver>();
-
     [SerializeField] protected BossDemonEnemyMovement movement;
-    public BossDemonEnemyMovement Movement => this.movement;
-    private void LoadMovement() =>
-       this.movement ??= transform.Find("Movement")?.GetComponent<BossDemonEnemyMovement>();
 
+    [ContextMenu("Load Component")]
     protected override void LoadComponent()
     {
         base.LoadComponent();
-        this.LoadModel();
-        this.LoadMovement();
-        this.LoadDamagedReceiver();
+        model = transform.Find("Model");
+        damageReceiver = transform.Find("DamageReceiver").GetComponent<BossDemonEnemyDamageReceiver>();
+        movement = transform.Find("Movement").GetComponent<BossDemonEnemyMovement>();
     }
 
+    public Transform Model => model; 
+    public BossDemonEnemyDamageReceiver DamageReceiver => damageReceiver;
+    public BossDemonEnemyMovement Movement => movement;
 }
