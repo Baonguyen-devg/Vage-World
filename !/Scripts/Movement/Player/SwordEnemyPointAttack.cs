@@ -7,14 +7,15 @@ namespace Movement
     public class SwordEnemyPointAttack : PointSpawnMovement
     {
         [SerializeField] private Transform player;
-        protected virtual void LoadPlayer() =>
-            player ??= GameObject.Find("Player").transform;
 
+        #region Load Component Methods
+        [ContextMenu("Load Component")]
         protected override void LoadComponent()
         {
             base.LoadComponent();
-            LoadPlayer();
+            player = GameObject.Find("Player").transform;
         }
+        #endregion
 
         protected override void OnEnable()
         {

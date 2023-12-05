@@ -180,7 +180,7 @@ GameObject:
   - component: {fileID: 5753882840478069570}
   - component: {fileID: 5753882840478069571}
   - component: {fileID: 5753882840478069568}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: Discoloration
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -262,6 +262,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boxCollider: {fileID: 5753882840478069570}
+  opacity: 0.35
   rigidBody: {fileID: 5753882840478069571}
 --- !u!1 &5753882840573368170
 GameObject:
@@ -311,7 +312,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8cceef88db2fdd4d91976fdc23bd257, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  model: {fileID: 5753882841147811864}
+  _model: {fileID: 0}
 --- !u!1 &5753882840743430102
 GameObject:
   m_ObjectHideFlags: 0
@@ -508,7 +509,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
+  m_SpriteSortPoint: 1
 --- !u!95 &5753882841147811865
 Animator:
   serializedVersion: 4

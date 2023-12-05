@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0cd78c79302b1e4ca95e674c451e3d0, type: 3}
   m_Name: Prefabs_Bullet
   m_EditorClassIdentifier: 
-  prefabs:
+  _prefabs:
   - {fileID: 8792950975773220359, guid: de960f8fe48580d46b155a769868fa3a, type: 3}
   - {fileID: 6349804576714705596, guid: f277449080a6bb54088e2d166f0f9bb5, type: 3}
   - {fileID: 8755180757344629601, guid: 6b080394191fe374f934d02b0092d5eb, type: 3}

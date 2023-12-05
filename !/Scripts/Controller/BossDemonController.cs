@@ -1,25 +1,25 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using DamageReceiver;
 using Movement;
 
 public class BossDemonController : AutoMonobehaviour
 {
-    [SerializeField] protected Transform model;
-    [SerializeField] protected BossDemonEnemyDamageReceiver damageReceiver;
-    [SerializeField] protected BossDemonEnemyMovement movement;
+    [SerializeField] private Transform _model;
+    [SerializeField] private BossDemonEnemyDamageReceiver _damageReceiver;
+    [SerializeField] private BossDemonEnemyMovement _movement;
 
+    #region Load Component Methods
     [ContextMenu("Load Component")]
     protected override void LoadComponent()
     {
         base.LoadComponent();
-        model = transform.Find("Model");
-        damageReceiver = transform.Find("DamageReceiver").GetComponent<BossDemonEnemyDamageReceiver>();
-        movement = transform.Find("Movement").GetComponent<BossDemonEnemyMovement>();
+        _model = transform.Find("Model");
+        _damageReceiver = transform.Find("DamageReceiver").GetComponent<BossDemonEnemyDamageReceiver>();
+        _movement = transform.Find("Movement").GetComponent<BossDemonEnemyMovement>();
     }
+    #endregion
 
-    public Transform Model => model; 
-    public BossDemonEnemyDamageReceiver DamageReceiver => damageReceiver;
-    public BossDemonEnemyMovement Movement => movement;
+    public Transform Model => _model; 
+    public BossDemonEnemyDamageReceiver DamageReceiver => _damageReceiver;
+    public BossDemonEnemyMovement Movement => _movement;
 }

@@ -12,11 +12,11 @@ namespace DamageReceiver
         [SerializeField] protected bool isDead = false;
 
         protected override void OnEnable() => ResetHealthToMaximum();
-        protected virtual void FixedUpdate() => CheckDead();
+        protected virtual void Update() => CheckDead();
 
         protected virtual void CheckDead()
         {
-            if (!IsDead()) return;
+            if (!IsDead() || isDead) return;
             isDead = true;
             OnDead();
         }

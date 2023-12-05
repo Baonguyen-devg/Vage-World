@@ -3,26 +3,28 @@ using CreatingPackage;
 
 public class MapController : AutoMonobehaviour
 {
-    [SerializeField] protected CreateMap createMap;
-    [SerializeField] protected CreateLandDecorationGroups decorObject;
-    [SerializeField] protected CreateItemGroups createItem;
-    [SerializeField] protected CreateSeaDecorationGroups createSeaDecorObject;
-    [SerializeField] protected CreateEnemyGroups createGroupEnemy;
+    [SerializeField] private CreateMap _createMap;
+    [SerializeField] private CreateLandDecorationGroups _decorObject;
+    [SerializeField] private CreateItemGroups _createItem;
+    [SerializeField] private CreateSeaDecorationGroups _createSeaDecorObject;
+    [SerializeField] private CreateEnemyGroups _createGroupEnemy;
 
+    #region Load Component Methods
     [ContextMenu("Load Component")]
     protected override void LoadComponent()
     {
         base.LoadComponent();
-        createMap = transform.Find("Create Map").GetComponent<CreateMap>();
-        decorObject = transform.Find("Create Land Decoration Groups").GetComponent<CreateLandDecorationGroups>();
-        createItem = transform.Find("Create Item Groups").GetComponent<CreateItemGroups>();
-        createGroupEnemy = transform.Find("Create Enemy Groups").GetComponent<CreateEnemyGroups>();
-        createSeaDecorObject = transform.Find("Create Sea Decoration Groups").GetComponent<CreateSeaDecorationGroups>();
+        _createMap = transform.Find("Create Map").GetComponent<CreateMap>();
+        _decorObject = transform.Find("Create Land Decoration Groups").GetComponent<CreateLandDecorationGroups>();
+        _createItem = transform.Find("Create Item Groups").GetComponent<CreateItemGroups>();
+        _createGroupEnemy = transform.Find("Create Enemy Groups").GetComponent<CreateEnemyGroups>();
+        _createSeaDecorObject = transform.Find("Create Sea Decoration Groups").GetComponent<CreateSeaDecorationGroups>();
     }
+    #endregion
 
-    public CreateMap CreateMap => createMap;
-    public CreateLandDecorationGroups DecorObject => decorObject;
-    public CreateItemGroups CreateItem => createItem;
-    public CreateEnemyGroups CreateGroupEnemy => createGroupEnemy;
-    public CreateSeaDecorationGroups CreateSeaDecorObject => createSeaDecorObject;
+    public CreateMap CreateMap => _createMap;
+    public CreateLandDecorationGroups DecorObject => _decorObject;
+    public CreateItemGroups CreateItem => _createItem;
+    public CreateEnemyGroups CreateGroupEnemy => _createGroupEnemy;
+    public CreateSeaDecorationGroups CreateSeaDecorObject => _createSeaDecorObject;
 }

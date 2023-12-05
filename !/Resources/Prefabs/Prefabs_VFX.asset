@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0cd78c79302b1e4ca95e674c451e3d0, type: 3}
   m_Name: Prefabs_VFX
   m_EditorClassIdentifier: 
-  prefabs:
+  _prefabs:
   - {fileID: 6908407834286565462, guid: 0e670eb220332c049ac3ea6aa86a5e32, type: 3}
   - {fileID: 7127128495319614675, guid: 42ec49b186862124b83631b77fec6cab, type: 3}
   - {fileID: 6909431371887175875, guid: 47a9e2dd96d33eb4eaf04423fca99516, type: 3}

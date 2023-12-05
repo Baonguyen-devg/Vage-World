@@ -2,10 +2,12 @@ using UnityEngine;
 
 public class DecorObjectController : AutoMonobehaviour
 {
-    [SerializeField] protected Transform model;
+    [SerializeField] private Transform _model;
 
+    #region Load Component Methods
     [ContextMenu("Load Component")]
-    protected override void LoadComponent() => model = transform.Find("Model");
+    protected override void LoadComponent() => _model = transform.Find("Model");
+    #endregion
 
-    public Transform Model => model;
+    public Transform Model => _model;
 }

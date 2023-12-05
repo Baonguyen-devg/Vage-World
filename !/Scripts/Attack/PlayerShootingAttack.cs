@@ -6,12 +6,13 @@ namespace Attack
     public class PlayerShootingAttack : ShootingAttack
     {
         [SerializeField] protected List<Transform> supporters;
-        [SerializeField] private float timeShootePrevious;
         [SerializeField] private float mana = 100f;
+        [SerializeField] private EventSO EventPlayerShoote;
 
-        public static event System.Action ShootePlayerEvent;
-        private string bulletName;
+        private float _timeShootePrevious;
+        private string _bulletName;
 
+        #region Load Component Methods
         [ContextMenu("Load Component")]
         protected override void LoadComponent()
         {
@@ -20,14 +21,17 @@ namespace Attack
             foreach (Transform supporter in transform)
                 supporters.Add(supporter.Find("Point")?.transform);
         }
+        #endregion
 
         public virtual void SetActiveTeamSupporter(bool status)
         {
             foreach (Transform supporter in supporters)
             {
-                supporter.parent.gameObject.SetActive(status);
-                supporter.parent.parent.Find("Model").gameObject.SetActive(status);
+                supporter.parent.Find("Model").gameObject.SetActive(status);
+                supporter.gameObject.SetActive(status);
             }
+
+            supporters[0].parent.Find("Model").gameObject.SetActive(true);
             supporters[0].gameObject.SetActive(true);
         }
 
@@ -41,40 +45,45 @@ namespace Attack
 
         public virtual bool SupportShoote()
         {
-            if (Time.time - timeShootePrevious < attackDelay) return false;
-            timeShootePrevious = Time.time;
+            if (!GameManager.Instance.IsGamePlaying()) return false;
+            //sua lai
+            if (Time.time - _timeShootePrevious < attackDelay) return false;
+            _timeShootePrevious = Time.time;
 
-            //bool isSkill3 = SkillManager.GetInstance().GetPrefabByName("Skill_3").IsCanUse();
-            bulletName = BulletSpawner.BULLET_PLAYER;
-            //bulletName = (isSkill3) ? BulletSpawner.torandoBullet : BulletSpawner.playerBullet;
-            
+            SetBulletToShoote();
             foreach (Transform point in supporters)
             {
                 if (!point.gameObject.activeInHierarchy) continue;
-                Shoote(bulletName, point);
+                Shoote(_bulletName, point);
             }
             InvokeShootePlayerEvent();
             return true;
+        }
+
+        private void SetBulletToShoote()
+        {
+            bool isSkill3 = SkillManager.Instance.CanUseSkill_3();
+            _bulletName = (isSkill3) ? BulletSpawner.BULLET_TORNADO : BulletSpawner.BULLET_PLAYER;
         }
 
         protected override void CustomizeBullet(Transform bullet, Transform point)
         {
             base.CustomizeBullet(bullet, point);
             bullet.position = point.position;
-  
-          /*  bool isSkill2 = SkillManager.GetInstance().GetPrefabByName("Skill_2").IsCanUse();
-            if (isSkill2) ZoomBullet(bullet);*/
+
             bullet.gameObject.SetActive(true);
+            bool isSkill2 = SkillManager.Instance.CanUseSkill_2();
+            if (isSkill2) ZoomBullet(bullet);
         }
 
         protected virtual void ZoomBullet(Transform bullet)
         {
-            bullet.transform.localScale += new Vector3(1, 1, 0);
-            bullet.GetComponent<PlayerBulletController>().DamageSender.IncreaseDame(20);
+            bullet.transform.localScale += new Vector3(2, 2, 0);
+            bullet.GetComponent<PlayerBulletController>().DamageSender.IncreaseDame(100);
         }
 
         public float GetMana() => mana;
-        private void InvokeShootePlayerEvent() => ShootePlayerEvent?.Invoke();
+        private void InvokeShootePlayerEvent() => EventPlayerShoote.Raise();
         public List<Transform> GetPointShootes() => supporters;
     }
 }

@@ -1,30 +1,35 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Menu : AutoMonobehaviour
 {
-    [SerializeField] private List<Button> buttonLevels = new List<Button>();
-    private void LoadButtomLevels()
+    private List<Button> _buttonLevels = new List<Button>();
+
+    #region Load Component Methods
+    [ContextMenu("Load Component")]
+    protected override void LoadComponent()
     {
         Transform holder = transform.Find("LevelTable")?.Find("Table");
-        foreach (Transform button in holder) 
-            buttonLevels.Add(button.GetComponent<Button>());
+        foreach (Transform button in holder)
+            _buttonLevels.Add(button.GetComponent<Button>());
     }
+    #endregion
 
-    protected override void LoadComponent() => LoadButtomLevels();
+    [ContextMenu("Reset Unlocked Level")]
+    private void ResetUnlockedLevel() =>
+         DataManager.SetIntData(DataManager.INT_UNLOCKED_LEVEL, 1);
 
     protected override void Awake()
     {
         base.Awake();
-        int unlockedLevel = PlayerPrefs.GetInt("UnlockedLevel", 1);
+        int unlockedLevel = DataManager.GetIntData(DataManager.INT_UNLOCKED_LEVEL);
 
-        foreach (Button button in buttonLevels) 
+        foreach (Button button in _buttonLevels) 
             ChangeStatusButton(button, false);
 
         for (int i = 0; i < unlockedLevel; i++)
-            ChangeStatusButton(buttonLevels[i], true);
+            ChangeStatusButton(_buttonLevels[i], true);
     }
 
     private void ChangeStatusButton(Button button, bool status)
@@ -35,13 +40,9 @@ public class Menu : AutoMonobehaviour
     
     public virtual void LoadEasyLevel(int Level)
     {
-        GameController.Instance.SetNameLevel(level: Level);
-        GameController.Instance.LoadLevelManagerSO();
-        PlayGame();
+        DataManager.SetIntData(DataManager.INT_LEVEL, Level);
+        LoadSceneManager.LoadScene(LoadSceneManager.LOADING);
     }
-
-    public virtual void PlayGame() =>
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
 
     public virtual void QuitGame() => Application.Quit();
 }

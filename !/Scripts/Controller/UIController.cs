@@ -1,87 +1,77 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class UIController : AutoMonobehaviour
 {
-    [SerializeField] protected static UIController instance;
+    protected static UIController instance;
     public static UIController Instance => instance;
 
     [SerializeField] protected List<Transform> listUI;
-    protected virtual void LoadListUI()
-    {
-        if (this.listUI.Count != 0) return;
-        foreach (Transform UI in transform)
-            this.listUI.Add(item: UI);
-    }
+    [SerializeField] protected TMPro.TMP_Text levelText; 
 
+    #region Load Component Methods
+    [ContextMenu("Load Component")]
     protected override void LoadComponent()
     {
         base.LoadComponent();
-        this.LoadListUI();
+        if (listUI.Count != 0) return;
+        foreach (Transform UI in transform)
+            listUI.Add(UI);
     }
+    #endregion
 
     protected override void LoadComponentInAwakeBefore()
     {
         base.LoadComponentInAwakeBefore();
         UIController.instance = this;
-       // this.LoadUI("Load_Screen");
+        levelText.text = "Level " + DataManager.GetIntData(DataManager.INT_LEVEL);
     }
 
-    protected virtual void Update()
+    protected void Update()
     {
-        if (Input.GetKeyDown(key: KeyCode.Escape))
-            this.LoadPauseGameUI();
+        if (!GameManager.Instance.IsGamePlaying()) return;
+        bool isEscapePressed = Manager.InputManager.GetInstance().IsEscapePress();
+        if (isEscapePressed) GameManager.Instance.PauseGame();
     }
 
-    public virtual void LoadUI(string nameUI)
+    public void LoadUI(string nameUI)
     {
-        foreach (Transform UI in this.listUI)
-            if (nameUI.Equals(value: UI.name)) 
-                UI.gameObject.SetActive(value: true);
+        foreach (Transform UI in listUI)
+            if (nameUI.Equals(UI.name)) 
+                UI.gameObject.SetActive(true);
     }
 
-    public virtual void LoadPauseGameUI() => this.LoadUI(nameUI: "Pause_Game_UI");
-
-    public virtual void LoadLoseGameUI() => this.LoadUI(nameUI: "Lose_Game_UI");
-
-    public virtual void LoadWinGameUI() => this.LoadUI(nameUI: "Win_Game_UI");
-
-    public virtual void Game() => this.LoadUI(nameUI: "Game_UI");
-
-    public virtual void Continue()
+    public void Continue()
     {
         Time.timeScale = 1;
-        this.Game();
+        GameManager.Instance.SetGamePlaying();
+        Game();
     }
 
-    public virtual void PlayAgain()
+    public void PlayAgain()
     {
         Time.timeScale = 1;
-        SceneManager.LoadScene(sceneBuildIndex: SceneManager.GetActiveScene().buildIndex);
+        int levelPresent = DataManager.GetIntData(DataManager.INT_LEVEL);
+        LoadSceneManager.LoadScene("Level_" + levelPresent);
     }
 
-    public virtual void NextGame()
+    public void NextGame()
     {
         Time.timeScale = 1;
-        GameController.Instance.SetNameLevel(GameController.Instance.Level + 1);
-        GameController.Instance.LoadLevelManagerSO();
-        SceneManager.LoadScene(sceneBuildIndex: SceneManager.GetActiveScene().buildIndex);
+        int level = DataManager.GetIntData(DataManager.INT_LEVEL) + 1;
+        DataManager.SetIntData(DataManager.INT_LEVEL, level);
+        LoadSceneManager.LoadScene(LoadSceneManager.LOADING);
     }
 
-    public virtual void QuitToMenu()
+    public void QuitToMenu()
     {
         Time.timeScale = 1;
-        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-        int nextSceneIndex = currentSceneIndex - 1;
-
-        if (nextSceneIndex < 0)
-        {
-            Debug.LogWarning(message: "Scene don't exit!");
-            return;
-        }
-        SceneManager.LoadScene(sceneBuildIndex: nextSceneIndex);
+        LoadSceneManager.LoadScene(LoadSceneManager.MENU);
     }
+
+    public void LoadPauseGameUI() => LoadUI("Pause_Game_UI");
+    public void LoadLoseGameUI() => LoadUI("Lose_Game_UI");
+    public void LoadWinGameUI() => LoadUI("Win_Game_UI");
+    public void Game() => LoadUI("Game_UI");
 }

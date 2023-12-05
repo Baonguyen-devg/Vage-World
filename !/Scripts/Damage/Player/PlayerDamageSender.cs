@@ -15,6 +15,8 @@ namespace DamageSender
         protected virtual void LoadDamage() => dame = playerSO.GetDame();
         private void LoadLevelManagerSO() => playerSO = Resources.Load<CharacterSO>(PATH);
 
+        protected override void OnEnable() => LoadDamage();
+
         [ContextMenu("Load Component")]
         protected override void LoadComponent()
         {
@@ -25,7 +27,7 @@ namespace DamageSender
 
         public override void Send(Transform obj)
         {
-            obj.GetComponentInChildren<EnemyDamageReceiver>()?.DecreaseHealth(dame);
+            obj.GetComponent<EnemyDamageReceiver>()?.DecreaseHealth(dame);
             obj.GetComponent<BossDemonEnemyDamageReceiver>()?.DecreaseHealth(dame);
         }
     }

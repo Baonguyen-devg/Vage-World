@@ -5,37 +5,39 @@ using UnityEngine;
 public class discoloration : AutoMonobehaviour
 {
     [SerializeField] protected BoxCollider2D boxCollider;
+    [Range(0f, 1f), SerializeField] private float opacity = 1f;
+
     protected virtual void LoadBoxCollider()
     {
-        this.boxCollider ??= gameObject.GetComponent<BoxCollider2D>();
-        this.boxCollider.isTrigger = true;
+        boxCollider ??= gameObject.GetComponent<BoxCollider2D>();
+        boxCollider.isTrigger = true;
     }
 
     [SerializeField] protected Rigidbody2D rigidBody;
     protected virtual void LoadRigidbody2D()
     {
-        this.rigidBody ??= gameObject.GetComponent<Rigidbody2D>();
-        this.rigidBody.isKinematic = true;
+        rigidBody ??= gameObject.GetComponent<Rigidbody2D>();
+        rigidBody.isKinematic = true;
     }
 
     protected override void LoadComponent()
     {
         base.LoadComponent();
-        this.LoadBoxCollider();
-        this.LoadRigidbody2D();
+        LoadBoxCollider();
+        LoadRigidbody2D();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.GetComponent<PlayerController>() == null
-            && collision.GetComponent<EnemyController>() == null) return;
-        transform.parent.Find(n: "Model").GetComponent<SpriteRenderer>().color = new(r: 1f, g: 1f, b: 1f, a: 0.5f);
+            && collision.GetComponent<DamageReceiver.EnemyDamageReceiver>() == null) return;
+        transform.parent.Find(n: "Model").GetComponent<SpriteRenderer>().color = new(r: 1f, g: 1f, b: 1f, opacity);
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.GetComponent<PlayerController>() == null
-           && collision.GetComponent<EnemyController>() == null) return;
+           && collision.GetComponent<DamageReceiver.EnemyDamageReceiver>() == null) return;
         transform.parent.Find(n: "Model").GetComponent<SpriteRenderer>().color = new(r: 1f, g: 1f, b: 1f, a: 1f);
     }
 }

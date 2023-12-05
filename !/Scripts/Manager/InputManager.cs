@@ -20,7 +20,7 @@ namespace Manager
         private bool rightMousePress = false;
         private bool leftMousePress = false;
 
-        public static event System.Action LeftMousePressEvent;
+        [SerializeField] private EventSO LeftMousePressed;
 
         protected override void LoadComponentInAwakeBefore()
         {
@@ -45,9 +45,11 @@ namespace Manager
             rightMousePress = Input.GetMouseButtonDown(1);
             leftMousePress = Input.GetMouseButtonDown(0);
 
-            if (leftMousePress) LeftMousePressEvent?.Invoke();
+            if (leftMousePress) OnLeftMousePressed();
         }
 
+
+        private void OnLeftMousePressed() => LeftMousePressed?.Raise();
         private bool CanPress() => true;
 
         public bool IsEscapePress() => escapePress;

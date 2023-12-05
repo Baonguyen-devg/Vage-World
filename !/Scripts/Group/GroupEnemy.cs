@@ -9,7 +9,7 @@ namespace Group
             Transform enemy = EnemySpawner.Instance.Spawn(objectToSpawner);
             enemy.SetPositionAndRotation(position, rotation);
             enemy.gameObject.SetActive(true);
-            transform.parent.GetComponent<PointSpawnEnemy>().Add(enemy);
+            /*transform._pointSpawn.GetComponent<PointSpawnEnemy>().Add(enemy);*/
         }
     }
 }

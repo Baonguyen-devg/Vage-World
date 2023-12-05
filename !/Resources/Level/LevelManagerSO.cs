@@ -11,33 +11,33 @@ public class LevelManagerSO : ScriptableObject
         [HideInInspector] public string Name => this.name;
 
         [Space(height: 3), Header(header: "[ Set Up Stats ]"), Space(height: 3)] //STATS
-        //Maximum enemy's health is about 50 to 30000 (boss)
+        //Maximum enemy's _health is about 50 to 30000 (_boss)
         [Range(min: 50, max: 30000), SerializeField] private int maximumHealth;
         [HideInInspector] public int MaximumHealth => this.maximumHealth;
 
-        //Maximum enemy's dame is about to 50 to 30000 (boss)
+        //Maximum enemy's _dame is about to 50 to 30000 (_boss)
         [Range(min: 0, max: 100), SerializeField] private int dame;
         [HideInInspector] public int Dame => this.dame;
 
-        //Maximum enemy's speedRotation is about to 50 to 30000 (boss)
+        //Maximum enemy's speedRotation is about to 50 to 30000 (_boss)
         [Range(min: 0.01f, max: 1), SerializeField] private float speed;
         [HideInInspector] public float Speed => this.speed;
 
         [Space(height: 3), Header(header: "[ Set Up Attack ] "), Space(height: 3)] //ATTACK
-                                                                                   //Maximum enemy's distance can attack is about to 50 to 30000 (boss)
+                                                                                   //Maximum enemy's distance can attack is about to 50 to 30000 (_boss)
         [Range(min: 0, max: 10), SerializeField] private float distanceAttack;
         [HideInInspector] public float DistanceAttack => this.distanceAttack;
 
-        //Maximum enemy's attack delay is about to 50 to 30000 (boss)
+        //Maximum enemy's attack delay is about to 50 to 30000 (_boss)
         [Range(min: 0, max: 10), SerializeField] private float attackDelay;
         [HideInInspector] public float AttackDelay => this.attackDelay;
 
         [Space(height: 3), Header(header: "[ Set Up Creating ] "), Space(height: 3)] //CREATING
-        //Maximum enemy's numberObject is about to 0 to 50 (boss)
+        //Maximum enemy's _numberObject is about to 0 to 50 (_boss)
         [Range(min: 0, max: 50), SerializeField] protected int numberObject;
         [HideInInspector] public int NumberObject => this.numberObject;
 
-        //Maximum enemy's numberGroup is about to 0 to 50 (boss)
+        //Maximum enemy's _numberGroup is about to 0 to 50 (_boss)
         [Range(min: 0, max: 50), SerializeField] protected int numberGroup;
         [HideInInspector] public int NumberGroup => this.numberGroup;
 
@@ -49,11 +49,11 @@ public class LevelManagerSO : ScriptableObject
         [HideInInspector] public string Name => this.name;
 
         [Space(height: 3), Header(header: "[ Set Up Creating ] "), Space(height: 3)] //CREATING
-        //Maximum enemy's numberObject is about to 0 to 50 (boss)
+        //Maximum enemy's _numberObject is about to 0 to 50 (_boss)
         [Range(min: 0, max: 50), SerializeField] protected int numberObject;
         [HideInInspector] public int NumberObject => this.numberObject;
 
-        //Maximum enemy's numberGroup is about to 0 to 50 (boss)
+        //Maximum enemy's _numberGroup is about to 0 to 50 (_boss)
         [Range(min: 0, max: 50), SerializeField] protected int numberGroup;
         [HideInInspector] public int NumberGroup => this.numberGroup;
     }

@@ -17,18 +17,15 @@ public class Spawner : AutoMonobehaviour
     {
         base.LoadComponent();
         prefabSO = Resources.Load<PrefabsSO>(GetPath());
-        prefabs = prefabSO.GetPrefabs();
         holder = transform.Find("Holder");
-    }
 
-    protected override void Awake()
-    {
-        base.Awake();
         if (isNullScriptableObject && CheckNullScriptableObject())
         {
             if (isLogger) Debug.LogError($"Have errors when load scriptable in {name}", this);
             gameObject.SetActive(false);
+            return;
         }
+        prefabs = prefabSO.GetPrefabs();
     }
 
     protected virtual string GetPath() => null;

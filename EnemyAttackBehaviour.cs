@@ -11,9 +11,9 @@ public class EnemyAttackBehaviour : StateMachineBehaviour
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         this.LoadController(animator.transform);
-        this.controller.Movement.gameObject.SetActive(false);
-        this.controller.RandomlyMovement.gameObject.SetActive(false);
-        this.controller.BehaviorManager.DoBehaviour();
+       /* this.controller.Movement.gameObject.SetActive(false);
+       // this.controller.RandomlyMovement.gameObject.SetActive(false);
+        this.controller.BehaviorManager.DoBehaviour();*/
     }
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

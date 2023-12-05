@@ -27,7 +27,7 @@ namespace DamageReceiver
         }
 
         /*protected virtual void LoadMaximumHealth() =>
-            maximumHealth = (int)levelManagerSO?.GetEnemySOByName(transform.parent.name)?.MaximumHealth;*/
+            maximumHealth = (int)_levelManagerSO?.GetEnemySOByName(transform._pointSpawn.name)?.MaximumHealth;*/
 
         public override void DecreaseHealth(int health)
         {
@@ -55,7 +55,7 @@ namespace DamageReceiver
             EnemySpawner.Instance.Despawn(obj: transform.parent);
             VFXSpawner.Instance.Spawn("Smoke_Die_Enemy");
             SFXSpawner.Instance.PlaySound("Sound_Smoke_Die_Enemy");
-            AchievementController.Instance.GetAchievementByName(transform.parent.name)?.Increase(1);
+            AchievementManager.Instance.GetAchievementByName(transform.parent.name)?.Increase(1);
         }
     }
 }

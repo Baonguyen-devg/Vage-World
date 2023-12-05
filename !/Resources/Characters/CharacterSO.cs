@@ -3,14 +3,14 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Character", menuName = "ScriptableObjects/Character")]
 public class CharacterSO : ScriptableObject
 {
-    [SerializeField] private int health = 1000;
-    [SerializeField] private float mana = 1000;
-    [SerializeField] private int dame = 100;
-    [SerializeField] private float speed = 0.01f;
+    [SerializeField] private int _health = 1000;
+    [SerializeField] private float _mana = 1000;
+    [SerializeField] private int _dame = 100;
+    [SerializeField] private float _speed = 0.01f;
 
-    public int GetHealth() => health;
-    public float GetMana() => mana;
-    public int GetDame() => dame;
-    public float GetSpeed() => speed;
+    public int GetHealth() => _health;
+    public float GetMana() => _mana;
+    public int GetDame() => _dame;
+    public float GetSpeed() => _speed;
 }
 

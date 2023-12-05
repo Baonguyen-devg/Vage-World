@@ -17,30 +17,32 @@ public class CoinBehaviour : StateMachineBehaviour
 
     [SerializeField] private Transform player;
     protected virtual void LoadPlayer() =>
-        this.player = GameObject.Find("Player")?.transform;
+        player = GameObject.Find("Player")?.transform;
 
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        this.LoadPlayer();
+        LoadPlayer();
         float posXDestination = Random.Range(-1f, 1f);
         float posYDestination = Random.Range(-1f, 1f);
-        this.destinationPos = animator.transform.parent.position + new Vector3(posXDestination, posYDestination, 0);
+
+        Vector3 newPosition = new Vector3(posXDestination, posYDestination, 0);
+        destinationPos = animator.transform.parent.position + newPosition;
     }
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (this.canPick) this.CheckDistanceToPick(animator.transform);
-        else this.CheckDestinationPos(animator.transform);
+        if (canPick) CheckDistanceToPick(animator.transform);
+        else CheckDestinationPos(animator.transform);
     }
 
     protected virtual void CheckDistanceToPick(Transform transform)
     {
-        if (Vector3.Distance(transform.parent.position, this.player.position) > this.distancePick) return;
-        transform.parent.position = Vector3.Lerp(transform.parent.position, this.player.position, this.speedPick);
+        if (Vector3.Distance(transform.parent.position, player.position) > distancePick) return;
+        transform.parent.position = Vector3.Lerp(transform.parent.position, player.position, speedPick);
 
-        if (Vector3.Distance(transform.parent.position, this.player.position) <= 0.5f)
+        if (Vector3.Distance(transform.parent.position, player.position) <= 0.5f)
         {
-            AchievementController.Instance.IncreaseCoin(1);
+            AchievementManager.Instance.IncreaseCoin(1);
             SFXSpawner.Instance.PlaySound("Sound_Coin");
             ItemSpawner.Instance.Despawn(transform.parent);
         }
@@ -48,7 +50,7 @@ public class CoinBehaviour : StateMachineBehaviour
 
     protected virtual void CheckDestinationPos(Transform transform)
     {
-        if (Vector3.Distance(transform.parent.position, destinationPos) <= 0.1f) this.canPick = true;
-        else transform.parent.position = Vector3.Lerp(transform.parent.position, this.destinationPos, this.speed);
+        if (Vector3.Distance(transform.parent.position, destinationPos) <= 0.1f) canPick = true;
+        else transform.parent.position = Vector3.Lerp(transform.parent.position, destinationPos, speed);
     }
 }

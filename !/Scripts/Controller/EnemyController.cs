@@ -2,75 +2,50 @@ using UnityEngine;
 using DamageReceiver;
 using DamageSender;
 using Movement;
+using UniRx;
 
 public class EnemyController : AutoMonobehaviour
 {
-    [SerializeField] protected Transform model;
-    [SerializeField] protected EnemyMovement movement;
-    [SerializeField] protected EnemyDamageSender damageSender;
-    [SerializeField] protected EnemyDamageReceiver damageReceiver;
-    [SerializeField] protected EnemyHealthBar healthBar;
-    [SerializeField] protected CreateRandomDirection randomlyMovement;
-    [SerializeField] protected BehaviorManager behaviorManager;
+    [SerializeField] private Transform _model;
+    [SerializeField] private BehavioursController _behavioursController;
+    [SerializeField] private EnemyDamageReceiver _damageReceiver;
+    [SerializeField] private EnemyHealthBar _healthBar;
 
-    private Transform posRoot;
-    [SerializeField] private bool nearRoot;
+    private Transform _player;
+    private bool _isAttack;
 
+    #region Load Component Methods
     [ContextMenu("Load Component")]
     protected override void LoadComponent()
     {
         base.LoadComponent();
-        model = transform.Find("Model");
-        movement ??= transform.Find("Movement")?.GetComponent<EnemyMovement>();
-        damageSender ??= transform.Find("DamageSender")?.GetComponent<EnemyDamageSender>();
-        damageReceiver ??= transform.Find("DamageReceiver")?.GetComponent<EnemyDamageReceiver>();
-        healthBar ??= transform.Find("HealthBar")?.GetComponentInChildren<EnemyHealthBar>();
-        randomlyMovement ??= transform.Find("DirectionRandomlyMovement")?.GetComponent<CreateRandomDirection>();
-        behaviorManager ??= transform.Find("Behaviours")?.GetComponent<BehaviorManager>();
+        _model = transform.Find("Model");
+        _healthBar = transform.GetComponentInChildren<EnemyHealthBar>();
+        _behavioursController = transform.GetComponentInChildren<BehavioursController>();
+        _damageReceiver = transform.GetComponentInChildren<EnemyDamageReceiver>();
+        _player = GameObject.Find("Player").transform;
     }
-
-    private void Update() => NearPosRoot();
-
-    private void NearPosRoot()
-    {
-       /* if ( .nearRoot == false) return;
-        if (Vector2.Distance(a: transform.position, b: .posRoot.position) <= 0.5f)
-        {
-            nearRoot = false;
-            randomlyMovement.gameObject.SetActive(value: false);
-            model.GetComponent<BehaviorManager>().GetBehaviorByName(name: "Idle").gameObject.SetActive(value: true);
-        }*/
-    }
+    #endregion
 
     protected override void LoadComponentInAwakeBefore()
     {
-        GameObject pos = new GameObject();
-        pos.transform.position = transform.position;
-        posRoot = pos.transform;
-        posRoot.SetParent(GameObject.Find("HolderGameObject").transform);
+        Observable.EveryUpdate().Subscribe(_ => NearPosRoot()).AddTo(this);
+        _healthBar.transform.parent.gameObject.SetActive(false);
     }
 
-    public virtual void DoAttack()
+    private void NearPosRoot()
     {
-        randomlyMovement.gameObject.SetActive(true);
-        randomlyMovement.SetTargetFollow(GameObject.Find("Player").transform);
-        nearRoot = false;
+        float distance = Vector2.Distance(transform.position, _player.position);
+        if (!_isAttack && distance <= 4f)
+        {
+            _behavioursController.SetTargetFollow(_player);
+            _isAttack = true;
+        }
     }
 
-    public virtual void StopAttack()
-    {
-        nearRoot = true;
-        randomlyMovement.gameObject.SetActive(true);
-        randomlyMovement.SetTargetFollow(posRoot);
-    }
-
-    public virtual void Stand() => randomlyMovement.gameObject.SetActive(false);
-
-    public Transform Model => model;
-    public EnemyMovement Movement => movement;
-    public EnemyDamageSender DamageSender => damageSender;
-    public EnemyDamageReceiver DamageReceiver => damageReceiver;
-    public EnemyHealthBar HealthBar => healthBar;
-    public CreateRandomDirection RandomlyMovement => randomlyMovement;
-    public BehaviorManager BehaviorManager => behaviorManager;
+    public void SetIsAttack(bool status) => _isAttack = status;
+    public Transform Model => _model;
+    public BehavioursController BehavioursManager => _behavioursController;
+    public EnemyDamageReceiver DamageReceiver => _damageReceiver;
+    public EnemyHealthBar HealthBar => _healthBar;
 }

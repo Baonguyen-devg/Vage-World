@@ -1,21 +1,32 @@
 using UnityEngine;
-using Movement;
 
 public class LookPlayer : AutoMonobehaviour
 {
-    [SerializeField] protected EnemyController controller;
-    protected virtual void LoadEnemyController() =>
-        this.controller ??= transform?.parent?.GetComponent<EnemyController>();
+    [SerializeField] private EnemyController _controller;
+    [SerializeField] private Transform _player;
 
-    protected override void LoadComponent() => this.LoadEnemyController();
-
-    protected virtual void Update()
+    #region Load Component Methods
+    [ContextMenu("Load Component")]
+    protected override void LoadComponent()
     {
-        if (this.controller.RandomlyMovement.TargetFollow == null) return;
+        base.LoadComponent();
+        //_controller = transform._pointSpawn.GetComponent<EnemyController>();
+        _player = GameObject.Find("Player").transform;
+    }
+    #endregion
 
-        if (transform.parent.localPosition.x > this.controller.RandomlyMovement.TargetFollow.localPosition.x)
-            transform.rotation = Quaternion.Euler(x: 0, y: 180, z: 0);
+    private void Update()
+    {
+       /* if (_controller.RandomlyMovement.TargetFollow == null) return;
+        Transform _targetFollow = _controller.RandomlyMovement.TargetFollow;*/
+        Look(_player);
+    }
+
+    private void Look(Transform targetFollow)
+    {
+        if (transform.parent.localPosition.x > targetFollow.localPosition.x)
+            transform.rotation = Quaternion.Euler(0, 180, 0);
         else
-            transform.rotation = Quaternion.Euler(x: 0, y: 0, z: 0);
+            transform.rotation = Quaternion.Euler(0, 0, 0);
     }
 }

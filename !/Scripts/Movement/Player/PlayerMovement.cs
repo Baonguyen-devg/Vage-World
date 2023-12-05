@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 namespace Movement
@@ -44,12 +45,27 @@ namespace Movement
         }
         #endregion
 
+        protected override IEnumerator LoadWaitForLongTime()
+        {
+            yield return StartCoroutine(base.LoadWaitForLongTime());
+            SetPlayerPosition();
+        }
+
+        private void SetPlayerPosition()
+        {
+            MapController controller = GameObject.Find("Map").GetComponent<MapController>();
+            Transform land = controller.CreateMap.GetRandomLand();
+            transform.parent.position = land.position;
+        }
+
         public virtual void UpdateGetInputAxis(float axisX, float axisY) =>
             (_movement.x, _movement.y) = (axisX, axisY);
 
         protected override void Update()
         {
+            if (!GameManager.Instance.IsGamePlaying()) return;
             base.Update();
+
             float x = Manager.InputManager.GetInstance().GetAxisHorizontal();
             float y = Manager.InputManager.GetInstance().GetAxisVertical();
             if (x != 0 || y != 0 )

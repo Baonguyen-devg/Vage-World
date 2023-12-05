@@ -90,12 +90,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e281a615c4380da44957fcd87bc2d6d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 8
+  speed: 0.2
   maximumSpeed: 1
-  minimumSpeed: 0.05
+  minimumSpeed: 0.01
   isMovingFast: 0
-  direction: {x: 0, y: 0, z: 0}
-  player: {fileID: 0}
 --- !u!1 &2128980225746657771
 GameObject:
   m_ObjectHideFlags: 0
@@ -112,7 +110,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2128980225746657770
 Transform:
   m_ObjectHideFlags: 0
@@ -147,7 +145,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   model: {fileID: 2128980225883774282}
   movement: {fileID: 2128980224928955649}
-  damageSender: {fileID: 0}
+  damageSender: {fileID: 2128980226207941070}
 --- !u!1 &2128980225883774283
 GameObject:
   m_ObjectHideFlags: 0
@@ -175,7 +173,7 @@ Transform:
   m_GameObject: {fileID: 2128980225883774283}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.59999996, y: 0.59999996, z: 0.59999996}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 2128980225746657770}
@@ -264,7 +262,7 @@ GameObject:
   - component: {fileID: 2128980226207941071}
   - component: {fileID: 2128980226207941070}
   m_Layer: 9
-  m_Name: DamagedSender
+  m_Name: DamageSender
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -1,80 +1,70 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class LoadScreen : AutoMonobehaviour
 {
-    [SerializeField] protected List<Transform> loadScreenTexts;
-    [SerializeField] protected GameObject frameLoad;
-    [SerializeField] protected Transform startGameScreen;
-    [SerializeField] protected Text textLevel;
+    [SerializeField] private List<Transform> loadScreenTexts;
+    [SerializeField] private RectTransform frameLoad;
+    [SerializeField] private TMP_Text textLevel;
 
-    protected virtual void LoadScreenTexts()
-    {
-        loadScreenTexts = new List<Transform>();
-        Transform texts = transform.Find("Texts");
-        foreach (Transform text in texts)
-            loadScreenTexts.Add(text);
-    }
-
+    #region Load Component Methods
     [ContextMenu("Load Component")]
     protected override void LoadComponent()
     {
-        base.LoadComponent();
-        frameLoad = transform.Find("Frame_Load")?.gameObject;
-        startGameScreen = GameObject.Find("Camera")?.transform.Find("Main Camera")?.
-            Find("Start_Game_Screen");
-        textLevel = transform.Find("Level").GetComponent<Text>();
+        frameLoad = transform.Find("Frame_Load").transform.Find("Load").GetComponent<RectTransform>();
+        textLevel = transform.Find("Level").GetComponent<TMP_Text>();
+    }
+    #endregion
+
+    protected override void Awake()
+    {
+        base.Awake();
+        LoadSceneFake();
+        textLevel.text = "Level " + DataManager.GetIntData(DataManager.INT_LEVEL);
+    }
+
+    private void LoadSceneFake()
+    {
+        Extension.StartDelayAction(this, 1f, () => LoadPercentScreen(1));
+        Extension.StartDelayAction(this, 1.5f, () => LoadPercentScreen(2));
+        Extension.StartDelayAction(this, 2f, () => LoadPercentScreen(3));
+        StartCoroutine(LoadSceneAsync());
+    }
+
+    private IEnumerator LoadSceneAsync()
+    {
+        yield return new WaitForSeconds(2.5f);
+        int levelPresent = DataManager.GetIntData(DataManager.INT_LEVEL);
+        string nameLevel = "Level_" + levelPresent;
+
+        AsyncOperation asyncOperation = LoadSceneManager.LoadSeneAsync(nameLevel);
+        while (!asyncOperation.isDone)
+        {
+            float process = (float)2/3 + Mathf.Clamp01(asyncOperation.progress);
+            yield return null;
+        }
     }
 
     protected virtual void LoadText(int index)
     {
         foreach (Transform text in loadScreenTexts)
             text.gameObject.SetActive(false);
-        loadScreenTexts[index].gameObject.SetActive(true);
+
+        loadScreenTexts[index - 1].gameObject.SetActive(true);
     }
 
-    protected override void OnEnable()
+    protected virtual void LoadPercentScreen(int rate)
     {
-        base.OnEnable();
-        textLevel = transform.Find("Level").GetComponent<Text>();
-        textLevel.text = "LEVEL " + GameController.Instance.Level.ToString();
-    }
+        float widthFrame = (float) rate * frameLoad.parent.GetComponent<RectTransform>().rect.width / loadScreenTexts.Count;
+        float heightFrame = frameLoad.rect.height;
 
-    protected override IEnumerator LoadWaitForShortTime()
-    {
-        yield return StartCoroutine(base.LoadWaitForShortTime());
-        UIController.Instance.LoadUI("Load_Screen");
-        LoadPercentScreen(1);
-    }
-
-    protected override IEnumerator LoadWaitForMediumTime()
-    {
-        yield return StartCoroutine(base.LoadWaitForMediumTime());
-        LoadPercentScreen(2);
-    }
-
-    protected override IEnumerator LoadWaitForLongTime()
-    {
-        yield return StartCoroutine(base.LoadWaitForLongTime());
-        LoadPercentScreen(3);
-        StartCoroutine(FinishedLoadGame());
-    }
-
-    protected virtual void LoadPercentScreen(int index)
-    {
-        float widthFrame = frameLoad.transform.Find("Frame").GetComponent<RectTransform>().rect.width - 3;
-        Vector2 newSzie = new Vector2((float) index / 3 * widthFrame, frameLoad.transform.Find("Load").GetComponent<RectTransform>().rect.height);
-        frameLoad.transform.Find("Load").GetComponent<RectTransform>().sizeDelta = newSzie;
-        LoadText(index - 1);
-    }
-
-    protected virtual IEnumerator FinishedLoadGame()
-    {
-        yield return new WaitForSeconds(1f);
-        startGameScreen.gameObject.SetActive(true);
-        frameLoad.transform.parent.gameObject.SetActive(false);
-        SFXSpawner.Instance.PlaySound("Sound_Background_Game");
+        Vector2 newSzie = new Vector2(widthFrame, heightFrame);
+        frameLoad.sizeDelta = newSzie;
+        LoadText(rate);
     }
 }

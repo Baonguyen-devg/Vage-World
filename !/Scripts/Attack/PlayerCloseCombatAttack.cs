@@ -25,11 +25,12 @@ namespace Attack
 
         public virtual bool SwordCloseCombat()
         {
-            if (Time.time - timeShootePrevious < attackDelay) return false;
-            timeShootePrevious = Time.time;
+            if (!GameManager.Instance.IsGamePlaying()) return false;
+            if (Time.time - timeShootePrevious < attackDelay) return false; //sua lai
 
-            SFXSpawner.Instance.PlaySound(SFXSpawner.SOUND_SLASH_SWORD); 
+            timeShootePrevious = Time.time;
             animator.SetTrigger(TRIGGER_SLASH_LEFT);
+            SFXSpawner.Instance.PlaySound(SFXSpawner.SOUND_SLASH_SWORD);
             return true;
         }
 

@@ -10,7 +10,7 @@ public class BaseLoadLevelManagerSO : AutoMonobehaviour
     [SerializeField] protected LevelManagerSO levelManagerSO;
 
     protected virtual void LoadLevelManagerSO() =>
-         levelManagerSO = Resources.Load<LevelManagerSO>(PATH + GameController.Instance.Level.ToString());
+         levelManagerSO = Resources.Load<LevelManagerSO>(PATH + GameManager.Instance.Level.ToString());
 
     protected override void OnEnable() => LoadLevelManagerSO();
 }

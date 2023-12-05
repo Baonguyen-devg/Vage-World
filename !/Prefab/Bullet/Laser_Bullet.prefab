@@ -174,8 +174,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cf8fdcffc324034fb20b23331c16820, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dame: 10
-  maximumDame: 100
+  dame: 100
+  maximumDame: 200
 --- !u!1 &6349804576714705595
 GameObject:
   m_ObjectHideFlags: 0
@@ -225,9 +225,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39bbe84158f2960418cb7a4e1cd83bb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movement: {fileID: 6349804576908861047}
-  model: {fileID: 6349804575995764712}
-  damageSender: {fileID: 0}
+  _movement: {fileID: 0}
+  _model: {fileID: 0}
+  _damageSender: {fileID: 0}
 --- !u!1 &6349804576908861046
 GameObject:
   m_ObjectHideFlags: 0
@@ -276,8 +276,6 @@ MonoBehaviour:
   maximumSpeed: 1
   minimumSpeed: 0.05
   isMovingFast: 0
-  direction: {x: 0, y: 0, z: 0}
-  player: {fileID: 0}
 --- !u!1 &6349804576969497963
 GameObject:
   m_ObjectHideFlags: 0

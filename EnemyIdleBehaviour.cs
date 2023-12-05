@@ -26,8 +26,8 @@ public class EnemyIdleBehaviour : StateMachineBehaviour
         this.LoadPlayer();
         this.LoadIconSignalAttack(animator.transform);
         this.LoadController(animator.transform);
-        this.controller.Movement.gameObject.SetActive(false);
-        this.controller.RandomlyMovement.gameObject.SetActive(false);
+        //this.controller.Movement.gameObject.SetActive(false);
+        //this.controller.RandomlyMovement.gameObject.SetActive(false);
     }
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -37,10 +37,10 @@ public class EnemyIdleBehaviour : StateMachineBehaviour
         if (!this.isRun)
         {
             this.iconSignalAttack.gameObject.SetActive(true);
-            GameController.Instance.CoroutineStateMachineBehaviour(this.SetRun(animator));
+            GameManager.Instance.CoroutineStateMachineBehaviour(this.SetRun(animator));
             this.isRun = false;
         }
-        GameController.Instance.CoroutineStateMachineBehaviour(this.DisActiveSignalAttack());
+        GameManager.Instance.CoroutineStateMachineBehaviour(this.DisActiveSignalAttack());
     }
 
     private IEnumerator SetRun(Animator animator)

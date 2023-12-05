@@ -11,7 +11,7 @@ namespace DamageSender
         protected override void OnEnable()
         {
             base.OnEnable();
-           // dame = (int)levelManagerSO?.GetEnemySOByName(transform.parent.name)?.Dame;
+           // _dame = (int)_levelManagerSO?.GetEnemySOByName(transform._pointSpawn.name)?.Dame;
         }
     }
 }

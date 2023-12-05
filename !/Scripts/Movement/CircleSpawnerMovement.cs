@@ -5,20 +5,20 @@ using UnityEngine;
 public class CircleSpawnerMovement : CircleMovement
 {
     [SerializeField] protected float timeCount = 0;
-    [SerializeField] protected CircleSpawnersBossDemon circleSpawers;
+    [SerializeField] protected BossCirclesActive circleSpawers;
     [SerializeField] protected float timeSpreadOut;
+    [SerializeField] protected int index;
 
     protected override void LoadComponentInAwakeBefore()
     {
         base.LoadComponentInAwakeBefore();
-        circleSpawers = transform.parent?.parent?.GetComponent<CircleSpawnersBossDemon>();
+        circleSpawers = transform.parent?.parent?.GetComponent<BossCirclesActive>();
     }
 
     protected override void LoadComponentInAwakeAfter()
     {
         base.LoadComponentInAwakeAfter();
-        angle = (float)360 / circleSpawers.CirclePrefabs.Count *
-            circleSpawers.GetIndexPrefab(transform.parent);
+        angle = (float)360 / circleSpawers.CirclePrefabs.Count * index;
     }
 
     protected override void OnEnable()

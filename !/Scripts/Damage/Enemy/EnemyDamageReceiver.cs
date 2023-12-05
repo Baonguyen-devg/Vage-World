@@ -6,76 +6,79 @@ namespace DamageReceiver
     public class EnemyDamageReceiver : DamageReceiver
     {
         [SerializeField] protected EnemyController controller;
-        protected virtual void LoadEnemyController() =>
-            controller ??= transform.parent.GetComponent<EnemyController>();
+        [SerializeField] protected SpriteRenderer render;
+        [SerializeField] protected EnemyHealthBar healthBar;
+        [SerializeField] protected float timeEffect = 0.2f;
 
-        [Header(header: "Hit Effect!!!"), Space(height: 10)]
-        [SerializeField] protected float timeEffect = 0.2f; //Time effect happen
-
-        [SerializeField] protected SpriteRenderer render = null; //SpriteRender in model of enemy
-        protected virtual void LoadSpriteRender() =>
-            render = controller?.Model?.GetComponent<SpriteRenderer>();
-
+        #region Load Component Methods
+        [ContextMenu("Load Component")]
         protected override void LoadComponent()
         {
             base.LoadComponent();
-            LoadEnemyController();
-            LoadSpriteRender();
+            controller = transform.parent.GetComponent<EnemyController>();
+            render = controller.Model.GetComponent<SpriteRenderer>();
+            healthBar = controller.HealthBar;
         }
-
-        protected override void OnEnable()
-        {
-            base.OnEnable();
-            //LoadMaximumHealth();
-            currentHealth = maximumHealth;
-        }
-
-       /* protected virtual void LoadMaximumHealth() =>
-            maximumHealth = (int)levelManagerSO?.GetEnemySOByName(transform.parent.name)?.MaximumHealth;*/
+        #endregion
 
         public override void DecreaseHealth(int health)
         {
-            base.DecreaseHealth(health: health);
+            base.DecreaseHealth(health);
             HitEffect();
             UpgradeAndAppearHealthBar();
         }
 
         protected virtual void HitEffect()
         {
-            VFXSpawner.Instance.Spawn(VFXSpawner.PICK_ITEM);
-            render.color = new Color32(r: 221, g: 83, b: 11, a: 255);
-            Invoke(methodName: "ResetColor", time: timeEffect);
-        }
+            Transform effect = VFXSpawner.Instance.Spawn(VFXSpawner.IMPACT_SWORD);
+            effect.gameObject.SetActive(true);
+            effect.position = transform.position;
 
-        protected virtual void ResetColor() =>
-           render.color = new Color32(r: 255, g: 255, b: 255, a: 255);
+            render.color = new Color32(221, 83, 11, 255);
+            Extension.StartDelayAction(this, timeEffect, () => ResetColor());
+        }
 
         protected virtual void UpgradeAndAppearHealthBar()
         {
-            controller.HealthBar.ChangeHealthBar(percent: CalculatePercentHealth());
-            controller.HealthBar.transform.parent.gameObject.SetActive(value: true);
-            Invoke(methodName: "DisappearHealthbar", time: 1f);
+            float percent = CalculatePercentHealth();
+            healthBar.ChangeHealthBar(percent);
+            healthBar.transform.parent.gameObject.SetActive(true);
+
+            Extension.StartDelayAction(this, 1f, () => DisappearHealthbar());
         }
-
-        protected virtual float CalculatePercentHealth() =>
-         (float)currentHealth / maximumHealth;
-
-        protected virtual void DisappearHealthbar() =>
-            controller.HealthBar.transform.parent.gameObject.SetActive(value: false);
 
         protected override void OnDead()
         {
-            SpawnCoins(Random.Range(3, 5));
-            VFXSpawner.Instance.Spawn("Smoke_Die_Enemy");
-            SFXSpawner.Instance.PlaySound("Sound_Smoke_Die_Enemy");
-            AchievementController.Instance.GetAchievementByName(name: transform.parent.name)?.Increase(1);
-            EnemySpawner.Instance.Despawn(obj: transform.parent);
+            Effects();
+            SpawnCoins();
+            AchievementManager.Instance.GetAchievementByName(transform.parent.name).Increase(1);
+            EnemySpawner.Instance.Despawn(transform.parent);
         }
 
-        protected virtual void SpawnCoins(int numberCoin)
+        private void Effects()
         {
-            for (int i = 0; i < numberCoin; i++)
-                LandDecorationSpawner.Instance.Spawn("Coin");
+            SFXSpawner.Instance.PlaySound(SFXSpawner.SOUND_SMOKE_ENEMY_DIE);
+            Transform effect = VFXSpawner.Instance.Spawn(VFXSpawner.SMOKE_ENEMY_DIE);
+
+            effect.gameObject.SetActive(true);
+            effect.position = transform.parent.position;
         }
+
+        protected virtual void SpawnCoins()
+        {
+            int numberCoin = Random.Range(3, 5);
+            while (numberCoin-- != 0)
+            {
+                Transform coin = LandDecorationSpawner.Instance.Spawn(LandDecorationSpawner.COIN);
+                coin.position = transform.parent.position;
+                coin.gameObject.SetActive(true);
+            }
+        }
+
+        protected virtual void DisappearHealthbar() =>
+            healthBar.transform.parent.gameObject.SetActive(false);
+
+        protected virtual void ResetColor() => render.color = new Color32(255, 255, 255, 255);
+        protected virtual float CalculatePercentHealth() => (float)currentHealth / maximumHealth;
     }
 }

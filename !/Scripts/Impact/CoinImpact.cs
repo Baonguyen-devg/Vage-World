@@ -8,7 +8,7 @@ public class CoinImpact : Impact
     {
         if (collision.name == "Player")
         {
-            AchievementController.Instance.IncreaseCoin(1);
+            AchievementManager.Instance.IncreaseCoin(1);
             SFXSpawner.Instance.PlaySound("Sound_Coin");
             ItemSpawner.Instance.Despawn(transform.parent);
         }

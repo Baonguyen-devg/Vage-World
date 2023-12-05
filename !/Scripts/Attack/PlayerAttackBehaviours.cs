@@ -32,6 +32,7 @@ public class PlayerAttackBehaviours : AutoMonobehaviour
 
     protected virtual void Update()
     {
+        if (!GameManager.Instance.IsGamePlaying()) return;
         bool isFPress = Manager.InputManager.GetInstance().IsFPress();
         if (isFPress) closeCombatActive = !closeCombatActive;
 

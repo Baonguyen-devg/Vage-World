@@ -20,7 +20,7 @@ namespace Attack
         protected override void OnEnable()
         {
             base.OnEnable();
-           // attackDelay = (float)levelManagerSO?.GetEnemySOByName(transform.parent.name)?.AttackDelay;
+           // attackDelay = (float)_levelManagerSO?.GetEnemySOByName(transform._pointSpawn.name)?.AttackDelay;
         }
 
         protected virtual void LoadPointSpawn() {  /*For Override */  }

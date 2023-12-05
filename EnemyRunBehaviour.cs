@@ -20,8 +20,8 @@ public class EnemyRunBehaviour : StateMachineBehaviour
         this.LoadController(animator.transform);
         this.LoadPlayer();
         this.countDownAttack = default_CountDown_Attack;
-        this.controller.Movement.gameObject.SetActive(true);
-        this.controller.RandomlyMovement.gameObject.SetActive(true);
+       //this.controller.Movement.gameObject.SetActive(true);
+        //this.controller.RandomlyMovement.gameObject.SetActive(true);
     }
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

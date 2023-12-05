@@ -28,7 +28,8 @@ namespace CreatingPackage
                 gameObject.SetActive(false);
                 return;
             }
-            resourceSpawners = groupSpawnSO.GetObjectSpawns();
+            Debug.Log(groupSpawnSO.GetObjectSpawns().Count);
+            resourceSpawners = new List<GroupSpawnSO.ObjectSpawnInfo>(groupSpawnSO.GetObjectSpawns());
         }
 
         protected abstract string GetPath();

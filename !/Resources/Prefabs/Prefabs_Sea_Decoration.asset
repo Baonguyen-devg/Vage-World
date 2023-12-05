@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0cd78c79302b1e4ca95e674c451e3d0, type: 3}
   m_Name: Prefabs_Sea_Decoration
   m_EditorClassIdentifier: 
-  prefabs:
+  _prefabs:
   - {fileID: 379828383941661875, guid: 6faa48eb1fb7f354b9aacc93fab91992, type: 3}
+  - {fileID: 7417433614514618809, guid: b512e023fae678f4fbf5eac317ab8624, type: 3}
   - {fileID: 5138040525425444698, guid: baaae4d4c7d3a5640833dc45218279e0, type: 3}
   - {fileID: 3759761222219990407, guid: fe89f80be86e8884cb7c794e51be74fc, type: 3}
   - {fileID: 5752499258821360240, guid: c27cb38ceb348764d8765041a0e87337, type: 3}
-  - {fileID: 7417433614514618809, guid: b512e023fae678f4fbf5eac317ab8624, type: 3}

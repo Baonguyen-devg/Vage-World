@@ -4,6 +4,7 @@ using DamageReceiver;
 
 public class EnergyBar : AutoMonobehaviour
 {
+    [SerializeField] private EventSO EventPlayerEnergyChange;
     [SerializeField] private PlayerEnergy _playerEnergy;
     [SerializeField] private Slider _slider;
 
@@ -18,12 +19,12 @@ public class EnergyBar : AutoMonobehaviour
     {
         base.Start();
         _slider.maxValue = _playerEnergy.GetMaxEnergy();
-        PlayerEnergy.PlayerEnergyEvent += UpdateSlider;
+        EventPlayerEnergyChange.Subscribe(UpdateSlider);
         UpdateSlider();
     }
 
     private void UpdateSlider() =>
          _slider.value = _playerEnergy.GetCurrentEnergy();
 
-    private void OnDisable() => PlayerEnergy.PlayerEnergyEvent -= UpdateSlider;
+    private void OnDisable() => EventPlayerEnergyChange.UnSubscribe(UpdateSlider);
 }

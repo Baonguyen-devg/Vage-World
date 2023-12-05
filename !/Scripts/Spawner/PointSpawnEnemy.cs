@@ -3,29 +3,30 @@ using UnityEngine;
 
 public class PointSpawnEnemy : AutoMonobehaviour
 {
-    [SerializeField] private List<Transform> listEnemy;
-    [SerializeField] private bool requestAttack;
-    [SerializeField] private double timeStopAttack;
-    [SerializeField] private double rateTimeAttack;
+    [SerializeField] private double _rateTimeAttack;
+    
+    private List<EnemyController> _listEnemy = new List<EnemyController>();
+    private double _timeStopAttack;
+    private bool _isAttack;
 
-    public virtual void Add(Transform enemy) => this.listEnemy.Add(item: enemy);
+    public void Add(Transform enemy) => 
+        _listEnemy.Add(enemy.GetComponent<EnemyController>());
 
-    public virtual void Update()
+    public void Update()
     {
-        if (this.requestAttack == true)
-            this.timeStopAttack = Time.time + this.rateTimeAttack;
+        if (_isAttack) _timeStopAttack = Time.time + _rateTimeAttack;
 
-        if (this.requestAttack == false && Time.time >= this.timeStopAttack)
-            foreach (Transform enemy in this.listEnemy)
-                enemy.GetComponent<EnemyController>().StopAttack();
+        /*if (!_isAttack && Time.time >= _timeStopAttack)
+            foreach (EnemyController enemy in _listEnemy)
+                enemy.StopAttack();*/
     }
 
-    public virtual void RequestEnemiesAttack()
+    public void RequestEnemiesAttack()
     {
-        this.requestAttack = true;
-        foreach (Transform enemy in this.listEnemy)
-            enemy.GetComponent<EnemyController>().DoAttack();
+        _isAttack = true;
+        /*foreach (EnemyController enemy in _listEnemy)
+            enemy.DoAttack();*/
     }
 
-    public virtual void RequestEnemiesStopAttack() => this.requestAttack = false;
+    public void RequestEnemiesStopAttack() => _isAttack = false;
 }

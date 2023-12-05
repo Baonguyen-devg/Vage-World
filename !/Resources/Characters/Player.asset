@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbbfb38fa64eab445bf721b7f3a987a0, type: 3}
   m_Name: Player
   m_EditorClassIdentifier: 
-  health: 1000
-  mana: 1000
-  dame: 100
-  speed: 4
+  _health: 500
+  _mana: 1000
+  _dame: 100
+  _speed: 4

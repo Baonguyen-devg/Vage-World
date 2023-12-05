@@ -5,44 +5,78 @@ using UnityEngine.UI;
 
 public class UISkill : AutoMonobehaviour
 {
-    [SerializeField] protected SkillController skillController;
-    [SerializeField] protected UISkillController controller;
+    [SerializeField] private SkillController skillController;
+    [SerializeField] private Button buttomUpdate;
+    [SerializeField] private Image imageShader;
 
-    [SerializeField] protected Button buttomUpdate;
-    [SerializeField] protected List<Image> listRender;
-    [SerializeField] protected Image imageShader;
+    private List<Image> renders = new List<Image>();
+    private List<Text> texts = new List<Text>();
 
-    protected virtual void LoadSkillPrefab() => 
-       skillController = SkillManager.GetInstance().GetPrefabByName(gameObject.name);
+    private string prefabImageName;
+    private Image prefabItemImage;
 
-    protected virtual void LoadListRender()
-    {
-        listRender.Clear();
-        Transform render = transform.Find("MaterialFrame").Find("NumberInfor");
-        foreach (Transform objectRender in render)
-            listRender.Add(objectRender.GetComponentInChildren<Image>());
-    }
-
+    #region Load Components Methods;
     [ContextMenu("Load Component")]
     protected override void LoadComponent()
     {
         base.LoadComponent();
-        controller = transform.parent.GetComponent<UISkillController>();
-        buttomUpdate ??= transform.Find("Update")?.Find("Button")?.GetComponent<Button>();
-
-        LoadListRender();
-        imageShader = transform.Find("ImageSkillShader")?.GetComponent<Image>();
+        buttomUpdate = transform.Find("Update").Find("Button").GetComponent<Button>();
+        imageShader = transform.Find("Shader").GetComponent<Image>();
+        LoadRendersAndTexts();
     }
 
-    protected virtual void LoadUIMaterial()
+    private void LoadRendersAndTexts()
+    {
+        if (renders.Count != 0) renders.Clear();
+        if (texts.Count != 0) texts.Clear();
+
+        Transform materials = transform.Find("Materials");
+        foreach (Transform material in materials)
+        {
+            renders.Add(material.GetComponentInChildren<Image>());
+            texts.Add(material.GetComponentInChildren<Text>());
+        }
+    }
+
+    private void LoadSkillPrefab() => 
+       skillController = SkillManager.Instance.GetPrefabByName(gameObject.name);
+    #endregion
+
+    private void Update()
+    {
+        if (skillController == null) return;
+        float rate = skillController.GetTimeCounter() / skillController.GetTimeDelay();
+        imageShader.fillAmount = rate;
+
+        if (CheckEnoughMaterial()) buttomUpdate.gameObject.SetActive(true);
+        else buttomUpdate.gameObject.SetActive(false);
+    }
+
+    private void LoadUIMaterial()
     {
         int index = 0;
-        foreach (KeyValuePair<Transform, int> skillPrefab in skillController.listRandomItems)
+        foreach (var skillPrefab in skillController.listRandomItems)
         {
-            listRender[index].sprite = controller.GetPrefabByName("Image" + skillPrefab.Key.name).sprite;
-            listRender[index].transform.parent.GetComponentInChildren<Text>().text = skillPrefab.Value.ToString();
-            index = Mathf.Min(index + 1, skillController.listRandomItems.Count);
+            SetItemImage(index, skillPrefab.Key.name);
+            SetValueText(index, skillPrefab.Value.ToString());
+            index = index + 1;
         }
+    }
+
+    private void SetValueText(int index, string valueString) => texts[index].text = valueString;
+
+    private void SetItemImage(int index, string prefabName)
+    {
+        prefabImageName = StringBuilder_ImageText(prefabName);
+        prefabItemImage = UISkillManger.Instance.GetPrefabByName(prefabImageName);
+        renders[index].sprite = prefabItemImage.sprite;
+    }
+
+    private string StringBuilder_ImageText(string prefabName)
+    {
+        System.Text.StringBuilder text = new System.Text.StringBuilder()
+            .Append("Image").Append(prefabName);
+        return text.ToString();
     }
 
     protected override IEnumerator LoadWaitForMediumTime()
@@ -54,13 +88,5 @@ public class UISkill : AutoMonobehaviour
         else LoadUIMaterial();
     }
 
-    protected virtual void Update()
-    {
-        imageShader.fillAmount = (skillController.GetTimeCounter() - Time.time) / skillController.GetTimeDelay();
-
-        if (CheckEnoughMaterial()) buttomUpdate.gameObject.SetActive(true);
-        else buttomUpdate.gameObject.SetActive(false);
-    }
-
-    protected virtual bool CheckEnoughMaterial() => skillController.CheckEnough();
+    private bool CheckEnoughMaterial() => skillController.CheckEnough();
 }

@@ -4,9 +4,9 @@ using UnityEngine;
 
 namespace Movement
 {
-    public class BossDemonEnemyMovement : EnemyMovement
+    public class BossDemonEnemyMovement : AutoMonobehaviour
     {
-        private const float timeStart_Default = 1;
+       /* private const float timeStart_Default = 1;
 
         [SerializeField] protected Transform player;
         [SerializeField] protected double distanceStop;
@@ -35,8 +35,8 @@ namespace Movement
 
             Vector3 direc = (player.position - transform.parent.position);
             direc.Normalize();
-            SetDirectionFollow(direc);
+            //SetDirectionFollow(direc);
             base.Update();
-        }
+        }*/
     }
 }

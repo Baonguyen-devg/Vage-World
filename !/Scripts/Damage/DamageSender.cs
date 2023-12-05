@@ -6,10 +6,10 @@ namespace DamageSender
     {
         [Header("Object's damage sender"), Space(10)]
         [SerializeField] protected int dame = 0;
-        [SerializeField] protected int maximumDame = 100;
+        [SerializeField] protected int maximumDame = 200;
 
-        public virtual void IncreaseDame(int dame) => dame = Mathf.Min(dame + dame, maximumDame);
-        public virtual void DecreaseDame(int dame) => dame = Mathf.Max(dame - dame, 0);
+        public virtual void IncreaseDame(int _dame) => dame = Mathf.Min(dame + _dame, maximumDame);
+        public virtual void DecreaseDame(int _dame) => dame = Mathf.Max(dame - _dame, 0);
 
         public abstract void Send(Transform obj);
     }

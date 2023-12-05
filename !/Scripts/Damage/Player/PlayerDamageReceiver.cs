@@ -9,7 +9,8 @@ namespace DamageReceiver
         private readonly int TRIGEER_DIE = Animator.StringToHash("Die");
         private readonly string PATH = "Characters/Player";
 
-        public static event System.Action PlayerReceiveDamageEvent;
+        public static event System.Action PlayerDecreaseHealth;
+        public static event System.Action PlayerIcreaseHealth;
 
         [Header("[ Player Scriptable Object ]"), Space(10)]
         [SerializeField] private CharacterSO playerSO;
@@ -42,8 +43,15 @@ namespace DamageReceiver
         public override void DecreaseHealth(int health)
         {
             base.DecreaseHealth(health);
-            PlayerReceiveDamageEvent?.Invoke();
+            PlayerDecreaseHealth?.Invoke();
             HitEffect();
+        }
+
+        public override void IncreaseHealth(int health)
+        {
+            base.IncreaseHealth(health);
+            PlayerIcreaseHealth?.Invoke();
+            SFXSpawner.Instance.PlaySound(SFXSpawner.SOUND_HEAL);
         }
 
         protected virtual void HitEffect()
@@ -64,7 +72,7 @@ namespace DamageReceiver
         protected override void OnDead()
         {
             controller.Model.GetComponent<Animator>().SetTrigger(TRIGEER_DIE);
-            GameController.Instance.LoseGame();
+            GameManager.Instance.LoseGame();
         }
     }
 }

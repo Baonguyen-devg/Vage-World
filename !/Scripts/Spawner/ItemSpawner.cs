@@ -6,7 +6,7 @@ public class ItemSpawner : Spawner
     protected static ItemSpawner instance;
     public static ItemSpawner Instance => instance;
 
-    public List<Transform> Prefabs => this.prefabs;
+    public List<Transform> Prefabs => prefabs;
 
     protected override string GetPath() => "Prefabs/Prefabs_Item";
     protected override void LoadComponentInAwakeBefore()

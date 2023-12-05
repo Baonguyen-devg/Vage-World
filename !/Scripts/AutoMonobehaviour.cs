@@ -29,19 +29,19 @@ public class AutoMonobehaviour : MonoBehaviour
 
     protected virtual IEnumerator LoadWaitForShortTime()
     {
-        yield return new WaitForSeconds(seconds: 0.5f);
+        yield return new WaitForSeconds(seconds: 0.1f);
         /* For Override */
     }
 
     protected virtual IEnumerator LoadWaitForMediumTime()
     {
-        yield return new WaitForSeconds(seconds: 1f);
+        yield return new WaitForSeconds(seconds: 0.2f);
         /* For Override */
     }
 
     protected virtual IEnumerator LoadWaitForLongTime()
     {
-        yield return new WaitForSeconds(seconds: 1.5f);
+        yield return new WaitForSeconds(seconds: 0.3f);
         /* For Override */
     }
 }

@@ -192,9 +192,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f7186bdbc07b2846aaa6059533480db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  model: {fileID: 8755180759067058184}
-  movement: {fileID: 8755180757563154017}
-  damageSender: {fileID: 8755180758144069085}
+  _model: {fileID: 0}
+  _movement: {fileID: 0}
+  _damageSender: {fileID: 0}
 --- !u!1 &8755180757563154031
 GameObject:
   m_ObjectHideFlags: 0
@@ -243,8 +243,6 @@ MonoBehaviour:
   maximumSpeed: 1
   minimumSpeed: 0.05
   isMovingFast: 0
-  direction: {x: 0, y: 0, z: 0}
-  player: {fileID: 0}
 --- !u!1 &8755180758144069083
 GameObject:
   m_ObjectHideFlags: 0
@@ -289,9 +287,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d01d64f63dce9f84d8910137ab675aa8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dame: 10
-  maximumDame: 10
-  playerSO: {fileID: 0}
+  dame: 100
+  maximumDame: 200
+  playerSO: {fileID: 11400000, guid: 8baf19d11c8e2324e9cdb1f232a789d2, type: 2}
 --- !u!1 &8755180759067058231
 GameObject:
   m_ObjectHideFlags: 0

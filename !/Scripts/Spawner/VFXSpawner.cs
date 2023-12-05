@@ -6,6 +6,7 @@ public class VFXSpawner : Spawner
 {
     public static readonly string IMPACT_SWORD = "Impact_Sword";
     public static readonly string PICK_ITEM = "Number_Pick_Item";
+    public static readonly string SMOKE_ENEMY_DIE = "Smoke_Die_Enemy";
 
     protected static VFXSpawner instance;
     public static VFXSpawner Instance => instance;

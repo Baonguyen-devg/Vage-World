@@ -38,7 +38,7 @@ public class UIMaterialManager : AutoMonobehaviour
     protected virtual Text FindUIMaterialWithName(string UImaterialText)
     {
         foreach (Text UImaterial in _UIMaterials)
-            if (UImaterial.name.Equals(UImaterialText)) return UImaterial;
+            if (UImaterial.transform.parent.name.Equals(UImaterialText)) return UImaterial;
         return null;
     }
 }

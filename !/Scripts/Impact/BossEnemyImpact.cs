@@ -4,7 +4,7 @@ public class BossEnemyImpact : Impact
 {
    /* [SerializeField] protected BossDemonController _controller;
     protected virtual void LoadBossDemonController() =>
-        this._controller ??= transform.parent.parent.GetComponent<BossDemonController>();
+        this._controller ??= transform._pointSpawn._pointSpawn.GetComponent<BossDemonController>();
 
     protected override void LoadComponent()
     {

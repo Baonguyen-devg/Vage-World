@@ -8,19 +8,21 @@ public class GroupSpawnSO : ScriptableObject
     #region ObjectSpawnInfor Class
     [System.Serializable] public class ObjectSpawnInfo
     {
-        [SerializeField] private string objectName;
-        [SerializeField] private int numberObject;
-        [SerializeField] private int numberGroup;
+        [SerializeField] private string _objectName;
+        [SerializeField] private int _numberObject;
+        [SerializeField] private int _numberGroup;
 
-        public string ObjectName => objectName;
-        public int NumberObject => numberObject;
-        public int NumberGroup => numberGroup;
+        public string ObjectName => _objectName;
+        public int NumberObject => _numberObject;
+        public int NumberGroup => _numberGroup;
     }
     #endregion
 
-    [SerializeField] private List<ObjectSpawnInfo> objectSpawns = new List<ObjectSpawnInfo>();
-    public List<ObjectSpawnInfo> GetObjectSpawns() => objectSpawns;
+    [SerializeField] 
+    private List<ObjectSpawnInfo> _objectSpawns = new List<ObjectSpawnInfo>();
 
     public ObjectSpawnInfo GetSOByName(string name) =>
-       objectSpawns.FirstOrDefault(objectSpawnInfo => objectSpawnInfo.ObjectName.Equals(name));
+       _objectSpawns.FirstOrDefault(objectSpawnInfo => objectSpawnInfo.ObjectName.Equals(name));
+
+    public List<ObjectSpawnInfo> GetObjectSpawns() => _objectSpawns;
 }

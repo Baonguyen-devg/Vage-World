@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 namespace Movement
@@ -11,6 +12,12 @@ namespace Movement
         {
             base.LoadComponent();
             player = GameObject.Find("Player").transform;
+        }
+
+        protected override IEnumerator LoadWaitForLongTime()
+        {
+            yield return StartCoroutine(base.LoadWaitForLongTime());
+            transform.parent.position = player.position;
         }
 
         protected override void Move()

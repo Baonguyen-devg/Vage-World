@@ -32,7 +32,7 @@ public class MaterialManager : AutoMonobehaviour
         if (_material == null) return;
 
         _material.Increase(number);
-        //UIMaterialManager.Instance.ChangeNumber(nameMaterial, _material.GetNumber());
+        UIMaterialManager.Instance.ChangeNumber(nameMaterial, _material.GetNumber());
     }
 
     public virtual void DecreaseNumber(string nameMaterial, int number)
@@ -41,7 +41,7 @@ public class MaterialManager : AutoMonobehaviour
         if (_material == null) return;
 
         _material.Decrease(number);
-        //UIMaterialManager.Instance.ChangeNumber(nameMaterial, _material.GetNumber());
+        UIMaterialManager.Instance.ChangeNumber(nameMaterial, _material.GetNumber());
     }
 
     protected virtual Material FindMaterialWithName(string nameMaterial)

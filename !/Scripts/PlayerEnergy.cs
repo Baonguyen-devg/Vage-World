@@ -5,53 +5,58 @@ using UnityEngine;
 public class PlayerEnergy : AutoMonobehaviour
 {
     [Header("[ Player Energy Information]"), Space(6)]
-    [SerializeField] private float maxEnergy = 1000;
-    [SerializeField] private float timeDelayMax = 3f;
-    [SerializeField] private float rateIncrease = 2f;
+    [SerializeField] private float _maxEnergy = 1000;
+    [SerializeField] private float _timeDelayMax = 3f;
+    [SerializeField] private float _rateIncrease = 2f;
 
-    [SerializeField] private float currentEnergy;
-    private float countTime;
+    [SerializeField] private EventSO _LeftMousePressed;
+    [SerializeField] private EventSO _PlayerEnergyChanged;
 
-    public static event System.Action PlayerEnergyEvent;
+    private float _currentEnergy;
+    private float _countTime;
 
     protected override void Awake()
     {
         base.Awake();
-        currentEnergy = maxEnergy;
+        _currentEnergy = _maxEnergy;
     }
 
-    protected override void Start() => Manager.InputManager.LeftMousePressEvent += DecreaseEnergy;
+    protected override void Start() => _LeftMousePressed.Subscribe(DecreaseEnergy);
 
     private void Update()
     {
-        if (countTime > 0)
+        if (_countTime > 0)
         {
-            countTime = countTime - Time.deltaTime;
+            _countTime = _countTime - Time.deltaTime;
             return;
         }
-        IncreaseEnergy(rateIncrease);
+        IncreaseEnergy(_rateIncrease);
     }
 
-    private void IncreaseEnergy(float energy) =>
-        currentEnergy = Mathf.Min(maxEnergy, currentEnergy + energy);
+    private void IncreaseEnergy(float energy)
+    {
+        _currentEnergy = Mathf.Min(_maxEnergy, _currentEnergy + energy);
+        OnPlayerEnergyChanged();
+    }
 
     private void DecreaseEnergy()
     {
         float mana = PlayerAttackBehaviours.GetInstance().GetMana();
-        if (mana > currentEnergy) return;
+        if (mana > _currentEnergy) return;
 
         bool canAttack = PlayerAttackBehaviours.GetInstance().RequestAttack();
         if (canAttack)
         {
-            currentEnergy = Mathf.Max(0, currentEnergy - mana);
-            PlayerEnergyEvent?.Invoke();
-            SetTimeDelayMax();
+            _currentEnergy = Mathf.Max(0, _currentEnergy - mana);
+            OnPlayerEnergyChanged();
+            if (mana != 0) SetTimeDelayMax();
         }
     }
     
-    public float GetMaxEnergy() => maxEnergy;
-    public float GetCurrentEnergy() => currentEnergy;
+    private void OnPlayerEnergyChanged() => _PlayerEnergyChanged?.Raise();
+    public float GetMaxEnergy() => _maxEnergy;
+    public float GetCurrentEnergy() => _currentEnergy;
 
-    private void SetTimeDelayMax() => countTime = timeDelayMax;
-    private void OnDisable() => Manager.InputManager.LeftMousePressEvent -= DecreaseEnergy;
+    private void SetTimeDelayMax() => _countTime = _timeDelayMax;
+    private void OnDisable() => _LeftMousePressed.UnSubscribe(DecreaseEnergy);
 }
